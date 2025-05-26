@@ -1,5 +1,8 @@
 $gymload_builder $mol_view
 	sub /
+		<= AddButton $mol_button_major
+			title @ \Add Exercise
+			click? <= add_exercise? null
 		<= Rows $mol_list
 			item_width_min* 200
 			item_height_min* 96
