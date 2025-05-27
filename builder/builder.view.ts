@@ -25,6 +25,7 @@ namespace $.$$ {
 			return this.data()[ id - 1 ]
 		}
 
+		@$mol_mem_key
 		override plan( id: any ) {
 			const res = []
 			const count = this.week_count()
@@ -37,13 +38,12 @@ namespace $.$$ {
 
 				res.push( aligned_weight )
 			}
-			console.log( res )
 			return res
 		}
 
-		override week_labels(): readonly ( string )[] {
-			const count = this.week_count()
-			return Array.from( { length: count }, (_, i) => `${ i + 1 }` )
+		override week_labels( id: any ): readonly ( string )[] {
+			const weights = this.plan( id )
+			return weights.map( ( w, i ) => `${i+1}: ${w}` )
 		}
 
 		override row_exercise_title( id: any ) {
