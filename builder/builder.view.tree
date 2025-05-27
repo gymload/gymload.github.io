@@ -17,6 +17,10 @@ $gymload_builder $mol_page
 									graphs /
 										<= Plan* $mol_plot_bar
 											series_y <= plan* /
+										<= Vert_ruler $mol_plot_ruler_vert
+										<= Marker_hor $mol_plot_mark_hor
+											title <= marker_hor_title \Weeks
+											labels <= week_labels /string
 						<= InputRow* $mol_row
 							sub <= row_content* /
 								<= Exercise_labeler* $mol_labeler

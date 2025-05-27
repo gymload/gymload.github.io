@@ -41,6 +41,11 @@ namespace $.$$ {
 			return res
 		}
 
+		override week_labels(): readonly ( string )[] {
+			const count = this.week_count()
+			return Array.from( { length: count }, (_, i) => `${ i + 1 }` )
+		}
+
 		override row_exercise_title( id: any ) {
 			const r = this.row( id )
 			return `${ r.excercise } #${ r.id }`
