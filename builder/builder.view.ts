@@ -4,9 +4,9 @@ namespace $.$$ {
 		excercise: string
 		sets: number
 		reps: number
-		beginWeight: number
-		finishWeight: number
-		minSteps: number
+		begin_weight: number
+		finish_weight: number
+		min_step: number
 	}
 
 	const data_key = 'gymload_builder_data'
@@ -28,15 +28,61 @@ namespace $.$$ {
 		override plan( id: any ) {
 			const res = []
 			const count = this.week_count()
+			const row = this.row( id )
+			const base = row.finish_weight / row.begin_weight
 			for( let i = 0; i < count; i++ ) {
-				res.push( i + 1 )
+				const progress = i / ( count - 1 )
+				const weight = row.begin_weight * Math.pow( base, progress )
+				const aligned_weight = Math.round( weight / row.min_step ) * row.min_step
+
+				res.push( aligned_weight )
 			}
+			console.log( res )
 			return res
 		}
 
 		override row_exercise_title( id: any ) {
 			const r = this.row( id )
 			return `${ r.excercise } #${ r.id }`
+		}
+
+		override row_remove( id: any ) {
+			this.data( this.data().filter( item => item.id !== id ) )
+		}
+
+		change_field<K extends keyof Item>(key: K, id: any, next?: Item[K]): Item[K] {
+			const row = this.row( id )
+
+			if( next !== undefined ) {
+				const newRow = { ...row, [key]: next }
+				this.data( this.data().map( item => item.id === id ? newRow : item ) )
+			}
+
+			return row[ key ]
+		}
+
+		override row_exercise( id: any, next?: string ) {
+			return this.change_field( 'excercise', id, next )
+		}
+
+		override row_sets( id: any, next?: number ) {
+			return this.change_field( 'sets', id, next )
+		}
+
+		override row_reps( id: any, next?: number ) {
+			return this.change_field( 'reps', id, next )
+		}
+
+		override row_begin_weight( id: any, next?: number ) {
+			return this.change_field( 'begin_weight', id, next )
+		}
+
+		override row_finish_weight( id: any, next?: number ) {
+			return this.change_field( 'finish_weight', id, next )
+		}
+
+		override row_min_step( id: any, next?: number ) {
+			return this.change_field( 'min_step', id, next )
 		}
 
 		override add_exercise() {
@@ -47,9 +93,9 @@ namespace $.$$ {
 					excercise: 'Приседания',
 					sets: 3,
 					reps: 10,
-					beginWeight: 50,
-					finishWeight: 100,
-					minSteps: 5,
+					begin_weight: 50,
+					finish_weight: 100,
+					min_step: 5,
 				},
 			] )
 		}
