@@ -23,7 +23,7 @@ namespace $.$$ {
 		}
 
 		data_ids( next?: number[] ): number[] {
-			return this.$.$mol_state_local.value( this.build_key( 'excercise_ids' ), next ) || []
+			return this.$.$mol_state_local.value( this.build_key( 'ids' ), next ) || []
 		}
 
 		override rows() {
@@ -31,7 +31,7 @@ namespace $.$$ {
 		}
 
 		row( id: any, next?: NewItem ): NewItem {
-			const key = this.build_key( `excercise_${ id }` )
+			const key = this.build_key( `item_${ id }` )
 			if( next === undefined ) {
 				return this.$.$mol_state_local.value<NewItem>( key ) || empty_item
 			}

@@ -1,0 +1,11 @@
+$gymload_builder_weights $mol_view
+	type \dumbbell
+	Item* $mol_labeler
+		title <= row_title* \
+		Content <= Value* $mol_number
+			precision 0.1
+			value? <=> row_value*? 0
+	sub /
+		<= AddButton $mol_button_major
+			title \+
+			click?event <= add? null
