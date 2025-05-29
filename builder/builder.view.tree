@@ -1,12 +1,8 @@
 $gymload_builder $mol_page
 	title \Builder
-	Day* $mol_view
-		sub /
-			<= DayTitle* $mol_view
-				sub / <= day_title* \Day
-			<= Content* $gymload_builder_day
-				title <= day_title* \Day
-				day_id <= day_id* 0
+	Day* $gymload_builder_day
+		title <= day_title* \Day
+		day_index <= day_index* 0
 	body /
 		<= WeekCount_labeler $mol_labeler
 			title @ \Week Count

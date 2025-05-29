@@ -8,7 +8,7 @@ namespace $.$$ {
 			return `Day ${id + 1}`
 		}
 
-		override day_id ( id: any ) {
+		override day_index ( id: any ) {
 			return id
 		}
 	}

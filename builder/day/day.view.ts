@@ -8,10 +8,6 @@ namespace $.$$ {
 		min_step: number
 	}
 
-	const data_key = 'gymload_builder_data'
-
-	const build_key = ( s: string ) => `gymload_builder_v1_${ s }`
-
 	const empty_item: NewItem = {
 		excercise: '',
 		sets: 3,
@@ -22,8 +18,12 @@ namespace $.$$ {
 	}
 
 	export class $gymload_builder_day extends $.$gymload_builder_day {
+		build_key(s :string) {
+			return this.state_key( `gymload_builder_v1_${this.day_index()}_${ s }` )
+		}
+
 		data_ids( next?: number[] ): number[] {
-			return this.$.$mol_state_local.value( this.state_key( 'excercise_ids' ), next ) || []
+			return this.$.$mol_state_local.value( this.build_key( 'excercise_ids' ), next ) || []
 		}
 
 		override rows() {
@@ -31,7 +31,7 @@ namespace $.$$ {
 		}
 
 		row( id: any, next?: NewItem ): NewItem {
-			const key = this.state_key( `excercise_${ id }` )
+			const key = this.build_key( `excercise_${ id }` )
 			if( next === undefined ) {
 				return this.$.$mol_state_local.value<NewItem>( key ) || empty_item
 			}
@@ -55,6 +55,10 @@ namespace $.$$ {
 				res.push( aligned_weight )
 			}
 			return res
+		}
+
+		override day_title(): string {
+			return `Day #${ this.day_index() + 1 }`
 		}
 
 		override week_labels( id: any ): readonly ( string )[] {
