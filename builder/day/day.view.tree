@@ -1,5 +1,7 @@
 $gymload_builder_day $mol_view
 	day_index 0
+	dumbbell_values /number
+	weight_plate_values /number
 	sub /
 		<= DayTitle $mol_view
 			sub / <= day_title \Day
@@ -29,6 +31,15 @@ $gymload_builder_day $mol_view
 									title <= row_exercise_title* \
 									Content <= Exercise* $mol_string
 										value? <=> row_exercise*? \
+								<= WeightType_labeler* $mol_labeler
+									title @ \Weight Type
+									Content <= WeightType* $mol_select
+										Filter null
+										value? <=> row_weight_type*? \custom
+										dictionary <= weight_types *
+											custom \Custom
+											dumbbell \Dumbbell
+											barbell \Barbell
 								<= Sets_labeler* $mol_labeler
 									title @ \Sets
 									Content <= Sets* $gymload_smallnumber

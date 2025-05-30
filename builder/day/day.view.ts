@@ -1,6 +1,7 @@
 namespace $.$$ {
 	type NewItem = {
 		excercise: string
+		weight_type: 'custom' | 'barbell' | 'dumbbell'
 		sets: number
 		reps: number
 		begin_weight: number
@@ -10,6 +11,7 @@ namespace $.$$ {
 
 	const empty_item: NewItem = {
 		excercise: '',
+		weight_type: 'custom',
 		sets: 3,
 		reps: 12,
 		begin_weight: 20,
@@ -118,6 +120,10 @@ namespace $.$$ {
 			return this.change_field( 'min_step', id, next )
 		}
 
+		override row_weight_type( id: any, next?: string ): string {
+			return this.change_field( 'weight_type', id, next as NewItem[ 'weight_type' ] ) || empty_item.weight_type
+		}
+
 		@$mol_mem
 		new_id() {
 			return Math.max( 1, 1 + Math.max( ... this.data_ids() ) )
@@ -134,6 +140,7 @@ namespace $.$$ {
 				new_item.sets = last_row.sets
 				new_item.reps = last_row.reps
 				new_item.min_step = last_row.min_step
+				new_item.weight_type = last_row.weight_type
 			}
 
 			this.data_ids( [ ...this.data_ids(), new_id ] )

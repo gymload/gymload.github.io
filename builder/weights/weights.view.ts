@@ -16,6 +16,13 @@ namespace $.$$ {
 			return this.$.$mol_state_local.value( this.build_key( 'ids' ), next ) || []
 		}
 
+		@$mol_mem
+		override values() {
+			const res = this.data_ids().map( id => this.row_value( id ) )
+			res.sort( ( a, b ) => a - b )
+			return res
+		}
+
 		row( id: any, next?: NewItem | null ): NewItem {
 			const key = this.build_key( `item_${ id }` )
 			if( next === undefined ) {

@@ -1,6 +1,7 @@
 $gymload_builder_weights $mol_view
 	storage_key \dumbbell
 	title \Dombell Weights
+	values /number
 	Item* $mol_view
 		sub /
 			<= Labeler* $mol_labeler
