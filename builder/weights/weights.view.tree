@@ -1,16 +1,22 @@
 $gymload_builder_weights $mol_view
-	type \dumbbell
+	storage_key \dumbbell
+	title \Dombell Weights
 	Item* $mol_view
 		sub /
 			<= Labeler* $mol_labeler
 				title <= row_title* \
-				Content <= Value* $mol_number
+				Content <= Value* $gymload_smallnumber
 					precision 0.1
 					value? <=> row_value*? 0
 			<= RemoveButton* $mol_button_major
 				title \x
 				click?event <=> row_remove*? null
+	AddButton $mol_button_major
+		title \+
+		click?event <= add? null
 	sub /
-		<= AddButton $mol_button_major
-			title \+
-			click?event <= add? null
+		<= Enabled $mol_check_expand
+			title <= title
+			checked? <=> enabled? true
+		<= Items $mol_view
+			sub <= items /$mol_view

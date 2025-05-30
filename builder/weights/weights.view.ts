@@ -9,7 +9,7 @@ namespace $.$$ {
 
 	export class $gymload_builder_weights extends $.$gymload_builder_weights {
 		build_key( s: string ) {
-			return this.state_key( `gymload_builder_v1_weights_${ this.type() }_${ s }` )
+			return this.state_key( `gymload_builder_v1_weights_${ this.storage_key() }_${ s }` )
 		}
 
 		data_ids( next?: number[] ): number[] {
@@ -52,21 +52,26 @@ namespace $.$$ {
 			const new_item = { ...empty_item }
 
 			const ids = this.data_ids()
-			if (ids.length > 1) {
+			if( ids.length > 1 ) {
 				const last_item = this.row( ids[ ids.length - 1 ] )
 				const last_item2 = this.row( ids[ ids.length - 2 ] )
 
-				new_item.value = last_item.value + (last_item.value - last_item2.value)
+				new_item.value = last_item.value + ( last_item.value - last_item2.value )
 			}
 
 			this.data_ids( [ ...ids, new_id ] )
 			this.row( new_id, new_item )
 		}
 
-		sub() {
-			const items = this.data_ids().map( id => this.Item( id ) )
+		items() {
+			if (!this.enabled()) {
+				return []
+			}
 
-			return [ ...super.sub(), ...items ]
+			return [
+				...this.data_ids().map( id => this.Item( id ) ),
+				this.AddButton(),
+			]
 		}
 	}
 }

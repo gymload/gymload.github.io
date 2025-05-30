@@ -13,5 +13,9 @@ $gymload_builder $mol_page
 			Content <= DayCount $mol_number
 				value? <=> day_count? 3
 		<= DumbbellWeighs $gymload_builder_weights
+			title \Dumbbell Weights
+		<= WeightPlates $gymload_builder_weights
+			title \Weight Plates
+			storage_key \weight_plates
 		<= Weeks $mol_deck
 			items <= week_items /$mol_view

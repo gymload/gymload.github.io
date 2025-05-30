@@ -10,7 +10,6 @@ namespace $.$$ {
 			maxHeight: '200px',
 		},
 		DayTitle: {
-
 			minHeight: rem(2),
 			margin: 0,
 			padding: $mol_gap.text,

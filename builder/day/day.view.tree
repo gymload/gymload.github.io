@@ -5,7 +5,7 @@ $gymload_builder_day $mol_view
 			sub / <= day_title \Day
 		<= WeekCount_labeler $mol_labeler
 			title @ \Week Count
-			Content <= WeekCount $mol_number
+			Content <= WeekCount $gymload_smallnumber
 				value? <=> week_count? 10
 		<= Rows $mol_list
 			item_width_min* 200
@@ -31,23 +31,23 @@ $gymload_builder_day $mol_view
 										value? <=> row_exercise*? \
 								<= Sets_labeler* $mol_labeler
 									title @ \Sets
-									Content <= Sets* $mol_number
+									Content <= Sets* $gymload_smallnumber
 										value? <=> row_sets*? 3
 								<= Reps_labeler* $mol_labeler
 									title @ \Reps
-									Content <= Reps* $mol_number
+									Content <= Reps* $gymload_smallnumber
 										value? <=> row_reps*? 12
 								<= BeginWeight_labeler* $mol_labeler
 									title @ \Begin Weight
-									Content <= BeginWeight* $mol_number
+									Content <= BeginWeight* $gymload_smallnumber
 										value? <=> row_begin_weight*? 50
 								<= FinishWeight_labeler* $mol_labeler
 									title @ \Finish Weight
-									Content <= FinishWeight* $mol_number
+									Content <= FinishWeight* $gymload_smallnumber
 										value? <=> row_finish_weight*? 100
 								<= MinStep_labeler* $mol_labeler
 									title @ \Min Step
-									Content <= MinStep* $mol_number
+									Content <= MinStep* $gymload_smallnumber
 										precision 0.1
 										value? <=> row_min_step*? 2.5
 								<= RemoveButton* $mol_button_major
