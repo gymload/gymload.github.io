@@ -16,7 +16,7 @@ namespace $.$$ {
 			return this.$.$mol_state_local.value( this.build_key( 'ids' ), next ) || []
 		}
 
-		row( id: any, next?: NewItem ): NewItem {
+		row( id: any, next?: NewItem | null ): NewItem {
 			const key = this.build_key( `item_${ id }` )
 			if( next === undefined ) {
 				return this.$.$mol_state_local.value<NewItem>( key ) || empty_item
@@ -24,15 +24,22 @@ namespace $.$$ {
 
 			this.$.$mol_state_local.value<NewItem>( key, next )
 
-			return next
+			return next || empty_item
 		}
 
 		override row_title( id: any ): string {
-			return `Weight #${ id + 1 }`
+			const idx = this.data_ids().indexOf( id )
+
+			return `Weight #${ idx + 1 }`
 		}
 
 		override row_value( id: any, next?: number ) {
 			return this.row( id, next ? { value: next } : undefined ).value
+		}
+
+		override row_remove( id: any ) {
+			this.data_ids( this.data_ids().filter( item => item !== id ) )
+			this.row( id, null )
 		}
 
 		@$mol_mem

@@ -30,7 +30,7 @@ namespace $.$$ {
 			return this.data_ids().map( id => this.Row( id ) )
 		}
 
-		row( id: any, next?: NewItem ): NewItem {
+		row( id: any, next?: NewItem | null ): NewItem {
 			const key = this.build_key( `item_${ id }` )
 			if( next === undefined ) {
 				return this.$.$mol_state_local.value<NewItem>( key ) || empty_item
@@ -38,7 +38,7 @@ namespace $.$$ {
 
 			this.$.$mol_state_local.value<NewItem>( key, next )
 
-			return next
+			return next || empty_item
 		}
 
 		@$mol_mem_key
@@ -72,6 +72,7 @@ namespace $.$$ {
 
 		override row_remove( id: any ) {
 			this.data_ids( this.data_ids().filter( item => item !== id ) )
+			this.row( id, null )
 		}
 
 		change_field<K extends keyof NewItem>( key: K, id: any, next?: NewItem[ K ] ): NewItem[ K ] {
