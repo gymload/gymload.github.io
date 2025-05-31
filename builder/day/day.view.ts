@@ -20,8 +20,8 @@ namespace $.$$ {
 	}
 
 	export class $gymload_builder_day extends $.$gymload_builder_day {
-		build_key(s :string) {
-			return this.state_key( `gymload_builder_v1_${this.day_index()}_${ s }` )
+		build_key( s: string ) {
+			return this.state_key( `gymload_builder_v1_${ this.day_index() }_${ s }` )
 		}
 
 		data_ids( next?: number[] ): number[] {
@@ -90,38 +90,76 @@ namespace $.$$ {
 			return this.row( id )[ key ]
 		}
 
-		@$mol_mem_key
 		override row_exercise( id: any, next?: string ) {
 			return this.change_field( 'excercise', id, next )
 		}
 
-		@$mol_mem_key
 		override row_sets( id: any, next?: number ) {
 			return this.change_field( 'sets', id, next )
 		}
 
-		@$mol_mem_key
 		override row_reps( id: any, next?: number ) {
 			return this.change_field( 'reps', id, next )
 		}
 
-		@$mol_mem_key
 		override row_begin_weight( id: any, next?: number ) {
 			return this.change_field( 'begin_weight', id, next )
 		}
 
-		@$mol_mem_key
 		override row_finish_weight( id: any, next?: number ) {
 			return this.change_field( 'finish_weight', id, next )
 		}
 
-		@$mol_mem_key
 		override row_min_step( id: any, next?: number ) {
 			return this.change_field( 'min_step', id, next )
 		}
 
 		override row_weight_type( id: any, next?: string ): string {
-			return this.change_field( 'weight_type', id, next as NewItem[ 'weight_type' ] ) || empty_item.weight_type
+			let v = this.change_field( 'weight_type', id, next as NewItem[ 'weight_type' ] ) || empty_item.weight_type
+
+			if ( v === 'barbell' && this.weight_plate_values().length === 0 ) {
+				v = 'custom'
+			}
+
+			if ( v === 'dumbbell' && this.dumbbell_values().length === 0 ) {
+				v = 'custom'
+			}
+
+			return v
+		}
+
+		override row_weight_types( id: any ): Record<string, string> {
+			const res: Record<string, string> = { 'custom': 'Custom' }
+
+			if( this.dumbbell_values().length > 0 ) {
+				res[ 'dumbbell' ] = 'Dumbbell'
+			}
+
+			if( this.weight_plate_values().length > 0 ) {
+				res[ 'barbell' ] = 'Barbell'
+			}
+
+			return res
+		}
+
+		override min_step_labeler( id: any ): $mol_view | null {
+			if (this.row_weight_type( id ) === 'custom') {
+				return this.MinStepLabeler( id )
+			}
+
+			return null
+		}
+
+		row_min_weight( id: any ): number {
+			switch( this.row_weight_type( id ) ) {
+				case 'barbell':
+					return Math.min( ...this.dumbbell_values() )
+
+				case 'dumbbell':
+					return Math.min( ...this.weight_plate_values() ) * 2
+			}
+
+			return 0 // custom
 		}
 
 		@$mol_mem

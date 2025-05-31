@@ -2,6 +2,11 @@ $gymload_builder_day $mol_view
 	day_index 0
 	dumbbell_values /number
 	weight_plate_values /number
+	MinStepLabeler* $mol_labeler
+		title @ \Min Step
+		Content <= MinStep* $gymload_smallnumber
+			precision 0.1
+			value? <=> row_min_step*? 2.5
 	sub /
 		<= DayTitle $mol_view
 			sub / <= day_title \Day
@@ -36,10 +41,7 @@ $gymload_builder_day $mol_view
 									Content <= WeightType* $mol_select
 										Filter null
 										value? <=> row_weight_type*? \custom
-										dictionary <= weight_types *
-											custom \Custom
-											dumbbell \Dumbbell
-											barbell \Barbell
+										dictionary <= row_weight_types* *
 								<= Sets_labeler* $mol_labeler
 									title @ \Sets
 									Content <= Sets* $gymload_smallnumber
@@ -56,11 +58,7 @@ $gymload_builder_day $mol_view
 									title @ \Finish Weight
 									Content <= FinishWeight* $gymload_smallnumber
 										value? <=> row_finish_weight*? 100
-								<= MinStep_labeler* $mol_labeler
-									title @ \Min Step
-									Content <= MinStep* $gymload_smallnumber
-										precision 0.1
-										value? <=> row_min_step*? 2.5
+								<= min_step_labeler* null $mol_view | null
 								<= RemoveButton* $mol_button_major
 									title \x
 									click?event <=> row_remove*? null
