@@ -1,7 +1,7 @@
 namespace $.$$ {
 	export class $gymload_builder extends $.$gymload_builder {
 		override week_items() {
-			return Array.from({ length: this.day_count() }, (_, i) => this.Day(i))
+			return Array.from({ length: this.day_count() }, (_, i) => this.DaySettings(i))
 		}
 
 		override day_title( id: any ) {
@@ -10,6 +10,13 @@ namespace $.$$ {
 
 		override day_index ( id: any ) {
 			return id
+		}
+
+		override top_desk_items(): readonly ( $mol_view )[] {
+			return [
+				this.Settings(),
+				...Array.from({ length: this.day_count() }, (_, i) => this.DayResults(i))
+			]
 		}
 	}
 }

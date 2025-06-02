@@ -1,30 +1,41 @@
 $gymload_builder $mol_page
 	title \Builder
-	Day* $gymload_builder_day
+	DaySettings* $gymload_builder_day
 		title <= day_title* \Day
 		day_index <= day_index* 0
 		dumbbell_values <= dumbbell_values
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
+	DayResults* $gymload_builder_day_results
+		title <= day_title* \Day
+		day_index <= day_index* 0
+		dumbbell_values <= dumbbell_values
+		weight_plate_values <= weight_plate_values
+		barbell_values <= barbell_values
+	Settings $mol_view
+		title \Settings
+		sub /
+			<= WeekCount_labeler $mol_labeler
+				title @ \Week Count
+				Content <= WeekCount $mol_number
+					value? <=> week_count? 10
+			<= DayCount_labeler $mol_labeler
+				title @ \Day Count
+				Content <= DayCount $mol_number
+					value? <=> day_count? 3
+			<= DumbbellWeighs $gymload_builder_weights
+				title \Dumbbell Weights
+				values => dumbbell_values /number
+			<= BarbellWeights $gymload_builder_weights
+				title \Barbell Weights
+				storage_key \barbell_weights
+				values => barbell_values /number
+			<= WeightPlates $gymload_builder_weights
+				title \Weight Plates
+				storage_key \weight_plates
+				values => weight_plate_values /number
+			<= Weeks $mol_deck
+				items <= week_items /$mol_view
 	body /
-		<= WeekCount_labeler $mol_labeler
-			title @ \Week Count
-			Content <= WeekCount $mol_number
-				value? <=> week_count? 10
-		<= DayCount_labeler $mol_labeler
-			title @ \Day Count
-			Content <= DayCount $mol_number
-				value? <=> day_count? 3
-		<= DumbbellWeighs $gymload_builder_weights
-			title \Dumbbell Weights
-			values => dumbbell_values /number
-		<= BarbellWeights $gymload_builder_weights
-			title \Barbell Weights
-			storage_key \barbell_weights
-			values => barbell_values /number
-		<= WeightPlates $gymload_builder_weights
-			title \Weight Plates
-			storage_key \weight_plates
-			values => weight_plate_values /number
-		<= Weeks $mol_deck
-			items <= week_items /$mol_view
+		<= TopDesk $mol_deck
+			items <= top_desk_items /$mol_view
