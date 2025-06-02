@@ -5,6 +5,7 @@ $gymload_builder $mol_page
 		day_index <= day_index* 0
 		dumbbell_values <= dumbbell_values
 		weight_plate_values <= weight_plate_values
+		barbell_values <= barbell_values
 	body /
 		<= WeekCount_labeler $mol_labeler
 			title @ \Week Count
@@ -17,6 +18,10 @@ $gymload_builder $mol_page
 		<= DumbbellWeighs $gymload_builder_weights
 			title \Dumbbell Weights
 			values => dumbbell_values /number
+		<= BarbellWeights $gymload_builder_weights
+			title \Barbell Weights
+			storage_key \barbell_weights
+			values => barbell_values /number
 		<= WeightPlates $gymload_builder_weights
 			title \Weight Plates
 			storage_key \weight_plates

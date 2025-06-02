@@ -2,6 +2,7 @@ $gymload_builder_day $mol_view
 	day_index 0
 	dumbbell_values /number
 	weight_plate_values /number
+	barbell_values /number
 	MinStepLabeler* $mol_labeler
 		title @ \Min Step
 		Content <= MinStep* $gymload_smallnumber
@@ -53,10 +54,16 @@ $gymload_builder_day $mol_view
 								<= BeginWeight_labeler* $mol_labeler
 									title @ \Begin Weight
 									Content <= BeginWeight* $gymload_smallnumber
+										precision_view 0.1
+										precision_change <= row_min_step*?
+										value_min <= row_min_weight* 0
 										value? <=> row_begin_weight*? 50
 								<= FinishWeight_labeler* $mol_labeler
 									title @ \Finish Weight
 									Content <= FinishWeight* $gymload_smallnumber
+										precision_view 0.1
+										precision_change <= row_min_step*?
+										value_min <= row_min_weight* 0
 										value? <=> row_finish_weight*? 100
 								<= min_step_labeler* null $mol_view | null
 								<= RemoveButton* $mol_button_major

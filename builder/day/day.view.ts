@@ -103,25 +103,58 @@ namespace $.$$ {
 		}
 
 		override row_begin_weight( id: any, next?: number ) {
-			return this.change_field( 'begin_weight', id, next )
+			const v = this.change_field( 'begin_weight', id, next )
+			return Math.max( v, this.row_min_weight( id ) )
 		}
 
 		override row_finish_weight( id: any, next?: number ) {
-			return this.change_field( 'finish_weight', id, next )
+			const v = this.change_field( 'finish_weight', id, next )
+			return Math.max( v, this.row_min_weight( id ) )
 		}
 
 		override row_min_step( id: any, next?: number ) {
-			return this.change_field( 'min_step', id, next )
+			const v = this.change_field( 'min_step', id, next )
+			const wt = this.row_weight_type( id )
+
+			if( wt === 'dumbbell' ) {
+				return this.min_dumbbell_weight()
+			}
+
+			if( wt === 'barbell' ) {
+				return this.min_weight_plate() * 2
+			}
+
+			return Math.max( v, 0.1 )
+		}
+
+		barbell_present() {
+			return this.weight_plate_values().length > 0 && this.barbell_values().length > 0
+		}
+
+		dumbbell_present() {
+			return this.dumbbell_values().length > 0
+		}
+
+		min_weight_plate() {
+			return Math.min( ...this.weight_plate_values() )
+		}
+
+		min_dumbbell_weight() {
+			return Math.min( ...this.dumbbell_values() )
+		}
+
+		min_barbell_weight() {
+			return Math.min( ...this.barbell_values() )
 		}
 
 		override row_weight_type( id: any, next?: string ): string {
 			let v = this.change_field( 'weight_type', id, next as NewItem[ 'weight_type' ] ) || empty_item.weight_type
 
-			if ( v === 'barbell' && this.weight_plate_values().length === 0 ) {
+			if( v === 'barbell' && !this.barbell_present() ) {
 				v = 'custom'
 			}
 
-			if ( v === 'dumbbell' && this.dumbbell_values().length === 0 ) {
+			if( v === 'dumbbell' && !this.dumbbell_present() ) {
 				v = 'custom'
 			}
 
@@ -131,11 +164,11 @@ namespace $.$$ {
 		override row_weight_types( id: any ): Record<string, string> {
 			const res: Record<string, string> = { 'custom': 'Custom' }
 
-			if( this.dumbbell_values().length > 0 ) {
+			if( this.dumbbell_present() ) {
 				res[ 'dumbbell' ] = 'Dumbbell'
 			}
 
-			if( this.weight_plate_values().length > 0 ) {
+			if( this.barbell_present() ) {
 				res[ 'barbell' ] = 'Barbell'
 			}
 
@@ -143,7 +176,7 @@ namespace $.$$ {
 		}
 
 		override min_step_labeler( id: any ): $mol_view | null {
-			if (this.row_weight_type( id ) === 'custom') {
+			if( this.row_weight_type( id ) === 'custom' ) {
 				return this.MinStepLabeler( id )
 			}
 
@@ -153,10 +186,10 @@ namespace $.$$ {
 		row_min_weight( id: any ): number {
 			switch( this.row_weight_type( id ) ) {
 				case 'barbell':
-					return Math.min( ...this.dumbbell_values() )
+					return this.min_barbell_weight()
 
 				case 'dumbbell':
-					return Math.min( ...this.weight_plate_values() ) * 2
+					return this.min_dumbbell_weight()
 			}
 
 			return 0 // custom
