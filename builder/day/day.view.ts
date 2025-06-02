@@ -49,12 +49,15 @@ namespace $.$$ {
 			const count = this.week_count()
 			const row = this.row( id )
 			const base = row.finish_weight / row.begin_weight
+			const min_weight = this.row_min_weight( id )
+			const min_step = this.row_min_step( id )
+
 			for( let i = 0; i < count; i++ ) {
 				const progress = i / ( count - 1 )
 				const weight = row.begin_weight * Math.pow( base, progress )
-				const aligned_weight = Math.round( weight / row.min_step ) * row.min_step
+				const aligned_weight = Math.round( weight / min_step ) * min_step
 
-				res.push( aligned_weight )
+				res.push( Math.max( aligned_weight, min_weight ) )
 			}
 			return res
 		}
