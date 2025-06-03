@@ -1,0 +1,16 @@
+$gymload_builder_day_results_set $mol_view
+	set_idx 0
+	week_idx 0
+	week_count 1
+	PastWeek_labeler $mol_labeler
+		title \Past
+		Content <= PastWeek $gymload_smallnumber
+	CurrentWeek_labeler $mol_labeler
+		title \Present
+		Content <= CurrentWeek $gymload_smallnumber
+	FutureWeek_labeler $mol_labeler
+		title \Future
+		Content <= FutureWeek $gymload_smallnumber
+	sub /
+		<= Label $mol_view
+			sub / <= set_idx

@@ -1,3 +1,24 @@
 $gymload_builder_day_results $gymload_builder_day
+	week_count 1
+	SetResult* $gymload_builder_day_results_set
+		set_idx <= set_idx* 0
+		week_idx <= current_week_number 0
+		week_count <= week_count
+	WeekTab* $mol_view
+		title <= week_tab_title*
+		sub / <= week_tab_title* \
 	sub /
-		\Results
+		<= DayTitle $mol_view
+			sub / <= day_title \Day
+		<= Weeks $mol_deck
+			current? <=> current_week? \0
+			items <= week_items /$mol_view
+		<= Rows $mol_list
+			item_width_min* 200
+			item_height_min* 96
+			rows <= rows /$mol_view
+				<= Row*0 $mol_view
+					sub /
+						<= row_exercise*?
+						<= SetRows* $mol_view
+							sub <= set_rows* /$mol_view

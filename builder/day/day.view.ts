@@ -24,7 +24,7 @@ namespace $.$$ {
 			return this.state_key( `gymload_builder_v1_${ this.day_index() }_${ s }` )
 		}
 
-		data_ids( next?: number[] ): number[] {
+		override data_ids( next?: number[] ): readonly(number)[] {
 			return this.$.$mol_state_local.value( this.build_key( 'ids' ), next ) || []
 		}
 

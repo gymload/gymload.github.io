@@ -3,6 +3,7 @@ $gymload_builder_day $mol_view
 	dumbbell_values /number
 	weight_plate_values /number
 	barbell_values /number
+	data_ids /number
 	MinStepLabeler* $mol_labeler
 		title @ \Min Step
 		Content <= MinStep* $gymload_smallnumber
@@ -18,7 +19,7 @@ $gymload_builder_day $mol_view
 		<= Rows $mol_list
 			item_width_min* 200
 			item_height_min* 96
-			rows <= rows /
+			rows <= rows /$mol_view
 				<= Row*0 $mol_view
 					sub /
 						<= ChartWrapper* $mol_view
