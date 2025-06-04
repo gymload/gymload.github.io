@@ -6,5 +6,8 @@ namespace $.$$ {
 		FutureWeekView: {
 			padding: $mol_gap.text,
 		},
+		DoneWeekView: {
+			padding: $mol_gap.text,
+		},
 	} )
 }

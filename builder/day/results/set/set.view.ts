@@ -7,7 +7,13 @@ namespace $.$$ {
 				items.push( this.PastWeekView() )
 			}
 
-			items.push( this.CurrentWeekView() )
+			const w = this.week_weight_value( this.week_idx() )
+
+			if( w < 0 ) {
+				items.push( this.DoneWeekView() )
+			} else {
+				items.push( this.CurrentWeekView() )
+			}
 
 			if( this.week_idx() < this.week_count() - 1 ) {
 				items.push( this.FutureWeekView() )
@@ -16,12 +22,42 @@ namespace $.$$ {
 			return items
 		}
 
+		override done_week_click() {
+			this.week_weight_value( this.week_idx(), this.plan_weight() )
+		}
+
+		override done_plan_label(): string {
+			return `Plan: ${ this.plan_weight() }`
+		}
+
 		override past_week_results() {
-			return '20 (10)'
+			if( this.week_idx() === 0 ) {
+				return '???'
+			}
+
+			const w = Math.max(
+				this.week_weight_value( this.week_idx() - 1 ),
+				this.plan()[ this.week_idx() - 1 ] || -1,
+			)
+
+			const reps = this.reps()
+
+			return `${ w } (${ reps })`
 		}
 
 		override future_week_results() {
-			return '30 (10)'
+			if( this.week_idx() === this.week_count() - 1 ) {
+				return '???'
+			}
+
+			const w = Math.max(
+				this.week_weight_value( this.week_idx() + 1 ),
+				this.plan()[ this.week_idx() + 1 ] || -1,
+			)
+
+			const reps = this.reps()
+
+			return `${ w } (${ reps })`
 		}
 
 		override week_plan_weight(): string {
