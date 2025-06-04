@@ -21,10 +21,10 @@ namespace $.$$ {
 
 	export class $gymload_builder_day extends $.$gymload_builder_day {
 		build_key( s: string ) {
-			return this.state_key( `gymload_builder_v1_${ this.day_index() }_${ s }` )
+			return `${ this.storage_key() }_${ s }`
 		}
 
-		override data_ids( next?: number[] ): readonly(number)[] {
+		override data_ids( next?: number[] ): readonly ( number )[] {
 			return this.$.$mol_state_local.value( this.build_key( 'ids' ), next ) || []
 		}
 

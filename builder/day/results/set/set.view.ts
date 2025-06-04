@@ -69,7 +69,7 @@ namespace $.$$ {
 		}
 
 		week_weight_value( week_idx: number, next?: number ): number {
-			const key = `gymload_builder_v1_results_${ this.excercise_idx() }_${ week_idx }_${ this.set_idx() }`
+			const key = `${this.storage_key()}_${ this.excercise_idx() }_${ week_idx }_${ this.set_idx() }`
 			return this.$.$mol_state_local.value( key, next ) || -1
 		}
 

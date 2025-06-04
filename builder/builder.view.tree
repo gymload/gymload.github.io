@@ -1,12 +1,15 @@
 $gymload_builder $mol_page
 	title \Builder
+	storage_key \gymload_builder
 	DaySettings* $gymload_builder_day
+		storage_key <= day_storage_key* \
 		title <= day_title* \Day
 		day_index <= day_index* 0
 		dumbbell_values <= dumbbell_values
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
 	DayResults* $gymload_builder_day_results
+		storage_key <= day_storage_key*
 		title <= day_title* \Day
 		day_index <= day_index* 0
 		week_count <= week_count

@@ -1,5 +1,7 @@
 $gymload_builder_day $mol_view
+	storage_key \day
 	day_index 0
+	week_count 10
 	dumbbell_values /number
 	weight_plate_values /number
 	barbell_values /number
@@ -12,10 +14,6 @@ $gymload_builder_day $mol_view
 	sub /
 		<= DayTitle $mol_view
 			sub / <= day_title \Day
-		<= WeekCount_labeler $mol_labeler
-			title @ \Week Count
-			Content <= WeekCount $gymload_smallnumber
-				value? <=> week_count? 10
 		<= Rows $mol_list
 			item_width_min* 200
 			item_height_min* 96

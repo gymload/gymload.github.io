@@ -7,6 +7,7 @@ $gymload_builder_day_results $gymload_builder_day
 		excercise_idx <= excercise_idx* 0
 		reps <= row_sets*? 3
 		plan <= excercise_plan* /number
+		storage_key <= storage_key
 	WeekTab* $mol_view
 		title <= week_tab_title*
 		sub / <= week_tab_title* \
