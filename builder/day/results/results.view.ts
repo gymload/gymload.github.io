@@ -12,8 +12,12 @@ namespace $.$$ {
 			return id.split( '_' )[ 1 ] || 0
 		}
 
+		override excercise_idx( id: any ): number {
+			return Number( id.split( '_' )[ 0 ] )
+		}
+
 		override excercise_plan( id: any ): readonly ( number )[] {
-			return this.plan( id.split( '_' )[ 0 ] )
+			return this.plan( this.excercise_idx( id ) )
 		}
 
 		override week_items() {

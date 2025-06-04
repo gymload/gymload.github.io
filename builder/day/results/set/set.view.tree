@@ -2,11 +2,12 @@ $gymload_builder_day_results_set $mol_view
 	set_idx 0
 	week_idx 0
 	week_count 1
+	excercise_idx 0
 	plan /number
 	PastWeekView $mol_view
 		sub / <= past_week_results \
 	CurrentWeekView $mol_labeler
-		title \Weight
+		title <= week_plan_weight \Weight: 0
 		Content <= CurrentWeekWeight $gymload_smallnumber
 			value? <=> week_weight? 0
 	FutureWeekView $mol_view
