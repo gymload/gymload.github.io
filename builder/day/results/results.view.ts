@@ -5,11 +5,15 @@ namespace $.$$ {
 		}
 
 		override set_rows( id: any ) {
-			return Array.from( { length: this.row_sets( id ) } ).map( ( _, idx ) => this.SetResult( idx ) )
+			return Array.from( { length: this.row_sets( id ) } ).map( ( _, idx ) => this.SetResult( `${id}_${idx}` ) )
 		}
 
 		override set_idx( id: any ) {
-			return id
+			return id.split( '_' )[ 1 ] || 0
+		}
+
+		override excercise_plan( id: any ): readonly ( number )[] {
+			return this.plan( id.split( '_' )[ 0 ] )
 		}
 
 		override week_items() {

@@ -45,7 +45,7 @@ namespace $.$$ {
 
 		@$mol_mem_key
 		override plan( id: any ) {
-			const res = []
+			const res: number[] = []
 			const count = this.week_count()
 			const row = this.row( id )
 			const base = row.finish_weight / row.begin_weight
@@ -59,6 +59,7 @@ namespace $.$$ {
 
 				res.push( Math.max( aligned_weight, min_weight ) )
 			}
+
 			return res
 		}
 
