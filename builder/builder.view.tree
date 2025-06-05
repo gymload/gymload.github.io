@@ -7,6 +7,7 @@ $gymload_builder $mol_page
 			dictionary *
 				ru \Русский
 				en \English
+		<= Source_link $mol_link_source uri \https://github.com/gymload/gymload.github.io
 		<= Lighter $mol_lights_toggle
 	DaySettings* $gymload_builder_day
 		storage_key <= day_storage_key* \
