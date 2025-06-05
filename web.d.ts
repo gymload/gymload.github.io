@@ -4773,42 +4773,62 @@ declare namespace $ {
 		,
 		ReturnType< $gymload_smallnumber['value'] >
 	>
-	type $mol_button_major__title_gymload_builder_day_results_set_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_major['title'] >
-	>
-	type $mol_button_major__click_gymload_builder_day_results_set_3 = $mol_type_enforce<
-		ReturnType< $gymload_builder_day_results_set['done_week_click'] >
-		,
-		ReturnType< $mol_button_major['click'] >
-	>
-	type $mol_view__sub_gymload_builder_day_results_set_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_gymload_builder_day_results_set_5 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_labeler__title_gymload_builder_day_results_set_6 = $mol_type_enforce<
+	type $mol_labeler__title_gymload_builder_day_results_set_2 = $mol_type_enforce<
 		ReturnType< $gymload_builder_day_results_set['week_plan_weight'] >
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_gymload_builder_day_results_set_7 = $mol_type_enforce<
+	type $mol_labeler__Content_gymload_builder_day_results_set_3 = $mol_type_enforce<
 		ReturnType< $gymload_builder_day_results_set['CurrentWeekWeight'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_view__sub_gymload_builder_day_results_set_8 = $mol_type_enforce<
+	type $gymload_smallnumber__value_gymload_builder_day_results_set_4 = $mol_type_enforce<
+		ReturnType< $gymload_builder_day_results_set['week_reps'] >
+		,
+		ReturnType< $gymload_smallnumber['value'] >
+	>
+	type $mol_labeler__title_gymload_builder_day_results_set_5 = $mol_type_enforce<
+		ReturnType< $gymload_builder_day_results_set['week_plan_Reps'] >
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_gymload_builder_day_results_set_6 = $mol_type_enforce<
+		ReturnType< $gymload_builder_day_results_set['CurrentWeekReps'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_button_major__title_gymload_builder_day_results_set_7 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_gymload_builder_day_results_set_8 = $mol_type_enforce<
+		ReturnType< $gymload_builder_day_results_set['done_week_click'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_view__sub_gymload_builder_day_results_set_9 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_gymload_builder_day_results_set_9 = $mol_type_enforce<
+	type $mol_view__sub_gymload_builder_day_results_set_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_gymload_builder_day_results_set_11 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_gymload_builder_day_results_set_12 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_gymload_builder_day_results_set_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -4818,6 +4838,11 @@ declare namespace $ {
 		week_plan_weight( ): string
 		week_weight( next?: number ): number
 		CurrentWeekWeight( ): $gymload_smallnumber
+		CurrentWeekWeight_labeler( ): $mol_labeler
+		week_plan_Reps( ): string
+		week_reps( next?: number ): number
+		CurrentWeekReps( ): $gymload_smallnumber
+		CurrentWeekReps_labeler( ): $mol_labeler
 		done_plan_label( ): string
 		done_week_click( next?: any ): any
 		DoneButton( ): $mol_button_major
@@ -4831,7 +4856,7 @@ declare namespace $ {
 		plan( ): readonly(number)[]
 		reps( ): number
 		PastWeekView( ): $mol_view
-		CurrentWeekView( ): $mol_labeler
+		CurrentWeekView( ): $mol_view
 		DoneWeekView( ): $mol_view
 		FutureWeekView( ): $mol_view
 		sub( ): readonly(any)[]
@@ -4849,8 +4874,11 @@ declare namespace $.$$ {
         future_week_results(): string;
         week_plan_weight(): string;
         plan_weight(): number;
+        build_key(week_idx: number, prop_name: string): string;
         week_weight_value(week_idx: number, next?: number): number;
+        week_reps_value(week_idx: number, next?: number): number;
         week_weight(next?: number): number;
+        week_reps(next?: number): number;
     }
 }
 

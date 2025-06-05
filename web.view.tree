@@ -891,10 +891,16 @@ $gymload_builder_day_results_set $mol_view
 	reps 3
 	PastWeekView $mol_view
 		sub / <= past_week_results \
-	CurrentWeekView $mol_labeler
-		title <= week_plan_weight \Weight: 0
-		Content <= CurrentWeekWeight $gymload_smallnumber
-			value? <=> week_weight? 0
+	CurrentWeekView $mol_view
+		sub /
+			<= CurrentWeekWeight_labeler $mol_labeler
+				title <= week_plan_weight \Weight: 0
+				Content <= CurrentWeekWeight $gymload_smallnumber
+					value? <=> week_weight? 0
+			<= CurrentWeekReps_labeler $mol_labeler
+				title <= week_plan_Reps \Reps: 0
+				Content <= CurrentWeekReps $gymload_smallnumber
+					value? <=> week_reps? 0
 	DoneWeekView $mol_view
 		sub /
 			<= done_plan_label \

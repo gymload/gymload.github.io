@@ -11389,6 +11389,30 @@ var $;
 			(obj.value) = (next) => ((this.week_weight(next)));
 			return obj;
 		}
+		CurrentWeekWeight_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.week_plan_weight()));
+			(obj.Content) = () => ((this.CurrentWeekWeight()));
+			return obj;
+		}
+		week_plan_Reps(){
+			return "Reps: 0";
+		}
+		week_reps(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		CurrentWeekReps(){
+			const obj = new this.$.$gymload_smallnumber();
+			(obj.value) = (next) => ((this.week_reps(next)));
+			return obj;
+		}
+		CurrentWeekReps_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.week_plan_Reps()));
+			(obj.Content) = () => ((this.CurrentWeekReps()));
+			return obj;
+		}
 		done_plan_label(){
 			return "";
 		}
@@ -11437,9 +11461,8 @@ var $;
 			return obj;
 		}
 		CurrentWeekView(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.week_plan_weight()));
-			(obj.Content) = () => ((this.CurrentWeekWeight()));
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.CurrentWeekWeight_labeler()), (this.CurrentWeekReps_labeler())]);
 			return obj;
 		}
 		DoneWeekView(){
@@ -11458,6 +11481,10 @@ var $;
 	};
 	($mol_mem(($.$gymload_builder_day_results_set.prototype), "week_weight"));
 	($mol_mem(($.$gymload_builder_day_results_set.prototype), "CurrentWeekWeight"));
+	($mol_mem(($.$gymload_builder_day_results_set.prototype), "CurrentWeekWeight_labeler"));
+	($mol_mem(($.$gymload_builder_day_results_set.prototype), "week_reps"));
+	($mol_mem(($.$gymload_builder_day_results_set.prototype), "CurrentWeekReps"));
+	($mol_mem(($.$gymload_builder_day_results_set.prototype), "CurrentWeekReps_labeler"));
 	($mol_mem(($.$gymload_builder_day_results_set.prototype), "done_week_click"));
 	($mol_mem(($.$gymload_builder_day_results_set.prototype), "DoneButton"));
 	($mol_mem(($.$gymload_builder_day_results_set.prototype), "Label"));
@@ -11522,15 +11549,27 @@ var $;
             plan_weight() {
                 return this.plan()[this.week_idx()] || -1;
             }
+            build_key(week_idx, prop_name) {
+                return `${this.storage_key()}_${this.excercise_idx()}_${week_idx}_${this.set_idx()}_${prop_name}`;
+            }
             week_weight_value(week_idx, next) {
-                const key = `${this.storage_key()}_${this.excercise_idx()}_${week_idx}_${this.set_idx()}`;
-                return this.$.$mol_state_local.value(key, next) || -1;
+                return this.$.$mol_state_local.value(this.build_key(week_idx, 'weight'), next) || -1;
+            }
+            week_reps_value(week_idx, next) {
+                return this.$.$mol_state_local.value(this.build_key(week_idx, 'reps'), next) || -1;
             }
             week_weight(next) {
                 if (next !== undefined) {
                     return this.week_weight_value(this.week_idx(), next);
                 }
                 const defaultValue = Math.max(this.week_weight_value(this.week_idx()), this.plan_weight());
+                return next || defaultValue;
+            }
+            week_reps(next) {
+                if (next !== undefined) {
+                    return this.week_reps_value(this.week_idx(), next);
+                }
+                const defaultValue = Math.max(this.week_reps_value(this.week_idx()), this.reps());
                 return next || defaultValue;
             }
         }
