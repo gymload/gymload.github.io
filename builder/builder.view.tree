@@ -6,6 +6,7 @@ $gymload_builder $mol_page
 		title <= day_title* \Day
 		day_index <= day_index* 0
 		dumbbell_values <= dumbbell_values
+		week_count <= week_count
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
 	DayResults* $gymload_builder_day_results
