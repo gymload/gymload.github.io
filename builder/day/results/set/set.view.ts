@@ -68,9 +68,16 @@ namespace $.$$ {
 			return this.plan()[ this.week_idx() ] || -1
 		}
 
+		build_key( week_idx: number, prop_name: string ): string {
+			return `${ this.storage_key() }_${ this.excercise_idx() }_${ week_idx }_${ this.set_idx() }_${ prop_name }`
+		}
+
 		week_weight_value( week_idx: number, next?: number ): number {
-			const key = `${this.storage_key()}_${ this.excercise_idx() }_${ week_idx }_${ this.set_idx() }`
-			return this.$.$mol_state_local.value( key, next ) || -1
+			return this.$.$mol_state_local.value( this.build_key( week_idx, 'weight' ), next ) || -1
+		}
+
+		week_reps_value( week_idx: number, next?: number ): number {
+			return this.$.$mol_state_local.value( this.build_key( week_idx, 'reps' ), next ) || -1
 		}
 
 		override week_weight( next?: number ): number {
@@ -81,6 +88,19 @@ namespace $.$$ {
 			const defaultValue = Math.max(
 				this.week_weight_value( this.week_idx() ),
 				this.plan_weight(),
+			)
+
+			return next || defaultValue
+		}
+
+		override week_reps( next?: number ): number {
+			if( next !== undefined ) {
+				return this.week_reps_value( this.week_idx(), next )
+			}
+
+			const defaultValue = Math.max(
+				this.week_reps_value( this.week_idx() ),
+				this.reps(),
 			)
 
 			return next || defaultValue
