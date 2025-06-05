@@ -1,6 +1,13 @@
 $gymload_builder $mol_page
 	title \Builder
 	storage_key \gymload_builder
+	tools /
+		<= List_of_languages $mol_locale_select
+			Filter null
+			dictionary *
+				ru \Русский
+				en \English
+		<= Lighter $mol_lights_toggle
 	DaySettings* $gymload_builder_day
 		storage_key <= day_storage_key* \
 		title <= day_title* \Day
@@ -18,7 +25,7 @@ $gymload_builder $mol_page
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
 	Settings $mol_view
-		title \Settings
+		title @ \Settings
 		sub /
 			<= WeekCount_labeler $mol_labeler
 				title @ \Week Count

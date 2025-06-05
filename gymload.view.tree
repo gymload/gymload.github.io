@@ -1,1 +1,3 @@
 $gymload $gymload_builder
+	plugins /
+		<= Theme $mol_theme_auto
