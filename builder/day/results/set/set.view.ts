@@ -27,7 +27,7 @@ namespace $.$$ {
 		}
 
 		override done_plan_label(): string {
-			return `Plan: ${ this.plan_weight() }`
+			return `Plan: ${ this.plan_weight() } (${ this.reps() })`
 		}
 
 		override past_week_results() {

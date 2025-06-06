@@ -12,8 +12,8 @@ $gymload_builder_day $mol_view
 			precision 0.1
 			value? <=> row_min_step*? 2.5
 	sub /
-		<= DayTitle $mol_view
-			sub / <= day_title \Day
+		<= DayTitle $gymload_title
+			title <= day_title \Day
 		<= Rows $mol_list
 			item_width_min* 200
 			item_height_min* 96
@@ -66,8 +66,8 @@ $gymload_builder_day $mol_view
 										value? <=> row_finish_weight*? 100
 								<= min_step_labeler* null $mol_view | null
 								<= RemoveButton* $mol_button_major
-									title \x
 									click?event <=> row_remove*? null
+									sub / <= Remove_close_icon* $mol_icon_close
 		<= AddButton $mol_button_major
 			title @ \Add Exercise
 			click? <= add_exercise? null

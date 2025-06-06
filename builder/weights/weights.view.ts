@@ -16,6 +16,10 @@ namespace $.$$ {
 			return this.$.$mol_state_local.value( this.build_key( 'ids' ), next ) || []
 		}
 
+		enabled( next?: boolean ): boolean {
+			return this.$.$mol_state_local.value( this.build_key( 'opened' ), next ) ?? true
+		}
+
 		@$mol_mem
 		override values() {
 			const res = this.data_ids().map( id => this.row_value( id ) )

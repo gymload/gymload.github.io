@@ -10,8 +10,8 @@ $gymload_builder_weights $mol_view
 					precision 0.1
 					value? <=> row_value*? 0
 			<= RemoveButton* $mol_button_major
-				title \x
 				click?event <=> row_remove*? null
+				sub / <= Remove_close_icon* $mol_icon_close
 	AddButton $mol_button_major
 		title \+
 		click?event <= add? null

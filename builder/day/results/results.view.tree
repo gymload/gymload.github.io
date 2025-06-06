@@ -10,10 +10,12 @@ $gymload_builder_day_results $gymload_builder_day
 		storage_key <= storage_key
 	WeekTab* $mol_view
 		title <= week_tab_title*
-		sub / <= week_tab_title* \
+		sub /
+			<= WeekTitle* $gymload_title
+				title <= week_tab_title* \Week
 	sub /
-		<= DayTitle $mol_view
-			sub / <= day_title \Day
+		<= DayTitle $gymload_title
+			title <= day_title \Day
 		<= Weeks $mol_deck
 			current? => current_week? \0
 			items <= week_items /$mol_view
@@ -23,6 +25,7 @@ $gymload_builder_day_results $gymload_builder_day
 			rows <= rows /$mol_view
 				<= Row*0 $mol_view
 					sub /
-						<= row_exercise*?
+						<= ExcerciseTitle* $gymload_title
+							title <= row_exercise_extra* \
 						<= SetRows* $mol_view
 							sub <= set_rows* /$mol_view

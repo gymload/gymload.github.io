@@ -1,0 +1,8 @@
+$gymload_title $mol_view
+	title \Title
+	extra \
+	sub /
+		<= Title $mol_view
+			sub / <= title
+		<= Extra $mol_view
+			sub / <= extra

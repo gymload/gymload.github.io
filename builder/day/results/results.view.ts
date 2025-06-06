@@ -5,7 +5,7 @@ namespace $.$$ {
 		}
 
 		override set_rows( id: any ) {
-			return Array.from( { length: this.row_sets( id ) } ).map( ( _, idx ) => this.SetResult( `${id}_${idx}` ) )
+			return Array.from( { length: this.row_sets( id ) } ).map( ( _, idx ) => this.SetResult( `${ id }_${ idx }` ) )
 		}
 
 		override set_idx( id: any ) {
@@ -30,6 +30,18 @@ namespace $.$$ {
 
 		override current_week_number(): number {
 			return Number( this.current_week() )
+		}
+
+		override day_title(): string {
+			return `Day №${ this.day_index() + 1 }`
+		}
+
+		override row_exercise_extra( id: any ): string {
+			const title = this.row_exercise( id )
+			const sets = this.row_sets( id )
+			const reps = this.row_reps( id )
+
+			return `${ title } ${ sets }x${ reps }`
 		}
 	}
 }
