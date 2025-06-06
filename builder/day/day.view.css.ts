@@ -1,5 +1,5 @@
 namespace $.$$ {
-	const {rem} = $mol_style_unit
+	const { rem } = $mol_style_unit
 
 	$mol_style_define( $gymload_builder_day, {
 		flexDirection: 'column',
@@ -9,5 +9,11 @@ namespace $.$$ {
 		ChartWrapper: {
 			maxHeight: '200px',
 		},
-	})
+		InputRow: {
+			alignItems: 'end',
+		},
+		AddButton: {
+			alignSelf: 'start',
+		}
+	} )
 }

@@ -1,5 +1,4 @@
-$gymload_builder $mol_page
-	title \Builder
+$gymload_builder $mol_view
 	storage_key \gymload_builder
 	tools /
 		<= List_of_languages $mol_locale_select
@@ -7,7 +6,6 @@ $gymload_builder $mol_page
 			dictionary *
 				ru \Русский
 				en \English
-		<= Source_link $mol_link_source uri \https://github.com/gymload/gymload.github.io
 		<= Lighter $mol_lights_toggle
 	DaySettings* $gymload_builder_day
 		storage_key <= day_storage_key* \
@@ -49,6 +47,6 @@ $gymload_builder $mol_page
 				values => weight_plate_values /number
 			<= Weeks $mol_deck
 				items <= week_items /$mol_view
-	body /
+	sub /
 		<= TopDesk $mol_deck
 			items <= top_desk_items /$mol_view

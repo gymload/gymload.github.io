@@ -1,3 +1,14 @@
-$gymload $gymload_builder
+$gymload $mol_page
+	title \Gymload - Workout Load Planner
 	plugins /
 		<= Theme $mol_theme_auto
+	tools /
+		<= List_of_languages $mol_locale_select
+			Filter null
+			dictionary *
+				ru \Русский
+				en \English
+		<= Lighter $mol_lights_toggle
+	body /
+		<= Builder $gymload_builder
+			storage_key \gymload_builder

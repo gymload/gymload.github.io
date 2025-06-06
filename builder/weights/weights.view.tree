@@ -13,8 +13,8 @@ $gymload_builder_weights $mol_view
 				click?event <=> row_remove*? null
 				sub / <= Remove_close_icon* $mol_icon_close
 	AddButton $mol_button_major
-		title \+
 		click?event <= add? null
+		sub / <= Add_icon $mol_icon_plus
 	sub /
 		<= Enabled $mol_check_expand
 			title <= title

@@ -2,6 +2,14 @@ namespace $.$$ {
 	const { rem } = $mol_style_unit
 
 	$mol_style_define( $gymload_builder, {
+		flex: {
+			direction: 'column',
+			shrink: 1,
+			grow: 1,
+		},
+		justify: {
+			self: 'stretch',
+		},
 		Settings: {
 			flexDirection: 'column',
 		},
