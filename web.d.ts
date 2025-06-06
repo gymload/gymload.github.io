@@ -2872,6 +2872,88 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	export class $mol_link extends $mol_view {
+		uri_toggle( ): string
+		hint( ): string
+		hint_safe( ): ReturnType< $mol_link['hint'] >
+		target( ): string
+		file_name( ): string
+		current( ): boolean
+		relation( ): string
+		event_click( next?: any ): any
+		click( next?: ReturnType< $mol_link['event_click'] > ): ReturnType< $mol_link['event_click'] >
+		uri( ): string
+		dom_name( ): string
+		uri_off( ): string
+		uri_native( ): any
+		external( ): boolean
+		attr( ): ({ 
+			'href': ReturnType< $mol_link['uri_toggle'] >,
+			'title': ReturnType< $mol_link['hint_safe'] >,
+			'target': ReturnType< $mol_link['target'] >,
+			'download': ReturnType< $mol_link['file_name'] >,
+			'mol_link_current': ReturnType< $mol_link['current'] >,
+			'rel': ReturnType< $mol_link['relation'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		sub( ): readonly($mol_view_content)[]
+		arg( ): Record<string, any>
+		event( ): ({ 
+			click( next?: ReturnType< $mol_link['click'] > ): ReturnType< $mol_link['click'] >,
+		})  & ReturnType< $mol_view['event'] >
+	}
+	
+}
+
+//# sourceMappingURL=link.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_link extends $.$mol_link {
+        uri_toggle(): string;
+        uri(): string;
+        uri_off(): string;
+        uri_native(): URL;
+        current(): boolean;
+        file_name(): string;
+        minimal_height(): number;
+        external(): boolean;
+        target(): '_self' | '_blank' | '_top' | '_parent' | string;
+        hint_safe(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_script extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=script.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_script_text extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=text.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_link_source extends $mol_link {
+		Icon( ): $mol_icon_script_text
+		hint( ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=source.view.tree.d.ts.map
+declare namespace $ {
     class $mol_media extends $mol_object2 {
         static match(query: string, next?: boolean): boolean;
     }
@@ -5029,153 +5111,159 @@ declare namespace $ {
 		,
 		ReturnType< $mol_locale_select['dictionary'] >
 	>
-	type $mol_number__value_gymload_builder_3 = $mol_type_enforce<
+	type $mol_link_source__uri_gymload_builder_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link_source['uri'] >
+	>
+	type $mol_number__value_gymload_builder_4 = $mol_type_enforce<
 		ReturnType< $gymload_builder['week_count'] >
 		,
 		ReturnType< $mol_number['value'] >
 	>
-	type $mol_labeler__title_gymload_builder_4 = $mol_type_enforce<
+	type $mol_labeler__title_gymload_builder_5 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_gymload_builder_5 = $mol_type_enforce<
+	type $mol_labeler__Content_gymload_builder_6 = $mol_type_enforce<
 		ReturnType< $gymload_builder['WeekCount'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_number__value_gymload_builder_6 = $mol_type_enforce<
+	type $mol_number__value_gymload_builder_7 = $mol_type_enforce<
 		ReturnType< $gymload_builder['day_count'] >
 		,
 		ReturnType< $mol_number['value'] >
 	>
-	type $mol_labeler__title_gymload_builder_7 = $mol_type_enforce<
+	type $mol_labeler__title_gymload_builder_8 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_gymload_builder_8 = $mol_type_enforce<
+	type $mol_labeler__Content_gymload_builder_9 = $mol_type_enforce<
 		ReturnType< $gymload_builder['DayCount'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
-	>
-	type $gymload_builder_weights__title_gymload_builder_9 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $gymload_builder_weights['title'] >
 	>
 	type $gymload_builder_weights__title_gymload_builder_10 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $gymload_builder_weights['title'] >
 	>
-	type $gymload_builder_weights__storage_key_gymload_builder_11 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $gymload_builder_weights['storage_key'] >
-	>
-	type $gymload_builder_weights__title_gymload_builder_12 = $mol_type_enforce<
+	type $gymload_builder_weights__title_gymload_builder_11 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $gymload_builder_weights['title'] >
 	>
-	type $gymload_builder_weights__storage_key_gymload_builder_13 = $mol_type_enforce<
+	type $gymload_builder_weights__storage_key_gymload_builder_12 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $gymload_builder_weights['storage_key'] >
 	>
-	type $mol_deck__items_gymload_builder_14 = $mol_type_enforce<
+	type $gymload_builder_weights__title_gymload_builder_13 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $gymload_builder_weights['title'] >
+	>
+	type $gymload_builder_weights__storage_key_gymload_builder_14 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $gymload_builder_weights['storage_key'] >
+	>
+	type $mol_deck__items_gymload_builder_15 = $mol_type_enforce<
 		ReturnType< $gymload_builder['week_items'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $mol_deck__items_gymload_builder_15 = $mol_type_enforce<
+	type $mol_deck__items_gymload_builder_16 = $mol_type_enforce<
 		ReturnType< $gymload_builder['top_desk_items'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $gymload_builder_day__storage_key_gymload_builder_16 = $mol_type_enforce<
+	type $gymload_builder_day__storage_key_gymload_builder_17 = $mol_type_enforce<
 		ReturnType< $gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $gymload_builder_day['storage_key'] >
 	>
-	type $gymload_builder_day__title_gymload_builder_17 = $mol_type_enforce<
+	type $gymload_builder_day__title_gymload_builder_18 = $mol_type_enforce<
 		ReturnType< $gymload_builder['day_title'] >
 		,
 		ReturnType< $gymload_builder_day['title'] >
 	>
-	type $gymload_builder_day__day_index_gymload_builder_18 = $mol_type_enforce<
+	type $gymload_builder_day__day_index_gymload_builder_19 = $mol_type_enforce<
 		ReturnType< $gymload_builder['day_index'] >
 		,
 		ReturnType< $gymload_builder_day['day_index'] >
 	>
-	type $gymload_builder_day__dumbbell_values_gymload_builder_19 = $mol_type_enforce<
+	type $gymload_builder_day__dumbbell_values_gymload_builder_20 = $mol_type_enforce<
 		ReturnType< $gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $gymload_builder_day['dumbbell_values'] >
 	>
-	type $gymload_builder_day__week_count_gymload_builder_20 = $mol_type_enforce<
+	type $gymload_builder_day__week_count_gymload_builder_21 = $mol_type_enforce<
 		ReturnType< $gymload_builder['week_count'] >
 		,
 		ReturnType< $gymload_builder_day['week_count'] >
 	>
-	type $gymload_builder_day__weight_plate_values_gymload_builder_21 = $mol_type_enforce<
+	type $gymload_builder_day__weight_plate_values_gymload_builder_22 = $mol_type_enforce<
 		ReturnType< $gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $gymload_builder_day['weight_plate_values'] >
 	>
-	type $gymload_builder_day__barbell_values_gymload_builder_22 = $mol_type_enforce<
+	type $gymload_builder_day__barbell_values_gymload_builder_23 = $mol_type_enforce<
 		ReturnType< $gymload_builder['barbell_values'] >
 		,
 		ReturnType< $gymload_builder_day['barbell_values'] >
 	>
-	type $gymload_builder_day_results__storage_key_gymload_builder_23 = $mol_type_enforce<
+	type $gymload_builder_day_results__storage_key_gymload_builder_24 = $mol_type_enforce<
 		ReturnType< $gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $gymload_builder_day_results['storage_key'] >
 	>
-	type $gymload_builder_day_results__title_gymload_builder_24 = $mol_type_enforce<
+	type $gymload_builder_day_results__title_gymload_builder_25 = $mol_type_enforce<
 		ReturnType< $gymload_builder['day_title'] >
 		,
 		ReturnType< $gymload_builder_day_results['title'] >
 	>
-	type $gymload_builder_day_results__day_index_gymload_builder_25 = $mol_type_enforce<
+	type $gymload_builder_day_results__day_index_gymload_builder_26 = $mol_type_enforce<
 		ReturnType< $gymload_builder['day_index'] >
 		,
 		ReturnType< $gymload_builder_day_results['day_index'] >
 	>
-	type $gymload_builder_day_results__week_count_gymload_builder_26 = $mol_type_enforce<
+	type $gymload_builder_day_results__week_count_gymload_builder_27 = $mol_type_enforce<
 		ReturnType< $gymload_builder['week_count'] >
 		,
 		ReturnType< $gymload_builder_day_results['week_count'] >
 	>
-	type $gymload_builder_day_results__dumbbell_values_gymload_builder_27 = $mol_type_enforce<
+	type $gymload_builder_day_results__dumbbell_values_gymload_builder_28 = $mol_type_enforce<
 		ReturnType< $gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $gymload_builder_day_results['dumbbell_values'] >
 	>
-	type $gymload_builder_day_results__weight_plate_values_gymload_builder_28 = $mol_type_enforce<
+	type $gymload_builder_day_results__weight_plate_values_gymload_builder_29 = $mol_type_enforce<
 		ReturnType< $gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $gymload_builder_day_results['weight_plate_values'] >
 	>
-	type $gymload_builder_day_results__barbell_values_gymload_builder_29 = $mol_type_enforce<
+	type $gymload_builder_day_results__barbell_values_gymload_builder_30 = $mol_type_enforce<
 		ReturnType< $gymload_builder['barbell_values'] >
 		,
 		ReturnType< $gymload_builder_day_results['barbell_values'] >
 	>
-	type $mol_view__title_gymload_builder_30 = $mol_type_enforce<
+	type $mol_view__title_gymload_builder_31 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_gymload_builder_31 = $mol_type_enforce<
+	type $mol_view__sub_gymload_builder_32 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
 	export class $gymload_builder extends $mol_page {
 		List_of_languages( ): $mol_locale_select
+		Source_link( ): $mol_link_source
 		Lighter( ): $mol_lights_toggle
 		day_storage_key( id: any): string
 		day_title( id: any): string
