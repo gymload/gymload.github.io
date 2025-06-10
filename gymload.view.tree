@@ -3,12 +3,78 @@ $gymload $mol_page
 	plugins /
 		<= Theme $mol_theme_auto
 	tools /
+		<= Lighter $mol_lights_toggle
 		<= List_of_languages $mol_locale_select
 			Filter null
 			dictionary *
 				ru \Русский
 				en \English
-		<= Lighter $mol_lights_toggle
-	body /
-		<= Builder $gymload_builder
-			storage_key \gymload_builder
+	ListPrograms $mol_select
+		dictionary <= programs *
+		value? <=> current_program_string? \0
+	EditProgram $mol_link
+		arg * view \edit_program
+		sub / <= EditProgram_icon $mol_icon_edit
+	AddProgram $mol_link
+		arg * view \add_program
+		sub / <= AddProgram_icon $mol_icon_plus
+	Builder $gymload_builder
+		storage_key <= builder_storage_key \gymload_builder
+	NewView $mol_view
+		sub /
+			<= NewTitle $gymload_title
+				title \Add New Program
+			<= NewForm $mol_form
+				body /
+					<= NewName_field $mol_form_field
+						name \Name
+						bid <= new_name_bid \
+						Content <= NewName_control $mol_string
+							value? <=> new_name? \
+				submit? <=> add_program? null
+				submit_allowed => add_allowed
+				buttons /
+					<= NewSubmit $mol_button_major
+						title \Add
+						click? <=> add_program? null
+						enabled <= add_allowed
+					<= NewResult $mol_status
+						message <= result? \
+	EditView $mol_view
+		sub /
+			<= EditTitle $gymload_title
+				title \Edit Program
+			<= EditForm $mol_form
+				body /
+					<= EditName_field $mol_form_field
+						name \Name
+						bid <= edit_name_bid \
+						Content <= EditName_control $mol_string
+							value? <=> edit_name? \
+				submit? <=> edit_program? null
+				submit_allowed => edit_allowed
+				buttons /
+					<= EditSubmit $mol_button_major
+						title \Save
+						click? <=> edit_program? null
+						enabled <= edit_allowed
+					<= EditResult $mol_status
+						message <= result? \
+					<= Space $mol_view
+					<= DeleteLink $mol_link
+						arg * view \delete_program
+						sub /
+							<= DeleteIcon $mol_icon_delete
+							\Delete
+	DeleteView $mol_view
+		sub /
+			<= DeleteTitle $gymload_title
+				title \Are you sure you want to delete this program?
+			<= DeleteActions $mol_view
+				sub /
+					<= DeleteConfirmButton $mol_button_major
+						title \Delete
+						click? <=> delete_program? null
+					<= DeleteCancelButton $mol_button_minor
+						title \Cancel
+						click? <=> cancel_delete_program? null
