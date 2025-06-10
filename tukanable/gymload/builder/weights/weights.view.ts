@@ -7,7 +7,7 @@ namespace $.$$ {
 		value: 0,
 	}
 
-	export class $gymload_builder_weights extends $.$gymload_builder_weights {
+	export class $tukanable_gymload_builder_weights extends $.$tukanable_gymload_builder_weights {
 		build_key( s: string ) {
 			return this.state_key( `gymload_builder_v1_weights_${ this.storage_key() }_${ s }` )
 		}

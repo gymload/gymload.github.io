@@ -1,4 +1,4 @@
-$gymload_builder_day $mol_view
+$tukanable_gymload_builder_day $mol_view
 	storage_key \day
 	day_index 0
 	week_count 10
@@ -8,11 +8,11 @@ $gymload_builder_day $mol_view
 	data_ids /number
 	MinStepLabeler* $mol_labeler
 		title @ \Min Step
-		Content <= MinStep* $gymload_smallnumber
+		Content <= MinStep* $tukanable_gymload_smallnumber
 			precision 0.1
 			value? <=> row_min_step*? 2.5
 	sub /
-		<= DayTitle $gymload_title
+		<= DayTitle $tukanable_gymload_title
 			title <= day_title \Day
 		<= Rows $mol_list
 			item_width_min* 200
@@ -44,22 +44,22 @@ $gymload_builder_day $mol_view
 										dictionary <= row_weight_types* *
 								<= Sets_labeler* $mol_labeler
 									title @ \Sets
-									Content <= Sets* $gymload_smallnumber
+									Content <= Sets* $tukanable_gymload_smallnumber
 										value? <=> row_sets*? 3
 								<= Reps_labeler* $mol_labeler
 									title @ \Reps
-									Content <= Reps* $gymload_smallnumber
+									Content <= Reps* $tukanable_gymload_smallnumber
 										value? <=> row_reps*? 12
 								<= BeginWeight_labeler* $mol_labeler
 									title @ \Begin Weight
-									Content <= BeginWeight* $gymload_smallnumber
+									Content <= BeginWeight* $tukanable_gymload_smallnumber
 										precision_view 0.1
 										precision_change <= row_min_step*?
 										value_min <= row_min_weight* 0
 										value? <=> row_begin_weight*? 50
 								<= FinishWeight_labeler* $mol_labeler
 									title @ \Finish Weight
-									Content <= FinishWeight* $gymload_smallnumber
+									Content <= FinishWeight* $tukanable_gymload_smallnumber
 										precision_view 0.1
 										precision_change <= row_min_step*?
 										value_min <= row_min_weight* 0

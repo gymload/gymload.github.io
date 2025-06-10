@@ -1,13 +1,6 @@
-$gymload_builder $mol_view
+$tukanable_gymload_builder $mol_view
 	storage_key \gymload_builder
-	tools /
-		<= List_of_languages $mol_locale_select
-			Filter null
-			dictionary *
-				ru \Русский
-				en \English
-		<= Lighter $mol_lights_toggle
-	DaySettings* $gymload_builder_day
+	DaySettings* $tukanable_gymload_builder_day
 		storage_key <= day_storage_key* \
 		title <= day_title* \Day
 		day_index <= day_index* 0
@@ -15,7 +8,7 @@ $gymload_builder $mol_view
 		week_count <= week_count
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
-	DayResults* $gymload_builder_day_results
+	DayResults* $tukanable_gymload_builder_day_results
 		storage_key <= day_storage_key*
 		title <= day_title* \Day
 		day_index <= day_index* 0
@@ -34,14 +27,14 @@ $gymload_builder $mol_view
 				title @ \Day Count
 				Content <= DayCount $mol_number
 					value? <=> day_count? 3
-			<= DumbbellWeighs $gymload_builder_weights
+			<= DumbbellWeighs $tukanable_gymload_builder_weights
 				title \Dumbbell Weights
 				values => dumbbell_values /number
-			<= BarbellWeights $gymload_builder_weights
+			<= BarbellWeights $tukanable_gymload_builder_weights
 				title \Barbell Weights
 				storage_key \barbell_weights
 				values => barbell_values /number
-			<= WeightPlates $gymload_builder_weights
+			<= WeightPlates $tukanable_gymload_builder_weights
 				title \Weight Plates
 				storage_key \weight_plates
 				values => weight_plate_values /number

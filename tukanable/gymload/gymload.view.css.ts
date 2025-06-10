@@ -1,5 +1,5 @@
 namespace $.$$ {
-	$mol_style_define( $gymload, {
+	$mol_style_define( $tukanable_gymload, {
 		NewView: {
 			flexDirection: 'column',
 		},

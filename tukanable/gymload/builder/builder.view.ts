@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $gymload_builder extends $.$gymload_builder {
+	export class $tukanable_gymload_builder extends $.$tukanable_gymload_builder {
 		override week_items() {
 			return Array.from({ length: this.day_count() }, (_, i) => this.DaySettings(i))
 		}

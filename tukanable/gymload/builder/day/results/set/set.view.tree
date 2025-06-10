@@ -1,4 +1,4 @@
-$gymload_builder_day_results_set $mol_view
+$tukanable_gymload_builder_day_results_set $mol_view
 	storage_key \setresult
 	set_idx 0
 	week_idx 0
@@ -12,11 +12,11 @@ $gymload_builder_day_results_set $mol_view
 		sub /
 			<= CurrentWeekWeight_labeler $mol_labeler
 				title <= week_plan_weight \Weight: 0
-				Content <= CurrentWeekWeight $gymload_smallnumber
+				Content <= CurrentWeekWeight $tukanable_gymload_smallnumber
 					value? <=> week_weight? 0
 			<= CurrentWeekReps_labeler $mol_labeler
 				title <= week_plan_Reps \Reps: 0
-				Content <= CurrentWeekReps $gymload_smallnumber
+				Content <= CurrentWeekReps $tukanable_gymload_smallnumber
 					value? <=> week_reps? 0
 	DoneWeekView $mol_view
 		sub /

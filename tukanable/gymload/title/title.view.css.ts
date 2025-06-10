@@ -15,7 +15,7 @@ namespace $.$$ {
 		},
 	} as const;
 
-	$mol_style_define( $gymload_title, {
+	$mol_style_define( $tukanable_gymload_title, {
 		Title: {
 			...baseTitle,
 			flex: {

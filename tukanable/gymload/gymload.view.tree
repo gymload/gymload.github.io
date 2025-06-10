@@ -1,4 +1,4 @@
-$gymload $mol_page
+$tukanable_gymload $mol_page
 	title \Gymload - Workout Load Planner
 	plugins /
 		<= Theme $mol_theme_auto
@@ -18,11 +18,11 @@ $gymload $mol_page
 	AddProgram $mol_link
 		arg * view \add_program
 		sub / <= AddProgram_icon $mol_icon_plus
-	Builder $gymload_builder
+	Builder $tukanable_gymload_builder
 		storage_key <= builder_storage_key \gymload_builder
 	NewView $mol_view
 		sub /
-			<= NewTitle $gymload_title
+			<= NewTitle $tukanable_gymload_title
 				title \Add New Program
 			<= NewForm $mol_form
 				body /
@@ -42,7 +42,7 @@ $gymload $mol_page
 						message <= result? \
 	EditView $mol_view
 		sub /
-			<= EditTitle $gymload_title
+			<= EditTitle $tukanable_gymload_title
 				title \Edit Program
 			<= EditForm $mol_form
 				body /
@@ -68,7 +68,7 @@ $gymload $mol_page
 							\Delete
 	DeleteView $mol_view
 		sub /
-			<= DeleteTitle $gymload_title
+			<= DeleteTitle $tukanable_gymload_title
 				title \Are you sure you want to delete this program?
 			<= DeleteActions $mol_view
 				sub /

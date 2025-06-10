@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $gymload_builder_day_results extends $.$gymload_builder_day_results {
+	export class $tukanable_gymload_builder_day_results extends $.$tukanable_gymload_builder_day_results {
 		override rows() {
 			return this.data_ids().map( id => this.Row( id ) )
 		}

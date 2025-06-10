@@ -19,7 +19,7 @@ namespace $.$$ {
 		min_step: 5,
 	}
 
-	export class $gymload_builder_day extends $.$gymload_builder_day {
+	export class $tukanable_gymload_builder_day extends $.$tukanable_gymload_builder_day {
 		build_key( s: string ) {
 			return `${ this.storage_key() }_${ s }`
 		}

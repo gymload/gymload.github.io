@@ -4,7 +4,7 @@ namespace $.$$ {
 	const defaultProgramName = 'Default'
 	const defaultProgramId = 0
 
-	export class $gymload extends $.$gymload {
+	export class $tukanable_gymload extends $.$tukanable_gymload {
 		override programs() {
 			const res: { [ key: string ]: string } = {}
 

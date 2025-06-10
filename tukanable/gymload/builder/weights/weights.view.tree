@@ -1,4 +1,4 @@
-$gymload_builder_weights $mol_view
+$tukanable_gymload_builder_weights $mol_view
 	storage_key \dumbbell
 	title \Dombell Weights
 	values /number
@@ -6,7 +6,7 @@ $gymload_builder_weights $mol_view
 		sub /
 			<= Labeler* $mol_labeler
 				title <= row_title* \
-				Content <= Value* $gymload_smallnumber
+				Content <= Value* $tukanable_gymload_smallnumber
 					precision 0.1
 					value? <=> row_value*? 0
 			<= RemoveButton* $mol_button_major

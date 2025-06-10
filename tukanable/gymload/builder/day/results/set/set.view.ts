@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $gymload_builder_day_results_set extends $.$gymload_builder_day_results_set {
+	export class $tukanable_gymload_builder_day_results_set extends $.$tukanable_gymload_builder_day_results_set {
 		override sub() {
 			const items: $mol_view[] = [ ...super.sub() ]
 

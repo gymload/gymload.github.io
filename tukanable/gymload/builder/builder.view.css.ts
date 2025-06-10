@@ -1,7 +1,7 @@
 namespace $.$$ {
 	const { rem } = $mol_style_unit
 
-	$mol_style_define( $gymload_builder, {
+	$mol_style_define( $tukanable_gymload_builder, {
 		flex: {
 			direction: 'column',
 			shrink: 1,
