@@ -77,7 +77,11 @@ namespace $.$$ {
 
 		@$mol_mem
 		override edit_name( next?: string ): string {
-			return next || this.program_name( this.current_program() )
+			if (next === undefined) {
+			  return this.program_name( this.current_program() )
+			}
+
+			return next
 		}
 
 		build_key( s: string ) {
