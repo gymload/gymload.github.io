@@ -34,8 +34,11 @@ namespace $.$$ {
 		override tools() {
 			const items = [ ...super.tools() ]
 
-			items.push( this.ListPrograms() )
-			items.push( this.EditProgram() )
+			if (this.user_program_ids().length > 0) {
+				items.push( this.ListPrograms() )
+				items.push( this.EditProgram() )
+			}
+
 			items.push( this.AddProgram() )
 
 			return items
@@ -92,8 +95,12 @@ namespace $.$$ {
 			return this.$.$mol_state_local.value( this.build_key( `program_name_${ key }` ), next ) || defaultProgramName
 		}
 
+		user_program_ids( next?: number[] ): readonly ( number )[] {
+			return this.$.$mol_state_local.value( this.build_key( 'program_ids' ), next ) || []
+		}
+
 		program_ids( next?: number[] ): readonly ( number )[] {
-			return this.$.$mol_state_local.value( this.build_key( 'program_ids' ), next ) || [ defaultProgramId ]
+			return [defaultProgramId, ...this.user_program_ids(next)]
 		}
 
 		@$mol_mem
