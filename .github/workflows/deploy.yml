@@ -13,7 +13,7 @@ jobs:
       uses: hyoo-ru/mam_build@master2
       with:
         token: ${{ secrets.GH_PAT }}
-        package: 'tukanable'
+        package: 'tukanable/gymload'
         meta: |
           my https://github.com/gymload/gymload.github.io
     - name: Deploy on GitHub Pages
@@ -21,4 +21,4 @@ jobs:
       uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
       with:
         repo-token: ${{ secrets.GH_PAT }}
-        site-directory: 'tukanable/-'
+        site-directory: 'tukanable/gymload/-'
