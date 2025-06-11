@@ -20,12 +20,13 @@ $tukanable_gymload_builder_day_results_set $mol_view
 					value? <=> week_reps? 0
 	DoneWeekView $mol_view
 		sub /
-			<= done_plan_label \
+			<= PlanLabel $mol_view
+				sub / <= done_plan_label \
 			<= DoneButton $mol_button_major
 				title \Done
 				click?event <=> done_week_click? null
 	FutureWeekView $mol_view
 		sub / <= future_week_results \
 	sub /
-		<= Label $mol_view
-			sub / <= set_idx
+		<= SetIndex $mol_view
+			sub / <= set_idx_label \#

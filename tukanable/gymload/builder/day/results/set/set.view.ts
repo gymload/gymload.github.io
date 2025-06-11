@@ -105,5 +105,9 @@ namespace $.$$ {
 
 			return next || defaultValue
 		}
+
+		override set_idx_label(): string {
+			return `${ super.set_idx_label() }${ this.set_idx() }`
+		}
 	}
 }
