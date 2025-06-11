@@ -8,6 +8,7 @@ $tukanable_gymload_builder $mol_view
 		week_count <= week_count
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
+		show_charts <= show_charts
 	DayResults* $tukanable_gymload_builder_day_results
 		storage_key <= day_storage_key*
 		title <= day_title* \Day
@@ -19,14 +20,20 @@ $tukanable_gymload_builder $mol_view
 	Settings $mol_view
 		title @ \Settings
 		sub /
-			<= WeekCount_labeler $mol_labeler
-				title @ \Week Count
-				Content <= WeekCount $mol_number
-					value? <=> week_count? 10
-			<= DayCount_labeler $mol_labeler
-				title @ \Day Count
-				Content <= DayCount $mol_number
-					value? <=> day_count? 3
+			<= Header $mol_view
+				sub /
+					<= WeekCount_labeler $mol_labeler
+						title @ \Week Count
+						Content <= WeekCount $mol_number
+							value? <=> week_count? 10
+					<= DayCount_labeler $mol_labeler
+						title @ \Day Count
+						Content <= DayCount $mol_number
+							value? <=> day_count? 3
+					<= ShowCharts_labeler $mol_labeler
+						title @ \Show Charts
+						Content <= ShowCharts_wrapper $mol_check_box
+							checked? <=> show_charts? true
 			<= DumbbellWeighs $tukanable_gymload_builder_weights
 				title \Dumbbell Weights
 				values => dumbbell_values /number

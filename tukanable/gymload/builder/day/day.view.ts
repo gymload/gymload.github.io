@@ -221,5 +221,13 @@ namespace $.$$ {
 			this.data_ids( [ ...this.data_ids(), new_id ] )
 			this.row( new_id, new_item )
 		}
+
+		override row_view( id: any ) {
+			if( this.show_charts() ) {
+				return [ this.ChartView( id ), ...super.row_view( id ) ]
+			}
+
+			return super.row_view( id )
+		}
 	}
 }

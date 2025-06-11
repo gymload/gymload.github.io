@@ -17,7 +17,7 @@ namespace $.$$ {
 		}
 
 		enabled( next?: boolean ): boolean {
-			return this.$.$mol_state_local.value( this.build_key( 'opened' ), next ) ?? true
+			return this.$.$mol_state_local.value( this.build_key( 'opened' ), next ) ?? super.enabled()
 		}
 
 		@$mol_mem

@@ -6,7 +6,7 @@ namespace $.$$ {
 		Row: {
 			flexDirection: 'column',
 		},
-		ChartWrapper: {
+		ChartView: {
 			maxHeight: '200px',
 		},
 		InputRow: {

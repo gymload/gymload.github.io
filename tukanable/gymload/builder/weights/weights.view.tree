@@ -18,6 +18,6 @@ $tukanable_gymload_builder_weights $mol_view
 	sub /
 		<= Enabled $mol_check_expand
 			title <= title
-			checked? <=> enabled? true
+			checked? <=> enabled? false
 		<= Items $mol_view
 			sub <= items /$mol_view

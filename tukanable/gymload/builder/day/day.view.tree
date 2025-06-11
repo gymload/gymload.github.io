@@ -6,11 +6,22 @@ $tukanable_gymload_builder_day $mol_view
 	weight_plate_values /number
 	barbell_values /number
 	data_ids /number
+	show_charts true
 	MinStepLabeler* $mol_labeler
 		title @ \Min Step
 		Content <= MinStep* $tukanable_gymload_smallnumber
 			precision 0.1
 			value? <=> row_min_step*? 2.5
+	ChartView* $mol_view
+		sub /
+			<= Chart* $mol_chart
+				graphs /
+					<= Plan* $mol_plot_bar
+						series_y <= plan* /
+					<= Vert_ruler* $mol_plot_ruler_vert
+					<= Marker_hor* $mol_plot_mark_hor
+						title <= marker_hor_title \Weeks
+						labels <= week_labels* /string
 	sub /
 		<= DayTitle $tukanable_gymload_title
 			title <= day_title \Day
@@ -19,17 +30,7 @@ $tukanable_gymload_builder_day $mol_view
 			item_height_min* 96
 			rows <= rows /$mol_view
 				<= Row*0 $mol_view
-					sub /
-						<= ChartWrapper* $mol_view
-							sub /
-								<= Chart* $mol_chart
-									graphs /
-										<= Plan* $mol_plot_bar
-											series_y <= plan* /
-										<= Vert_ruler* $mol_plot_ruler_vert
-										<= Marker_hor* $mol_plot_mark_hor
-											title <= marker_hor_title \Weeks
-											labels <= week_labels* /string
+					sub <= row_view* /
 						<= InputRow* $mol_row
 							sub <= row_content* /
 								<= Exercise_labeler* $mol_labeler
