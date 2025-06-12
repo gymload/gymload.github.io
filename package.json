@@ -1,5 +1,5 @@
 {
-  "name": "tukanable_tukanable",
+  "name": "tukanable_gymload",
   "version": "0.0.1",
   "exports": {
     "node": {
@@ -15,7 +15,7 @@
   "browser": "./web.js",
   "types": "./web.d.ts",
   "keywords": [
-    "$tukanable_tukanable",
+    "$tukanable_gymload",
     "$tukanable"
   ],
   "dependencies": {}
