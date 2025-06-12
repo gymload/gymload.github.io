@@ -1,5 +1,5 @@
 {
-  "name": "tukanable",
+  "name": "tukanable_tukanable",
   "version": "0.0.1",
   "exports": {
     "node": {
@@ -15,6 +15,7 @@
   "browser": "./web.js",
   "types": "./web.d.ts",
   "keywords": [
+    "$tukanable_tukanable",
     "$tukanable"
   ],
   "dependencies": {}
