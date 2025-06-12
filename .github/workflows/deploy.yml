@@ -13,11 +13,10 @@ jobs:
       uses: hyoo-ru/mam_build@master2
       with:
         token: ${{ secrets.GH_PAT }}
-        package: 'tukanable'
-        modules: tukanable/gymload
+        package: 'tukanable/gymload'
     - name: Deploy on GitHub Pages
       if: github.ref == 'refs/heads/master'
       uses: alex-page/blazing-fast-gh-pages-deploy@v1.1.0
       with:
         repo-token: ${{ secrets.GH_PAT }}
-        site-directory: 'tukanable/-'
+        site-directory: 'tukanable/gymload/-'
