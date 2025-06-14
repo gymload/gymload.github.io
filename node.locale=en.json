@@ -1,0 +1,19 @@
+{
+	"$mol_lights_toggle_hint": "Toggle lights",
+	"$mol_search_Clear_hint": "Clear",
+	"$mol_search_hint": "Search...",
+	"$mol_select_filter_hint": "Filter..",
+	"$mol_select_hint": "Pick..",
+	"$mol_select_no_options_message": "No options",
+	"$tukanable_gymload_builder_DayCount_labeler_title": "Day Count",
+	"$tukanable_gymload_builder_Settings_title": "Settings",
+	"$tukanable_gymload_builder_ShowCharts_labeler_title": "Show Charts",
+	"$tukanable_gymload_builder_WeekCount_labeler_title": "Week Count",
+	"$tukanable_gymload_builder_day_AddButton_title": "Add Exercise",
+	"$tukanable_gymload_builder_day_BeginWeight_labeler_title": "Begin Weight",
+	"$tukanable_gymload_builder_day_FinishWeight_labeler_title": "Finish Weight",
+	"$tukanable_gymload_builder_day_MinStepLabeler_title": "Min Step",
+	"$tukanable_gymload_builder_day_Reps_labeler_title": "Reps",
+	"$tukanable_gymload_builder_day_Sets_labeler_title": "Sets",
+	"$tukanable_gymload_builder_day_WeightType_labeler_title": "Weight Type"
+}
