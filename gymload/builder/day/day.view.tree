@@ -28,6 +28,8 @@ $tukanable_gymload_builder_day $mol_view
 		<= Rows $mol_list
 			item_width_min* 200
 			item_height_min* 96
+			Empty* <= EmptyExercises $mol_view
+				sub / \No exercises yet...
 			rows <= rows /$mol_view
 				<= Row*0 $mol_view
 					sub <= row_view* /
