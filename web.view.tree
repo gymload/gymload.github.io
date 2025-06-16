@@ -37,6 +37,30 @@ $mol_page $mol_view
 $mol_theme_auto $mol_plugin
 	attr * mol_theme <= theme \
 
+$mol_pop $mol_view
+	showed? false
+	align_vert \
+	align_hor \
+	prefer \vert
+	sub /
+		<= Anchor null
+	sub_visible /
+		<= Anchor
+		<= Bubble $mol_pop_bubble
+			align <= align \bottom_center
+			content <= bubble_content /$mol_view_content
+			height_max <= height_max 9999
+
+$mol_pop_bubble $mol_view
+	sub <= content /$mol_view_content
+	style *
+		^
+		maxHeight <= height_max 9999
+	attr *
+		^
+		mol_pop_align <= align \
+		tabindex 0
+
 $mol_speck $mol_view
 	minimal_width 12
 	attr *
@@ -86,68 +110,6 @@ $mol_check $mol_button_minor
 			<= Title $mol_view
 				sub /
 					<= title \
-
-$mol_check_icon $mol_check
-
-$mol_svg $mol_view
-	dom_name \svg
-	dom_name_space \http://www.w3.org/2000/svg
-	font_size 16
-	font_family \
-	style_size *
-
-$mol_svg_root $mol_svg
-	dom_name \svg
-	attr *
-		^
-		viewBox <= view_box \0 0 100 100
-		preserveAspectRatio <= aspect \xMidYMid
-
-$mol_svg_path $mol_svg
-	dom_name \path
-	attr *
-		^
-		d <= geometry \
-
-
-$mol_icon $mol_svg_root
-	view_box \0 0 24 24
-	minimal_width 16
-	minimal_height 16
-	sub /
-		<= Path $mol_svg_path
-			geometry <= path \
-
-$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
-
-$mol_lights_toggle $mol_check_icon
-	Icon <= Lights_icon $mol_icon_brightness_4
-	hint @ \Toggle lights
-	checked? <=> lights? false
-
-$mol_pop $mol_view
-	showed? false
-	align_vert \
-	align_hor \
-	prefer \vert
-	sub /
-		<= Anchor null
-	sub_visible /
-		<= Anchor
-		<= Bubble $mol_pop_bubble
-			align <= align \bottom_center
-			content <= bubble_content /$mol_view_content
-			height_max <= height_max 9999
-
-$mol_pop_bubble $mol_view
-	sub <= content /$mol_view_content
-	style *
-		^
-		maxHeight <= height_max 9999
-	attr *
-		^
-		mol_pop_align <= align \
-		tabindex 0
 
 $mol_pick $mol_pop
 	event *
@@ -258,6 +220,35 @@ $mol_string $mol_view
 			mod_ctrl <= submit_with_ctrl false
 			key * enter?event <=> submit?event null
 
+$mol_svg $mol_view
+	dom_name \svg
+	dom_name_space \http://www.w3.org/2000/svg
+	font_size 16
+	font_family \
+	style_size *
+
+$mol_svg_root $mol_svg
+	dom_name \svg
+	attr *
+		^
+		viewBox <= view_box \0 0 100 100
+		preserveAspectRatio <= aspect \xMidYMid
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_icon $mol_svg_root
+	view_box \0 0 24 24
+	minimal_width 16
+	minimal_height 16
+	sub /
+		<= Path $mol_svg_path
+			geometry <= path \
+
 $mol_icon_close $mol_icon path \M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
 
 $mol_search $mol_pop
@@ -337,6 +328,15 @@ $mol_select $mol_pick
 	Trigger_icon $mol_icon_dots_vertical
 
 $mol_locale_select $mol_select
+
+$mol_check_icon $mol_check
+
+$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_4
+	hint @ \Toggle lights
+	checked? <=> lights? false
 
 $mol_icon_edit $mol_icon path \M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19H5V5H12V3H5M17.78,4C17.61,4 17.43,4.07 17.3,4.2L16.08,5.41L18.58,7.91L19.8,6.7C20.06,6.44 20.06,6 19.8,5.75L18.25,4.2C18.12,4.07 17.95,4 17.78,4M15.37,6.12L8,13.5V16H10.5L17.87,8.62L15.37,6.12Z
 
@@ -826,6 +826,7 @@ $tukanable_gymload_builder_day $mol_view
 	barbell_values /number
 	data_ids /number
 	show_charts true
+	no_exercises @ \No exercises yet...
 	weight_types *
 		custom @ \Custom
 		dumbbell @ \Dumbbell
@@ -847,12 +848,12 @@ $tukanable_gymload_builder_day $mol_view
 						labels <= week_labels* /string
 	sub /
 		<= DayTitle $tukanable_gymload_title
-			title <= day_title \Day
+			title <= day_title @ \Day #
 		<= Rows $mol_list
 			item_width_min* 200
 			item_height_min* 96
 			Empty* <= EmptyExercises $mol_view
-				sub / \No exercises yet...
+				sub / <= no_exercises
 			rows <= rows /$mol_view
 				<= Row*0 $mol_view
 					sub <= row_view* /
@@ -983,15 +984,15 @@ $tukanable_gymload_builder_day_results_set $mol_view
 	DoneWeekView $mol_view
 		sub /
 			<= PlanLabel $mol_view
-				sub / <= done_plan_label \
+				sub / <= done_plan_label @ \Plan: __weight__ (__reps__)
 			<= DoneButton $mol_button_major
-				title \Done
+				title @ \Done
 				click?event <=> done_week_click? null
 	FutureWeekView $mol_view
 		sub / <= future_week_results \
 	sub /
 		<= SetIndex $mol_view
-			sub / <= set_idx_label \#
+			sub / <= set_idx_label @ \#
 
 $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 	week_count 1
@@ -1059,7 +1060,7 @@ $tukanable_gymload_builder $mol_view
 	Settings $mol_view
 		title @ \Settings
 		sub /
-			<= Header $mol_view
+			<= Header $mol_row
 				sub /
 					<= WeekCount_labeler $mol_labeler
 						title @ \Week Count
@@ -1088,19 +1089,22 @@ $tukanable_gymload_builder $mol_view
 				items <= week_items /$mol_view
 	sub /
 		<= TopDesk $mol_deck
+			current? <=> top_desk_current? \3
 			items <= top_desk_items /$mol_view
 
 $tukanable_gymload $mol_page
-	title @ \Gymload - Workout Load Planner
+	title @ \Gymload
+	required_label @ \Required
+	default_program_name @ \Default
 	plugins /
 		<= Theme $mol_theme_auto
 	tools /
-		<= Lighter $mol_lights_toggle
 		<= List_of_languages $mol_locale_select
 			Filter null
 			dictionary *
-				ru \Русский
-				en \English
+				ru \Рус
+				en \Eng
+		<= Lighter $mol_lights_toggle
 	ListPrograms $mol_select
 		dictionary <= programs *
 		value? <=> current_program_string? \0
@@ -1157,7 +1161,7 @@ $tukanable_gymload $mol_page
 						arg * view \delete_program
 						sub /
 							<= DeleteIcon $mol_icon_delete
-							@ \Delete
+							<= delete_link_text @ \Delete Program
 	DeleteView $mol_view
 		sub /
 			<= DeleteTitle $tukanable_gymload_title

@@ -30,6 +30,8 @@
 	"$tukanable_gymload_builder_day_Reps_labeler_title": "Повторения",
 	"$tukanable_gymload_builder_day_Sets_labeler_title": "Подходы",
 	"$tukanable_gymload_builder_day_WeightType_labeler_title": "Тип веса",
+	"$tukanable_gymload_builder_day_day_title": "День №",
+	"$tukanable_gymload_builder_day_no_exercises": "Упражнений пока нет",
 	"$tukanable_gymload_builder_day_results_day_title": "День №",
 	"$tukanable_gymload_builder_day_results_week_tab_title": "Неделя №",
 	"$tukanable_gymload_builder_day_row_exercise_title": "Упражнение #",
@@ -37,5 +39,8 @@
 	"$tukanable_gymload_builder_day_weight_types_barbell": "Штанга",
 	"$tukanable_gymload_builder_day_weight_types_custom": "Произвольный",
 	"$tukanable_gymload_builder_day_weight_types_dumbbell": "Гантели",
-	"$tukanable_gymload_title": "Gymload - Конструктор программ для качалки"
+	"$tukanable_gymload_default_program_name": "Первая",
+	"$tukanable_gymload_delete_link_text": "Удалить программу",
+	"$tukanable_gymload_required_label": "Обязательное поле",
+	"$tukanable_gymload_title": "Gymload"
 }

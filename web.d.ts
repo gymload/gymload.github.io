@@ -1263,250 +1263,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    let $mol_layer: Record<"focus" | "float" | "hover" | "speck" | "popup", $mol_style_func<"var", unknown>>;
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_speck extends $mol_view {
-		theme( ): string
-		value( ): any
-		minimal_width( ): number
-		attr( ): ({ 
-			'mol_theme': ReturnType< $mol_speck['theme'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		style( ): ({ 
-			'minHeight': string,
-		})  & ReturnType< $mol_view['style'] >
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=speck.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_speck__value_mol_button_1 = $mol_type_enforce<
-		ReturnType< $mol_button['error'] >
-		,
-		ReturnType< $mol_speck['value'] >
-	>
-	export class $mol_button extends $mol_view {
-		event_activate( next?: any ): any
-		clicks( next?: any ): any
-		event_key_press( next?: any ): any
-		disabled( ): boolean
-		tab_index( ): number
-		hint( ): string
-		hint_safe( ): ReturnType< $mol_button['hint'] >
-		error( ): string
-		enabled( ): boolean
-		click( next?: any ): any
-		event_click( next?: any ): any
-		event( ): ({ 
-			click( next?: ReturnType< $mol_button['event_activate'] > ): ReturnType< $mol_button['event_activate'] >,
-			dblclick( next?: ReturnType< $mol_button['clicks'] > ): ReturnType< $mol_button['clicks'] >,
-			keydown( next?: ReturnType< $mol_button['event_key_press'] > ): ReturnType< $mol_button['event_key_press'] >,
-		})  & ReturnType< $mol_view['event'] >
-		attr( ): ({ 
-			'disabled': ReturnType< $mol_button['disabled'] >,
-			'role': string,
-			'tabindex': ReturnType< $mol_button['tab_index'] >,
-			'title': ReturnType< $mol_button['hint_safe'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		sub( ): readonly($mol_view_content)[]
-		Speck( ): $mol_speck
-	}
-	
-}
-
-//# sourceMappingURL=button.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_button extends $.$mol_button {
-        status(next?: any[]): any[];
-        disabled(): boolean;
-        event_activate(next: Event): void;
-        event_key_press(event: KeyboardEvent): void;
-        tab_index(): number;
-        error(): string;
-        hint_safe(): string;
-        sub_visible(): ($mol_view_content | $mol_speck)[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_typed extends $mol_button {
-		minimal_height( ): number
-		minimal_width( ): number
-	}
-	
-}
-
-//# sourceMappingURL=typed.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_minor extends $mol_button_typed {
-	}
-	
-}
-
-//# sourceMappingURL=minor.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_check extends $mol_button_minor {
-		checked( next?: boolean ): boolean
-		aria_checked( ): string
-		aria_role( ): string
-		Icon( ): any
-		title( ): string
-		Title( ): $mol_view
-		label( ): readonly(any)[]
-		attr( ): ({ 
-			'mol_check_checked': ReturnType< $mol_check['checked'] >,
-			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
-			'role': ReturnType< $mol_check['aria_role'] >,
-		})  & ReturnType< $mol_button_minor['attr'] >
-		sub( ): readonly($mol_view_content)[]
-	}
-	
-}
-
-//# sourceMappingURL=check.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_check extends $.$mol_check {
-        click(next?: Event): void;
-        sub(): readonly $mol_view_content[];
-        label(): readonly any[];
-        aria_checked(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_check_icon extends $mol_check {
-	}
-	
-}
-
-//# sourceMappingURL=icon.view.tree.d.ts.map
-declare namespace $ {
-    class $mol_state_time extends $mol_object {
-        static task(precision: number, reset?: null): $mol_after_timeout | $mol_after_frame;
-        static now(precision: number): number;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_svg extends $mol_view {
-		dom_name( ): string
-		dom_name_space( ): string
-		font_size( ): number
-		font_family( ): string
-		style_size( ): Record<string, any>
-	}
-	
-}
-
-//# sourceMappingURL=svg.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_svg extends $.$mol_svg {
-        computed_style(): Record<string, any>;
-        font_size(): number;
-        font_family(): any;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_svg_root extends $mol_svg {
-		view_box( ): string
-		aspect( ): string
-		dom_name( ): string
-		attr( ): ({ 
-			'viewBox': ReturnType< $mol_svg_root['view_box'] >,
-			'preserveAspectRatio': ReturnType< $mol_svg_root['aspect'] >,
-		})  & ReturnType< $mol_svg['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=root.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_svg_path extends $mol_svg {
-		geometry( ): string
-		dom_name( ): string
-		attr( ): ({ 
-			'd': ReturnType< $mol_svg_path['geometry'] >,
-		})  & ReturnType< $mol_svg['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=path.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_svg_path__geometry_mol_icon_1 = $mol_type_enforce<
-		ReturnType< $mol_icon['path'] >
-		,
-		ReturnType< $mol_svg_path['geometry'] >
-	>
-	export class $mol_icon extends $mol_svg_root {
-		path( ): string
-		Path( ): $mol_svg_path
-		view_box( ): string
-		minimal_width( ): number
-		minimal_height( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=icon.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_brightness_4 extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=4.view.tree.d.ts.map
-declare namespace $ {
     class $mol_lock extends $mol_object {
         protected promise: null | Promise<void>;
         wait(): Promise<() => void>;
@@ -1725,22 +1481,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
-
-	export class $mol_lights_toggle extends $mol_check_icon {
-		Lights_icon( ): $mol_icon_brightness_4
-		lights( next?: boolean ): boolean
-		Icon( ): ReturnType< $mol_lights_toggle['Lights_icon'] >
-		hint( ): string
-		checked( next?: ReturnType< $mol_lights_toggle['lights'] > ): ReturnType< $mol_lights_toggle['lights'] >
-	}
-	
+    let $mol_layer: Record<"focus" | "float" | "hover" | "speck" | "popup", $mol_style_func<"var", unknown>>;
 }
 
-//# sourceMappingURL=toggle.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_lights_toggle extends $.$mol_lights_toggle {
-        lights(next?: boolean): boolean;
-    }
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -1817,6 +1561,142 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_speck extends $mol_view {
+		theme( ): string
+		value( ): any
+		minimal_width( ): number
+		attr( ): ({ 
+			'mol_theme': ReturnType< $mol_speck['theme'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		style( ): ({ 
+			'minHeight': string,
+		})  & ReturnType< $mol_view['style'] >
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=speck.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_speck__value_mol_button_1 = $mol_type_enforce<
+		ReturnType< $mol_button['error'] >
+		,
+		ReturnType< $mol_speck['value'] >
+	>
+	export class $mol_button extends $mol_view {
+		event_activate( next?: any ): any
+		clicks( next?: any ): any
+		event_key_press( next?: any ): any
+		disabled( ): boolean
+		tab_index( ): number
+		hint( ): string
+		hint_safe( ): ReturnType< $mol_button['hint'] >
+		error( ): string
+		enabled( ): boolean
+		click( next?: any ): any
+		event_click( next?: any ): any
+		event( ): ({ 
+			click( next?: ReturnType< $mol_button['event_activate'] > ): ReturnType< $mol_button['event_activate'] >,
+			dblclick( next?: ReturnType< $mol_button['clicks'] > ): ReturnType< $mol_button['clicks'] >,
+			keydown( next?: ReturnType< $mol_button['event_key_press'] > ): ReturnType< $mol_button['event_key_press'] >,
+		})  & ReturnType< $mol_view['event'] >
+		attr( ): ({ 
+			'disabled': ReturnType< $mol_button['disabled'] >,
+			'role': string,
+			'tabindex': ReturnType< $mol_button['tab_index'] >,
+			'title': ReturnType< $mol_button['hint_safe'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		sub( ): readonly($mol_view_content)[]
+		Speck( ): $mol_speck
+	}
+	
+}
+
+//# sourceMappingURL=button.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_button extends $.$mol_button {
+        status(next?: any[]): any[];
+        disabled(): boolean;
+        event_activate(next: Event): void;
+        event_key_press(event: KeyboardEvent): void;
+        tab_index(): number;
+        error(): string;
+        hint_safe(): string;
+        sub_visible(): ($mol_view_content | $mol_speck)[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_typed extends $mol_button {
+		minimal_height( ): number
+		minimal_width( ): number
+	}
+	
+}
+
+//# sourceMappingURL=typed.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_minor extends $mol_button_typed {
+	}
+	
+}
+
+//# sourceMappingURL=minor.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_check extends $mol_button_minor {
+		checked( next?: boolean ): boolean
+		aria_checked( ): string
+		aria_role( ): string
+		Icon( ): any
+		title( ): string
+		Title( ): $mol_view
+		label( ): readonly(any)[]
+		attr( ): ({ 
+			'mol_check_checked': ReturnType< $mol_check['checked'] >,
+			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
+			'role': ReturnType< $mol_check['aria_role'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+		sub( ): readonly($mol_view_content)[]
+	}
+	
+}
+
+//# sourceMappingURL=check.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_check extends $.$mol_check {
+        click(next?: Event): void;
+        sub(): readonly $mol_view_content[];
+        label(): readonly any[];
+        aria_checked(): string;
+    }
 }
 
 declare namespace $ {
@@ -2242,6 +2122,87 @@ declare namespace $.$$ {
 declare namespace $ {
 }
 
+declare namespace $ {
+    class $mol_state_time extends $mol_object {
+        static task(precision: number, reset?: null): $mol_after_timeout | $mol_after_frame;
+        static now(precision: number): number;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_svg extends $mol_view {
+		dom_name( ): string
+		dom_name_space( ): string
+		font_size( ): number
+		font_family( ): string
+		style_size( ): Record<string, any>
+	}
+	
+}
+
+//# sourceMappingURL=svg.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_svg extends $.$mol_svg {
+        computed_style(): Record<string, any>;
+        font_size(): number;
+        font_family(): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_svg_root extends $mol_svg {
+		view_box( ): string
+		aspect( ): string
+		dom_name( ): string
+		attr( ): ({ 
+			'viewBox': ReturnType< $mol_svg_root['view_box'] >,
+			'preserveAspectRatio': ReturnType< $mol_svg_root['aspect'] >,
+		})  & ReturnType< $mol_svg['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=root.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_svg_path extends $mol_svg {
+		geometry( ): string
+		dom_name( ): string
+		attr( ): ({ 
+			'd': ReturnType< $mol_svg_path['geometry'] >,
+		})  & ReturnType< $mol_svg['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=path.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_svg_path__geometry_mol_icon_1 = $mol_type_enforce<
+		ReturnType< $mol_icon['path'] >
+		,
+		ReturnType< $mol_svg_path['geometry'] >
+	>
+	export class $mol_icon extends $mol_svg_root {
+		path( ): string
+		Path( ): $mol_svg_path
+		view_box( ): string
+		minimal_width( ): number
+		minimal_height( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=icon.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_icon_close extends $mol_icon {
@@ -2935,6 +2896,45 @@ declare namespace $.$$ {
             za: string;
             zu: string;
         };
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_check_icon extends $mol_check {
+	}
+	
+}
+
+//# sourceMappingURL=icon.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_brightness_4 extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=4.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_lights_toggle extends $mol_check_icon {
+		Lights_icon( ): $mol_icon_brightness_4
+		lights( next?: boolean ): boolean
+		Icon( ): ReturnType< $mol_lights_toggle['Lights_icon'] >
+		hint( ): string
+		checked( next?: ReturnType< $mol_lights_toggle['lights'] > ): ReturnType< $mol_lights_toggle['lights'] >
+	}
+	
+}
+
+//# sourceMappingURL=toggle.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_lights_toggle extends $.$mol_lights_toggle {
+        lights(next?: boolean): boolean;
     }
 }
 
@@ -4688,6 +4688,7 @@ declare namespace $ {
 		barbell_values( ): readonly(number)[]
 		data_ids( ): readonly(number)[]
 		show_charts( ): boolean
+		no_exercises( ): string
 		weight_types( ): ({ 
 			'custom': string,
 			'dumbbell': string,
@@ -4701,6 +4702,9 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=day.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
 declare namespace $.$$ {
     type NewItem = {
         excercise: string;
@@ -4742,9 +4746,6 @@ declare namespace $.$$ {
         row_view(id: any): readonly any[];
     }
     export {};
-}
-
-declare namespace $.$$ {
 }
 
 declare namespace $ {
@@ -5136,6 +5137,9 @@ declare namespace $ {
 
 //# sourceMappingURL=set.view.tree.d.ts.map
 declare namespace $.$$ {
+}
+
+declare namespace $.$$ {
     class $tukanable_gymload_builder_day_results_set extends $.$tukanable_gymload_builder_day_results_set {
         sub(): $mol_view[];
         done_week_click(): void;
@@ -5151,9 +5155,6 @@ declare namespace $.$$ {
         week_reps(next?: number): number;
         set_idx_label(): string;
     }
-}
-
-declare namespace $.$$ {
 }
 
 declare namespace $ {
@@ -5367,10 +5368,10 @@ declare namespace $ {
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_10 = $mol_type_enforce<
+	type $mol_row__sub_tukanable_gymload_builder_10 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_row['sub'] >
 	>
 	type $tukanable_gymload_builder_weights__title_tukanable_gymload_builder_11 = $mol_type_enforce<
 		string
@@ -5402,117 +5403,122 @@ declare namespace $ {
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $mol_deck__items_tukanable_gymload_builder_17 = $mol_type_enforce<
+	type $mol_deck__current_tukanable_gymload_builder_17 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder['top_desk_current'] >
+		,
+		ReturnType< $mol_deck['current'] >
+	>
+	type $mol_deck__items_tukanable_gymload_builder_18 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['top_desk_items'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_18 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_19 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_19 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_20 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['title'] >
 	>
-	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_20 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_21 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['day_index'] >
 	>
-	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_21 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_22 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_22 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_23 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['week_count'] >
 	>
-	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_23 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_24 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_24 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_25 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_25 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_26 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['show_charts'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['show_charts'] >
 	>
-	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_26 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_27 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_27 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_28 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['title'] >
 	>
-	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_28 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_29 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['day_index'] >
 	>
-	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_29 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_30 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['week_count'] >
 	>
-	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_30 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_31 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_31 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_32 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_32 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_33 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_33 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_34 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_stats['title'] >
 	>
-	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_34 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_35 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['day_count'] >
 	>
-	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_35 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_36 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['model'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_36 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_37 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_37 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_38 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_38 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_39 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_39 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_40 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -5530,7 +5536,7 @@ declare namespace $ {
 		show_charts( next?: boolean ): boolean
 		ShowCharts_wrapper( ): $mol_check_box
 		ShowCharts_labeler( ): $mol_labeler
-		Header( ): $mol_view
+		Header( ): $mol_row
 		dumbbell_values( ): ReturnType< ReturnType< $tukanable_gymload_builder['DumbbellWeighs'] >['values'] >
 		DumbbellWeighs( ): $tukanable_gymload_builder_weights
 		barbell_values( ): ReturnType< ReturnType< $tukanable_gymload_builder['BarbellWeights'] >['values'] >
@@ -5539,6 +5545,7 @@ declare namespace $ {
 		WeightPlates( ): $tukanable_gymload_builder_weights
 		week_items( ): readonly($mol_view)[]
 		Weeks( ): $mol_deck
+		top_desk_current( next?: string ): string
 		top_desk_items( ): readonly($mol_view)[]
 		TopDesk( ): $mol_deck
 		storage_key( ): string
@@ -5564,6 +5571,7 @@ declare namespace $.$$ {
         week_count(next?: number): number;
         day_count(next?: number): number;
         show_charts(next?: boolean): boolean;
+        top_desk_current(next?: string): string;
     }
 }
 
@@ -5803,8 +5811,8 @@ declare namespace $ {
 	>
 	export class $tukanable_gymload extends $mol_page {
 		Theme( ): $mol_theme_auto
-		Lighter( ): $mol_lights_toggle
 		List_of_languages( ): $mol_locale_select
+		Lighter( ): $mol_lights_toggle
 		programs( ): Record<string, any>
 		current_program_string( next?: string ): string
 		EditProgram_icon( ): $mol_icon_edit
@@ -5832,6 +5840,7 @@ declare namespace $ {
 		EditResult( ): $mol_status
 		Space( ): $mol_view
 		DeleteIcon( ): $mol_icon_delete
+		delete_link_text( ): string
 		DeleteLink( ): $mol_link
 		EditForm( ): $mol_form
 		DeleteTitle( ): $tukanable_gymload_title
@@ -5841,6 +5850,8 @@ declare namespace $ {
 		DeleteCancelButton( ): $mol_button_minor
 		DeleteActions( ): $mol_view
 		title( ): string
+		required_label( ): string
+		default_program_name( ): string
 		plugins( ): readonly(any)[]
 		tools( ): readonly(any)[]
 		ListPrograms( ): $mol_select
@@ -5867,6 +5878,7 @@ declare namespace $.$$ {
         tools(): any[];
         body(): readonly $mol_view[] | $.$tukanable_gymload_builder[];
         new_name_bid(): string;
+        edit_name_bid(): string;
         add_program(): void;
         edit_program(): void;
         edit_name(next?: string): string;
