@@ -24,8 +24,12 @@ namespace $.$$ {
 			return Array.from( { length: this.week_count() }, ( _, i ) => this.WeekTab( i ) )
 		}
 
+		override week_tab_title_short( id: any ): string {
+			return ( id + 1 ).toString()
+		}
+
 		override week_tab_title( id: any ): string {
-			return `Week ${ id + 1 }`
+			return super.week_tab_title( id ) + ( id + 1 ).toString()
 		}
 
 		override current_week_number(): number {
@@ -33,7 +37,7 @@ namespace $.$$ {
 		}
 
 		override day_title(): string {
-			return `Day №${ this.day_index() + 1 }`
+			return super.day_title() + ( this.day_index() + 1 ).toString()
 		}
 
 		override row_exercise_extra( id: any ): string {

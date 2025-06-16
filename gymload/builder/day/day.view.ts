@@ -73,7 +73,7 @@ namespace $.$$ {
 		}
 
 		override row_exercise_title( id: any ) {
-			return `Exercise #${ id }`
+			return super.row_exercise_title( id ) + id.toString()
 		}
 
 		override row_remove( id: any ) {
@@ -166,14 +166,15 @@ namespace $.$$ {
 		}
 
 		override row_weight_types( id: any ): Record<string, string> {
-			const res: Record<string, string> = { 'custom': 'Custom' }
+			const labels = { ...this.weight_types() }
+			const res: Record<string, string> = { ...this.weight_types() }
 
-			if( this.dumbbell_present() ) {
-				res[ 'dumbbell' ] = 'Dumbbell'
+			if( !this.dumbbell_present() ) {
+				delete res[ 'dumbbell' ]
 			}
 
-			if( this.barbell_present() ) {
-				res[ 'barbell' ] = 'Barbell'
+			if( !this.barbell_present() ) {
+				delete res[ 'barbell' ]
 			}
 
 			return res

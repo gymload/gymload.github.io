@@ -7,6 +7,10 @@ $tukanable_gymload_builder_day $mol_view
 	barbell_values /number
 	data_ids /number
 	show_charts true
+	weight_types *
+		custom @ \Custom
+		dumbbell @ \Dumbbell
+		barbell @ \Barbell
 	MinStepLabeler* $mol_labeler
 		title @ \Min Step
 		Content <= MinStep* $tukanable_gymload_smallnumber
@@ -36,7 +40,7 @@ $tukanable_gymload_builder_day $mol_view
 						<= InputRow* $mol_row
 							sub <= row_content* /
 								<= Exercise_labeler* $mol_labeler
-									title <= row_exercise_title* \
+									title <= row_exercise_title* @ \Excercise #
 									Content <= Exercise* $mol_string
 										value? <=> row_exercise*? \
 								<= WeightType_labeler* $mol_labeler

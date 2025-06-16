@@ -1,0 +1,13 @@
+{
+	"$tukanable_gymload_builder_day_row_exercise_title": "Упражнение #",
+	"$tukanable_gymload_builder_day_WeightType_labeler_title": "Тип веса",
+	"$tukanable_gymload_builder_day_Sets_labeler_title": "Подходы",
+	"$tukanable_gymload_builder_day_Reps_labeler_title": "Повторения",
+	"$tukanable_gymload_builder_day_BeginWeight_labeler_title": "Начальный вес",
+	"$tukanable_gymload_builder_day_FinishWeight_labeler_title": "Конечный вес",
+	"$tukanable_gymload_builder_day_AddButton_title": "Добавить упражнение",
+	"$tukanable_gymload_builder_day_weight_types_custom": "Произвольный",
+	"$tukanable_gymload_builder_day_weight_types_dumbbell": "Гантели",
+	"$tukanable_gymload_builder_day_weight_types_barbell": "Штанга",
+	"$tukanable_gymload_builder_day_MinStepLabeler_title": "Мин. шаг"
+}

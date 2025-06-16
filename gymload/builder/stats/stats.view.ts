@@ -10,7 +10,6 @@ namespace $.$$ {
 				for( const id of ids ) {
 					const sets = day.row_sets( id )
 					const plan = day.plan( id )
-					console.log( plan )
 
 					totalWeight += plan.reduce( ( acc, w ) => acc + w * sets, 0 )
 				}

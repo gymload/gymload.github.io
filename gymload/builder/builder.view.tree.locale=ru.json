@@ -1,0 +1,12 @@
+{
+	"$tukanable_gymload_builder_WeekCount_labeler_title": "Количество недель",
+	"$tukanable_gymload_builder_DayCount_labeler_title": "Количество дней",
+	"$tukanable_gymload_builder_ShowCharts_labeler_title": "Показать графики",
+	"$tukanable_gymload_builder_DumbbellWeighs_title": "Веса гантелей",
+	"$tukanable_gymload_builder_BarbellWeights_title": "Веса штанги",
+	"$tukanable_gymload_builder_WeightPlates_title": "Блины для штанги",
+	"$tukanable_gymload_builder_day_title": "День №",
+	"$tukanable_gymload_builder_Stats_title": "Статистика",
+	"$tukanable_gymload_builder_Export_title": "Экспорт",
+	"$tukanable_gymload_builder_Settings_title": "Настройки"
+}

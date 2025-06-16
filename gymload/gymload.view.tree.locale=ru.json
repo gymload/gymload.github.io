@@ -1,0 +1,12 @@
+{
+	"$tukanable_gymload_NewTitle_title": "Добавить новую программу",
+	"$tukanable_gymload_NewName_field_name": "Название",
+	"$tukanable_gymload_NewSubmit_title": "Добавить",
+	"$tukanable_gymload_EditTitle_title": "Редактировать программу",
+	"$tukanable_gymload_EditName_field_name": "Название",
+	"$tukanable_gymload_EditSubmit_title": "Сохранить",
+	"$tukanable_gymload_DeleteTitle_title": "Вы уверены, что хотите удалить эту программу?",
+	"$tukanable_gymload_DeleteConfirmButton_title": "Удалить",
+	"$tukanable_gymload_DeleteCancelButton_title": "Отмена",
+	"$tukanable_gymload_title": "Gymload - Конструктор программ для качалки"
+}

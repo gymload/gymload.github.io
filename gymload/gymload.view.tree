@@ -1,5 +1,5 @@
 $tukanable_gymload $mol_page
-	title \Gymload - Workout Load Planner
+	title @ \Gymload - Workout Load Planner
 	plugins /
 		<= Theme $mol_theme_auto
 	tools /
@@ -23,11 +23,11 @@ $tukanable_gymload $mol_page
 	NewView $mol_view
 		sub /
 			<= NewTitle $tukanable_gymload_title
-				title \Add New Program
+				title @ \Add New Program
 			<= NewForm $mol_form
 				body /
 					<= NewName_field $mol_form_field
-						name \Name
+						name @ \Name
 						bid <= new_name_bid \
 						Content <= NewName_control $mol_string
 							value? <=> new_name? \
@@ -35,7 +35,7 @@ $tukanable_gymload $mol_page
 				submit_allowed => add_allowed
 				buttons /
 					<= NewSubmit $mol_button_major
-						title \Add
+						title @ \Add
 						click? <=> add_program? null
 						enabled <= add_allowed
 					<= NewResult $mol_status
@@ -43,11 +43,11 @@ $tukanable_gymload $mol_page
 	EditView $mol_view
 		sub /
 			<= EditTitle $tukanable_gymload_title
-				title \Edit Program
+				title @ \Edit Program
 			<= EditForm $mol_form
 				body /
 					<= EditName_field $mol_form_field
-						name \Name
+						name @ \Name
 						bid <= edit_name_bid \
 						Content <= EditName_control $mol_string
 							value? <=> edit_name? \
@@ -55,7 +55,7 @@ $tukanable_gymload $mol_page
 				submit_allowed => edit_allowed
 				buttons /
 					<= EditSubmit $mol_button_major
-						title \Save
+						title @ \Save
 						click? <=> edit_program? null
 						enabled <= edit_allowed
 					<= EditResult $mol_status
@@ -65,16 +65,16 @@ $tukanable_gymload $mol_page
 						arg * view \delete_program
 						sub /
 							<= DeleteIcon $mol_icon_delete
-							\Delete
+							@ \Delete
 	DeleteView $mol_view
 		sub /
 			<= DeleteTitle $tukanable_gymload_title
-				title \Are you sure you want to delete this program?
+				title @ \Are you sure you want to delete this program?
 			<= DeleteActions $mol_view
 				sub /
 					<= DeleteConfirmButton $mol_button_major
-						title \Delete
+						title @ \Delete
 						click? <=> delete_program? null
 					<= DeleteCancelButton $mol_button_minor
-						title \Cancel
+						title @ \Cancel
 						click? <=> cancel_delete_program? null

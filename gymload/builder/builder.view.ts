@@ -5,7 +5,7 @@ namespace $.$$ {
 		}
 
 		override day_title( id: any ) {
-			return `Day ${ id + 1 }`
+			return super.day_title( id ) + ( id + 1 ).toString()
 		}
 
 		override day_index( id: any ) {
@@ -14,8 +14,8 @@ namespace $.$$ {
 
 		override top_desk_items(): readonly ( $mol_view )[] {
 			return [
-				this.Settings(),
 				...Array.from( { length: this.day_count() }, ( _, i ) => this.DayResults( i ) ),
+				this.Settings(),
 				this.Stats(),
 				this.Export(),
 			]
