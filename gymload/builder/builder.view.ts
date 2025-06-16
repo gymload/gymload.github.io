@@ -42,5 +42,9 @@ namespace $.$$ {
 		override show_charts( next?: boolean ): boolean {
 			return this.$.$mol_state_local.value( this.build_key( 'show_charts' ), next ) ?? super.show_charts()
 		}
+
+		override top_desk_current( next?: string ) {
+			return this.$.$mol_state_session.value( `${ this }.top_desk_current()` , next ) || super.top_desk_current()
+		}
 	}
 }

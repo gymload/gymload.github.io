@@ -1,5 +1,5 @@
 $tukanable_gymload $mol_page
-	title @ \Gymload - Workout Load Planner
+	title @ \Gymload
 	plugins /
 		<= Theme $mol_theme_auto
 	tools /

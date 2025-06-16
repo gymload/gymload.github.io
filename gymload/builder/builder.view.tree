@@ -56,4 +56,5 @@ $tukanable_gymload_builder $mol_view
 				items <= week_items /$mol_view
 	sub /
 		<= TopDesk $mol_deck
+			current? <=> top_desk_current? \3
 			items <= top_desk_items /$mol_view
