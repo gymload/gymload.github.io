@@ -8647,37 +8647,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
-		path(){
-			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
-		}
-	};
-
-
-;
-"use strict";
-
-;
-	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
-		Icon(){
-			const obj = new this.$.$mol_icon_tick();
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_check_box.prototype), "Icon"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
 	($.$tukanable_gymload_smallnumber) = class $tukanable_gymload_smallnumber extends ($.$mol_number) {};
 
 
@@ -8690,522 +8659,6 @@ var $;
 
 ;
 "use strict";
-
-;
-	($.$mol_check_expand) = class $mol_check_expand extends ($.$mol_check) {
-		level_style(){
-			return "0px";
-		}
-		expanded(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		expandable(){
-			return false;
-		}
-		Icon(){
-			const obj = new this.$.$mol_icon_chevron();
-			return obj;
-		}
-		level(){
-			return 0;
-		}
-		style(){
-			return {...(super.style()), "paddingLeft": (this.level_style())};
-		}
-		checked(next){
-			return (this.expanded(next));
-		}
-		enabled(){
-			return (this.expandable());
-		}
-	};
-	($mol_mem(($.$mol_check_expand.prototype), "expanded"));
-	($mol_mem(($.$mol_check_expand.prototype), "Icon"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_check_expand extends $.$mol_check_expand {
-            level_style() {
-                return `${this.level() * 1 - 1}rem`;
-            }
-            expandable() {
-                return this.expanded() !== null;
-            }
-        }
-        $$.$mol_check_expand = $mol_check_expand;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/expand/expand.view.css", "[mol_check_expand] {\n\tmin-width: 20px;\n}\n\n:where([mol_check_expand][disabled]) [mol_check_expand_icon] {\n\tvisibility: hidden;\n}\n\n[mol_check_expand_icon] {\n\tbox-shadow: none;\n\tmargin-left: -0.375rem;\n}\n[mol_check_expand_icon] {\n\ttransform: rotateZ(0deg);\n}\n\n:where([mol_check_checked]) [mol_check_expand_icon] {\n\ttransform: rotateZ(90deg);\n}\n\n[mol_check_expand_icon] {\n\tvertical-align: text-top;\n}\n\n[mol_check_expand_label] {\n\tmargin-left: 0;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$tukanable_gymload_builder_weights) = class $tukanable_gymload_builder_weights extends ($.$mol_view) {
-		row_title(id){
-			return "";
-		}
-		row_value(id, next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		Value(id){
-			const obj = new this.$.$tukanable_gymload_smallnumber();
-			(obj.precision) = () => (0.1);
-			(obj.value) = (next) => ((this.row_value(id, next)));
-			return obj;
-		}
-		Labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.row_title(id)));
-			(obj.Content) = () => ((this.Value(id)));
-			return obj;
-		}
-		row_remove(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Remove_close_icon(id){
-			const obj = new this.$.$mol_icon_close();
-			return obj;
-		}
-		RemoveButton(id){
-			const obj = new this.$.$mol_button_major();
-			(obj.click) = (next) => ((this.row_remove(id, next)));
-			(obj.sub) = () => ([(this.Remove_close_icon(id))]);
-			return obj;
-		}
-		add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add_icon(){
-			const obj = new this.$.$mol_icon_plus();
-			return obj;
-		}
-		enabled(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		Enabled(){
-			const obj = new this.$.$mol_check_expand();
-			(obj.title) = () => ((this.title()));
-			(obj.checked) = (next) => ((this.enabled(next)));
-			return obj;
-		}
-		items(){
-			return [];
-		}
-		Items(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.items()));
-			return obj;
-		}
-		storage_key(){
-			return "dumbbell";
-		}
-		title(){
-			return "Dombell Weights";
-		}
-		values(){
-			return [];
-		}
-		Item(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Labeler(id)), (this.RemoveButton(id))]);
-			return obj;
-		}
-		AddButton(){
-			const obj = new this.$.$mol_button_major();
-			(obj.click) = (next) => ((this.add()));
-			(obj.sub) = () => ([(this.Add_icon())]);
-			return obj;
-		}
-		sub(){
-			return [(this.Enabled()), (this.Items())];
-		}
-	};
-	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "row_value"));
-	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "Value"));
-	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "Labeler"));
-	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "row_remove"));
-	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "Remove_close_icon"));
-	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "RemoveButton"));
-	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "add"));
-	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "Add_icon"));
-	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "enabled"));
-	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "Enabled"));
-	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "Items"));
-	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "Item"));
-	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "AddButton"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        const empty_item = {
-            value: 0,
-        };
-        class $tukanable_gymload_builder_weights extends $.$tukanable_gymload_builder_weights {
-            build_key(s) {
-                return this.state_key(`gymload_builder_v1_weights_${this.storage_key()}_${s}`);
-            }
-            data_ids(next) {
-                return this.$.$mol_state_local.value(this.build_key('ids'), next) || [];
-            }
-            enabled(next) {
-                return this.$.$mol_state_local.value(this.build_key('opened'), next) ?? super.enabled();
-            }
-            values() {
-                const res = this.data_ids().map(id => this.row_value(id));
-                res.sort((a, b) => a - b);
-                return res;
-            }
-            row(id, next) {
-                const key = this.build_key(`item_${id}`);
-                if (next === undefined) {
-                    return this.$.$mol_state_local.value(key) || empty_item;
-                }
-                this.$.$mol_state_local.value(key, next);
-                return next || empty_item;
-            }
-            row_title(id) {
-                const idx = this.data_ids().indexOf(id);
-                return `Weight #${idx + 1}`;
-            }
-            row_value(id, next) {
-                return this.row(id, next ? { value: next } : undefined).value;
-            }
-            row_remove(id) {
-                this.data_ids(this.data_ids().filter(item => item !== id));
-                this.row(id, null);
-            }
-            new_id() {
-                return Math.max(1, 1 + Math.max(...this.data_ids()));
-            }
-            add() {
-                const new_id = this.new_id();
-                const new_item = { ...empty_item };
-                const ids = this.data_ids();
-                if (ids.length > 1) {
-                    const last_item = this.row(ids[ids.length - 1]);
-                    const last_item2 = this.row(ids[ids.length - 2]);
-                    new_item.value = last_item.value + (last_item.value - last_item2.value);
-                }
-                this.data_ids([...ids, new_id]);
-                this.row(new_id, new_item);
-            }
-            items() {
-                if (!this.enabled()) {
-                    return [];
-                }
-                return [
-                    ...this.data_ids().map(id => this.Item(id)),
-                    this.AddButton(),
-                ];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $tukanable_gymload_builder_weights.prototype, "values", null);
-        __decorate([
-            $mol_mem
-        ], $tukanable_gymload_builder_weights.prototype, "new_id", null);
-        $$.$tukanable_gymload_builder_weights = $tukanable_gymload_builder_weights;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        const { rem } = $mol_style_unit;
-        $mol_style_define($tukanable_gymload_builder_weights, {
-            flexDirection: 'column',
-            Items: {
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-            },
-            AddButton: {
-                alignSelf: 'end',
-                marginLeft: rem(1),
-            },
-            RemoveButton: {
-                alignSelf: 'end',
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
-		option_checked(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		option_title(id){
-			return "";
-		}
-		option_label(id){
-			return [(this.option_title(id))];
-		}
-		enabled(){
-			return true;
-		}
-		option_enabled(id){
-			return (this.enabled());
-		}
-		option_hint(id){
-			return "";
-		}
-		items(){
-			return [];
-		}
-		dictionary(){
-			return {};
-		}
-		Option(id){
-			const obj = new this.$.$mol_check();
-			(obj.checked) = (next) => ((this.option_checked(id, next)));
-			(obj.label) = () => ((this.option_label(id)));
-			(obj.enabled) = () => ((this.option_enabled(id)));
-			(obj.hint) = () => ((this.option_hint(id)));
-			(obj.minimal_height) = () => (24);
-			return obj;
-		}
-		options(){
-			return {};
-		}
-		keys(){
-			return [];
-		}
-		sub(){
-			return (this.items());
-		}
-	};
-	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
-	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_check_list extends $.$mol_check_list {
-            options() {
-                return {};
-            }
-            dictionary(next) {
-                return next ?? {};
-            }
-            option_checked(id, next) {
-                const prev = this.dictionary();
-                if (next === undefined)
-                    return prev[id] ?? null;
-                const next_rec = { ...prev, [id]: next };
-                if (next === null)
-                    delete next_rec[id];
-                return this.dictionary(next_rec)[id] ?? null;
-            }
-            keys() {
-                return Object.keys(this.options());
-            }
-            items() {
-                return this.keys().map(key => this.Option(key));
-            }
-            option_title(key) {
-                return this.options()[key] || key;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_check_list.prototype, "keys", null);
-        __decorate([
-            $mol_mem
-        ], $mol_check_list.prototype, "items", null);
-        $$.$mol_check_list = $mol_check_list;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
-		value(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-	};
-	($mol_mem(($.$mol_switch.prototype), "value"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_state_session extends $mol_object {
-        static 'native()';
-        static native() {
-            if (this['native()'])
-                return this['native()'];
-            check: try {
-                const native = $mol_dom_context.sessionStorage;
-                if (!native)
-                    break check;
-                native.setItem('', '');
-                native.removeItem('');
-                return this['native()'] = native;
-            }
-            catch (error) {
-                console.warn(error);
-            }
-            return this['native()'] = {
-                getItem(key) {
-                    return this[':' + key];
-                },
-                setItem(key, value) {
-                    this[':' + key] = value;
-                },
-                removeItem(key) {
-                    this[':' + key] = void 0;
-                }
-            };
-        }
-        static value(key, next) {
-            if (next === void 0)
-                return JSON.parse(this.native().getItem(key) || 'null');
-            if (next === null)
-                this.native().removeItem(key);
-            else
-                this.native().setItem(key, JSON.stringify(next));
-            return next;
-        }
-        prefix() { return ''; }
-        value(key, next) {
-            return $mol_state_session.value(this.prefix() + '.' + key, next);
-        }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $mol_state_session, "value", null);
-    $.$mol_state_session = $mol_state_session;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_switch extends $.$mol_switch {
-            value(next) {
-                return $mol_state_session.value(`${this}.value()`, next) ?? '';
-            }
-            option_checked(key, next) {
-                if (next === undefined)
-                    return this.value() == key;
-                this.value(next ? key : '');
-                return next;
-            }
-        }
-        $$.$mol_switch = $mol_switch;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_deck) = class $mol_deck extends ($.$mol_list) {
-		current(next){
-			if(next !== undefined) return next;
-			return "0";
-		}
-		switch_options(){
-			return {};
-		}
-		Switch(){
-			const obj = new this.$.$mol_switch();
-			(obj.value) = (next) => ((this.current(next)));
-			(obj.options) = () => ((this.switch_options()));
-			return obj;
-		}
-		Content(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		items(){
-			return [];
-		}
-		rows(){
-			return [(this.Switch()), (this.Content())];
-		}
-	};
-	($mol_mem(($.$mol_deck.prototype), "current"));
-	($mol_mem(($.$mol_deck.prototype), "Switch"));
-	($mol_mem(($.$mol_deck.prototype), "Content"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_deck extends $.$mol_deck {
-            current(next) {
-                return $mol_state_session.value(`${this}.current()`, next) || '0';
-            }
-            switch_options() {
-                let options = {};
-                this.items().forEach((item, index) => {
-                    options[String(index)] = item.title();
-                });
-                return options;
-            }
-            Content() {
-                return this.items()[Number(this.current())];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_deck.prototype, "Content", null);
-        $$.$mol_deck = $mol_deck;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
 
 ;
 	($.$mol_svg_group) = class $mol_svg_group extends ($.$mol_svg) {
@@ -11480,8 +10933,13 @@ var $;
 			(obj.title) = () => ((this.day_title()));
 			return obj;
 		}
+		EmptyExercises(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["No exercises yet..."]);
+			return obj;
+		}
 		row_exercise_title(id){
-			return "";
+			return (this.$.$mol_locale.text("$tukanable_gymload_builder_day_row_exercise_title"));
 		}
 		row_exercise(id, next){
 			if(next !== undefined) return next;
@@ -11636,6 +11094,7 @@ var $;
 			const obj = new this.$.$mol_list();
 			(obj.item_width_min) = (id) => (200);
 			(obj.item_height_min) = (id) => (96);
+			(obj.Empty) = (id) => ((this.EmptyExercises()));
 			(obj.rows) = () => ((this.rows()));
 			return obj;
 		}
@@ -11673,6 +11132,13 @@ var $;
 		show_charts(){
 			return true;
 		}
+		weight_types(){
+			return {
+				"custom": (this.$.$mol_locale.text("$tukanable_gymload_builder_day_weight_types_custom")), 
+				"dumbbell": (this.$.$mol_locale.text("$tukanable_gymload_builder_day_weight_types_dumbbell")), 
+				"barbell": (this.$.$mol_locale.text("$tukanable_gymload_builder_day_weight_types_barbell"))
+			};
+		}
 		MinStepLabeler(id){
 			const obj = new this.$.$mol_labeler();
 			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_day_MinStepLabeler_title")));
@@ -11699,6 +11165,7 @@ var $;
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Marker_hor"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Chart"));
 	($mol_mem(($.$tukanable_gymload_builder_day.prototype), "DayTitle"));
+	($mol_mem(($.$tukanable_gymload_builder_day.prototype), "EmptyExercises"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "row_exercise"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Exercise"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Exercise_labeler"));
@@ -11788,7 +11255,7 @@ var $;
                 return weights.map((w, i) => `${i + 1}: ${w}`);
             }
             row_exercise_title(id) {
-                return `Exercise #${id}`;
+                return super.row_exercise_title(id) + id.toString();
             }
             row_remove(id) {
                 this.data_ids(this.data_ids().filter(item => item !== id));
@@ -11858,12 +11325,13 @@ var $;
                 return v;
             }
             row_weight_types(id) {
-                const res = { 'custom': 'Custom' };
-                if (this.dumbbell_present()) {
-                    res['dumbbell'] = 'Dumbbell';
+                const labels = { ...this.weight_types() };
+                const res = { ...this.weight_types() };
+                if (!this.dumbbell_present()) {
+                    delete res['dumbbell'];
                 }
-                if (this.barbell_present()) {
-                    res['barbell'] = 'Barbell';
+                if (!this.barbell_present()) {
+                    delete res['barbell'];
                 }
                 return res;
             }
@@ -11926,6 +11394,9 @@ var $;
         const { rem } = $mol_style_unit;
         $mol_style_define($tukanable_gymload_builder_day, {
             flexDirection: 'column',
+            EmptyExercises: {
+                padding: $mol_gap.text,
+            },
             Row: {
                 flexDirection: 'column',
             },
@@ -11937,8 +11408,555 @@ var $;
             },
             AddButton: {
                 alignSelf: 'start',
-            }
+            },
         });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
+		path(){
+			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
+		Icon(){
+			const obj = new this.$.$mol_icon_tick();
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_check_box.prototype), "Icon"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_check_expand) = class $mol_check_expand extends ($.$mol_check) {
+		level_style(){
+			return "0px";
+		}
+		expanded(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		expandable(){
+			return false;
+		}
+		Icon(){
+			const obj = new this.$.$mol_icon_chevron();
+			return obj;
+		}
+		level(){
+			return 0;
+		}
+		style(){
+			return {...(super.style()), "paddingLeft": (this.level_style())};
+		}
+		checked(next){
+			return (this.expanded(next));
+		}
+		enabled(){
+			return (this.expandable());
+		}
+	};
+	($mol_mem(($.$mol_check_expand.prototype), "expanded"));
+	($mol_mem(($.$mol_check_expand.prototype), "Icon"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_check_expand extends $.$mol_check_expand {
+            level_style() {
+                return `${this.level() * 1 - 1}rem`;
+            }
+            expandable() {
+                return this.expanded() !== null;
+            }
+        }
+        $$.$mol_check_expand = $mol_check_expand;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/expand/expand.view.css", "[mol_check_expand] {\n\tmin-width: 20px;\n}\n\n:where([mol_check_expand][disabled]) [mol_check_expand_icon] {\n\tvisibility: hidden;\n}\n\n[mol_check_expand_icon] {\n\tbox-shadow: none;\n\tmargin-left: -0.375rem;\n}\n[mol_check_expand_icon] {\n\ttransform: rotateZ(0deg);\n}\n\n:where([mol_check_checked]) [mol_check_expand_icon] {\n\ttransform: rotateZ(90deg);\n}\n\n[mol_check_expand_icon] {\n\tvertical-align: text-top;\n}\n\n[mol_check_expand_label] {\n\tmargin-left: 0;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$tukanable_gymload_builder_weights) = class $tukanable_gymload_builder_weights extends ($.$mol_view) {
+		row_title(id){
+			return "";
+		}
+		row_value(id, next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Value(id){
+			const obj = new this.$.$tukanable_gymload_smallnumber();
+			(obj.precision) = () => (0.1);
+			(obj.value) = (next) => ((this.row_value(id, next)));
+			return obj;
+		}
+		Labeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.row_title(id)));
+			(obj.Content) = () => ((this.Value(id)));
+			return obj;
+		}
+		row_remove(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Remove_close_icon(id){
+			const obj = new this.$.$mol_icon_close();
+			return obj;
+		}
+		RemoveButton(id){
+			const obj = new this.$.$mol_button_major();
+			(obj.click) = (next) => ((this.row_remove(id, next)));
+			(obj.sub) = () => ([(this.Remove_close_icon(id))]);
+			return obj;
+		}
+		add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add_icon(){
+			const obj = new this.$.$mol_icon_plus();
+			return obj;
+		}
+		enabled(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Enabled(){
+			const obj = new this.$.$mol_check_expand();
+			(obj.title) = () => ((this.title()));
+			(obj.checked) = (next) => ((this.enabled(next)));
+			return obj;
+		}
+		items(){
+			return [];
+		}
+		Items(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.items()));
+			return obj;
+		}
+		storage_key(){
+			return "dumbbell";
+		}
+		title(){
+			return "Dombell Weights";
+		}
+		values(){
+			return [];
+		}
+		Item(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Labeler(id)), (this.RemoveButton(id))]);
+			return obj;
+		}
+		AddButton(){
+			const obj = new this.$.$mol_button_major();
+			(obj.click) = (next) => ((this.add()));
+			(obj.sub) = () => ([(this.Add_icon())]);
+			return obj;
+		}
+		sub(){
+			return [(this.Enabled()), (this.Items())];
+		}
+	};
+	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "row_value"));
+	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "Value"));
+	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "Labeler"));
+	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "row_remove"));
+	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "Remove_close_icon"));
+	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "RemoveButton"));
+	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "add"));
+	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "Add_icon"));
+	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "enabled"));
+	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "Enabled"));
+	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "Items"));
+	($mol_mem_key(($.$tukanable_gymload_builder_weights.prototype), "Item"));
+	($mol_mem(($.$tukanable_gymload_builder_weights.prototype), "AddButton"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const empty_item = {
+            value: 0,
+        };
+        class $tukanable_gymload_builder_weights extends $.$tukanable_gymload_builder_weights {
+            build_key(s) {
+                return this.state_key(`gymload_builder_v1_weights_${this.storage_key()}_${s}`);
+            }
+            data_ids(next) {
+                return this.$.$mol_state_local.value(this.build_key('ids'), next) || [];
+            }
+            enabled(next) {
+                return this.$.$mol_state_local.value(this.build_key('opened'), next) ?? super.enabled();
+            }
+            values() {
+                const res = this.data_ids().map(id => this.row_value(id));
+                res.sort((a, b) => a - b);
+                return res;
+            }
+            row(id, next) {
+                const key = this.build_key(`item_${id}`);
+                if (next === undefined) {
+                    return this.$.$mol_state_local.value(key) || empty_item;
+                }
+                this.$.$mol_state_local.value(key, next);
+                return next || empty_item;
+            }
+            row_title(id) {
+                const idx = this.data_ids().indexOf(id);
+                return `Weight #${idx + 1}`;
+            }
+            row_value(id, next) {
+                return this.row(id, next ? { value: next } : undefined).value;
+            }
+            row_remove(id) {
+                this.data_ids(this.data_ids().filter(item => item !== id));
+                this.row(id, null);
+            }
+            new_id() {
+                return Math.max(1, 1 + Math.max(...this.data_ids()));
+            }
+            add() {
+                const new_id = this.new_id();
+                const new_item = { ...empty_item };
+                const ids = this.data_ids();
+                if (ids.length > 1) {
+                    const last_item = this.row(ids[ids.length - 1]);
+                    const last_item2 = this.row(ids[ids.length - 2]);
+                    new_item.value = last_item.value + (last_item.value - last_item2.value);
+                }
+                this.data_ids([...ids, new_id]);
+                this.row(new_id, new_item);
+            }
+            items() {
+                if (!this.enabled()) {
+                    return [];
+                }
+                return [
+                    ...this.data_ids().map(id => this.Item(id)),
+                    this.AddButton(),
+                ];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload_builder_weights.prototype, "values", null);
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload_builder_weights.prototype, "new_id", null);
+        $$.$tukanable_gymload_builder_weights = $tukanable_gymload_builder_weights;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { rem } = $mol_style_unit;
+        $mol_style_define($tukanable_gymload_builder_weights, {
+            flexDirection: 'column',
+            Items: {
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+            },
+            AddButton: {
+                alignSelf: 'end',
+                marginLeft: rem(1),
+            },
+            RemoveButton: {
+                alignSelf: 'end',
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
+		option_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		option_title(id){
+			return "";
+		}
+		option_label(id){
+			return [(this.option_title(id))];
+		}
+		enabled(){
+			return true;
+		}
+		option_enabled(id){
+			return (this.enabled());
+		}
+		option_hint(id){
+			return "";
+		}
+		items(){
+			return [];
+		}
+		dictionary(){
+			return {};
+		}
+		Option(id){
+			const obj = new this.$.$mol_check();
+			(obj.checked) = (next) => ((this.option_checked(id, next)));
+			(obj.label) = () => ((this.option_label(id)));
+			(obj.enabled) = () => ((this.option_enabled(id)));
+			(obj.hint) = () => ((this.option_hint(id)));
+			(obj.minimal_height) = () => (24);
+			return obj;
+		}
+		options(){
+			return {};
+		}
+		keys(){
+			return [];
+		}
+		sub(){
+			return (this.items());
+		}
+	};
+	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
+	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_check_list extends $.$mol_check_list {
+            options() {
+                return {};
+            }
+            dictionary(next) {
+                return next ?? {};
+            }
+            option_checked(id, next) {
+                const prev = this.dictionary();
+                if (next === undefined)
+                    return prev[id] ?? null;
+                const next_rec = { ...prev, [id]: next };
+                if (next === null)
+                    delete next_rec[id];
+                return this.dictionary(next_rec)[id] ?? null;
+            }
+            keys() {
+                return Object.keys(this.options());
+            }
+            items() {
+                return this.keys().map(key => this.Option(key));
+            }
+            option_title(key) {
+                return this.options()[key] || key;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "keys", null);
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "items", null);
+        $$.$mol_check_list = $mol_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+	};
+	($mol_mem(($.$mol_switch.prototype), "value"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_state_session extends $mol_object {
+        static 'native()';
+        static native() {
+            if (this['native()'])
+                return this['native()'];
+            check: try {
+                const native = $mol_dom_context.sessionStorage;
+                if (!native)
+                    break check;
+                native.setItem('', '');
+                native.removeItem('');
+                return this['native()'] = native;
+            }
+            catch (error) {
+                console.warn(error);
+            }
+            return this['native()'] = {
+                getItem(key) {
+                    return this[':' + key];
+                },
+                setItem(key, value) {
+                    this[':' + key] = value;
+                },
+                removeItem(key) {
+                    this[':' + key] = void 0;
+                }
+            };
+        }
+        static value(key, next) {
+            if (next === void 0)
+                return JSON.parse(this.native().getItem(key) || 'null');
+            if (next === null)
+                this.native().removeItem(key);
+            else
+                this.native().setItem(key, JSON.stringify(next));
+            return next;
+        }
+        prefix() { return ''; }
+        value(key, next) {
+            return $mol_state_session.value(this.prefix() + '.' + key, next);
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_session, "value", null);
+    $.$mol_state_session = $mol_state_session;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_switch extends $.$mol_switch {
+            value(next) {
+                return $mol_state_session.value(`${this}.value()`, next) ?? '';
+            }
+            option_checked(key, next) {
+                if (next === undefined)
+                    return this.value() == key;
+                this.value(next ? key : '');
+                return next;
+            }
+        }
+        $$.$mol_switch = $mol_switch;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_deck) = class $mol_deck extends ($.$mol_list) {
+		current(next){
+			if(next !== undefined) return next;
+			return "0";
+		}
+		switch_options(){
+			return {};
+		}
+		Switch(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.current(next)));
+			(obj.options) = () => ((this.switch_options()));
+			return obj;
+		}
+		Content(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		items(){
+			return [];
+		}
+		rows(){
+			return [(this.Switch()), (this.Content())];
+		}
+	};
+	($mol_mem(($.$mol_deck.prototype), "current"));
+	($mol_mem(($.$mol_deck.prototype), "Switch"));
+	($mol_mem(($.$mol_deck.prototype), "Content"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_deck extends $.$mol_deck {
+            current(next) {
+                return $mol_state_session.value(`${this}.current()`, next) || '0';
+            }
+            switch_options() {
+                let options = {};
+                this.items().forEach((item, index) => {
+                    options[String(index)] = item.title();
+                });
+                return options;
+            }
+            Content() {
+                return this.items()[Number(this.current())];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_deck.prototype, "Content", null);
+        $$.$mol_deck = $mol_deck;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -12221,8 +12239,11 @@ var $;
 		excercise_plan(id){
 			return [];
 		}
+		week_tab_title_short(id){
+			return (this.$.$mol_locale.text("$tukanable_gymload_builder_day_results_week_tab_title_short"));
+		}
 		week_tab_title(id){
-			return "Week";
+			return (this.$.$mol_locale.text("$tukanable_gymload_builder_day_results_week_tab_title"));
 		}
 		WeekTitle(id){
 			const obj = new this.$.$tukanable_gymload_title();
@@ -12230,7 +12251,7 @@ var $;
 			return obj;
 		}
 		day_title(){
-			return "Day";
+			return (this.$.$mol_locale.text("$tukanable_gymload_builder_day_results_day_title"));
 		}
 		DayTitle(){
 			const obj = new this.$.$tukanable_gymload_title();
@@ -12295,7 +12316,7 @@ var $;
 		}
 		WeekTab(id){
 			const obj = new this.$.$mol_view();
-			(obj.title) = () => ((this.week_tab_title(id)));
+			(obj.title) = () => ((this.week_tab_title_short(id)));
 			(obj.sub) = () => ([(this.WeekTitle(id))]);
 			return obj;
 		}
@@ -12347,14 +12368,17 @@ var $;
             week_items() {
                 return Array.from({ length: this.week_count() }, (_, i) => this.WeekTab(i));
             }
+            week_tab_title_short(id) {
+                return (id + 1).toString();
+            }
             week_tab_title(id) {
-                return `Week ${id + 1}`;
+                return super.week_tab_title(id) + (id + 1).toString();
             }
             current_week_number() {
                 return Number(this.current_week());
             }
             day_title() {
-                return `Day №${this.day_index() + 1}`;
+                return super.day_title() + (this.day_index() + 1).toString();
             }
             row_exercise_extra(id) {
                 const title = this.row_exercise(id);
@@ -12382,12 +12406,59 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$tukanable_gymload_builder_stats) = class $tukanable_gymload_builder_stats extends ($.$mol_view) {
+		value(){
+			return "";
+		}
+		day_count(){
+			return 0;
+		}
+		model(id){
+			const obj = new this.$.$tukanable_gymload_builder_day();
+			return obj;
+		}
+		sub(){
+			return [(this.value())];
+		}
+	};
+	($mol_mem_key(($.$tukanable_gymload_builder_stats.prototype), "model"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $tukanable_gymload_builder_stats extends $.$tukanable_gymload_builder_stats {
+            value() {
+                let totalWeight = 0;
+                for (let i = 0; i < this.day_count(); i++) {
+                    const day = this.model(i);
+                    const ids = day.data_ids();
+                    for (const id of ids) {
+                        const sets = day.row_sets(id);
+                        const plan = day.plan(id);
+                        totalWeight += plan.reduce((acc, w) => acc + w * sets, 0);
+                    }
+                }
+                return `Total weight lifted: ${totalWeight} kg`;
+            }
+        }
+        $$.$tukanable_gymload_builder_stats = $tukanable_gymload_builder_stats;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$tukanable_gymload_builder) = class $tukanable_gymload_builder extends ($.$mol_view) {
 		day_storage_key(id){
 			return "";
 		}
 		day_title(id){
-			return "Day";
+			return (this.$.$mol_locale.text("$tukanable_gymload_builder_day_title"));
 		}
 		day_index(id){
 			return 0;
@@ -12451,7 +12522,7 @@ var $;
 		}
 		DumbbellWeighs(){
 			const obj = new this.$.$tukanable_gymload_builder_weights();
-			(obj.title) = () => ("Dumbbell Weights");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_DumbbellWeighs_title")));
 			return obj;
 		}
 		barbell_values(){
@@ -12459,7 +12530,7 @@ var $;
 		}
 		BarbellWeights(){
 			const obj = new this.$.$tukanable_gymload_builder_weights();
-			(obj.title) = () => ("Barbell Weights");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_BarbellWeights_title")));
 			(obj.storage_key) = () => ("barbell_weights");
 			return obj;
 		}
@@ -12468,7 +12539,7 @@ var $;
 		}
 		WeightPlates(){
 			const obj = new this.$.$tukanable_gymload_builder_weights();
-			(obj.title) = () => ("Weight Plates");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_WeightPlates_title")));
 			(obj.storage_key) = () => ("weight_plates");
 			return obj;
 		}
@@ -12514,6 +12585,19 @@ var $;
 			(obj.barbell_values) = () => ((this.barbell_values()));
 			return obj;
 		}
+		Stats(){
+			const obj = new this.$.$tukanable_gymload_builder_stats();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_Stats_title")));
+			(obj.day_count) = () => ((this.day_count()));
+			(obj.model) = (id) => ((this.DaySettings(id)));
+			return obj;
+		}
+		Export(){
+			const obj = new this.$.$mol_view();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_Export_title")));
+			(obj.sub) = () => (["TODO"]);
+			return obj;
+		}
 		Settings(){
 			const obj = new this.$.$mol_view();
 			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_Settings_title")));
@@ -12547,6 +12631,8 @@ var $;
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "TopDesk"));
 	($mol_mem_key(($.$tukanable_gymload_builder.prototype), "DaySettings"));
 	($mol_mem_key(($.$tukanable_gymload_builder.prototype), "DayResults"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "Stats"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "Export"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "Settings"));
 
 
@@ -12564,15 +12650,17 @@ var $;
                 return Array.from({ length: this.day_count() }, (_, i) => this.DaySettings(i));
             }
             day_title(id) {
-                return `Day ${id + 1}`;
+                return super.day_title(id) + (id + 1).toString();
             }
             day_index(id) {
                 return id;
             }
             top_desk_items() {
                 return [
+                    ...Array.from({ length: this.day_count() }, (_, i) => this.DayResults(i)),
                     this.Settings(),
-                    ...Array.from({ length: this.day_count() }, (_, i) => this.DayResults(i))
+                    this.Stats(),
+                    this.Export(),
                 ];
             }
             build_key(s) {
@@ -12662,7 +12750,7 @@ var $;
 		}
 		NewTitle(){
 			const obj = new this.$.$tukanable_gymload_title();
-			(obj.title) = () => ("Add New Program");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_NewTitle_title")));
 			return obj;
 		}
 		new_name_bid(){
@@ -12679,7 +12767,7 @@ var $;
 		}
 		NewName_field(){
 			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Name");
+			(obj.name) = () => ((this.$.$mol_locale.text("$tukanable_gymload_NewName_field_name")));
 			(obj.bid) = () => ((this.new_name_bid()));
 			(obj.Content) = () => ((this.NewName_control()));
 			return obj;
@@ -12693,7 +12781,7 @@ var $;
 		}
 		NewSubmit(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Add");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_NewSubmit_title")));
 			(obj.click) = (next) => ((this.add_program(next)));
 			(obj.enabled) = () => ((this.add_allowed()));
 			return obj;
@@ -12716,7 +12804,7 @@ var $;
 		}
 		EditTitle(){
 			const obj = new this.$.$tukanable_gymload_title();
-			(obj.title) = () => ("Edit Program");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_EditTitle_title")));
 			return obj;
 		}
 		edit_name_bid(){
@@ -12733,7 +12821,7 @@ var $;
 		}
 		EditName_field(){
 			const obj = new this.$.$mol_form_field();
-			(obj.name) = () => ("Name");
+			(obj.name) = () => ((this.$.$mol_locale.text("$tukanable_gymload_EditName_field_name")));
 			(obj.bid) = () => ((this.edit_name_bid()));
 			(obj.Content) = () => ((this.EditName_control()));
 			return obj;
@@ -12747,7 +12835,7 @@ var $;
 		}
 		EditSubmit(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Save");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_EditSubmit_title")));
 			(obj.click) = (next) => ((this.edit_program(next)));
 			(obj.enabled) = () => ((this.edit_allowed()));
 			return obj;
@@ -12768,7 +12856,7 @@ var $;
 		DeleteLink(){
 			const obj = new this.$.$mol_link();
 			(obj.arg) = () => ({"view": "delete_program"});
-			(obj.sub) = () => ([(this.DeleteIcon()), "Delete"]);
+			(obj.sub) = () => ([(this.DeleteIcon()), (this.$.$mol_locale.text("$tukanable_gymload_DeleteLink"))]);
 			return obj;
 		}
 		EditForm(){
@@ -12785,7 +12873,7 @@ var $;
 		}
 		DeleteTitle(){
 			const obj = new this.$.$tukanable_gymload_title();
-			(obj.title) = () => ("Are you sure you want to delete this program?");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_DeleteTitle_title")));
 			return obj;
 		}
 		delete_program(next){
@@ -12794,7 +12882,7 @@ var $;
 		}
 		DeleteConfirmButton(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Delete");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_DeleteConfirmButton_title")));
 			(obj.click) = (next) => ((this.delete_program(next)));
 			return obj;
 		}
@@ -12804,7 +12892,7 @@ var $;
 		}
 		DeleteCancelButton(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ("Cancel");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_DeleteCancelButton_title")));
 			(obj.click) = (next) => ((this.cancel_delete_program(next)));
 			return obj;
 		}
@@ -12814,7 +12902,7 @@ var $;
 			return obj;
 		}
 		title(){
-			return "Gymload - Workout Load Planner";
+			return (this.$.$mol_locale.text("$tukanable_gymload_title"));
 		}
 		plugins(){
 			return [(this.Theme())];
@@ -16565,25 +16653,6 @@ var $;
 var $;
 (function ($) {
     $mol_test({
-        'null by default'() {
-            const key = String(Math.random());
-            $mol_assert_equal($mol_state_session.value(key), null);
-        },
-        'storing'() {
-            const key = String(Math.random());
-            $mol_state_session.value(key, '$mol_state_session_test');
-            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
-            $mol_state_session.value(key, null);
-            $mol_assert_equal($mol_state_session.value(key), null);
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_test({
         'Vector limiting'() {
             let point = new $mol_vector_3d(7, 10, 13);
             const res = point.limited([[1, 5], [15, 20], [5, 10]]);
@@ -16665,6 +16734,25 @@ var $;
                 .expanded2(dimensions);
             $mol_assert_like([...expanded.x], [Infinity, -Infinity]);
             $mol_assert_like([...expanded.y], [Infinity, -Infinity]);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'null by default'() {
+            const key = String(Math.random());
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+        'storing'() {
+            const key = String(Math.random());
+            $mol_state_session.value(key, '$mol_state_session_test');
+            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
+            $mol_state_session.value(key, null);
+            $mol_assert_equal($mol_state_session.value(key), null);
         },
     });
 })($ || ($ = {}));

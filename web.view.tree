@@ -457,69 +457,7 @@ $mol_number $mol_view
 			enabled <= inc_enabled <= enabled
 			sub / <= inc_icon $mol_icon_chevron_right
 
-$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
-
-$mol_check_box $mol_check
-	Icon $mol_icon_tick
-
 $tukanable_gymload_smallnumber $mol_number
-
-$mol_check_expand $mol_check
-	Icon $mol_icon_chevron
-	level 0
-	style *
-		^
-		paddingLeft <= level_style \0px
-	checked? <=> expanded? false
-	enabled <= expandable false
-
-$tukanable_gymload_builder_weights $mol_view
-	storage_key \dumbbell
-	title \Dombell Weights
-	values /number
-	Item* $mol_view
-		sub /
-			<= Labeler* $mol_labeler
-				title <= row_title* \
-				Content <= Value* $tukanable_gymload_smallnumber
-					precision 0.1
-					value? <=> row_value*? 0
-			<= RemoveButton* $mol_button_major
-				click?event <=> row_remove*? null
-				sub / <= Remove_close_icon* $mol_icon_close
-	AddButton $mol_button_major
-		click?event <= add? null
-		sub / <= Add_icon $mol_icon_plus
-	sub /
-		<= Enabled $mol_check_expand
-			title <= title
-			checked? <=> enabled? false
-		<= Items $mol_view
-			sub <= items /$mol_view
-
-$mol_check_list $mol_view
-	dictionary *
-	Option* $mol_check
-		checked? <=> option_checked*? false
-		label <= option_label* /
-			<= option_title* \
-		enabled <= option_enabled* <= enabled true
-		hint <= option_hint* \
-		minimal_height 24
-	options *
-	keys /string
-	sub <= items /$mol_check
-
-$mol_switch $mol_check_list
-	value? \
-
-$mol_deck $mol_list
-	items /$mol_view
-	rows /$mol_view
-		<= Switch $mol_switch
-			value? <=> current? \0
-			options <= switch_options *
-		<= Content $mol_view
 
 $mol_svg_group $mol_svg
 	dom_name \g
@@ -888,6 +826,10 @@ $tukanable_gymload_builder_day $mol_view
 	barbell_values /number
 	data_ids /number
 	show_charts true
+	weight_types *
+		custom @ \Custom
+		dumbbell @ \Dumbbell
+		barbell @ \Barbell
 	MinStepLabeler* $mol_labeler
 		title @ \Min Step
 		Content <= MinStep* $tukanable_gymload_smallnumber
@@ -909,13 +851,15 @@ $tukanable_gymload_builder_day $mol_view
 		<= Rows $mol_list
 			item_width_min* 200
 			item_height_min* 96
+			Empty* <= EmptyExercises $mol_view
+				sub / \No exercises yet...
 			rows <= rows /$mol_view
 				<= Row*0 $mol_view
 					sub <= row_view* /
 						<= InputRow* $mol_row
 							sub <= row_content* /
 								<= Exercise_labeler* $mol_labeler
-									title <= row_exercise_title* \
+									title <= row_exercise_title* @ \Excercise #
 									Content <= Exercise* $mol_string
 										value? <=> row_exercise*? \
 								<= WeightType_labeler* $mol_labeler
@@ -953,6 +897,68 @@ $tukanable_gymload_builder_day $mol_view
 		<= AddButton $mol_button_major
 			title @ \Add Exercise
 			click? <= add_exercise? null
+
+$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
+
+$mol_check_box $mol_check
+	Icon $mol_icon_tick
+
+$mol_check_expand $mol_check
+	Icon $mol_icon_chevron
+	level 0
+	style *
+		^
+		paddingLeft <= level_style \0px
+	checked? <=> expanded? false
+	enabled <= expandable false
+
+$tukanable_gymload_builder_weights $mol_view
+	storage_key \dumbbell
+	title \Dombell Weights
+	values /number
+	Item* $mol_view
+		sub /
+			<= Labeler* $mol_labeler
+				title <= row_title* \
+				Content <= Value* $tukanable_gymload_smallnumber
+					precision 0.1
+					value? <=> row_value*? 0
+			<= RemoveButton* $mol_button_major
+				click?event <=> row_remove*? null
+				sub / <= Remove_close_icon* $mol_icon_close
+	AddButton $mol_button_major
+		click?event <= add? null
+		sub / <= Add_icon $mol_icon_plus
+	sub /
+		<= Enabled $mol_check_expand
+			title <= title
+			checked? <=> enabled? false
+		<= Items $mol_view
+			sub <= items /$mol_view
+
+$mol_check_list $mol_view
+	dictionary *
+	Option* $mol_check
+		checked? <=> option_checked*? false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
+$mol_switch $mol_check_list
+	value? \
+
+$mol_deck $mol_list
+	items /$mol_view
+	rows /$mol_view
+		<= Switch $mol_switch
+			value? <=> current? \0
+			options <= switch_options *
+		<= Content $mol_view
 
 $tukanable_gymload_builder_day_results_set $mol_view
 	storage_key \setresult
@@ -998,13 +1004,13 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 		plan <= excercise_plan* /number
 		storage_key <= storage_key
 	WeekTab* $mol_view
-		title <= week_tab_title*
+		title <= week_tab_title_short* @ \Week #
 		sub /
 			<= WeekTitle* $tukanable_gymload_title
-				title <= week_tab_title* \Week
+				title <= week_tab_title* @ \Week #
 	sub /
 		<= DayTitle $tukanable_gymload_title
-			title <= day_title \Day
+			title <= day_title @ \Day #
 		<= Weeks $mol_deck
 			current? => current_week? \0
 			items <= week_items /$mol_view
@@ -1019,11 +1025,16 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 						<= SetRows* $mol_view
 							sub <= set_rows* /$mol_view
 
+$tukanable_gymload_builder_stats $mol_view
+	day_count 0
+	model* $tukanable_gymload_builder_day
+	sub / <= value \
+
 $tukanable_gymload_builder $mol_view
 	storage_key \gymload_builder
 	DaySettings* $tukanable_gymload_builder_day
 		storage_key <= day_storage_key* \
-		title <= day_title* \Day
+		title <= day_title* @ \Day #
 		day_index <= day_index* 0
 		dumbbell_values <= dumbbell_values
 		week_count <= week_count
@@ -1032,12 +1043,19 @@ $tukanable_gymload_builder $mol_view
 		show_charts <= show_charts
 	DayResults* $tukanable_gymload_builder_day_results
 		storage_key <= day_storage_key*
-		title <= day_title* \Day
+		title <= day_title*
 		day_index <= day_index* 0
 		week_count <= week_count
 		dumbbell_values <= dumbbell_values
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
+	Stats $tukanable_gymload_builder_stats
+		title @ \Stats
+		day_count <= day_count
+		model* <= DaySettings*
+	Export $mol_view
+		title @ \Export
+		sub / \TODO
 	Settings $mol_view
 		title @ \Settings
 		sub /
@@ -1056,14 +1074,14 @@ $tukanable_gymload_builder $mol_view
 						Content <= ShowCharts_wrapper $mol_check_box
 							checked? <=> show_charts? true
 			<= DumbbellWeighs $tukanable_gymload_builder_weights
-				title \Dumbbell Weights
+				title @ \Dumbbell Weights
 				values => dumbbell_values /number
 			<= BarbellWeights $tukanable_gymload_builder_weights
-				title \Barbell Weights
+				title @ \Barbell Weights
 				storage_key \barbell_weights
 				values => barbell_values /number
 			<= WeightPlates $tukanable_gymload_builder_weights
-				title \Weight Plates
+				title @ \Weight Plates
 				storage_key \weight_plates
 				values => weight_plate_values /number
 			<= Weeks $mol_deck
@@ -1073,7 +1091,7 @@ $tukanable_gymload_builder $mol_view
 			items <= top_desk_items /$mol_view
 
 $tukanable_gymload $mol_page
-	title \Gymload - Workout Load Planner
+	title @ \Gymload - Workout Load Planner
 	plugins /
 		<= Theme $mol_theme_auto
 	tools /
@@ -1097,11 +1115,11 @@ $tukanable_gymload $mol_page
 	NewView $mol_view
 		sub /
 			<= NewTitle $tukanable_gymload_title
-				title \Add New Program
+				title @ \Add New Program
 			<= NewForm $mol_form
 				body /
 					<= NewName_field $mol_form_field
-						name \Name
+						name @ \Name
 						bid <= new_name_bid \
 						Content <= NewName_control $mol_string
 							value? <=> new_name? \
@@ -1109,7 +1127,7 @@ $tukanable_gymload $mol_page
 				submit_allowed => add_allowed
 				buttons /
 					<= NewSubmit $mol_button_major
-						title \Add
+						title @ \Add
 						click? <=> add_program? null
 						enabled <= add_allowed
 					<= NewResult $mol_status
@@ -1117,11 +1135,11 @@ $tukanable_gymload $mol_page
 	EditView $mol_view
 		sub /
 			<= EditTitle $tukanable_gymload_title
-				title \Edit Program
+				title @ \Edit Program
 			<= EditForm $mol_form
 				body /
 					<= EditName_field $mol_form_field
-						name \Name
+						name @ \Name
 						bid <= edit_name_bid \
 						Content <= EditName_control $mol_string
 							value? <=> edit_name? \
@@ -1129,7 +1147,7 @@ $tukanable_gymload $mol_page
 				submit_allowed => edit_allowed
 				buttons /
 					<= EditSubmit $mol_button_major
-						title \Save
+						title @ \Save
 						click? <=> edit_program? null
 						enabled <= edit_allowed
 					<= EditResult $mol_status
@@ -1139,16 +1157,16 @@ $tukanable_gymload $mol_page
 						arg * view \delete_program
 						sub /
 							<= DeleteIcon $mol_icon_delete
-							\Delete
+							@ \Delete
 	DeleteView $mol_view
 		sub /
 			<= DeleteTitle $tukanable_gymload_title
-				title \Are you sure you want to delete this program?
+				title @ \Are you sure you want to delete this program?
 			<= DeleteActions $mol_view
 				sub /
 					<= DeleteConfirmButton $mol_button_major
-						title \Delete
+						title @ \Delete
 						click? <=> delete_program? null
 					<= DeleteCancelButton $mol_button_minor
-						title \Cancel
+						title @ \Cancel
 						click? <=> cancel_delete_program? null
