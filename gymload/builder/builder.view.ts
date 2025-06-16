@@ -15,7 +15,9 @@ namespace $.$$ {
 		override top_desk_items(): readonly ( $mol_view )[] {
 			return [
 				this.Settings(),
-				...Array.from( { length: this.day_count() }, ( _, i ) => this.DayResults( i ) )
+				...Array.from( { length: this.day_count() }, ( _, i ) => this.DayResults( i ) ),
+				this.Stats(),
+				this.Export(),
 			]
 		}
 

@@ -17,6 +17,13 @@ $tukanable_gymload_builder $mol_view
 		dumbbell_values <= dumbbell_values
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
+	Stats $tukanable_gymload_builder_stats
+		title @ \Stats
+		day_count <= day_count
+		model* <= DaySettings*
+	Export $mol_view
+		title @ \Export
+		sub / \TODO
 	Settings $mol_view
 		title @ \Settings
 		sub /
