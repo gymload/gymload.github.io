@@ -8,5 +8,8 @@
 	"$tukanable_gymload_DeleteTitle_title": "Вы уверены, что хотите удалить эту программу?",
 	"$tukanable_gymload_DeleteConfirmButton_title": "Удалить",
 	"$tukanable_gymload_DeleteCancelButton_title": "Отмена",
+	"$tukanable_gymload_delete_link_text": "Удалить программу",
+	"$tukanable_gymload_required_label": "Обязательное поле",
+	"$tukanable_gymload_default_program_name": "Первая",
 	"$tukanable_gymload_title": "Gymload"
 }

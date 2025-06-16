@@ -27,6 +27,7 @@ namespace $.$$ {
 		}
 
 		override done_plan_label(): string {
+			return super.done_plan_label().replace( '__weight__', this.plan_weight().toString() ).replace( '__reps__', this.reps().toString() )
 			return `Plan: ${ this.plan_weight() } (${ this.reps() })`
 		}
 

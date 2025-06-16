@@ -64,7 +64,7 @@ namespace $.$$ {
 		}
 
 		override day_title(): string {
-			return `Day #${ this.day_index() + 1 }`
+			return super.day_title() + ( this.day_index() + 1 ).toString()
 		}
 
 		override week_labels( id: any ): readonly ( string )[] {

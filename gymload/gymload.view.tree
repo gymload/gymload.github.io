@@ -1,14 +1,16 @@
 $tukanable_gymload $mol_page
 	title @ \Gymload
+	required_label @ \Required
+	default_program_name @ \Default
 	plugins /
 		<= Theme $mol_theme_auto
 	tools /
-		<= Lighter $mol_lights_toggle
 		<= List_of_languages $mol_locale_select
 			Filter null
 			dictionary *
-				ru \Русский
-				en \English
+				ru \Рус
+				en \Eng
+		<= Lighter $mol_lights_toggle
 	ListPrograms $mol_select
 		dictionary <= programs *
 		value? <=> current_program_string? \0
@@ -65,7 +67,7 @@ $tukanable_gymload $mol_page
 						arg * view \delete_program
 						sub /
 							<= DeleteIcon $mol_icon_delete
-							@ \Delete
+							<= delete_link_text @ \Delete Program
 	DeleteView $mol_view
 		sub /
 			<= DeleteTitle $tukanable_gymload_title

@@ -27,7 +27,7 @@ $tukanable_gymload_builder $mol_view
 	Settings $mol_view
 		title @ \Settings
 		sub /
-			<= Header $mol_view
+			<= Header $mol_row
 				sub /
 					<= WeekCount_labeler $mol_labeler
 						title @ \Week Count

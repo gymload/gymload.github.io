@@ -7,6 +7,7 @@ $tukanable_gymload_builder_day $mol_view
 	barbell_values /number
 	data_ids /number
 	show_charts true
+	no_exercises @ \No exercises yet...
 	weight_types *
 		custom @ \Custom
 		dumbbell @ \Dumbbell
@@ -28,12 +29,12 @@ $tukanable_gymload_builder_day $mol_view
 						labels <= week_labels* /string
 	sub /
 		<= DayTitle $tukanable_gymload_title
-			title <= day_title \Day
+			title <= day_title @ \Day #
 		<= Rows $mol_list
 			item_width_min* 200
 			item_height_min* 96
 			Empty* <= EmptyExercises $mol_view
-				sub / \No exercises yet...
+				sub / <= no_exercises
 			rows <= rows /$mol_view
 				<= Row*0 $mol_view
 					sub <= row_view* /

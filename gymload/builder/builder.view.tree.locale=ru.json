@@ -8,5 +8,6 @@
 	"$tukanable_gymload_builder_day_title": "День №",
 	"$tukanable_gymload_builder_Stats_title": "Статистика",
 	"$tukanable_gymload_builder_Export_title": "Экспорт",
+	"$tukanable_gymload_builder_day_no_exercises": "Упражнений пока нет",
 	"$tukanable_gymload_builder_Settings_title": "Настройки"
 }

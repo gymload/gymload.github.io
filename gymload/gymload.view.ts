@@ -1,7 +1,6 @@
 namespace $.$$ {
 	type State = 'program' | 'edit_program' | 'add_program' | 'delete_program'
 
-	const defaultProgramName = 'Default'
 	const defaultProgramId = 0
 
 	export class $tukanable_gymload extends $.$tukanable_gymload {
@@ -60,7 +59,11 @@ namespace $.$$ {
 		}
 
 		override new_name_bid(): string {
-			return this.new_name().trim().length === 0 ? 'Required' : ''
+			return this.new_name().trim().length === 0 ? this.required_label() : ''
+		}
+
+		override edit_name_bid(): string {
+			return this.edit_name().trim().length === 0 ? this.required_label() : ''
 		}
 
 		override add_program() {
@@ -92,7 +95,7 @@ namespace $.$$ {
 		}
 
 		program_name( key: any, next?: string ): string {
-			return this.$.$mol_state_local.value( this.build_key( `program_name_${ key }` ), next ) || defaultProgramName
+			return this.$.$mol_state_local.value( this.build_key( `program_name_${ key }` ), next ) || this.default_program_name()
 		}
 
 		user_program_ids( next?: number[] ): readonly ( number )[] {
