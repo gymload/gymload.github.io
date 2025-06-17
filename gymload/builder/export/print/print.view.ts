@@ -4,6 +4,10 @@ namespace $.$$ {
 			print()
 		}
 
+		override day_idx( id: any ): number {
+			return id
+		}
+
 		override sub() {
 			const items = [ ...super.sub() ]
 
@@ -26,6 +30,10 @@ namespace $.$$ {
 
 		override excercise_title( id: any ): string {
 			return this.model().row_exercise_extra( id )
+		}
+
+		override day_name(): string {
+			return `${ super.day_name() }${ this.day_idx()+1 }`
 		}
 
 		override sub() {

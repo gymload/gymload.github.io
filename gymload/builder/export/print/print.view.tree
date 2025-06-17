@@ -3,6 +3,7 @@ $tukanable_gymload_builder_export_print $mol_view
 	model* $tukanable_gymload_builder_day
 	Day* $tukanable_gymload_builder_export_print_day
 		model <= model*
+		day_idx <= day_idx* 0
 	sub /
 		<= PrintButton $mol_button_major
 			title \Print
@@ -10,6 +11,7 @@ $tukanable_gymload_builder_export_print $mol_view
 
 $tukanable_gymload_builder_export_print_day $mol_view
 	model $tukanable_gymload_builder_day
+	day_idx 0
 	ExcerciseTable* $mol_view
 		sub /
 			<= Title* $tukanable_gymload_title
@@ -17,7 +19,8 @@ $tukanable_gymload_builder_export_print_day $mol_view
 			<= Table* $tukanable_gymload_builder_export_print_table
 				sets <= excercise_sets* 3
 				plan <= excercise_plan* /number
-	sub / \Day
+	sub /
+		<= day_name \Day #
 
 $tukanable_gymload_builder_export_print_table $mol_view
 	sets 3
