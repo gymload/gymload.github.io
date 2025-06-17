@@ -4689,6 +4689,8 @@ declare namespace $ {
 		data_ids( ): readonly(number)[]
 		show_charts( ): boolean
 		no_exercises( ): string
+		excercise_without_name( ): string
+		row_exercise_extra( id: any): string
 		weight_types( ): ({ 
 			'custom': string,
 			'dumbbell': string,
@@ -4744,6 +4746,7 @@ declare namespace $.$$ {
         new_id(): number;
         add_exercise(): void;
         row_view(id: any): readonly any[];
+        row_exercise_extra(id: any): string;
     }
     export {};
 }
@@ -5268,7 +5271,6 @@ declare namespace $ {
 		current_week( next?: ReturnType< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] > ): ReturnType< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] >
 		week_items( ): readonly($mol_view)[]
 		Weeks( ): $mol_deck
-		row_exercise_extra( id: any): string
 		ExcerciseTitle( id: any): $tukanable_gymload_title
 		set_rows( id: any): readonly($mol_view)[]
 		SetRows( id: any): $mol_view
@@ -5296,7 +5298,6 @@ declare namespace $.$$ {
         week_tab_title(id: any): string;
         current_week_number(): number;
         day_title(): string;
-        row_exercise_extra(id: any): string;
     }
 }
 
@@ -5306,7 +5307,7 @@ declare namespace $.$$ {
 declare namespace $ {
 
 	export class $tukanable_gymload_builder_stats extends $mol_view {
-		value( ): string
+		total_lifted( ): string
 		day_count( ): number
 		model( id: any): $tukanable_gymload_builder_day
 		sub( ): readonly(any)[]
@@ -5317,8 +5318,11 @@ declare namespace $ {
 //# sourceMappingURL=stats.view.tree.d.ts.map
 declare namespace $.$$ {
     class $tukanable_gymload_builder_stats extends $.$tukanable_gymload_builder_stats {
-        value(): string;
+        total_lifted(): string;
     }
+}
+
+declare namespace $.$$ {
 }
 
 declare namespace $ {
@@ -5503,22 +5507,27 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_builder_stats['model'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_37 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_builder_37 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_builder_export_print['title'] >
+	>
+	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_builder_38 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder['day_count'] >
+		,
+		ReturnType< $tukanable_gymload_builder_export_print['day_count'] >
+	>
+	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_builder_39 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder['DaySettings'] >
+		,
+		ReturnType< $tukanable_gymload_builder_export_print['model'] >
+	>
+	type $mol_view__title_tukanable_gymload_builder_40 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_38 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__title_tukanable_gymload_builder_39 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_view['title'] >
-	>
-	type $mol_view__sub_tukanable_gymload_builder_40 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_41 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -5552,7 +5561,7 @@ declare namespace $ {
 		DaySettings( id: any): $tukanable_gymload_builder_day
 		DayResults( id: any): $tukanable_gymload_builder_day_results
 		Stats( ): $tukanable_gymload_builder_stats
-		Export( ): $mol_view
+		Export( ): $tukanable_gymload_builder_export_print
 		Settings( ): $mol_view
 		sub( ): readonly(any)[]
 	}
@@ -5895,6 +5904,177 @@ declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_button_major__title_tukanable_gymload_builder_export_print_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_builder_export_print_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_export_print['print_click'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $tukanable_gymload_builder_export_print_day__model_tukanable_gymload_builder_export_print_3 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_export_print['model'] >
+		,
+		ReturnType< $tukanable_gymload_builder_export_print_day['model'] >
+	>
+	type $tukanable_gymload_builder_export_print_day__day_idx_tukanable_gymload_builder_export_print_4 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_export_print['day_idx'] >
+		,
+		ReturnType< $tukanable_gymload_builder_export_print_day['day_idx'] >
+	>
+	export class $tukanable_gymload_builder_export_print extends $mol_view {
+		day_idx( id: any): number
+		print_click( next?: any ): any
+		PrintButton( ): $mol_button_major
+		day_count( ): number
+		model( id: any): $tukanable_gymload_builder_day
+		Day( id: any): $tukanable_gymload_builder_export_print_day
+		sub( ): readonly(any)[]
+	}
+	
+	type $tukanable_gymload_title__title_tukanable_gymload_builder_export_print_day_1 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_export_print_day['excercise_title'] >
+		,
+		ReturnType< $tukanable_gymload_title['title'] >
+	>
+	type $tukanable_gymload_builder_export_print_table__sets_tukanable_gymload_builder_export_print_day_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_export_print_day['excercise_sets'] >
+		,
+		ReturnType< $tukanable_gymload_builder_export_print_table['sets'] >
+	>
+	type $tukanable_gymload_builder_export_print_table__plan_tukanable_gymload_builder_export_print_day_3 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_export_print_day['excercise_plan'] >
+		,
+		ReturnType< $tukanable_gymload_builder_export_print_table['plan'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_export_print_day_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $tukanable_gymload_builder_export_print_day extends $mol_view {
+		excercise_title( id: any): string
+		Title( id: any): $tukanable_gymload_title
+		excercise_sets( id: any): number
+		excercise_plan( id: any): readonly(number)[]
+		Table( id: any): $tukanable_gymload_builder_export_print_table
+		day_name( ): string
+		model( ): $tukanable_gymload_builder_day
+		day_idx( ): number
+		ExcerciseTable( id: any): $mol_view
+		sub( ): readonly(any)[]
+	}
+	
+	type $mol_view__dom_name_tukanable_gymload_builder_export_print_table_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_export_print_table_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_export_print_table['header_cells'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__dom_name_tukanable_gymload_builder_export_print_table_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_export_print_table_4 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_export_print_table['set_rows'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__dom_name_tukanable_gymload_builder_export_print_table_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_export_print_table_6 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__dom_name_tukanable_gymload_builder_export_print_table_7 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_export_print_table_8 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__dom_name_tukanable_gymload_builder_export_print_table_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_export_print_table_10 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_export_print_table['columns'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__dom_name_tukanable_gymload_builder_export_print_table_11 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_export_print_table_12 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $tukanable_gymload_builder_export_print_table extends $mol_view {
+		result( id: any): string
+		columns( id: any): readonly($mol_view)[]
+		header_content( id: any): string
+		header_cells( ): readonly($mol_view)[]
+		Header( ): $mol_view
+		set_rows( ): readonly($mol_view)[]
+		Body( ): $mol_view
+		sets( ): number
+		plan( ): readonly(number)[]
+		dom_name( ): string
+		SetCell( id: any): $mol_view
+		ResultCell( id: any): $mol_view
+		SetRow( id: any): $mol_view
+		HeaderCell( id: any): $mol_view
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=print.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $tukanable_gymload_builder_export_print extends $.$tukanable_gymload_builder_export_print {
+        print_click(): void;
+        day_idx(id: any): number;
+        sub(): any[];
+    }
+    class $tukanable_gymload_builder_export_print_day extends $.$tukanable_gymload_builder_export_print_day {
+        excercise_sets(id: any): number;
+        excercise_plan(id: any): readonly (number)[];
+        excercise_title(id: any): string;
+        day_name(): string;
+        sub(): any[];
+    }
+    class $tukanable_gymload_builder_export_print_table extends $.$tukanable_gymload_builder_export_print_table {
+        set_rows(): readonly ($mol_view)[];
+        header_content(id: any): any;
+        header_cells(): readonly ($mol_view)[];
+        result(id: any): string;
+        columns(id: any): readonly ($mol_view)[];
+    }
+}
+
+declare namespace $ {
 }
 
 export = $;

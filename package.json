@@ -233,7 +233,9 @@
     "$mol_state_session",
     "$tukanable_gymload_builder_day_results",
     "$tukanable_gymload_builder_day_results_set",
-    "$tukanable_gymload_builder_stats"
+    "$tukanable_gymload_builder_stats",
+    "$tukanable_gymload_builder_export_print",
+    "$tukanable_gymload_builder_export"
   ],
   "dependencies": {
     "jsdom": "*"

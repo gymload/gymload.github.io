@@ -827,6 +827,8 @@ $tukanable_gymload_builder_day $mol_view
 	data_ids /number
 	show_charts true
 	no_exercises @ \No exercises yet...
+	excercise_without_name @ \Without name. Edit in Settings
+	row_exercise_extra* \
 	weight_types *
 		custom @ \Custom
 		dumbbell @ \Dumbbell
@@ -1022,14 +1024,14 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 				<= Row*0 $mol_view
 					sub /
 						<= ExcerciseTitle* $tukanable_gymload_title
-							title <= row_exercise_extra* \
+							title <= row_exercise_extra*
 						<= SetRows* $mol_view
 							sub <= set_rows* /$mol_view
 
 $tukanable_gymload_builder_stats $mol_view
 	day_count 0
 	model* $tukanable_gymload_builder_day
-	sub / <= value \
+	sub / <= total_lifted @ \Total weight lifted: 
 
 $tukanable_gymload_builder $mol_view
 	storage_key \gymload_builder
@@ -1054,9 +1056,10 @@ $tukanable_gymload_builder $mol_view
 		title @ \Stats
 		day_count <= day_count
 		model* <= DaySettings*
-	Export $mol_view
+	Export $tukanable_gymload_builder_export_print
 		title @ \Export
-		sub / \TODO
+		day_count <= day_count
+		model* <= DaySettings*
 	Settings $mol_view
 		title @ \Settings
 		sub /
@@ -1174,3 +1177,51 @@ $tukanable_gymload $mol_page
 					<= DeleteCancelButton $mol_button_minor
 						title @ \Cancel
 						click? <=> cancel_delete_program? null
+
+$tukanable_gymload_builder_export_print $mol_view
+	day_count 3
+	model* $tukanable_gymload_builder_day
+	Day* $tukanable_gymload_builder_export_print_day
+		model <= model*
+		day_idx <= day_idx* 0
+	sub /
+		<= PrintButton $mol_button_major
+			title \Print
+			click?event <=> print_click? null
+
+$tukanable_gymload_builder_export_print_day $mol_view
+	model $tukanable_gymload_builder_day
+	day_idx 0
+	ExcerciseTable* $mol_view
+		sub /
+			<= Title* $tukanable_gymload_title
+				title <= excercise_title* \
+			<= Table* $tukanable_gymload_builder_export_print_table
+				sets <= excercise_sets* 3
+				plan <= excercise_plan* /number
+	sub /
+		<= day_name \Day #
+
+$tukanable_gymload_builder_export_print_table $mol_view
+	sets 3
+	plan /number
+	dom_name \table
+	SetCell* $mol_view
+		dom_name \td
+		sub / \Set
+	ResultCell* $mol_view
+		dom_name \td
+		sub / <= result* \
+	SetRow* $mol_view
+		dom_name \tr
+		sub <= columns* /$mol_view
+	HeaderCell* $mol_view
+		dom_name \th
+		sub / <= header_content* \
+	sub /
+		<= Header $mol_view
+			dom_name \tr
+			sub <= header_cells /$mol_view
+		<= Body $mol_view
+			dom_name \tbody
+			sub <= set_rows /$mol_view
