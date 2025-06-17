@@ -1,6 +1,6 @@
 namespace $.$$ {
 	export class $tukanable_gymload_builder_stats extends $.$tukanable_gymload_builder_stats {
-		override value() {
+		override total_lifted() {
 			let totalWeight = 0
 
 			for( let i = 0; i < this.day_count(); i++ ) {
@@ -15,7 +15,7 @@ namespace $.$$ {
 				}
 			}
 
-			return `Total weight lifted: ${totalWeight} kg`
+			return super.total_lifted() + `${ totalWeight } kg`
 		}
 	}
 }

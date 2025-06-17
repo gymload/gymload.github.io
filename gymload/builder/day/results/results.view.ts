@@ -41,11 +41,11 @@ namespace $.$$ {
 		}
 
 		override row_exercise_extra( id: any ): string {
-			const title = this.row_exercise( id )
+			const title = this.row_exercise( id ) || this.excercise_without_name()
 			const sets = this.row_sets( id )
 			const reps = this.row_reps( id )
 
-			return `${ title } ${ sets }x${ reps }`
+			return `${ title || 'Not Set' } ${ sets }x${ reps }`
 		}
 	}
 }

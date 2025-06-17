@@ -108,7 +108,7 @@ namespace $.$$ {
 		}
 
 		override set_idx_label(): string {
-			return `${ super.set_idx_label() }${ this.set_idx() }`
+			return `${ super.set_idx_label() }${ Number( this.set_idx() ) + 1 }`
 		}
 	}
 }

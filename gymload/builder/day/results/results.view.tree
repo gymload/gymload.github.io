@@ -1,5 +1,6 @@
 $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 	week_count 1
+	excercise_without_name @ \Without name. Edit in Settings
 	SetResult* $tukanable_gymload_builder_day_results_set
 		set_idx <= set_idx* 0
 		week_idx <= current_week_number 0
