@@ -24,6 +24,10 @@ namespace $.$$ {
 			return this.model().plan( id )
 		}
 
+		override excercise_title( id: any ): string {
+			return this.model().row_exercise_extra( id )
+		}
+
 		override sub() {
 			const items = [ ...super.sub() ]
 

@@ -29,3 +29,7 @@
 [tukanable_gymload_builder_export_print_table_headercell] {
 	display: table-cell;
 }
+
+[tukanable_gymload_builder_export_print_day_excercisetable] {
+	flex-direction: column;
+}

@@ -39,13 +39,5 @@ namespace $.$$ {
 		override day_title(): string {
 			return super.day_title() + ( this.day_index() + 1 ).toString()
 		}
-
-		override row_exercise_extra( id: any ): string {
-			const title = this.row_exercise( id ) || this.excercise_without_name()
-			const sets = this.row_sets( id )
-			const reps = this.row_reps( id )
-
-			return `${ title || 'Not Set' } ${ sets }x${ reps }`
-		}
 	}
 }

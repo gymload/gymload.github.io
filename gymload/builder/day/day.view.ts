@@ -230,5 +230,13 @@ namespace $.$$ {
 
 			return super.row_view( id )
 		}
+
+		override row_exercise_extra( id: any ): string {
+			const title = this.row_exercise( id ) || this.excercise_without_name()
+			const sets = this.row_sets( id )
+			const reps = this.row_reps( id )
+
+			return `${ title || 'Not Set' } ${ sets }x${ reps }`
+		}
 	}
 }

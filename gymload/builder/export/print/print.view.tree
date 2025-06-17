@@ -10,9 +10,13 @@ $tukanable_gymload_builder_export_print $mol_view
 
 $tukanable_gymload_builder_export_print_day $mol_view
 	model $tukanable_gymload_builder_day
-	ExcerciseTable* $tukanable_gymload_builder_export_print_table
-		sets <= excercise_sets* 3
-		plan <= excercise_plan* /number
+	ExcerciseTable* $mol_view
+		sub /
+			<= Title* $tukanable_gymload_title
+				title <= excercise_title* \
+			<= Table* $tukanable_gymload_builder_export_print_table
+				sets <= excercise_sets* 3
+				plan <= excercise_plan* /number
 	sub / \Day
 
 $tukanable_gymload_builder_export_print_table $mol_view
