@@ -1,0 +1,31 @@
+@media print {
+	[tukanable_gymload_builder_export_print_printbutton],
+	[tukanable_gymload_builder_topdesk],
+	[tukanable_gymload_head] {
+		display: none;
+	}
+}
+
+[tukanable_gymload_builder_export_print],
+[tukanable_gymload_builder_export_print_day] {
+	flex-direction: column;
+}
+
+[tukanable_gymload_builder_export_print_table] {
+	display: table;
+}
+
+[tukanable_gymload_builder_export_print_table_body] {
+	display: table-row-group;
+}
+
+[tukanable_gymload_builder_export_print_table_setrow],
+[tukanable_gymload_builder_export_print_table_header] {
+	display: table-row;
+}
+
+[tukanable_gymload_builder_export_print_table_setcell],
+[tukanable_gymload_builder_export_print_table_resultcell],
+[tukanable_gymload_builder_export_print_table_headercell] {
+	display: table-cell;
+}

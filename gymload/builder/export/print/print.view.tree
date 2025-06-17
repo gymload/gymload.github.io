@@ -1,0 +1,40 @@
+$tukanable_gymload_builder_export_print $mol_view
+	day_count 3
+	model* $tukanable_gymload_builder_day
+	Day* $tukanable_gymload_builder_export_print_day
+		model <= model*
+	sub /
+		<= PrintButton $mol_button_major
+			title \Print
+			click?event <=> print_click? null
+
+$tukanable_gymload_builder_export_print_day $mol_view
+	model $tukanable_gymload_builder_day
+	ExcerciseTable* $tukanable_gymload_builder_export_print_table
+		sets <= excercise_sets* 3
+		plan <= excercise_plan* /number
+	sub / \Day
+
+$tukanable_gymload_builder_export_print_table $mol_view
+	sets 3
+	plan /number
+	dom_name \table
+	SetCell* $mol_view
+		dom_name \td
+		sub / \Set
+	ResultCell* $mol_view
+		dom_name \td
+		sub / <= result* \
+	SetRow* $mol_view
+		dom_name \tr
+		sub <= columns* /$mol_view
+	HeaderCell* $mol_view
+		dom_name \th
+		sub / <= header_content* \
+	sub /
+		<= Header $mol_view
+			dom_name \tr
+			sub <= header_cells /$mol_view
+		<= Body $mol_view
+			dom_name \tbody
+			sub <= set_rows /$mol_view
