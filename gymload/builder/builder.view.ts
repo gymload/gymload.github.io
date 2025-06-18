@@ -46,5 +46,9 @@ namespace $.$$ {
 		override top_desk_current( next?: string ) {
 			return this.$.$mol_state_session.value( `${ this }.top_desk_current()` , next ) || super.top_desk_current()
 		}
+
+		override progress_formula( next?: string ): string {
+			return this.$.$mol_state_local.value( this.build_key( 'progress_formula' ), next ) || super.progress_formula()
+		}
 	}
 }

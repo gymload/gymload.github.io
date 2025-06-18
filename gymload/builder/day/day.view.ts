@@ -54,8 +54,21 @@ namespace $.$$ {
 
 			for( let i = 0; i < count; i++ ) {
 				const progress = i / ( count - 1 )
-				const weight = row.begin_weight * Math.pow( base, progress )
-				const aligned_weight = Math.round( weight / min_step ) * min_step
+
+				// sigmoid by default
+				let factor = 1 - Math.pow(1 - progress, 2)
+
+				switch (this.progress_formula()) {
+					case 'linear':
+						factor = progress
+						break
+
+					case 'log':
+						factor = Math.log1p(progress * 9) / Math.log1p(9)
+				}
+
+				const weight = row.begin_weight + (row.finish_weight - row.begin_weight) * factor
+				const aligned_weight = Math.floor( weight / min_step ) * min_step
 
 				res.push( Math.max( aligned_weight, min_weight ) )
 			}

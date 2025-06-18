@@ -12,6 +12,7 @@ $tukanable_gymload_builder_day $mol_view
 	row_exercise_extra* \
 	row_exercise_extra_title* \
 	row_exercise_extra_extra* \
+	progress_formula \sigmoid
 	weight_types *
 		custom @ \Custom
 		dumbbell @ \Dumbbell

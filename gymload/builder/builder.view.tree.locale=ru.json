@@ -8,6 +8,10 @@
 	"$tukanable_gymload_builder_day_title": "День №",
 	"$tukanable_gymload_builder_Stats_title": "Статистика",
 	"$tukanable_gymload_builder_Export_title": "Экспорт",
+	"$tukanable_gymload_builder_ProgressFormula_dictionary_sigmoid": "Сигмоид",
+	"$tukanable_gymload_builder_ProgressFormula_dictionary_log": "Логарифмическая",
+	"$tukanable_gymload_builder_ProgressFormula_dictionary_linear": "Линейная",
+	"$tukanable_gymload_builder_ProgressFormula_labeler_title": "Формула прогресса",
 	"$tukanable_gymload_builder_day_no_exercises": "Упражнений пока нет",
 	"$tukanable_gymload_builder_Settings_title": "Настройки"
 }
