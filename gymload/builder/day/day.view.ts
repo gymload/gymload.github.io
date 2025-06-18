@@ -232,11 +232,18 @@ namespace $.$$ {
 		}
 
 		override row_exercise_extra( id: any ): string {
-			const title = this.row_exercise( id ) || this.excercise_without_name()
+			return `${ this.row_exercise_extra_title( id ) } ${ this.row_exercise_extra_extra( id ) }`
+		}
+
+		override row_exercise_extra_title( id: any ): string {
+			return this.row_exercise( id ) || this.excercise_without_name()
+		}
+
+		override row_exercise_extra_extra( id: any ): string {
 			const sets = this.row_sets( id )
 			const reps = this.row_reps( id )
 
-			return `${ title || 'Not Set' } ${ sets }x${ reps }`
+			return `${ sets }x${ reps }`
 		}
 	}
 }

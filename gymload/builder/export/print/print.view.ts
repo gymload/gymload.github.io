@@ -28,12 +28,16 @@ namespace $.$$ {
 			return this.model().plan( id )
 		}
 
-		override excercise_title( id: any ): string {
-			return this.model().row_exercise_extra( id )
+		override excercise_title_extra_extra( id: any ): string {
+			return this.model().row_exercise_extra_extra ( id )
+		}
+
+		override excercise_title_extra_title( id: any ): string {
+			return this.model().row_exercise_extra_title( id )
 		}
 
 		override day_name(): string {
-			return `${ super.day_name() }${ this.day_idx()+1 }`
+			return `${ super.day_name() }${ this.day_idx() + 1 }`
 		}
 
 		override sub() {
@@ -74,10 +78,18 @@ namespace $.$$ {
 			return items
 		}
 
-		override result( id: any ): string {
+		override set_idx( id: any ): string {
+			return id + 1
+		}
+
+		override result_begin( id: any ): string {
 			const [ , weight ] = id.split( '_' )
 
-			return `${ weight } (___)`
+			return `${ weight } (`
+		}
+
+		override result_end( id: any ): string {
+			return ')'
 		}
 
 		override columns( id: any ): readonly ( $mol_view )[] {

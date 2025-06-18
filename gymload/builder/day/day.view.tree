@@ -10,6 +10,8 @@ $tukanable_gymload_builder_day $mol_view
 	no_exercises @ \No exercises yet...
 	excercise_without_name @ \Without name. Edit in Settings
 	row_exercise_extra* \
+	row_exercise_extra_title* \
+	row_exercise_extra_extra* \
 	weight_types *
 		custom @ \Custom
 		dumbbell @ \Dumbbell

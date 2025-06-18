@@ -1,6 +1,6 @@
 @media print {
 	[tukanable_gymload_builder_export_print_printbutton],
-	[tukanable_gymload_builder_topdesk],
+	[tukanable_gymload_builder_topdesk_switch],
 	[tukanable_gymload_head] {
 		display: none;
 	}
@@ -11,8 +11,13 @@
 	flex-direction: column;
 }
 
+[tukanable_gymload_builder_export_print_day] {
+	page-break-after: always;
+}
+
 [tukanable_gymload_builder_export_print_table] {
 	display: table;
+	border-collapse: collapse;
 }
 
 [tukanable_gymload_builder_export_print_table_body] {
@@ -28,8 +33,33 @@
 [tukanable_gymload_builder_export_print_table_resultcell],
 [tukanable_gymload_builder_export_print_table_headercell] {
 	display: table-cell;
+	border: 1px solid #666;
+	padding: 0.1rem 0.2rem;
+}
+
+[tukanable_gymload_builder_export_print_table_resultcellbegin] {
+	flex: 1;
+}
+
+[tukanable_gymload_builder_export_print_table_resultcell] {
+	text-align: right;
+}
+
+[tukanable_gymload_builder_export_print_table_setcell] {
+	width: 30px;
+	text-align: center;
 }
 
 [tukanable_gymload_builder_export_print_day_excercisetable] {
 	flex-direction: column;
+}
+
+[tukanable_gymload_builder_export_print_day_dayname] {
+	font-size: 1.2rem;
+	font-weight: bold;
+	margin: 1rem 0.75rem 0;
+}
+
+[tukanable_gymload_builder_export_print_day_title] {
+	margin-top: 1rem;
 }
