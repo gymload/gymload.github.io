@@ -1,7 +1,7 @@
 namespace $.$$ {
 	const { rem } = $mol_style_unit
 
-	const currentWidth = rem( 14 )
+	const currentWidth = rem( 19 )
 
 	$mol_style_define( $tukanable_gymload_builder_day_results_set, {
 		paddingTop: rem(0.25),
