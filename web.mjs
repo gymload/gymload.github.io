@@ -10423,6 +10423,21 @@ var $;
 			(obj.value) = (next) => ((this.row_min_step(id, next)));
 			return obj;
 		}
+		row_min_weight(id){
+			return 0;
+		}
+		row_begin_weight(id, next){
+			if(next !== undefined) return next;
+			return 50;
+		}
+		BeginWeight(id){
+			const obj = new this.$.$tukanable_gymload_smallnumber();
+			(obj.precision_view) = () => (0.1);
+			(obj.precision_change) = () => ((this.row_min_step(id)));
+			(obj.value_min) = () => ((this.row_min_weight(id)));
+			(obj.value) = (next) => ((this.row_begin_weight(id, next)));
+			return obj;
+		}
 		plan(id){
 			return [];
 		}
@@ -10537,26 +10552,8 @@ var $;
 			(obj.Content) = () => ((this.Reps(id)));
 			return obj;
 		}
-		row_min_weight(id){
-			return 0;
-		}
-		row_begin_weight(id, next){
-			if(next !== undefined) return next;
-			return 50;
-		}
-		BeginWeight(id){
-			const obj = new this.$.$tukanable_gymload_smallnumber();
-			(obj.precision_view) = () => (0.1);
-			(obj.precision_change) = () => ((this.row_min_step(id)));
-			(obj.value_min) = () => ((this.row_min_weight(id)));
-			(obj.value) = (next) => ((this.row_begin_weight(id, next)));
-			return obj;
-		}
-		BeginWeight_labeler(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_day_BeginWeight_labeler_title")));
-			(obj.Content) = () => ((this.BeginWeight(id)));
-			return obj;
+		begin_weight_labeler(id){
+			return null;
 		}
 		row_finish_weight(id, next){
 			if(next !== undefined) return next;
@@ -10599,7 +10596,7 @@ var $;
 				(this.WeightType_labeler(id)), 
 				(this.Sets_labeler(id)), 
 				(this.Reps_labeler(id)), 
-				(this.BeginWeight_labeler(id)), 
+				(this.begin_weight_labeler(id)), 
 				(this.FinishWeight_labeler(id)), 
 				(this.min_step_labeler(id)), 
 				(this.RemoveButton(id))
@@ -10681,6 +10678,9 @@ var $;
 		progress_formula(){
 			return "sigmoid";
 		}
+		start_percent(){
+			return NaN;
+		}
 		weight_types(){
 			return {
 				"custom": (this.$.$mol_locale.text("$tukanable_gymload_builder_day_weight_types_custom")), 
@@ -10692,6 +10692,12 @@ var $;
 			const obj = new this.$.$mol_labeler();
 			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_day_MinStepLabeler_title")));
 			(obj.Content) = () => ((this.MinStep(id)));
+			return obj;
+		}
+		BeginWeightLabeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_day_BeginWeightLabeler_title")));
+			(obj.Content) = () => ((this.BeginWeight(id)));
 			return obj;
 		}
 		ChartView(id){
@@ -10709,6 +10715,8 @@ var $;
 	};
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "row_min_step"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "MinStep"));
+	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "row_begin_weight"));
+	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "BeginWeight"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Plan"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Vert_ruler"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Marker_hor"));
@@ -10727,9 +10735,6 @@ var $;
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "row_reps"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Reps"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Reps_labeler"));
-	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "row_begin_weight"));
-	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "BeginWeight"));
-	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "BeginWeight_labeler"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "row_finish_weight"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "FinishWeight"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "FinishWeight_labeler"));
@@ -10742,6 +10747,7 @@ var $;
 	($mol_mem(($.$tukanable_gymload_builder_day.prototype), "add_exercise"));
 	($mol_mem(($.$tukanable_gymload_builder_day.prototype), "AddButton"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "MinStepLabeler"));
+	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "BeginWeightLabeler"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "ChartView"));
 
 
@@ -10812,8 +10818,8 @@ var $;
             plan(id) {
                 const res = [];
                 const count = this.week_count();
-                const row = this.row(id);
-                const base = row.finish_weight / row.begin_weight;
+                const begin_weight = this.row_begin_weight(id);
+                const finish_weight = this.row_finish_weight(id);
                 const min_weight = this.row_min_weight(id);
                 const min_step = this.row_min_step(id);
                 for (let i = 0; i < count; i++) {
@@ -10826,7 +10832,7 @@ var $;
                         case 'log':
                             factor = Math.log1p(progress * 9) / Math.log1p(9);
                     }
-                    const weight = row.begin_weight + (row.finish_weight - row.begin_weight) * factor;
+                    const weight = begin_weight + (finish_weight - begin_weight) * factor;
                     const aligned_weight = Math.floor(weight / min_step) * min_step;
                     res.push(Math.max(aligned_weight, min_weight));
                 }
@@ -10866,6 +10872,9 @@ var $;
                 return this.change_field('reps', id, next);
             }
             row_begin_weight(id, next) {
+                if (this.start_percent_valid()) {
+                    return Math.max(this.row_finish_weight(id) * this.start_percent() / 100, this.row_min_weight(id));
+                }
                 const v = this.change_field('begin_weight', id, next);
                 return Math.max(v, this.row_min_weight(id));
             }
@@ -10923,6 +10932,16 @@ var $;
             min_step_labeler(id) {
                 if (this.row_weight_type(id) === 'custom') {
                     return this.MinStepLabeler(id);
+                }
+                return null;
+            }
+            start_percent_valid() {
+                const v = this.start_percent();
+                return !isNaN(v) && v > 0 && v < 100;
+            }
+            begin_weight_labeler(id) {
+                if (!this.start_percent_valid()) {
+                    return this.BeginWeightLabeler(id);
                 }
                 return null;
             }
@@ -12100,13 +12119,29 @@ var $;
 			(obj.Content) = () => ((this.ProgressFormula()));
 			return obj;
 		}
+		start_percent(next){
+			if(next !== undefined) return next;
+			return NaN;
+		}
+		StartPercent(){
+			const obj = new this.$.$mol_number();
+			(obj.value) = (next) => ((this.start_percent(next)));
+			return obj;
+		}
+		StartPercent_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_StartPercent_labeler_title")));
+			(obj.Content) = () => ((this.StartPercent()));
+			return obj;
+		}
 		Header(){
 			const obj = new this.$.$mol_row();
 			(obj.sub) = () => ([
 				(this.WeekCount_labeler()), 
 				(this.DayCount_labeler()), 
 				(this.ShowCharts_labeler()), 
-				(this.ProgressFormula_labeler())
+				(this.ProgressFormula_labeler()), 
+				(this.StartPercent_labeler())
 			]);
 			return obj;
 		}
@@ -12171,6 +12206,7 @@ var $;
 			(obj.barbell_values) = () => ((this.barbell_values()));
 			(obj.show_charts) = () => ((this.show_charts()));
 			(obj.progress_formula) = () => ((this.progress_formula()));
+			(obj.start_percent) = () => ((this.start_percent()));
 			return obj;
 		}
 		DayResults(id){
@@ -12183,6 +12219,7 @@ var $;
 			(obj.weight_plate_values) = () => ((this.weight_plate_values()));
 			(obj.barbell_values) = () => ((this.barbell_values()));
 			(obj.progress_formula) = () => ((this.progress_formula()));
+			(obj.start_percent) = () => ((this.start_percent()));
 			return obj;
 		}
 		Stats(){
@@ -12227,6 +12264,9 @@ var $;
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "progress_formula"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "ProgressFormula"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "ProgressFormula_labeler"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "start_percent"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "StartPercent"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "StartPercent_labeler"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "Header"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "DumbbellWeighs"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "BarbellWeights"));
@@ -12290,6 +12330,9 @@ var $;
             }
             progress_formula(next) {
                 return this.$.$mol_state_local.value(this.build_key('progress_formula'), next) || super.progress_formula();
+            }
+            start_percent(next) {
+                return this.$.$mol_state_local.value(this.build_key('start_percent'), next) || super.start_percent();
             }
         }
         $$.$tukanable_gymload_builder = $tukanable_gymload_builder;

@@ -832,6 +832,7 @@ $tukanable_gymload_builder_day $mol_view
 	row_exercise_extra_title* \
 	row_exercise_extra_extra* \
 	progress_formula \sigmoid
+	start_percent NaN number
 	weight_types *
 		custom @ \Custom
 		dumbbell @ \Dumbbell
@@ -841,6 +842,13 @@ $tukanable_gymload_builder_day $mol_view
 		Content <= MinStep* $tukanable_gymload_smallnumber
 			precision 0.1
 			value? <=> row_min_step*? 2.5
+	BeginWeightLabeler* $mol_labeler
+		title @ \Begin Weight
+		Content <= BeginWeight* $tukanable_gymload_smallnumber
+			precision_view 0.1
+			precision_change <= row_min_step*?
+			value_min <= row_min_weight* 0
+			value? <=> row_begin_weight*? 50
 	ChartView* $mol_view
 		sub /
 			<= Chart* $mol_chart
@@ -882,13 +890,7 @@ $tukanable_gymload_builder_day $mol_view
 									title @ \Reps
 									Content <= Reps* $tukanable_gymload_smallnumber
 										value? <=> row_reps*? 12
-								<= BeginWeight_labeler* $mol_labeler
-									title @ \Begin Weight
-									Content <= BeginWeight* $tukanable_gymload_smallnumber
-										precision_view 0.1
-										precision_change <= row_min_step*?
-										value_min <= row_min_weight* 0
-										value? <=> row_begin_weight*? 50
+								<= begin_weight_labeler* null $mol_view | null
 								<= FinishWeight_labeler* $mol_labeler
 									title @ \Finish Weight
 									Content <= FinishWeight* $tukanable_gymload_smallnumber
@@ -1048,6 +1050,7 @@ $tukanable_gymload_builder $mol_view
 		barbell_values <= barbell_values
 		show_charts <= show_charts
 		progress_formula <= progress_formula
+		start_percent <= start_percent
 	DayResults* $tukanable_gymload_builder_day_results
 		storage_key <= day_storage_key*
 		title <= day_title*
@@ -1057,6 +1060,7 @@ $tukanable_gymload_builder $mol_view
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
 		progress_formula <= progress_formula
+		start_percent <= start_percent
 	Stats $tukanable_gymload_builder_stats
 		title @ \Stats
 		day_count <= day_count
@@ -1090,6 +1094,10 @@ $tukanable_gymload_builder $mol_view
 								sigmoid @ \Sigmoid
 								log @ \Logarithmic
 								linear @ \Linear
+					<= StartPercent_labeler $mol_labeler
+						title @ \Start Percent
+						Content <= StartPercent $mol_number
+							value? <=> start_percent? NaN
 			<= DumbbellWeighs $tukanable_gymload_builder_weights
 				title @ \Dumbbell Weights
 				values => dumbbell_values /number
