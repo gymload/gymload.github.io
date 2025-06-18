@@ -50,5 +50,9 @@ namespace $.$$ {
 		override progress_formula( next?: string ): string {
 			return this.$.$mol_state_local.value( this.build_key( 'progress_formula' ), next ) || super.progress_formula()
 		}
+
+		override start_percent( next?: number ): number {
+			return this.$.$mol_state_local.value( this.build_key( 'start_percent' ), next ) || super.start_percent()
+		}
 	}
 }

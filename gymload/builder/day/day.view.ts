@@ -47,8 +47,8 @@ namespace $.$$ {
 		override plan( id: any ) {
 			const res: number[] = []
 			const count = this.week_count()
-			const row = this.row( id )
-			const base = row.finish_weight / row.begin_weight
+			const begin_weight = this.row_begin_weight( id )
+			const finish_weight = this.row_finish_weight( id )
 			const min_weight = this.row_min_weight( id )
 			const min_step = this.row_min_step( id )
 
@@ -56,18 +56,18 @@ namespace $.$$ {
 				const progress = i / ( count - 1 )
 
 				// sigmoid by default
-				let factor = 1 - Math.pow(1 - progress, 2)
+				let factor = 1 - Math.pow( 1 - progress, 2 )
 
-				switch (this.progress_formula()) {
+				switch( this.progress_formula() ) {
 					case 'linear':
 						factor = progress
 						break
 
 					case 'log':
-						factor = Math.log1p(progress * 9) / Math.log1p(9)
+						factor = Math.log1p( progress * 9 ) / Math.log1p( 9 )
 				}
 
-				const weight = row.begin_weight + (row.finish_weight - row.begin_weight) * factor
+				const weight = begin_weight + ( finish_weight - begin_weight ) * factor
 				const aligned_weight = Math.floor( weight / min_step ) * min_step
 
 				res.push( Math.max( aligned_weight, min_weight ) )
@@ -120,6 +120,13 @@ namespace $.$$ {
 		}
 
 		override row_begin_weight( id: any, next?: number ) {
+			if( this.start_percent_valid() ) {
+				return Math.max(
+					this.row_finish_weight( id ) * this.start_percent() / 100,
+					this.row_min_weight( id ),
+				)
+			}
+
 			const v = this.change_field( 'begin_weight', id, next )
 			return Math.max( v, this.row_min_weight( id ) )
 		}
@@ -201,6 +208,19 @@ namespace $.$$ {
 			return null
 		}
 
+		start_percent_valid(): boolean {
+			const v = this.start_percent()
+			return !isNaN( v ) && v > 0 && v < 100
+		}
+
+		override begin_weight_labeler( id: any ): $mol_view | null {
+			if( !this.start_percent_valid() ) {
+				return this.BeginWeightLabeler( id )
+			}
+
+			return null
+		}
+
 		row_min_weight( id: any ): number {
 			switch( this.row_weight_type( id ) ) {
 				case 'barbell':
@@ -238,7 +258,7 @@ namespace $.$$ {
 
 		override row_view( id: any ) {
 			if( this.show_charts() ) {
-				return [ ...super.row_view( id ), this.ChartView ( id ) ]
+				return [ ...super.row_view( id ), this.ChartView( id ) ]
 			}
 
 			return super.row_view( id )

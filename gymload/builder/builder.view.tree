@@ -10,6 +10,7 @@ $tukanable_gymload_builder $mol_view
 		barbell_values <= barbell_values
 		show_charts <= show_charts
 		progress_formula <= progress_formula
+		start_percent <= start_percent
 	DayResults* $tukanable_gymload_builder_day_results
 		storage_key <= day_storage_key*
 		title <= day_title*
@@ -19,6 +20,7 @@ $tukanable_gymload_builder $mol_view
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
 		progress_formula <= progress_formula
+		start_percent <= start_percent
 	Stats $tukanable_gymload_builder_stats
 		title @ \Stats
 		day_count <= day_count
@@ -52,6 +54,10 @@ $tukanable_gymload_builder $mol_view
 								sigmoid @ \Sigmoid
 								log @ \Logarithmic
 								linear @ \Linear
+					<= StartPercent_labeler $mol_labeler
+						title @ \Start Percent
+						Content <= StartPercent $mol_number
+							value? <=> start_percent? NaN
 			<= DumbbellWeighs $tukanable_gymload_builder_weights
 				title @ \Dumbbell Weights
 				values => dumbbell_values /number

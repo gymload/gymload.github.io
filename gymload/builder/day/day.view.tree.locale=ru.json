@@ -4,7 +4,7 @@
 	"$tukanable_gymload_builder_day_WeightType_labeler_title": "Тип веса",
 	"$tukanable_gymload_builder_day_Sets_labeler_title": "Подходы",
 	"$tukanable_gymload_builder_day_Reps_labeler_title": "Повторения",
-	"$tukanable_gymload_builder_day_BeginWeight_labeler_title": "Начальный вес",
+	"$tukanable_gymload_builder_day_BeginWeightLabeler_title": "Начальный вес",
 	"$tukanable_gymload_builder_day_excercise_without_name": "Без названия. Отредактируйте в Настройках",
 	"$tukanable_gymload_builder_day_FinishWeight_labeler_title": "Конечный вес",
 	"$tukanable_gymload_builder_day_AddButton_title": "Добавить упражнение",
