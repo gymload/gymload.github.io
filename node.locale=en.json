@@ -44,6 +44,8 @@
 	"$tukanable_gymload_builder_day_weight_types_barbell": "Barbell",
 	"$tukanable_gymload_builder_day_weight_types_custom": "Custom",
 	"$tukanable_gymload_builder_day_weight_types_dumbbell": "Dumbbell",
+	"$tukanable_gymload_builder_export_print_PrintButton_title": "Print",
+	"$tukanable_gymload_builder_export_print_day_day_name": "Day #",
 	"$tukanable_gymload_builder_stats_total_lifted": "Total weight lifted: ",
 	"$tukanable_gymload_default_program_name": "Default",
 	"$tukanable_gymload_delete_link_text": "Delete Program",

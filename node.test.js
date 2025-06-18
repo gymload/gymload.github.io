@@ -11141,6 +11141,12 @@ var $;
 		row_exercise_extra(id){
 			return "";
 		}
+		row_exercise_extra_title(id){
+			return "";
+		}
+		row_exercise_extra_extra(id){
+			return "";
+		}
 		weight_types(){
 			return {
 				"custom": (this.$.$mol_locale.text("$tukanable_gymload_builder_day_weight_types_custom")), 
@@ -11412,10 +11418,15 @@ var $;
                 return super.row_view(id);
             }
             row_exercise_extra(id) {
-                const title = this.row_exercise(id) || this.excercise_without_name();
+                return `${this.row_exercise_extra_title(id)} ${this.row_exercise_extra_extra(id)}`;
+            }
+            row_exercise_extra_title(id) {
+                return this.row_exercise(id) || this.excercise_without_name();
+            }
+            row_exercise_extra_extra(id) {
                 const sets = this.row_sets(id);
                 const reps = this.row_reps(id);
-                return `${title || 'Not Set'} ${sets}x${reps}`;
+                return `${sets}x${reps}`;
             }
         }
         __decorate([
@@ -12116,7 +12127,7 @@ var $;
     var $$;
     (function ($$) {
         const { rem } = $mol_style_unit;
-        const currentWidth = rem(14);
+        const currentWidth = rem(19);
         $mol_style_define($tukanable_gymload_builder_day_results_set, {
             paddingTop: rem(0.25),
             paddingBottom: rem(0.25),
@@ -13182,7 +13193,7 @@ var $;
 		}
 		PrintButton(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ("Print");
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_export_print_PrintButton_title")));
 			(obj.click) = (next) => ((this.print_click(next)));
 			return obj;
 		}
@@ -13208,12 +13219,16 @@ var $;
 	($mol_mem_key(($.$tukanable_gymload_builder_export_print.prototype), "model"));
 	($mol_mem_key(($.$tukanable_gymload_builder_export_print.prototype), "Day"));
 	($.$tukanable_gymload_builder_export_print_day) = class $tukanable_gymload_builder_export_print_day extends ($.$mol_view) {
-		excercise_title(id){
+		excercise_title_extra_title(id){
+			return "";
+		}
+		excercise_title_extra_extra(id){
 			return "";
 		}
 		Title(id){
 			const obj = new this.$.$tukanable_gymload_title();
-			(obj.title) = () => ((this.excercise_title(id)));
+			(obj.title) = () => ((this.excercise_title_extra_title(id)));
+			(obj.extra) = () => ((this.excercise_title_extra_extra(id)));
 			return obj;
 		}
 		excercise_sets(id){
@@ -13229,7 +13244,12 @@ var $;
 			return obj;
 		}
 		day_name(){
-			return "Day #";
+			return (this.$.$mol_locale.text("$tukanable_gymload_builder_export_print_day_day_name"));
+		}
+		DayName(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.day_name())]);
+			return obj;
 		}
 		model(){
 			const obj = new this.$.$tukanable_gymload_builder_day();
@@ -13244,16 +13264,38 @@ var $;
 			return obj;
 		}
 		sub(){
-			return [(this.day_name())];
+			return [(this.DayName())];
 		}
 	};
 	($mol_mem_key(($.$tukanable_gymload_builder_export_print_day.prototype), "Title"));
 	($mol_mem_key(($.$tukanable_gymload_builder_export_print_day.prototype), "Table"));
+	($mol_mem(($.$tukanable_gymload_builder_export_print_day.prototype), "DayName"));
 	($mol_mem(($.$tukanable_gymload_builder_export_print_day.prototype), "model"));
 	($mol_mem_key(($.$tukanable_gymload_builder_export_print_day.prototype), "ExcerciseTable"));
 	($.$tukanable_gymload_builder_export_print_table) = class $tukanable_gymload_builder_export_print_table extends ($.$mol_view) {
-		result(id){
+		set_idx(id){
 			return "";
+		}
+		result_begin(id){
+			return "";
+		}
+		ResultCellBegin(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.result_begin(id))]);
+			return obj;
+		}
+		result_end(id){
+			return "";
+		}
+		ResultCellEnd(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.result_end(id))]);
+			return obj;
+		}
+		ResultCellContent(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.ResultCellBegin(id)), (this.ResultCellEnd(id))]);
+			return obj;
 		}
 		columns(id){
 			return [];
@@ -13291,13 +13333,13 @@ var $;
 		SetCell(id){
 			const obj = new this.$.$mol_view();
 			(obj.dom_name) = () => ("td");
-			(obj.sub) = () => (["Set"]);
+			(obj.sub) = () => ([(this.set_idx(id))]);
 			return obj;
 		}
 		ResultCell(id){
 			const obj = new this.$.$mol_view();
 			(obj.dom_name) = () => ("td");
-			(obj.sub) = () => ([(this.result(id))]);
+			(obj.sub) = () => ([(this.ResultCellContent(id))]);
 			return obj;
 		}
 		SetRow(id){
@@ -13316,6 +13358,9 @@ var $;
 			return [(this.Header()), (this.Body())];
 		}
 	};
+	($mol_mem_key(($.$tukanable_gymload_builder_export_print_table.prototype), "ResultCellBegin"));
+	($mol_mem_key(($.$tukanable_gymload_builder_export_print_table.prototype), "ResultCellEnd"));
+	($mol_mem_key(($.$tukanable_gymload_builder_export_print_table.prototype), "ResultCellContent"));
 	($mol_mem(($.$tukanable_gymload_builder_export_print_table.prototype), "Header"));
 	($mol_mem(($.$tukanable_gymload_builder_export_print_table.prototype), "Body"));
 	($mol_mem_key(($.$tukanable_gymload_builder_export_print_table.prototype), "SetCell"));
@@ -13356,8 +13401,11 @@ var $;
             excercise_plan(id) {
                 return this.model().plan(id);
             }
-            excercise_title(id) {
-                return this.model().row_exercise_extra(id);
+            excercise_title_extra_extra(id) {
+                return this.model().row_exercise_extra_extra(id);
+            }
+            excercise_title_extra_title(id) {
+                return this.model().row_exercise_extra_title(id);
             }
             day_name() {
                 return `${super.day_name()}${this.day_idx() + 1}`;
@@ -13390,9 +13438,15 @@ var $;
                 }
                 return items;
             }
-            result(id) {
+            set_idx(id) {
+                return id + 1;
+            }
+            result_begin(id) {
                 const [, weight] = id.split('_');
-                return `${weight} (___)`;
+                return `${weight} (`;
+            }
+            result_end(id) {
+                return ')';
             }
             columns(id) {
                 const items = [
@@ -13412,7 +13466,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("tukanable/gymload/builder/export/print/print.view.css", "@media print {\n\t[tukanable_gymload_builder_export_print_printbutton],\n\t[tukanable_gymload_builder_topdesk],\n\t[tukanable_gymload_head] {\n\t\tdisplay: none;\n\t}\n}\n\n[tukanable_gymload_builder_export_print],\n[tukanable_gymload_builder_export_print_day] {\n\tflex-direction: column;\n}\n\n[tukanable_gymload_builder_export_print_table] {\n\tdisplay: table;\n}\n\n[tukanable_gymload_builder_export_print_table_body] {\n\tdisplay: table-row-group;\n}\n\n[tukanable_gymload_builder_export_print_table_setrow],\n[tukanable_gymload_builder_export_print_table_header] {\n\tdisplay: table-row;\n}\n\n[tukanable_gymload_builder_export_print_table_setcell],\n[tukanable_gymload_builder_export_print_table_resultcell],\n[tukanable_gymload_builder_export_print_table_headercell] {\n\tdisplay: table-cell;\n}\n\n[tukanable_gymload_builder_export_print_day_excercisetable] {\n\tflex-direction: column;\n}");
+    $mol_style_attach("tukanable/gymload/builder/export/print/print.view.css", "@media print {\n\t[tukanable_gymload_builder_export_print_printbutton],\n\t[tukanable_gymload_builder_topdesk_switch],\n\t[tukanable_gymload_head] {\n\t\tdisplay: none;\n\t}\n}\n\n[tukanable_gymload_builder_export_print],\n[tukanable_gymload_builder_export_print_day] {\n\tflex-direction: column;\n}\n\n[tukanable_gymload_builder_export_print_day] {\n\tpage-break-after: always;\n}\n\n[tukanable_gymload_builder_export_print_table] {\n\tdisplay: table;\n\tborder-collapse: collapse;\n}\n\n[tukanable_gymload_builder_export_print_table_body] {\n\tdisplay: table-row-group;\n}\n\n[tukanable_gymload_builder_export_print_table_setrow],\n[tukanable_gymload_builder_export_print_table_header] {\n\tdisplay: table-row;\n}\n\n[tukanable_gymload_builder_export_print_table_setcell],\n[tukanable_gymload_builder_export_print_table_resultcell],\n[tukanable_gymload_builder_export_print_table_headercell] {\n\tdisplay: table-cell;\n\tborder: 1px solid #666;\n\tpadding: 0.1rem 0.2rem;\n}\n\n[tukanable_gymload_builder_export_print_table_resultcellbegin] {\n\tflex: 1;\n}\n\n[tukanable_gymload_builder_export_print_table_resultcell] {\n\ttext-align: right;\n}\n\n[tukanable_gymload_builder_export_print_table_setcell] {\n\twidth: 30px;\n\ttext-align: center;\n}\n\n[tukanable_gymload_builder_export_print_day_excercisetable] {\n\tflex-direction: column;\n}\n\n[tukanable_gymload_builder_export_print_day_dayname] {\n\tfont-size: 1.2rem;\n\tfont-weight: bold;\n\tmargin: 1rem 0.75rem 0;\n}\n\n[tukanable_gymload_builder_export_print_day_title] {\n\tmargin-top: 1rem;\n}");
 })($ || ($ = {}));
 
 ;
