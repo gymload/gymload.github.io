@@ -238,7 +238,7 @@ namespace $.$$ {
 
 		override row_view( id: any ) {
 			if( this.show_charts() ) {
-				return [ this.ChartView( id ), ...super.row_view( id ) ]
+				return [ ...super.row_view( id ), this.ChartView ( id ) ]
 			}
 
 			return super.row_view( id )
