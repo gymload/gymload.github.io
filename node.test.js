@@ -8654,7 +8654,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("tukanable/gymload/smallnumber/smallnumber.view.css", "[tukanable_gymload_smallnumber_string] {\n\twidth: 4.5rem;\n}");
+    $mol_style_attach("tukanable/gymload/smallnumber/smallnumber.view.css", "[tukanable_gymload_smallnumber_string] {\n\twidth: 4.3rem;\n}");
 })($ || ($ = {}));
 
 ;
@@ -11147,6 +11147,9 @@ var $;
 		row_exercise_extra_extra(id){
 			return "";
 		}
+		progress_formula(){
+			return "sigmoid";
+		}
 		weight_types(){
 			return {
 				"custom": (this.$.$mol_locale.text("$tukanable_gymload_builder_day_weight_types_custom")), 
@@ -11284,8 +11287,16 @@ var $;
                 const min_step = this.row_min_step(id);
                 for (let i = 0; i < count; i++) {
                     const progress = i / (count - 1);
-                    const weight = row.begin_weight * Math.pow(base, progress);
-                    const aligned_weight = Math.round(weight / min_step) * min_step;
+                    let factor = 1 - Math.pow(1 - progress, 2);
+                    switch (this.progress_formula()) {
+                        case 'linear':
+                            factor = progress;
+                            break;
+                        case 'log':
+                            factor = Math.log1p(progress * 9) / Math.log1p(9);
+                    }
+                    const weight = row.begin_weight + (row.finish_weight - row.begin_weight) * factor;
+                    const aligned_weight = Math.floor(weight / min_step) * min_step;
                     res.push(Math.max(aligned_weight, min_weight));
                 }
                 return res;
@@ -12538,12 +12549,33 @@ var $;
 			(obj.Content) = () => ((this.ShowCharts_wrapper()));
 			return obj;
 		}
+		progress_formula(next){
+			if(next !== undefined) return next;
+			return "sigmoid";
+		}
+		ProgressFormula(){
+			const obj = new this.$.$mol_select();
+			(obj.value) = (next) => ((this.progress_formula(next)));
+			(obj.dictionary) = () => ({
+				"sigmoid": (this.$.$mol_locale.text("$tukanable_gymload_builder_ProgressFormula_dictionary_sigmoid")), 
+				"log": (this.$.$mol_locale.text("$tukanable_gymload_builder_ProgressFormula_dictionary_log")), 
+				"linear": (this.$.$mol_locale.text("$tukanable_gymload_builder_ProgressFormula_dictionary_linear"))
+			});
+			return obj;
+		}
+		ProgressFormula_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_ProgressFormula_labeler_title")));
+			(obj.Content) = () => ((this.ProgressFormula()));
+			return obj;
+		}
 		Header(){
 			const obj = new this.$.$mol_row();
 			(obj.sub) = () => ([
 				(this.WeekCount_labeler()), 
 				(this.DayCount_labeler()), 
-				(this.ShowCharts_labeler())
+				(this.ShowCharts_labeler()), 
+				(this.ProgressFormula_labeler())
 			]);
 			return obj;
 		}
@@ -12607,6 +12639,7 @@ var $;
 			(obj.weight_plate_values) = () => ((this.weight_plate_values()));
 			(obj.barbell_values) = () => ((this.barbell_values()));
 			(obj.show_charts) = () => ((this.show_charts()));
+			(obj.progress_formula) = () => ((this.progress_formula()));
 			return obj;
 		}
 		DayResults(id){
@@ -12618,6 +12651,7 @@ var $;
 			(obj.dumbbell_values) = () => ((this.dumbbell_values()));
 			(obj.weight_plate_values) = () => ((this.weight_plate_values()));
 			(obj.barbell_values) = () => ((this.barbell_values()));
+			(obj.progress_formula) = () => ((this.progress_formula()));
 			return obj;
 		}
 		Stats(){
@@ -12659,6 +12693,9 @@ var $;
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "show_charts"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "ShowCharts_wrapper"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "ShowCharts_labeler"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "progress_formula"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "ProgressFormula"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "ProgressFormula_labeler"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "Header"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "DumbbellWeighs"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "BarbellWeights"));
@@ -12719,6 +12756,9 @@ var $;
             }
             top_desk_current(next) {
                 return this.$.$mol_state_session.value(`${this}.top_desk_current()`, next) || super.top_desk_current();
+            }
+            progress_formula(next) {
+                return this.$.$mol_state_local.value(this.build_key('progress_formula'), next) || super.progress_formula();
             }
         }
         $$.$tukanable_gymload_builder = $tukanable_gymload_builder;

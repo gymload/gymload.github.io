@@ -4808,6 +4808,7 @@ declare namespace $ {
 		row_exercise_extra( id: any): string
 		row_exercise_extra_title( id: any): string
 		row_exercise_extra_extra( id: any): string
+		progress_formula( ): string
 		weight_types( ): ({ 
 			'custom': string,
 			'dumbbell': string,
@@ -5491,162 +5492,196 @@ declare namespace $ {
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_row__sub_tukanable_gymload_builder_10 = $mol_type_enforce<
+	type $mol_select__value_tukanable_gymload_builder_10 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder['progress_formula'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_select__dictionary_tukanable_gymload_builder_11 = $mol_type_enforce<
+		({ 
+			'sigmoid': string,
+			'log': string,
+			'linear': string,
+		}) 
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_labeler__title_tukanable_gymload_builder_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_tukanable_gymload_builder_13 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder['ProgressFormula'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_row__sub_tukanable_gymload_builder_14 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $tukanable_gymload_builder_weights__title_tukanable_gymload_builder_11 = $mol_type_enforce<
+	type $tukanable_gymload_builder_weights__title_tukanable_gymload_builder_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_weights['title'] >
 	>
-	type $tukanable_gymload_builder_weights__title_tukanable_gymload_builder_12 = $mol_type_enforce<
+	type $tukanable_gymload_builder_weights__title_tukanable_gymload_builder_16 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_weights['title'] >
 	>
-	type $tukanable_gymload_builder_weights__storage_key_tukanable_gymload_builder_13 = $mol_type_enforce<
+	type $tukanable_gymload_builder_weights__storage_key_tukanable_gymload_builder_17 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_weights['storage_key'] >
 	>
-	type $tukanable_gymload_builder_weights__title_tukanable_gymload_builder_14 = $mol_type_enforce<
+	type $tukanable_gymload_builder_weights__title_tukanable_gymload_builder_18 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_weights['title'] >
 	>
-	type $tukanable_gymload_builder_weights__storage_key_tukanable_gymload_builder_15 = $mol_type_enforce<
+	type $tukanable_gymload_builder_weights__storage_key_tukanable_gymload_builder_19 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_weights['storage_key'] >
 	>
-	type $mol_deck__items_tukanable_gymload_builder_16 = $mol_type_enforce<
+	type $mol_deck__items_tukanable_gymload_builder_20 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_items'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $mol_deck__current_tukanable_gymload_builder_17 = $mol_type_enforce<
+	type $mol_deck__current_tukanable_gymload_builder_21 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['top_desk_current'] >
 		,
 		ReturnType< $mol_deck['current'] >
 	>
-	type $mol_deck__items_tukanable_gymload_builder_18 = $mol_type_enforce<
+	type $mol_deck__items_tukanable_gymload_builder_22 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['top_desk_items'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_19 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_23 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_20 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_24 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['title'] >
 	>
-	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_21 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_25 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['day_index'] >
 	>
-	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_22 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_26 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_23 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_27 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['week_count'] >
 	>
-	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_24 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_28 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_25 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_29 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_26 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_30 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['show_charts'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['show_charts'] >
 	>
-	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_27 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__progress_formula_tukanable_gymload_builder_31 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder['progress_formula'] >
+		,
+		ReturnType< $tukanable_gymload_builder_day['progress_formula'] >
+	>
+	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_32 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_28 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_33 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['title'] >
 	>
-	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_29 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_34 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['day_index'] >
 	>
-	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_30 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_35 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['week_count'] >
 	>
-	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_31 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_36 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_32 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_37 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_33 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_38 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_34 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__progress_formula_tukanable_gymload_builder_39 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder['progress_formula'] >
+		,
+		ReturnType< $tukanable_gymload_builder_day_results['progress_formula'] >
+	>
+	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_40 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_stats['title'] >
 	>
-	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_35 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_41 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['day_count'] >
 	>
-	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_36 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_42 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['model'] >
 	>
-	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_builder_37 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_builder_43 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['title'] >
 	>
-	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_builder_38 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_builder_44 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['day_count'] >
 	>
-	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_builder_39 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_builder_45 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['model'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_40 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_46 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_41 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_47 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -5664,6 +5699,9 @@ declare namespace $ {
 		show_charts( next?: boolean ): boolean
 		ShowCharts_wrapper( ): $mol_check_box
 		ShowCharts_labeler( ): $mol_labeler
+		progress_formula( next?: string ): string
+		ProgressFormula( ): $mol_select
+		ProgressFormula_labeler( ): $mol_labeler
 		Header( ): $mol_row
 		dumbbell_values( ): ReturnType< ReturnType< $tukanable_gymload_builder['DumbbellWeighs'] >['values'] >
 		DumbbellWeighs( ): $tukanable_gymload_builder_weights
@@ -5700,6 +5738,7 @@ declare namespace $.$$ {
         day_count(next?: number): number;
         show_charts(next?: boolean): boolean;
         top_desk_current(next?: string): string;
+        progress_formula(next?: string): string;
     }
 }
 

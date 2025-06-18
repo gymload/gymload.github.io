@@ -831,6 +831,7 @@ $tukanable_gymload_builder_day $mol_view
 	row_exercise_extra* \
 	row_exercise_extra_title* \
 	row_exercise_extra_extra* \
+	progress_formula \sigmoid
 	weight_types *
 		custom @ \Custom
 		dumbbell @ \Dumbbell
@@ -1046,6 +1047,7 @@ $tukanable_gymload_builder $mol_view
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
 		show_charts <= show_charts
+		progress_formula <= progress_formula
 	DayResults* $tukanable_gymload_builder_day_results
 		storage_key <= day_storage_key*
 		title <= day_title*
@@ -1054,6 +1056,7 @@ $tukanable_gymload_builder $mol_view
 		dumbbell_values <= dumbbell_values
 		weight_plate_values <= weight_plate_values
 		barbell_values <= barbell_values
+		progress_formula <= progress_formula
 	Stats $tukanable_gymload_builder_stats
 		title @ \Stats
 		day_count <= day_count
@@ -1079,6 +1082,14 @@ $tukanable_gymload_builder $mol_view
 						title @ \Show Charts
 						Content <= ShowCharts_wrapper $mol_check_box
 							checked? <=> show_charts? true
+					<= ProgressFormula_labeler $mol_labeler
+						title @ \Progress Formula
+						Content <= ProgressFormula $mol_select
+							value? <=> progress_formula? \sigmoid
+							dictionary *
+								sigmoid @ \Sigmoid
+								log @ \Logarithmic
+								linear @ \Linear
 			<= DumbbellWeighs $tukanable_gymload_builder_weights
 				title @ \Dumbbell Weights
 				values => dumbbell_values /number
