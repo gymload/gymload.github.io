@@ -62,7 +62,11 @@ namespace $.$$ {
 		}
 
 		override week_plan_weight(): string {
-			return `Weight: ${ this.plan_weight() }`
+			return `${ super.week_plan_weight() }${ this.plan_weight() }`
+		}
+
+		override week_plan_reps(): string {
+			return `${ super.week_plan_reps() }${ this.reps() }`
 		}
 
 		plan_weight() {
@@ -86,12 +90,12 @@ namespace $.$$ {
 				return this.week_weight_value( this.week_idx(), next )
 			}
 
-			const defaultValue = Math.max(
-				this.week_weight_value( this.week_idx() ),
-				this.plan_weight(),
-			)
+			let v = this.week_weight_value( this.week_idx() )
+			if (v < 0) {
+				v = this.plan_weight()
+			}
 
-			return next || defaultValue
+			return next || v
 		}
 
 		override week_reps( next?: number ): number {
@@ -99,12 +103,12 @@ namespace $.$$ {
 				return this.week_reps_value( this.week_idx(), next )
 			}
 
-			const defaultValue = Math.max(
-				this.week_reps_value( this.week_idx() ),
-				this.reps(),
-			)
+			let v = this.week_reps_value( this.week_idx() )
+			if( v < 0 ) {
+				v = this.reps()
+			}
 
-			return next || defaultValue
+			return next || v
 		}
 
 		override set_idx_label(): string {
