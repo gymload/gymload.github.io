@@ -42,6 +42,8 @@
 	"$tukanable_gymload_builder_day_results_set_DoneButton_title": "Сделано",
 	"$tukanable_gymload_builder_day_results_set_done_plan_label": "План: __weight__ (__reps__)",
 	"$tukanable_gymload_builder_day_results_set_set_idx_label": "№",
+	"$tukanable_gymload_builder_day_results_set_week_plan_reps": "Повторы:",
+	"$tukanable_gymload_builder_day_results_set_week_plan_weight": "Вес:",
 	"$tukanable_gymload_builder_day_results_week_tab_title": "Неделя №",
 	"$tukanable_gymload_builder_day_row_exercise_title": "Упражнение #",
 	"$tukanable_gymload_builder_day_title": "День №",

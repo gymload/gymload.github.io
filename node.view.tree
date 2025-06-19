@@ -976,16 +976,21 @@ $tukanable_gymload_builder_day_results_set $mol_view
 	excercise_idx 0
 	plan /number
 	reps 3
+	weight_min_step 0.1
+	weight_min 0
 	PastWeekView $mol_view
 		sub / <= past_week_results \
 	CurrentWeekView $mol_view
 		sub /
 			<= CurrentWeekWeight_labeler $mol_labeler
-				title <= week_plan_weight \Weight: 0
+				title <= week_plan_weight @ \Weight:
 				Content <= CurrentWeekWeight $tukanable_gymload_smallnumber
+					precision_view 0.1
+					precision_change <= weight_min_step
+					value_min <= weight_min
 					value? <=> week_weight? 0
 			<= CurrentWeekReps_labeler $mol_labeler
-				title <= week_plan_Reps \Reps: 0
+				title <= week_plan_reps @ \Reps:
 				Content <= CurrentWeekReps $tukanable_gymload_smallnumber
 					value? <=> week_reps? 0
 	DoneWeekView $mol_view
@@ -1011,6 +1016,8 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 		reps <= row_sets*? 3
 		plan <= excercise_plan* /number
 		storage_key <= storage_key
+		weight_min_step <= row_min_step*?
+		weight_min <= row_min_weight*
 	WeekTab* $mol_view
 		title <= week_tab_title_short* @ \Week #
 		sub /

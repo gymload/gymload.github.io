@@ -5159,65 +5159,65 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
-	type $tukanable_gymload_smallnumber__value_tukanable_gymload_builder_day_results_set_1 = $mol_type_enforce<
+	type $tukanable_gymload_smallnumber__precision_view_tukanable_gymload_builder_day_results_set_1 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $tukanable_gymload_smallnumber['precision_view'] >
+	>
+	type $tukanable_gymload_smallnumber__precision_change_tukanable_gymload_builder_day_results_set_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min_step'] >
+		,
+		ReturnType< $tukanable_gymload_smallnumber['precision_change'] >
+	>
+	type $tukanable_gymload_smallnumber__value_min_tukanable_gymload_builder_day_results_set_3 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min'] >
+		,
+		ReturnType< $tukanable_gymload_smallnumber['value_min'] >
+	>
+	type $tukanable_gymload_smallnumber__value_tukanable_gymload_builder_day_results_set_4 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results_set['week_weight'] >
 		,
 		ReturnType< $tukanable_gymload_smallnumber['value'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_results_set_2 = $mol_type_enforce<
+	type $mol_labeler__title_tukanable_gymload_builder_day_results_set_5 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results_set['week_plan_weight'] >
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_results_set_3 = $mol_type_enforce<
+	type $mol_labeler__Content_tukanable_gymload_builder_day_results_set_6 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results_set['CurrentWeekWeight'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $tukanable_gymload_smallnumber__value_tukanable_gymload_builder_day_results_set_4 = $mol_type_enforce<
+	type $tukanable_gymload_smallnumber__value_tukanable_gymload_builder_day_results_set_7 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results_set['week_reps'] >
 		,
 		ReturnType< $tukanable_gymload_smallnumber['value'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_results_set_5 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day_results_set['week_plan_Reps'] >
+	type $mol_labeler__title_tukanable_gymload_builder_day_results_set_8 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results_set['week_plan_reps'] >
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_results_set_6 = $mol_type_enforce<
+	type $mol_labeler__Content_tukanable_gymload_builder_day_results_set_9 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results_set['CurrentWeekReps'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
-	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_set_7 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_button_major__title_tukanable_gymload_builder_day_results_set_8 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_major['title'] >
-	>
-	type $mol_button_major__click_tukanable_gymload_builder_day_results_set_9 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day_results_set['done_week_click'] >
-		,
-		ReturnType< $mol_button_major['click'] >
 	>
 	type $mol_view__sub_tukanable_gymload_builder_day_results_set_10 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_set_11 = $mol_type_enforce<
-		readonly(any)[]
+	type $mol_button_major__title_tukanable_gymload_builder_day_results_set_11 = $mol_type_enforce<
+		string
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_set_12 = $mol_type_enforce<
-		readonly(any)[]
+	type $mol_button_major__click_tukanable_gymload_builder_day_results_set_12 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results_set['done_week_click'] >
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_button_major['click'] >
 	>
 	type $mol_view__sub_tukanable_gymload_builder_day_results_set_13 = $mol_type_enforce<
 		readonly(any)[]
@@ -5229,13 +5229,28 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
+	type $mol_view__sub_tukanable_gymload_builder_day_results_set_15 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_results_set_16 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_results_set_17 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
 	export class $tukanable_gymload_builder_day_results_set extends $mol_view {
 		past_week_results( ): string
 		week_plan_weight( ): string
 		week_weight( next?: number ): number
 		CurrentWeekWeight( ): $tukanable_gymload_smallnumber
 		CurrentWeekWeight_labeler( ): $mol_labeler
-		week_plan_Reps( ): string
+		week_plan_reps( ): string
 		week_reps( next?: number ): number
 		CurrentWeekReps( ): $tukanable_gymload_smallnumber
 		CurrentWeekReps_labeler( ): $mol_labeler
@@ -5253,6 +5268,8 @@ declare namespace $ {
 		excercise_idx( ): number
 		plan( ): readonly(number)[]
 		reps( ): number
+		weight_min_step( ): number
+		weight_min( ): number
 		PastWeekView( ): $mol_view
 		CurrentWeekView( ): $mol_view
 		DoneWeekView( ): $mol_view
@@ -5274,6 +5291,7 @@ declare namespace $.$$ {
         past_week_results(): string;
         future_week_results(): string;
         week_plan_weight(): string;
+        week_plan_reps(): string;
         plan_weight(): number;
         build_key(week_idx: number, prop_name: string): string;
         week_weight_value(week_idx: number, next?: number): number;
@@ -5371,12 +5389,22 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['storage_key'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_day_results_18 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__weight_min_step_tukanable_gymload_builder_day_results_18 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_min_step'] >
+		,
+		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min_step'] >
+	>
+	type $tukanable_gymload_builder_day_results_set__weight_min_tukanable_gymload_builder_day_results_19 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_min_weight'] >
+		,
+		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min'] >
+	>
+	type $mol_view__title_tukanable_gymload_builder_day_results_20 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['week_tab_title_short'] >
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_19 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_results_21 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >

@@ -42,6 +42,8 @@
 	"$tukanable_gymload_builder_day_results_set_DoneButton_title": "Done",
 	"$tukanable_gymload_builder_day_results_set_done_plan_label": "Plan: __weight__ (__reps__)",
 	"$tukanable_gymload_builder_day_results_set_set_idx_label": "#",
+	"$tukanable_gymload_builder_day_results_set_week_plan_reps": "Reps:",
+	"$tukanable_gymload_builder_day_results_set_week_plan_weight": "Weight:",
 	"$tukanable_gymload_builder_day_results_week_tab_title": "Week #",
 	"$tukanable_gymload_builder_day_results_week_tab_title_short": "Week #",
 	"$tukanable_gymload_builder_day_row_exercise_title": "Excercise #",
