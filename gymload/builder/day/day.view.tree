@@ -87,4 +87,4 @@ $tukanable_gymload_builder_day $mol_view
 									sub / <= Remove_close_icon* $mol_icon_close
 		<= AddButton $mol_button_major
 			title @ \Add Exercise
-			click? <= add_exercise? null
+			click? <=> add_exercise? null

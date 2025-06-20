@@ -18,6 +18,7 @@ namespace $.$$ {
 	$mol_style_define( $tukanable_gymload_title, {
 		Title: {
 			...baseTitle,
+			fontWeight: 'bold',
 			flex: {
 				grow: 1,
 			}

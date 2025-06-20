@@ -238,7 +238,7 @@ namespace $.$$ {
 			return Math.max( 1, 1 + Math.max( ... this.data_ids() ) )
 		}
 
-		override add_exercise() {
+		override add_exercise( e: PointerEvent ) {
 			const ids = this.data_ids()
 			const new_id = this.new_id()
 			const last_id = ids[ ids.length - 1 ]
@@ -254,6 +254,15 @@ namespace $.$$ {
 
 			this.data_ids( [ ...this.data_ids(), new_id ] )
 			this.row( new_id, new_item )
+
+			const t = e.target as HTMLDivElement
+			if( !t ) {
+				return
+			}
+
+			setTimeout( () => {
+				t.scrollIntoView( { behavior: "smooth", block: "end" } ) // @ts-ignore
+			}, 1 )
 		}
 
 		override row_view( id: any ) {
