@@ -5,12 +5,15 @@
 	"$mol_select_filter_hint": "Filter..",
 	"$mol_select_hint": "Pick..",
 	"$mol_select_no_options_message": "No options",
+	"$mol_text_code_Copy_hint": "Copy whole code",
+	"$mol_text_header_Link_hint": "Permalink to this section",
 	"$tukanable_gymload_DeleteCancelButton_title": "Cancel",
 	"$tukanable_gymload_DeleteConfirmButton_title": "Delete",
 	"$tukanable_gymload_DeleteTitle_title": "Are you sure you want to delete this program?",
 	"$tukanable_gymload_EditName_field_name": "Name",
 	"$tukanable_gymload_EditSubmit_title": "Save",
 	"$tukanable_gymload_EditTitle_title": "Edit Program",
+	"$tukanable_gymload_LogoButton_title": "Gymload",
 	"$tukanable_gymload_NewName_field_name": "Name",
 	"$tukanable_gymload_NewSubmit_title": "Add",
 	"$tukanable_gymload_NewTitle_title": "Add New Program",
@@ -57,6 +60,5 @@
 	"$tukanable_gymload_builder_stats_total_lifted": "Total weight lifted: ",
 	"$tukanable_gymload_default_program_name": "Default",
 	"$tukanable_gymload_delete_link_text": "Delete Program",
-	"$tukanable_gymload_required_label": "Required",
-	"$tukanable_gymload_title": "Gymload"
+	"$tukanable_gymload_required_label": "Required"
 }
