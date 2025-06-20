@@ -4892,7 +4892,7 @@ declare namespace $.$$ {
         begin_weight_labeler(id: any): $mol_view | null;
         row_min_weight(id: any): number;
         new_id(): number;
-        add_exercise(): void;
+        add_exercise(e: PointerEvent): void;
         row_view(id: any): any[];
         row_exercise_extra(id: any): string;
         row_exercise_extra_title(id: any): string;

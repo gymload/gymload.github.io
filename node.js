@@ -7889,6 +7889,7 @@ var $;
         $mol_style_define($tukanable_gymload_title, {
             Title: {
                 ...baseTitle,
+                fontWeight: 'bold',
                 flex: {
                     grow: 1,
                 }
@@ -11155,7 +11156,7 @@ var $;
 		AddButton(){
 			const obj = new this.$.$mol_button_major();
 			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_day_AddButton_title")));
-			(obj.click) = (next) => ((this.add_exercise()));
+			(obj.click) = (next) => ((this.add_exercise(next)));
 			return obj;
 		}
 		storage_key(){
@@ -11485,7 +11486,7 @@ var $;
             new_id() {
                 return Math.max(1, 1 + Math.max(...this.data_ids()));
             }
-            add_exercise() {
+            add_exercise(e) {
                 const ids = this.data_ids();
                 const new_id = this.new_id();
                 const last_id = ids[ids.length - 1];
@@ -11499,6 +11500,13 @@ var $;
                 }
                 this.data_ids([...this.data_ids(), new_id]);
                 this.row(new_id, new_item);
+                const t = e.target;
+                if (!t) {
+                    return;
+                }
+                setTimeout(() => {
+                    t.scrollIntoView({ behavior: "smooth", block: "end" });
+                }, 1);
             }
             row_view(id) {
                 const items = [
