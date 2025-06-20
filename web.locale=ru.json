@@ -38,6 +38,7 @@
 	"$tukanable_gymload_builder_day_day_title": "День №",
 	"$tukanable_gymload_builder_day_excercise_without_name": "Без названия. Отредактируйте в Настройках",
 	"$tukanable_gymload_builder_day_no_exercises": "Упражнений пока нет",
+	"$tukanable_gymload_builder_day_planweights_weights": "Расчетные веса:",
 	"$tukanable_gymload_builder_day_results_day_title": "День №",
 	"$tukanable_gymload_builder_day_results_set_DoneButton_title": "Сделано",
 	"$tukanable_gymload_builder_day_results_set_done_plan_label": "План: __weight__ (__reps__)",

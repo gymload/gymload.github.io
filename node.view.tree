@@ -817,6 +817,10 @@ $mol_chart $mol_view
 			hue_base <= hue_base 210
 			hue_shift <= hue_shift 163
 
+$tukanable_gymload_builder_day_planweights $mol_view
+	values /number
+	sub / <= weights @ \Calculated Weights:
+
 $tukanable_gymload_builder_day $mol_view
 	storage_key \day
 	day_index 0
@@ -849,12 +853,14 @@ $tukanable_gymload_builder_day $mol_view
 			precision_change <= row_min_step*?
 			value_min <= row_min_weight* 0
 			value? <=> row_begin_weight*? 50
+	PlanWeights* $tukanable_gymload_builder_day_planweights
+		values <= plan* /number
 	ChartView* $mol_view
 		sub /
 			<= Chart* $mol_chart
 				graphs /
 					<= Plan* $mol_plot_bar
-						series_y <= plan* /
+						series_y <= plan* /number
 					<= Vert_ruler* $mol_plot_ruler_vert
 					<= Marker_hor* $mol_plot_mark_hor
 						title <= marker_hor_title \Weeks

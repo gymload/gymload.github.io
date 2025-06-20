@@ -4512,6 +4512,26 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=chart.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $tukanable_gymload_builder_day_planweights extends $.$tukanable_gymload_builder_day_planweights {
+        weights(): string;
+    }
+}
+
+declare namespace $ {
+
+	export class $tukanable_gymload_builder_day_planweights extends $mol_view {
+		weights( ): string
+		values( ): readonly(number)[]
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=planweights.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
 declare namespace $ {
 
 	type $tukanable_gymload_smallnumber__precision_tukanable_gymload_builder_day_1 = $mol_type_enforce<
@@ -4744,7 +4764,12 @@ declare namespace $ {
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_47 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_planweights__values_tukanable_gymload_builder_day_47 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['plan'] >
+		,
+		ReturnType< $tukanable_gymload_builder_day_planweights['values'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_48 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -4755,7 +4780,7 @@ declare namespace $ {
 		row_min_weight( id: any): number
 		row_begin_weight( id: any, next?: number ): number
 		BeginWeight( id: any): $tukanable_gymload_smallnumber
-		plan( id: any): readonly(any)[]
+		plan( id: any): readonly(number)[]
 		Plan( id: any): $mol_plot_bar
 		Vert_ruler( id: any): $mol_plot_ruler_vert
 		marker_hor_title( ): string
@@ -4817,6 +4842,7 @@ declare namespace $ {
 		}) 
 		MinStepLabeler( id: any): $mol_labeler
 		BeginWeightLabeler( id: any): $mol_labeler
+		PlanWeights( id: any): $tukanable_gymload_builder_day_planweights
 		ChartView( id: any): $mol_view
 		sub( ): readonly(any)[]
 	}
@@ -4867,7 +4893,7 @@ declare namespace $.$$ {
         row_min_weight(id: any): number;
         new_id(): number;
         add_exercise(): void;
-        row_view(id: any): readonly any[];
+        row_view(id: any): any[];
         row_exercise_extra(id: any): string;
         row_exercise_extra_title(id: any): string;
         row_exercise_extra_extra(id: any): string;

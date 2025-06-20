@@ -10890,6 +10890,50 @@ var $;
 "use strict";
 
 ;
+	($.$tukanable_gymload_builder_day_planweights) = class $tukanable_gymload_builder_day_planweights extends ($.$mol_view) {
+		weights(){
+			return (this.$.$mol_locale.text("$tukanable_gymload_builder_day_planweights_weights"));
+		}
+		values(){
+			return [];
+		}
+		sub(){
+			return [(this.weights())];
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $tukanable_gymload_builder_day_planweights extends $.$tukanable_gymload_builder_day_planweights {
+            weights() {
+                return `${super.weights()} ${this.values().join(', ')}`;
+            }
+        }
+        $$.$tukanable_gymload_builder_day_planweights = $tukanable_gymload_builder_day_planweights;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($tukanable_gymload_builder_day_planweights, {
+            padding: $mol_gap.text,
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$tukanable_gymload_builder_day) = class $tukanable_gymload_builder_day extends ($.$mol_view) {
 		row_min_step(id, next){
 			if(next !== undefined) return next;
@@ -11178,6 +11222,11 @@ var $;
 			(obj.Content) = () => ((this.BeginWeight(id)));
 			return obj;
 		}
+		PlanWeights(id){
+			const obj = new this.$.$tukanable_gymload_builder_day_planweights();
+			(obj.values) = () => ((this.plan(id)));
+			return obj;
+		}
 		ChartView(id){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([(this.Chart(id))]);
@@ -11226,6 +11275,7 @@ var $;
 	($mol_mem(($.$tukanable_gymload_builder_day.prototype), "AddButton"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "MinStepLabeler"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "BeginWeightLabeler"));
+	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "PlanWeights"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "ChartView"));
 
 
@@ -11451,10 +11501,14 @@ var $;
                 this.row(new_id, new_item);
             }
             row_view(id) {
+                const items = [
+                    ...super.row_view(id),
+                    this.PlanWeights(id),
+                ];
                 if (this.show_charts()) {
-                    return [...super.row_view(id), this.ChartView(id)];
+                    items.push(this.ChartView(id));
                 }
-                return super.row_view(id);
+                return items;
             }
             row_exercise_extra(id) {
                 return `${this.row_exercise_extra_title(id)} ${this.row_exercise_extra_extra(id)}`;
