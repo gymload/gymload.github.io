@@ -14,5 +14,8 @@ namespace $.$$ {
 		DeleteView: {
 			flexDirection: 'column',
 		},
+		LogoButton: {
+			padding: 0,
+		}
 	} )
 }

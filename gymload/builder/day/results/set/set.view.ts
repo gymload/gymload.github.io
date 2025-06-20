@@ -78,7 +78,8 @@ namespace $.$$ {
 		}
 
 		week_weight_value( week_idx: number, next?: number ): number {
-			return this.$.$mol_state_local.value( this.build_key( week_idx, 'weight' ), next ) || -1
+			const v = this.$.$mol_state_local.value( this.build_key( week_idx, 'weight' ), next ) || -1
+			return Math.round( v * 10 ) / 10
 		}
 
 		week_reps_value( week_idx: number, next?: number ): number {

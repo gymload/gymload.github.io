@@ -1,10 +1,16 @@
 $tukanable_gymload $mol_page
-	title @ \Gymload
+	title_content /
+		<= LogoButton $mol_link
+			arg * view \program
+			title @ \Gymload
 	required_label @ \Required
 	default_program_name @ \Default
 	plugins /
 		<= Theme $mol_theme_auto
 	tools /
+		<= Help $mol_link
+			arg * view \help
+			sub / <= Help_icon $mol_icon_help
 		<= List_of_languages $mol_locale_select
 			Filter null
 			dictionary *
@@ -14,6 +20,7 @@ $tukanable_gymload $mol_page
 	ListPrograms $mol_select
 		dictionary <= programs *
 		value? <=> current_program_string? \0
+	HelpPage $tukanable_gymload_help
 	EditProgram $mol_link
 		arg * view \edit_program
 		sub / <= EditProgram_icon $mol_icon_edit
@@ -80,3 +87,8 @@ $tukanable_gymload $mol_page
 					<= DeleteCancelButton $mol_button_minor
 						title @ \Cancel
 						click? <=> cancel_delete_program? null
+
+$tukanable_gymload_help $mol_view
+	sub /
+		<= Text $mol_text
+			text <= content \Help not available yet.

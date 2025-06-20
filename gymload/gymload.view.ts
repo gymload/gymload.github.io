@@ -1,5 +1,5 @@
 namespace $.$$ {
-	type State = 'program' | 'edit_program' | 'add_program' | 'delete_program'
+	type State = 'program' | 'edit_program' | 'add_program' | 'delete_program' | 'help'
 
 	const defaultProgramId = 0
 
@@ -33,7 +33,7 @@ namespace $.$$ {
 		override tools() {
 			const items = [ ...super.tools() ]
 
-			if (this.user_program_ids().length > 0) {
+			if( this.user_program_ids().length > 0 ) {
 				items.push( this.ListPrograms() )
 				items.push( this.EditProgram() )
 			}
@@ -52,7 +52,9 @@ namespace $.$$ {
 				case 'add_program':
 					return [ this.NewView() ]
 				case 'delete_program':
-					return [this.DeleteView()]
+					return [ this.DeleteView() ]
+				case 'help':
+					return [ this.HelpPage() ]
 			}
 
 			return super.body()
@@ -83,8 +85,8 @@ namespace $.$$ {
 
 		@$mol_mem
 		override edit_name( next?: string ): string {
-			if (next === undefined) {
-			  return this.program_name( this.current_program() )
+			if( next === undefined ) {
+				return this.program_name( this.current_program() )
 			}
 
 			return next
@@ -103,7 +105,7 @@ namespace $.$$ {
 		}
 
 		program_ids( next?: number[] ): readonly ( number )[] {
-			return [defaultProgramId, ...this.user_program_ids(next)]
+			return [ defaultProgramId, ...this.user_program_ids( next ) ]
 		}
 
 		@$mol_mem
@@ -122,15 +124,23 @@ namespace $.$$ {
 
 			keys.forEach( key => {
 				this.$.$mol_state_local.native().removeItem( key )
-			})
+			} )
 
 			this.program_ids( this.program_ids().filter( id => id !== this.current_program() ) )
-			this.current_program( this.program_ids()[0] || defaultProgramId)
+			this.current_program( this.program_ids()[ 0 ] || defaultProgramId )
 			this.current_view( 'program' )
 		}
 
 		override cancel_delete_program() {
 			this.current_view( 'program' )
+		}
+	}
+
+	export class $tukanable_gymload_help extends $.$tukanable_gymload_help {
+		@$mol_mem
+		content() {
+			const lang = this.$.$mol_locale.lang()
+			return this.$.$mol_fetch.text( `tukanable/gymload/help.${ lang }.md` )
 		}
 	}
 }
