@@ -257,11 +257,16 @@ namespace $.$$ {
 		}
 
 		override row_view( id: any ) {
+			const items = [
+				...super.row_view( id ),
+				this.PlanWeights( id ),
+			]
+
 			if( this.show_charts() ) {
-				return [ ...super.row_view( id ), this.ChartView( id ) ]
+				items.push( this.ChartView( id ) )
 			}
 
-			return super.row_view( id )
+			return items
 		}
 
 		override row_exercise_extra( id: any ): string {
