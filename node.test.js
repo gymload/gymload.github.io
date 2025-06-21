@@ -14008,19 +14008,14 @@ var $;
 		dom_name(){
 			return "img";
 		}
-		field(){
+		attr(){
 			return {
-				...(super.field()), 
+				...(super.attr()), 
 				"src": (this.uri()), 
 				"alt": (this.title()), 
 				"loading": (this.loading()), 
 				"decoding": (this.decoding()), 
-				"crossOrigin": (this.cors())
-			};
-		}
-		attr(){
-			return {
-				...(super.attr()), 
+				"crossOrigin": (this.cors()), 
 				"width": (this.natural_width()), 
 				"height": (this.natural_height())
 			};
@@ -15887,6 +15882,9 @@ var $;
     ], $mol_fetch, "html", null);
     $.$mol_fetch = $mol_fetch;
 })($ || ($ = {}));
+
+;
+var $node = $node || {} ; $node[ "/tukanable/gymload/icon.svg" ] = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCA0NSA0NSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0zMyAxNi41SDM1QzM1LjU1MiAxNi41IDM2IDE2Ljk0OCAzNiAxNy41VjI3LjVDMzYgMjguMDUyIDM1LjU1MiAyOC41IDM1IDI4LjVIMzNDMzIuNDQ4IDI4LjUgMzIgMjguMDUyIDMyIDI3LjVWMTcuNUMzMiAxNi45NDggMzIuNDQ4IDE2LjUgMzMgMTYuNVoiIHN0cm9rZT0iIzNDM0MzQyIgc3Ryb2tlLXdpZHRoPSIyIi8+DQo8cGF0aCBkPSJNMjkgMTIuNUgzMUMzMS41NTIgMTIuNSAzMiAxMi45NDggMzIgMTMuNVYzMS41QzMyIDMyLjA1MiAzMS41NTIgMzIuNSAzMSAzMi41SDI5QzI4LjQ0OCAzMi41IDI4IDMyLjA1MiAyOCAzMS41VjEzLjVDMjggMTIuOTQ4IDI4LjQ0OCAxMi41IDI5IDEyLjVaIiBzdHJva2U9IiMzQzNDM0MiIHN0cm9rZS13aWR0aD0iMiIvPg0KPHBhdGggZD0iTTE1IDEyLjVIMTdDMTcuNTUyIDEyLjUgMTggMTIuOTQ4IDE4IDEzLjVWMzEuNUMxOCAzMi4wNTIgMTcuNTUyIDMyLjUgMTcgMzIuNUgxNUMxNC40NDggMzIuNSAxNCAzMi4wNTIgMTQgMzEuNVYxMy41QzE0IDEyLjk0OCAxNC40NDggMTIuNSAxNSAxMi41WiIgc3Ryb2tlPSIjM0MzQzNDIiBzdHJva2Utd2lkdGg9IjIiLz4NCjxwYXRoIGQ9Ik0xMSAxNi41SDEzQzEzLjU1MiAxNi41IDE0IDE2Ljk0OCAxNCAxNy41VjI3LjVDMTQgMjguMDUyIDEzLjU1MiAyOC41IDEzIDI4LjVIMTFDMTAuNDQ4IDI4LjUgMTAgMjguMDUyIDEwIDI3LjVWMTcuNUMxMCAxNi45NDggMTAuNDQ4IDE2LjUgMTEgMTYuNVoiIHN0cm9rZT0iIzNDM0MzQyIgc3Ryb2tlLXdpZHRoPSIyIi8+DQo8cGF0aCBkPSJNMzYgMjIuNUgzOSIgc3Ryb2tlPSIjM0MzQzNDIiBzdHJva2Utd2lkdGg9IjIiLz4NCjxwYXRoIGQ9Ik0xOCAyMi41SDI4IiBzdHJva2U9IiMzQzNDM0MiIHN0cm9rZS13aWR0aD0iMiIvPg0KPHBhdGggZD0iTTcgMjIuNUgxMCIgc3Ryb2tlPSIjM0MzQzNDIiBzdHJva2Utd2lkdGg9IjIiLz4NCjwvc3ZnPg=="
 
 ;
 "use strict";
