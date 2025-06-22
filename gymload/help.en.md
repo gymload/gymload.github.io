@@ -121,3 +121,18 @@ In the "Export" section, you can:
 
 - **Source code**: https://github.com/gymload/gymload.github.io
 - **Suggestions and feedback**: alexes.dev@gmail.com
+
+## Commercial Development
+
+The application can be customized for your brand and needs. The following options are available:
+
+ - for personal trainers:
+     - branded PDF with logo and customized client program
+     - ready-made workout templates based on your methodology
+     - ability to share a link to the client's program
+ - for fitness clubs:
+    - branded application with club logo and colors
+    - weight configuration for your equipment
+    - basic programs for each client
+
+💡 The source code is open and distributed under the MIT license — your developer can customize everything independently or with my help. My contacts: alexes.dev@gmail.com.
