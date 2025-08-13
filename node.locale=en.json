@@ -20,7 +20,7 @@
 	"$tukanable_gymload_builder_BarbellWeights_title": "Barbell Weights",
 	"$tukanable_gymload_builder_DayCount_labeler_title": "Day Count",
 	"$tukanable_gymload_builder_DumbbellWeighs_title": "Dumbbell Weights",
-	"$tukanable_gymload_builder_Export_title": "Export",
+	"$tukanable_gymload_builder_Print_title": "Print",
 	"$tukanable_gymload_builder_ProgressFormula_dictionary_linear": "Linear",
 	"$tukanable_gymload_builder_ProgressFormula_dictionary_log": "Logarithmic",
 	"$tukanable_gymload_builder_ProgressFormula_dictionary_sigmoid": "Sigmoid",
@@ -60,5 +60,6 @@
 	"$tukanable_gymload_builder_stats_total_lifted": "Total weight lifted: ",
 	"$tukanable_gymload_default_program_name": "Default",
 	"$tukanable_gymload_delete_link_text": "Delete Program",
-	"$tukanable_gymload_required_label": "Required"
+	"$tukanable_gymload_required_label": "Required",
+	"$tukanable_gymload_title": "Gymload"
 }

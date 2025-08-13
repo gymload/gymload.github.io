@@ -1082,8 +1082,8 @@ $tukanable_gymload_builder $mol_view
 		title @ \Stats
 		day_count <= day_count
 		model* <= DaySettings*
-	Export $tukanable_gymload_builder_export_print
-		title @ \Export
+	Print $tukanable_gymload_builder_export_print
+		title @ \Print
 		day_count <= day_count
 		model* <= DaySettings*
 	Settings $mol_view
@@ -1487,6 +1487,7 @@ $mol_text_list_item $mol_paragraph
 		mol_text_list_item_index <= index 0
 
 $tukanable_gymload $mol_page
+	title @ \Gymload
 	title_content /
 		<= LogoButton $mol_link
 			arg * view \program

@@ -12810,9 +12810,9 @@ var $;
 			(obj.model) = (id) => ((this.DaySettings(id)));
 			return obj;
 		}
-		Export(){
+		Print(){
 			const obj = new this.$.$tukanable_gymload_builder_export_print();
-			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_Export_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_Print_title")));
 			(obj.day_count) = () => ((this.day_count()));
 			(obj.model) = (id) => ((this.DaySettings(id)));
 			return obj;
@@ -12858,7 +12858,7 @@ var $;
 	($mol_mem_key(($.$tukanable_gymload_builder.prototype), "DaySettings"));
 	($mol_mem_key(($.$tukanable_gymload_builder.prototype), "DayResults"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "Stats"));
-	($mol_mem(($.$tukanable_gymload_builder.prototype), "Export"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "Print"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "Settings"));
 
 
@@ -12886,7 +12886,7 @@ var $;
                     ...Array.from({ length: this.day_count() }, (_, i) => this.DayResults(i)),
                     this.Settings(),
                     this.Stats(),
-                    this.Export(),
+                    this.Print(),
                 ];
             }
             build_key(s) {
@@ -15637,6 +15637,9 @@ var $;
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([(this.DeleteConfirmButton()), (this.DeleteCancelButton())]);
 			return obj;
+		}
+		title(){
+			return (this.$.$mol_locale.text("$tukanable_gymload_title"));
 		}
 		title_content(){
 			return [(this.LogoButton())];

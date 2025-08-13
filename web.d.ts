@@ -5708,7 +5708,7 @@ declare namespace $ {
 		DaySettings( id: any): $tukanable_gymload_builder_day
 		DayResults( id: any): $tukanable_gymload_builder_day_results
 		Stats( ): $tukanable_gymload_builder_stats
-		Export( ): $tukanable_gymload_builder_export_print
+		Print( ): $tukanable_gymload_builder_export_print
 		Settings( ): $mol_view
 		sub( ): readonly(any)[]
 	}
@@ -7465,6 +7465,7 @@ declare namespace $ {
 		cancel_delete_program( next?: any ): any
 		DeleteCancelButton( ): $mol_button_minor
 		DeleteActions( ): $mol_view
+		title( ): string
 		title_content( ): readonly(any)[]
 		required_label( ): string
 		default_program_name( ): string

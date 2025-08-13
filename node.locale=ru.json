@@ -19,7 +19,7 @@
 	"$tukanable_gymload_builder_BarbellWeights_title": "Веса штанги",
 	"$tukanable_gymload_builder_DayCount_labeler_title": "Количество дней",
 	"$tukanable_gymload_builder_DumbbellWeighs_title": "Веса гантелей",
-	"$tukanable_gymload_builder_Export_title": "Экспорт",
+	"$tukanable_gymload_builder_Print_title": "Печать",
 	"$tukanable_gymload_builder_ProgressFormula_dictionary_linear": "Линейная",
 	"$tukanable_gymload_builder_ProgressFormula_dictionary_log": "Логарифмическая",
 	"$tukanable_gymload_builder_ProgressFormula_dictionary_sigmoid": "Сигмоид",
@@ -58,5 +58,6 @@
 	"$tukanable_gymload_builder_stats_total_lifted": "Будет поднято: ",
 	"$tukanable_gymload_default_program_name": "Первая",
 	"$tukanable_gymload_delete_link_text": "Удалить программу",
-	"$tukanable_gymload_required_label": "Обязательное поле"
+	"$tukanable_gymload_required_label": "Обязательное поле",
+	"$tukanable_gymload_title": "Gymload"
 }
