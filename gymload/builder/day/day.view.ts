@@ -68,12 +68,23 @@ namespace $.$$ {
 				}
 
 				const weight = begin_weight + ( finish_weight - begin_weight ) * factor
-				const aligned_weight = Math.floor( weight / min_step ) * min_step
+
+				let aligned_weight = Math.floor( weight / min_step ) * min_step
+
+				if( this.row_weight_type( id ) === 'dumbbell' ) {
+					aligned_weight = this.closest_dumbell_value( weight )
+				}
 
 				res.push( Math.max( aligned_weight, min_weight ) )
 			}
 
 			return res
+		}
+
+		closest_dumbell_value( val: number ) {
+			return this.dumbbell_values().reduce( ( prev, curr ) => {
+				return Math.abs( curr - val ) < Math.abs( prev - val ) ? curr : prev
+			}, this.min_dumbbell_weight() )
 		}
 
 		override day_title(): string {
