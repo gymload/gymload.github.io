@@ -56,7 +56,8 @@ $mol_link $mol_view
 		click?event <=> click?event <=> event_click?event null
 
 $mol_theme_auto $mol_plugin
-	attr * mol_theme <= theme \
+	light \$mol_theme_light
+	attr * mol_theme <= theme <= dark \$mol_theme_dark
 
 $mol_svg $mol_view
 	dom_name \svg
@@ -322,6 +323,7 @@ $mol_select $mol_pick
 	value? \
 	option_label_default \
 	Option_row* $mol_button_minor
+		enabled <= enabled true
 		event_click?event <=> event_select*?event null
 		sub <= option_content* /
 			<= Option_label* $mol_dimmer
@@ -1021,7 +1023,7 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 		week_idx <= current_week_number 0
 		week_count <= week_count
 		excercise_idx <= excercise_idx* 0
-		reps <= row_sets*? 3
+		reps <= set_reps* 15
 		plan <= excercise_plan* /number
 		storage_key <= storage_key
 		weight_min_step <= row_min_step*?
@@ -1191,6 +1193,7 @@ $mol_text_code $mol_stack
 	text_lines /string
 	find_pos* null
 	uri_base \
+	row_themes /string
 	sub /
 		<= Rows $mol_list
 			render_visible_only <= render_visible_only false
@@ -1198,6 +1201,7 @@ $mol_text_code $mol_stack
 				<= Row*0 $mol_text_code_line
 					numb_showed <= sidebar_showed
 					numb <= row_numb* 0
+					theme <= row_theme* \
 					text <= row_text* \
 					syntax <= syntax null
 					uri_resolve* <= uri_resolve* \
@@ -1270,7 +1274,7 @@ $mol_image $mol_view
 		^
 		src <= uri \
 		alt <= title
-		loading <= loading \eager
+		loading <= loading \lazy
 		decoding <= decoding \async
 		crossOrigin <= cors null
 		width <= natural_width 0
@@ -1307,8 +1311,9 @@ $mol_icon_youtube $mol_icon path \M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 
 
 $mol_frame $mol_embed_native
 	attr *
-		^
+		tabindex <= tabindex
 		allow <= allow \
+		src <= uri
 		srcdoc <= html null
 	fullscreen true
 	accelerometer true
@@ -1394,6 +1399,7 @@ $mol_text $mol_list
 		arg <= header_arg* *
 	Pre* $mol_text_code
 		text <= pre_text* \
+		row_themes <= pre_themes* /string
 		highlight <= highlight \
 		uri_resolve* <= uri_resolve* \
 		sidebar_showed <= pre_sidebar_showed <= code_sidebar_showed true
