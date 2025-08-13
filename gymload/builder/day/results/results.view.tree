@@ -5,7 +5,7 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 		week_idx <= current_week_number 0
 		week_count <= week_count
 		excercise_idx <= excercise_idx* 0
-		reps <= row_sets*? 3
+		reps <= set_reps* 15
 		plan <= excercise_plan* /number
 		storage_key <= storage_key
 		weight_min_step <= row_min_step*?

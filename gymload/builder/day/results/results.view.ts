@@ -39,5 +39,9 @@ namespace $.$$ {
 		override day_title(): string {
 			return super.day_title() + ( this.day_index() + 1 ).toString()
 		}
+
+		override set_reps( id: any ): number {
+			return this.row_reps( this.excercise_idx( id ) )
+		}
 	}
 }
