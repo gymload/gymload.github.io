@@ -1,4 +1,5 @@
 $tukanable_gymload $mol_page
+	title @ \Gymload
 	title_content /
 		<= LogoButton $mol_link
 			arg * view \program

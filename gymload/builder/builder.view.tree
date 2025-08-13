@@ -25,8 +25,8 @@ $tukanable_gymload_builder $mol_view
 		title @ \Stats
 		day_count <= day_count
 		model* <= DaySettings*
-	Export $tukanable_gymload_builder_export_print
-		title @ \Export
+	Print $tukanable_gymload_builder_export_print
+		title @ \Print
 		day_count <= day_count
 		model* <= DaySettings*
 	Settings $mol_view

@@ -7,7 +7,7 @@
 	"$tukanable_gymload_builder_WeightPlates_title": "Блины для штанги",
 	"$tukanable_gymload_builder_day_title": "День №",
 	"$tukanable_gymload_builder_Stats_title": "Статистика",
-	"$tukanable_gymload_builder_Export_title": "Экспорт",
+	"$tukanable_gymload_builder_Print_title": "Печать",
 	"$tukanable_gymload_builder_ProgressFormula_dictionary_sigmoid": "Сигмоид",
 	"$tukanable_gymload_builder_ProgressFormula_dictionary_log": "Логарифмическая",
 	"$tukanable_gymload_builder_ProgressFormula_dictionary_linear": "Линейная",

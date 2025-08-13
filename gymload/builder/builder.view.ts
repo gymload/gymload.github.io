@@ -17,7 +17,7 @@ namespace $.$$ {
 				...Array.from( { length: this.day_count() }, ( _, i ) => this.DayResults( i ) ),
 				this.Settings(),
 				this.Stats(),
-				this.Export(),
+				this.Print(),
 			]
 		}
 
