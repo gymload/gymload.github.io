@@ -12,3 +12,4 @@ deploy \/tukanable/gymload/icon-256x256.png
 deploy \/tukanable/gymload/icon-384x384.png
 deploy \/tukanable/gymload/icon-512x512.png
 deploy \/tukanable/gymload/manifest.json
+include \/mol/offline/install
