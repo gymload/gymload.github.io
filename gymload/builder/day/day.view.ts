@@ -71,8 +71,14 @@ namespace $.$$ {
 
 				let aligned_weight = Math.floor( weight / min_step ) * min_step
 
-				if( this.row_weight_type( id ) === 'dumbbell' ) {
-					aligned_weight = this.closest_dumbell_value( weight )
+				switch( this.row_weight_type( id ) ) {
+					case 'barbell':
+						aligned_weight = this.closest_barbell_weight( aligned_weight )
+						break
+
+					case 'dumbbell':
+						aligned_weight = this.closest_dumbell_value( weight )
+						break
 				}
 
 				res.push( Math.max( aligned_weight, min_weight ) )
@@ -303,5 +309,82 @@ namespace $.$$ {
 
 			return `${ sets }x${ reps }`
 		}
+
+		@$mol_mem_key
+		possible_weights_for_barbell( barbell_weight: number ) {
+			const plates = this.weight_plate_values()
+			const possible = new Set<number>()
+
+			// only a barbell
+			possible.add( barbell_weight )
+
+			const max_plates_per_weight = 6
+
+			const generateCombinations = ( index: number, current_weight: number ) => {
+				if( index >= plates.length ) {
+					possible.add( current_weight )
+					return
+				}
+
+				for( let count = 0; count <= max_plates_per_weight; count++ ) {
+					const added_weight = plates[ index ] * 2 * count // *2 так как блины с двух сторон
+					generateCombinations( index + 1, current_weight + added_weight )
+				}
+			}
+
+			generateCombinations( 0, barbell_weight )
+
+			return Array.from( possible ).sort( ( a, b ) => a - b )
+		}
+
+		@$mol_mem
+		all_possible_barbell_weights() {
+			const all_weights = new Set<number>()
+			const barbell_weights = this.barbell_values()
+
+			for( const barbell of barbell_weights ) {
+				const weights = this.possible_weights_for_barbell( barbell )
+				weights.forEach( w => all_weights.add( w ) )
+			}
+
+			return Array.from( all_weights ).sort( ( a, b ) => a - b )
+		}
+
+		closest_barbell_weight( target_weight: number ) {
+			const possible = this.all_possible_barbell_weights()
+
+			if( target_weight <= possible[ 0 ] ) {
+				return possible[ 0 ]
+			}
+
+			if( target_weight >= possible[ possible.length - 1 ] ) {
+				return possible[ possible.length - 1 ]
+			}
+
+			let left = 0
+			let right = possible.length - 1
+
+			while( left < right - 1 ) {
+				const mid = Math.floor( ( left + right ) / 2 )
+				if( possible[ mid ] === target_weight ) {
+					return target_weight
+				}
+				if( possible[ mid ] < target_weight ) {
+					left = mid
+				} else {
+					right = mid
+				}
+			}
+
+			const diff_left = Math.abs( target_weight - possible[ left ] )
+			const diff_right = Math.abs( target_weight - possible[ right ] )
+
+			if( diff_left <= diff_right ) {
+				return possible[ left ]
+			}
+
+			return possible[ right ]
+		}
+
 	}
 }
