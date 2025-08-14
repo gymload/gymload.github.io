@@ -7322,6 +7322,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_offline(): void;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
 
 	type $mol_link__arg_tukanable_gymload_1 = $mol_type_enforce<
 		({ 

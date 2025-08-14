@@ -22,3 +22,15 @@
 	deploy \/tukanable/gymload/help.ru.md
 	deploy \/tukanable/gymload/help.en.md
 	deploy \/tukanable/gymload/icon.svg
+	deploy \/tukanable/gymload/icon-48x48.png
+	deploy \/tukanable/gymload/icon-72x72.png
+	deploy \/tukanable/gymload/icon-96x96.png
+	deploy \/tukanable/gymload/icon-128x128.png
+	deploy \/tukanable/gymload/icon-144x144.png
+	deploy \/tukanable/gymload/icon-152x152.png
+	deploy \/tukanable/gymload/icon-192x192.png
+	deploy \/tukanable/gymload/icon-256x256.png
+	deploy \/tukanable/gymload/icon-384x384.png
+	deploy \/tukanable/gymload/icon-512x512.png
+	deploy \/tukanable/gymload/manifest.json
+	include \/mol/offline/install
