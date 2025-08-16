@@ -74,11 +74,7 @@ namespace $.$$ {
 			return this.plan()[ this.week_idx() ] || -1
 		}
 
-		build_key( week_idx: number, prop_name: string, set_idx?: number ): string {
-			if (set_idx === undefined) {
-				set_idx = this.set_idx()
-			}
-
+		build_key( week_idx: number, prop_name: string, set_idx: number = this.set_idx() ): string {
 			return `${ this.storage_key() }_${ this.excercise_idx() }_${ week_idx }_${ set_idx }_${ prop_name }`
 		}
 
