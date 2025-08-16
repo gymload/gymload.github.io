@@ -11993,10 +11993,7 @@ var $;
             plan_weight() {
                 return this.plan()[this.week_idx()] || -1;
             }
-            build_key(week_idx, prop_name, set_idx) {
-                if (set_idx === undefined) {
-                    set_idx = this.set_idx();
-                }
+            build_key(week_idx, prop_name, set_idx = this.set_idx()) {
                 return `${this.storage_key()}_${this.excercise_idx()}_${week_idx}_${set_idx}_${prop_name}`;
             }
             week_weight_value(week_idx, next) {
