@@ -73,8 +73,8 @@ namespace $.$$ {
 			return this.plan()[ this.week_idx() ] || -1
 		}
 
-		build_key( week_idx: number, prop_name: string ): string {
-			return `${ this.storage_key() }_${ this.excercise_idx() }_${ week_idx }_${ this.set_idx() }_${ prop_name }`
+		build_key( week_idx: number, prop_name: string, set_idx?: number = this.set_idx() ): string {
+			return `${ this.storage_key() }_${ this.excercise_idx() }_${ week_idx }_${ set_idx }_${ prop_name }`
 		}
 
 		week_weight_value( week_idx: number, next?: number ): number {
@@ -82,8 +82,8 @@ namespace $.$$ {
 			return Math.round( v * 10 ) / 10
 		}
 
-		week_reps_value( week_idx: number, next?: number ): number {
-			return this.$.$mol_state_local.value( this.build_key( week_idx, 'reps' ), next ) || -1
+		week_reps_value( week_idx: number, next?: number, set_idx?: number ): number {
+			return this.$.$mol_state_local.value( this.build_key( week_idx, 'reps', set_idx ), next ) || -1
 		}
 
 		override week_weight( next?: number ): number {
@@ -99,6 +99,15 @@ namespace $.$$ {
 			return next || v
 		}
 
+		default_reps() {
+			if (this.set_idx() > 0) {
+				const prev = this.week_reps_value(this.week_idx(), undefined, this.set_idx() - 1)
+				return prev || this.reps()
+			}
+
+			return this.reps()
+		}
+
 		override week_reps( next?: number ): number {
 			if( next !== undefined ) {
 				return this.week_reps_value( this.week_idx(), next )
@@ -106,7 +115,7 @@ namespace $.$$ {
 
 			let v = this.week_reps_value( this.week_idx() )
 			if( v < 0 ) {
-				v = this.reps()
+				v = this.default_reps()
 			}
 
 			return next || v
