@@ -24,6 +24,7 @@ namespace $.$$ {
 
 		override done_week_click() {
 			this.week_weight_value( this.week_idx(), this.plan_weight() )
+			this.week_reps( this.default_reps() ) // immediately save to storage
 		}
 
 		override done_plan_label(): string {
@@ -92,7 +93,7 @@ namespace $.$$ {
 			}
 
 			let v = this.week_weight_value( this.week_idx() )
-			if (v < 0) {
+			if( v < 0 ) {
 				v = this.plan_weight()
 			}
 
@@ -100,8 +101,8 @@ namespace $.$$ {
 		}
 
 		default_reps() {
-			if (this.set_idx() > 0) {
-				const prev = this.week_reps_value(this.week_idx(), undefined, this.set_idx() - 1)
+			if( this.set_idx() > 0 ) {
+				const prev = this.week_reps_value( this.week_idx(), undefined, this.set_idx() - 1 )
 				return prev || this.reps()
 			}
 
