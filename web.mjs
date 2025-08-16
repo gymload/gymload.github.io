@@ -3712,9 +3712,12 @@ var $;
         },
         ':focus': {
             outline: 'none',
+        },
+        ':focus-visible': {
+            outline: 'none',
             background: {
                 color: $mol_theme.hover,
-            },
+            }
         },
         ':active': {
             color: $mol_theme.focus,
@@ -5439,7 +5442,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\talign-content: center;\n\talign-items: center;\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tgap: var(--mol_gap_space);\n\tuser-select: none;\n\tcursor: pointer;\n}\n\n[mol_button_typed][disabled] {\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus {\n\tbox-shadow: inset 0 0 0 10rem var(--mol_theme_hover);\n}\n\n[mol_button_typed]:active {\n\tcolor: var(--mol_theme_focus);\n}\n\n");
+    $mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\talign-content: center;\n\talign-items: center;\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tgap: var(--mol_gap_space);\n\tuser-select: none;\n\tcursor: pointer;\n}\n\n[mol_button_typed][disabled] {\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus-visible {\n\tbox-shadow: inset 0 0 0 10rem var(--mol_theme_hover);\n}\n\n[mol_button_typed]:active {\n\tcolor: var(--mol_theme_focus);\n}\n\n");
 })($ || ($ = {}));
 
 ;
@@ -8199,8 +8202,38 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$tukanable_gymload_smallnumber) = class $tukanable_gymload_smallnumber extends ($.$mol_number) {};
+	($.$tukanable_gymload_smallnumber) = class $tukanable_gymload_smallnumber extends ($.$mol_number) {
+		click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		event(){
+			return {"click": (next) => (this.click(next))};
+		}
+	};
+	($mol_mem(($.$tukanable_gymload_smallnumber.prototype), "click"));
 
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $tukanable_gymload_smallnumber extends $.$tukanable_gymload_smallnumber {
+            click(e) {
+                const el = e.target;
+                if (el.tagName === 'INPUT') {
+                    el.select();
+                }
+            }
+        }
+        $$.$tukanable_gymload_smallnumber = $tukanable_gymload_smallnumber;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -8208,9 +8241,6 @@ var $;
 (function ($) {
     $mol_style_attach("tukanable/gymload/smallnumber/smallnumber.view.css", "[tukanable_gymload_smallnumber_string] {\n\twidth: 4.3rem;\n}");
 })($ || ($ = {}));
-
-;
-"use strict";
 
 ;
 	($.$mol_svg_group) = class $mol_svg_group extends ($.$mol_svg) {
@@ -10503,6 +10533,20 @@ var $;
 			(obj.value) = (next) => ((this.row_begin_weight(id, next)));
 			return obj;
 		}
+		row_barbell_weight_string(id, next){
+			if(next !== undefined) return next;
+			return "0";
+		}
+		barbell_value_strings(){
+			return [];
+		}
+		BarbellWeight(id){
+			const obj = new this.$.$mol_select();
+			(obj.Filter) = () => (null);
+			(obj.value) = (next) => ((this.row_barbell_weight_string(id, next)));
+			(obj.options) = () => ((this.barbell_value_strings()));
+			return obj;
+		}
 		plan(id){
 			return [];
 		}
@@ -10587,6 +10631,9 @@ var $;
 			(obj.Content) = () => ((this.WeightType(id)));
 			return obj;
 		}
+		barbell_weight_labeler(id){
+			return null;
+		}
 		row_sets(id, next){
 			if(next !== undefined) return next;
 			return 3;
@@ -10659,6 +10706,7 @@ var $;
 			return [
 				(this.Exercise_labeler(id)), 
 				(this.WeightType_labeler(id)), 
+				(this.barbell_weight_labeler(id)), 
 				(this.Sets_labeler(id)), 
 				(this.Reps_labeler(id)), 
 				(this.begin_weight_labeler(id)), 
@@ -10765,6 +10813,12 @@ var $;
 			(obj.Content) = () => ((this.BeginWeight(id)));
 			return obj;
 		}
+		BarbellWeightLabeler(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_day_BarbellWeightLabeler_title")));
+			(obj.Content) = () => ((this.BarbellWeight(id)));
+			return obj;
+		}
 		PlanWeights(id){
 			const obj = new this.$.$tukanable_gymload_builder_day_planweights();
 			(obj.values) = () => ((this.plan(id)));
@@ -10787,6 +10841,8 @@ var $;
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "MinStep"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "row_begin_weight"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "BeginWeight"));
+	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "row_barbell_weight_string"));
+	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "BarbellWeight"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Plan"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Vert_ruler"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "Marker_hor"));
@@ -10818,6 +10874,7 @@ var $;
 	($mol_mem(($.$tukanable_gymload_builder_day.prototype), "AddButton"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "MinStepLabeler"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "BeginWeightLabeler"));
+	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "BarbellWeightLabeler"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "PlanWeights"));
 	($mol_mem_key(($.$tukanable_gymload_builder_day.prototype), "ChartView"));
 
@@ -10891,8 +10948,12 @@ var $;
                 const count = this.week_count();
                 const begin_weight = this.row_begin_weight(id);
                 const finish_weight = this.row_finish_weight(id);
-                const min_weight = this.row_min_weight(id);
                 const min_step = this.row_min_step(id);
+                const weight_type = this.row_weight_type(id);
+                let min_weight = this.row_min_weight(id);
+                if (weight_type === 'barbell') {
+                    min_weight = this.row_barbell_weight(id);
+                }
                 for (let i = 0; i < count; i++) {
                     const progress = i / (count - 1);
                     let factor = 1 - Math.pow(1 - progress, 2);
@@ -10904,9 +10965,11 @@ var $;
                             factor = Math.log1p(progress * 9) / Math.log1p(9);
                     }
                     const weight = begin_weight + (finish_weight - begin_weight) * factor;
-                    let aligned_weight = Math.floor(weight / min_step) * min_step;
-                    if (this.row_weight_type(id) === 'dumbbell') {
-                        aligned_weight = this.closest_dumbell_value(weight);
+                    let aligned_weight = Math.round((weight - min_weight) / min_step) * min_step + min_weight;
+                    switch (this.row_weight_type(id)) {
+                        case 'dumbbell':
+                            aligned_weight = this.closest_dumbell_value(weight);
+                            break;
                     }
                     res.push(Math.max(aligned_weight, min_weight));
                 }
@@ -11079,6 +11142,46 @@ var $;
                 const reps = this.row_reps(id);
                 return `${sets}x${reps}`;
             }
+            possible_weights_for_barbell(barbell_weight) {
+                const plates = this.weight_plate_values();
+                const possible = new Set();
+                possible.add(barbell_weight);
+                const max_plates_per_weight = 6;
+                const generateCombinations = (index, current_weight) => {
+                    if (index >= plates.length) {
+                        possible.add(current_weight);
+                        return;
+                    }
+                    for (let count = 0; count <= max_plates_per_weight; count++) {
+                        const added_weight = plates[index] * 2 * count;
+                        generateCombinations(index + 1, current_weight + added_weight);
+                    }
+                };
+                generateCombinations(0, barbell_weight);
+                return Array.from(possible).sort((a, b) => a - b);
+            }
+            barbell_weight_labeler(id) {
+                if (this.row_weight_type(id) === 'barbell') {
+                    return this.BarbellWeightLabeler(id);
+                }
+                return null;
+            }
+            barbell_value_strings() {
+                return this.barbell_values().map(v => v.toString());
+            }
+            default_row_barbell_weight() {
+                return Math.max(0, ...this.barbell_values());
+            }
+            row_barbell_weight(id, next) {
+                return this.change_field('barbell_weight', id, next) || this.default_row_barbell_weight();
+            }
+            row_barbell_weight_string(id, next) {
+                let v;
+                if (next !== undefined) {
+                    v = parseInt(next, 10) || this.default_row_barbell_weight();
+                }
+                return this.row_barbell_weight(id, v).toString();
+            }
         }
         __decorate([
             $mol_mem_key
@@ -11086,6 +11189,15 @@ var $;
         __decorate([
             $mol_mem
         ], $tukanable_gymload_builder_day.prototype, "new_id", null);
+        __decorate([
+            $mol_mem_key
+        ], $tukanable_gymload_builder_day.prototype, "possible_weights_for_barbell", null);
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload_builder_day.prototype, "barbell_value_strings", null);
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload_builder_day.prototype, "default_row_barbell_weight", null);
         $$.$tukanable_gymload_builder_day = $tukanable_gymload_builder_day;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -11850,6 +11962,7 @@ var $;
             }
             done_week_click() {
                 this.week_weight_value(this.week_idx(), this.plan_weight());
+                this.week_reps(this.default_reps());
             }
             done_plan_label() {
                 return super.done_plan_label().replace('__weight__', this.plan_weight().toString()).replace('__reps__', this.reps().toString());
@@ -11880,15 +11993,18 @@ var $;
             plan_weight() {
                 return this.plan()[this.week_idx()] || -1;
             }
-            build_key(week_idx, prop_name) {
-                return `${this.storage_key()}_${this.excercise_idx()}_${week_idx}_${this.set_idx()}_${prop_name}`;
+            build_key(week_idx, prop_name, set_idx) {
+                if (set_idx === undefined) {
+                    set_idx = this.set_idx();
+                }
+                return `${this.storage_key()}_${this.excercise_idx()}_${week_idx}_${set_idx}_${prop_name}`;
             }
             week_weight_value(week_idx, next) {
                 const v = this.$.$mol_state_local.value(this.build_key(week_idx, 'weight'), next) || -1;
                 return Math.round(v * 10) / 10;
             }
-            week_reps_value(week_idx, next) {
-                return this.$.$mol_state_local.value(this.build_key(week_idx, 'reps'), next) || -1;
+            week_reps_value(week_idx, next, set_idx) {
+                return this.$.$mol_state_local.value(this.build_key(week_idx, 'reps', set_idx), next) || -1;
             }
             week_weight(next) {
                 if (next !== undefined) {
@@ -11900,13 +12016,20 @@ var $;
                 }
                 return next || v;
             }
+            default_reps() {
+                if (this.set_idx() > 0) {
+                    const prev = this.week_reps_value(this.week_idx(), undefined, this.set_idx() - 1);
+                    return prev || this.reps();
+                }
+                return this.reps();
+            }
             week_reps(next) {
                 if (next !== undefined) {
                     return this.week_reps_value(this.week_idx(), next);
                 }
                 let v = this.week_reps_value(this.week_idx());
                 if (v < 0) {
-                    v = this.reps();
+                    v = this.default_reps();
                 }
                 return next || v;
             }
@@ -14276,7 +14399,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/expander/expander.view.css", "[mol_expander] {\n\tflex-direction: column;\n}\n\n[mol_expander_label] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tborder-radius: var(--mol_gap_round);\n}\n\n[mol_expander_trigger] {\n\tflex: auto;\n\tposition: relative;\n}\n\n[mol_expander_trigger_icon] {\n\tmargin-left: -.55rem;\n}\n");
+    $mol_style_attach("mol/expander/expander.view.css", "[mol_expander] {\n\tflex-direction: column;\n}\n\n[mol_expander_label] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tborder-radius: var(--mol_gap_round);\n}\n\n[mol_expander_trigger] {\n\tflex: auto;\n\tposition: relative;\n}\n");
 })($ || ($ = {}));
 
 ;
