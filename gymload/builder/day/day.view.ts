@@ -7,6 +7,7 @@ namespace $.$$ {
 		begin_weight: number
 		finish_weight: number
 		min_step: number
+		barbell_weight?: number
 	}
 
 	const empty_item: NewItem = {
@@ -49,8 +50,13 @@ namespace $.$$ {
 			const count = this.week_count()
 			const begin_weight = this.row_begin_weight( id )
 			const finish_weight = this.row_finish_weight( id )
-			const min_weight = this.row_min_weight( id )
 			const min_step = this.row_min_step( id )
+			const weight_type = this.row_weight_type( id )
+
+			let min_weight = this.row_min_weight( id )
+			if( weight_type === 'barbell' ) {
+				min_weight = this.row_barbell_weight( id )
+			}
 
 			for( let i = 0; i < count; i++ ) {
 				const progress = i / ( count - 1 )
@@ -69,13 +75,9 @@ namespace $.$$ {
 
 				const weight = begin_weight + ( finish_weight - begin_weight ) * factor
 
-				let aligned_weight = Math.floor( weight / min_step ) * min_step
+				let aligned_weight = Math.round( (weight - min_weight) / min_step ) * min_step + min_weight
 
 				switch( this.row_weight_type( id ) ) {
-					case 'barbell':
-						aligned_weight = this.closest_barbell_weight( aligned_weight )
-						break
-
 					case 'dumbbell':
 						aligned_weight = this.closest_dumbell_value( weight )
 						break
@@ -337,53 +339,36 @@ namespace $.$$ {
 			return Array.from( possible ).sort( ( a, b ) => a - b )
 		}
 
-		@$mol_mem
-		all_possible_barbell_weights() {
-			const all_weights = new Set<number>()
-			const barbell_weights = this.barbell_values()
-
-			for( const barbell of barbell_weights ) {
-				const weights = this.possible_weights_for_barbell( barbell )
-				weights.forEach( w => all_weights.add( w ) )
+		override barbell_weight_labeler( id: any ) {
+			if( this.row_weight_type( id ) === 'barbell' ) {
+				return this.BarbellWeightLabeler( id )
 			}
 
-			return Array.from( all_weights ).sort( ( a, b ) => a - b )
+			return null
 		}
 
-		closest_barbell_weight( target_weight: number ) {
-			const possible = this.all_possible_barbell_weights()
+		@$mol_mem
+		override barbell_value_strings() {
+			return this.barbell_values().map( v => v.toString() )
+		}
 
-			if( target_weight <= possible[ 0 ] ) {
-				return possible[ 0 ]
+		@$mol_mem
+		default_row_barbell_weight() {
+			return Math.max( 0, ...this.barbell_values() )
+		}
+
+		row_barbell_weight( id: any, next?: number ) {
+			return this.change_field( 'barbell_weight', id, next ) || this.default_row_barbell_weight()
+		}
+
+		override row_barbell_weight_string( id: any, next?: string ) {
+			let v: number | undefined
+
+			if( next !== undefined ) {
+				v = parseInt( next, 10 ) || this.default_row_barbell_weight()
 			}
 
-			if( target_weight >= possible[ possible.length - 1 ] ) {
-				return possible[ possible.length - 1 ]
-			}
-
-			let left = 0
-			let right = possible.length - 1
-
-			while( left < right - 1 ) {
-				const mid = Math.floor( ( left + right ) / 2 )
-				if( possible[ mid ] === target_weight ) {
-					return target_weight
-				}
-				if( possible[ mid ] < target_weight ) {
-					left = mid
-				} else {
-					right = mid
-				}
-			}
-
-			const diff_left = Math.abs( target_weight - possible[ left ] )
-			const diff_right = Math.abs( target_weight - possible[ right ] )
-
-			if( diff_left <= diff_right ) {
-				return possible[ left ]
-			}
-
-			return possible[ right ]
+			return this.row_barbell_weight( id, v ).toString()
 		}
 
 	}

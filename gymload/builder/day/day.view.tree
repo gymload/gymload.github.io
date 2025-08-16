@@ -30,6 +30,12 @@ $tukanable_gymload_builder_day $mol_view
 			precision_change <= row_min_step*?
 			value_min <= row_min_weight* 0
 			value? <=> row_begin_weight*? 50
+	BarbellWeightLabeler* $mol_labeler
+		title @ \Barbell
+		Content <= BarbellWeight* $mol_select
+			Filter null
+			value? <=> row_barbell_weight_string*? \0
+			options <= barbell_value_strings /
 	PlanWeights* $tukanable_gymload_builder_day_planweights
 		values <= plan* /number
 	ChartView* $mol_view
@@ -65,6 +71,7 @@ $tukanable_gymload_builder_day $mol_view
 										Filter null
 										value? <=> row_weight_type*? \custom
 										dictionary <= row_weight_types* *
+								<= barbell_weight_labeler* null $mol_view | null
 								<= Sets_labeler* $mol_labeler
 									title @ \Sets
 									Content <= Sets* $tukanable_gymload_smallnumber
