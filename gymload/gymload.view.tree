@@ -28,8 +28,27 @@ $tukanable_gymload $mol_page
 	AddProgram $mol_link
 		arg * view \add_program
 		sub / <= AddProgram_icon $mol_icon_plus
+	ProgramHeader $mol_view
+		sub /
+			<= ToProgramLink $mol_link
+				arg * view \program
+				sub /
+					<= ToProgram_icon $mol_icon_arrow_left
+					\Back to Program
+	Stats $tukanable_gymload_builder_stats
+		title @ \Stats
+		day_count <= day_count
+		model* <= DaySettings*
+		header <= ProgramHeader
+	Print $tukanable_gymload_builder_export_print
+		title @ \Print
+		day_count <= day_count
+		model* <= DaySettings*
+		header <= ProgramHeader
 	Builder $tukanable_gymload_builder
 		storage_key <= builder_storage_key \gymload_builder
+		day_count => day_count
+		DaySettings* => DaySettings* $tukanable_gymload_builder_day
 	NewView $mol_view
 		sub /
 			<= NewTitle $tukanable_gymload_title

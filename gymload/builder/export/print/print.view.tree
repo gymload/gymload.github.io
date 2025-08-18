@@ -1,10 +1,10 @@
-$tukanable_gymload_builder_export_print $mol_view
+$tukanable_gymload_builder_export_print $tukanable_gymload_extrapage
 	day_count 3
 	model* $tukanable_gymload_builder_day
 	Day* $tukanable_gymload_builder_export_print_day
 		model <= model*
 		day_idx <= day_idx* 0
-	sub /
+	body /
 		<= PrintButton $mol_button_major
 			title @ \Print
 			click?event <=> print_click? null

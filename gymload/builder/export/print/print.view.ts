@@ -8,8 +8,8 @@ namespace $.$$ {
 			return id
 		}
 
-		override sub() {
-			const items = [ ...super.sub() ]
+		override body() {
+			const items = [ ...super.body() ]
 
 			for( let i = 0; i < this.day_count(); i++ ) {
 				items.push( this.Day( i ) )

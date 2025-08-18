@@ -75,3 +75,29 @@ $tukanable_gymload_builder $mol_view
 		<= TopDesk $mol_deck
 			current? <=> top_desk_current? \3
 			items <= top_desk_items /$mol_view
+			Switch => TopDeskSwitch
+			Content => TopDeskContent
+			rows /$mol_view
+				<= TopDeskHeader $tukanable_gymload_builder_extramenu
+					switch <= TopDeskSwitch
+				<= TopDeskContent
+
+$tukanable_gymload_builder_extramenu $mol_view
+	switch $mol_view
+	sub /
+		<= switch
+		<= ExtraMenu $mol_pick
+			hint \Click to show popup
+			trigger_content /
+				<= Trigger_icon $mol_icon_dots_vertical
+			bubble_content /
+				<= Bubble_pane $mol_scroll
+					sub /
+						<= Menu $mol_list
+							rows /
+								<= StatsMenuLink $mol_link
+									arg * view \stats
+									title @ \Stats
+								<= PrintMenuLink $mol_link
+									arg * view \print
+									title @ \Print

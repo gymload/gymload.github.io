@@ -1,4 +1,4 @@
-$tukanable_gymload_builder_stats $mol_view
+$tukanable_gymload_builder_stats $tukanable_gymload_extrapage
 	day_count 0
 	model* $tukanable_gymload_builder_day
-	sub / <= total_lifted @ \Total weight lifted: 
+	body / <= total_lifted @ \Total weight lifted: 

@@ -1,5 +1,5 @@
 namespace $.$$ {
-	type State = 'program' | 'edit_program' | 'add_program' | 'delete_program' | 'help'
+	type State = 'program' | 'edit_program' | 'add_program' | 'delete_program' | 'help' | 'stats' | 'print'
 
 	const defaultProgramId = 0
 
@@ -55,6 +55,10 @@ namespace $.$$ {
 					return [ this.DeleteView() ]
 				case 'help':
 					return [ this.HelpPage() ]
+				case 'stats':
+					return [ this.Stats() ]
+				case 'print':
+					return [ this.Print() ]
 			}
 
 			return super.body()
