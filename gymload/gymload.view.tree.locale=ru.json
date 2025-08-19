@@ -12,5 +12,12 @@
 	"$tukanable_gymload_required_label": "Обязательное поле",
 	"$tukanable_gymload_default_program_name": "Первая",
 	"$tukanable_gymload_LogoButton_title": "Gymload",
+	"$tukanable_gymload_day_results_title": "День №",
+	"$tukanable_gymload_StatsPage_title": "Статистика",
+	"$tukanable_gymload_PrintPage_title": "Печать",
+	"$tukanable_gymload_help_title": "Помощь",
+	"$tukanable_gymload_EditView_title": "Редактировать",
+	"$tukanable_gymload_NewView_title": "Новая",
+	"$tukanable_gymload_DeleteView_title": "Удалить",
 	"$tukanable_gymload_title": "Gymload"
 }

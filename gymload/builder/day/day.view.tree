@@ -1,4 +1,5 @@
-$tukanable_gymload_builder_day $mol_view
+$tukanable_gymload_builder_day $mol_page
+	title \Day
 	storage_key \day
 	day_index 0
 	week_count 10
@@ -48,7 +49,7 @@ $tukanable_gymload_builder_day $mol_view
 					<= Marker_hor* $mol_plot_mark_hor
 						title <= marker_hor_title \Weeks
 						labels <= week_labels* /string
-	sub /
+	body /
 		<= DayTitle $tukanable_gymload_title
 			title <= day_title @ \Day #
 		<= Rows $mol_list

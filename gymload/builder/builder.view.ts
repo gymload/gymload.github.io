@@ -1,5 +1,13 @@
 namespace $.$$ {
 	export class $tukanable_gymload_builder extends $.$tukanable_gymload_builder {
+		override minimal_width(): number {
+			return Math.min(800, $mol_view_visible_width())
+		}
+
+		override maximal_width(): number {
+			return 800
+		}
+
 		override week_items() {
 			return Array.from( { length: this.day_count() }, ( _, i ) => this.DaySettings( i ) )
 		}
@@ -10,15 +18,6 @@ namespace $.$$ {
 
 		override day_index( id: any ) {
 			return id
-		}
-
-		override top_desk_items(): readonly ( $mol_view )[] {
-			return [
-				...Array.from( { length: this.day_count() }, ( _, i ) => this.DayResults( i ) ),
-				this.Settings(),
-				this.Stats(),
-				this.Print(),
-			]
 		}
 
 		build_key( s: string ): string {
@@ -36,15 +35,11 @@ namespace $.$$ {
 
 		override day_count( next?: number ): number {
 			const key = this.build_key( 'day_count' )
-			return this.$.$mol_state_local.value( key, next ) || 3
+			return this.$.$mol_state_local.value( key, next ) || 0
 		}
 
 		override show_charts( next?: boolean ): boolean {
 			return this.$.$mol_state_local.value( this.build_key( 'show_charts' ), next ) ?? super.show_charts()
-		}
-
-		override top_desk_current( next?: string ) {
-			return this.$.$mol_state_session.value( `${ this }.top_desk_current()` , next ) || super.top_desk_current()
 		}
 
 		override progress_formula( next?: string ): string {

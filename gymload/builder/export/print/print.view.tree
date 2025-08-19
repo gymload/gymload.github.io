@@ -1,4 +1,5 @@
-$tukanable_gymload_builder_export_print $tukanable_gymload_extrapage
+$tukanable_gymload_builder_export_print $mol_page
+	title @ \Print
 	day_count 3
 	model* $tukanable_gymload_builder_day
 	Day* $tukanable_gymload_builder_export_print_day

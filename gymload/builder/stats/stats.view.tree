@@ -1,4 +1,5 @@
-$tukanable_gymload_builder_stats $tukanable_gymload_extrapage
+$tukanable_gymload_builder_stats $mol_page
+	title @ \Stats
 	day_count 0
 	model* $tukanable_gymload_builder_day
 	body / <= total_lifted @ \Total weight lifted: 

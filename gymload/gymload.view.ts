@@ -4,6 +4,29 @@ namespace $.$$ {
 	const defaultProgramId = 0
 
 	export class $tukanable_gymload extends $.$tukanable_gymload {
+		override spreads() {
+			const days: any = {}
+			const programs: any = {}
+			const program_ids = this.program_ids()
+
+			for (let i = 0; i < this.day_count(); i++) {
+				days[`day${i + 1}`] = this.DayResultsPage(i)
+			}
+
+			return {
+				...days,
+				...super.spreads(),
+			}
+		}
+
+		override day_results_title( id: any) {
+			return `${super.day_results_title( id )}${id+1}`
+		}
+
+		override day_results_body( id: any ): $mol_view {
+			return this.DayResults( id )
+		}
+
 		override programs() {
 			const res: { [ key: string ]: string } = {}
 
@@ -30,38 +53,14 @@ namespace $.$$ {
 			return this.$.$mol_state_arg.value( 'view', next ) as State || 'program'
 		}
 
-		override tools() {
-			const items = [ ...super.tools() ]
+		override menu_tools() {
+			const items = [ ...super.menu_tools() ]
 
 			if( this.user_program_ids().length > 0 ) {
 				items.push( this.ListPrograms() )
-				items.push( this.EditProgram() )
 			}
-
-			items.push( this.AddProgram() )
 
 			return items
-		}
-
-		override body() {
-			switch( this.current_view() ) {
-				case 'program':
-					return [ this.Builder() ]
-				case 'edit_program':
-					return [ this.EditView() ]
-				case 'add_program':
-					return [ this.NewView() ]
-				case 'delete_program':
-					return [ this.DeleteView() ]
-				case 'help':
-					return [ this.HelpPage() ]
-				case 'stats':
-					return [ this.Stats() ]
-				case 'print':
-					return [ this.Print() ]
-			}
-
-			return super.body()
 		}
 
 		override new_name_bid(): string {

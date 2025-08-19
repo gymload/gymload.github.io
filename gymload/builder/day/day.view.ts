@@ -21,6 +21,14 @@ namespace $.$$ {
 	}
 
 	export class $tukanable_gymload_builder_day extends $.$tukanable_gymload_builder_day {
+		override minimal_width(): number {
+			return Math.min(800, $mol_view_visible_width())
+		}
+
+		override maximal_width(): number {
+			return 1000
+		}
+
 		build_key( s: string ) {
 			return `${ this.storage_key() }_${ s }`
 		}

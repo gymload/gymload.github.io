@@ -16,8 +16,6 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 			<= WeekTitle* $tukanable_gymload_title
 				title <= week_tab_title* @ \Week #
 	sub /
-		<= DayTitle $tukanable_gymload_title
-			title <= day_title @ \Day #
 		<= Weeks $mol_deck
 			current? => current_week? \0
 			items <= week_items /$mol_view
