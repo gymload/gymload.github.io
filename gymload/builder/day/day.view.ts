@@ -91,6 +91,8 @@ namespace $.$$ {
 						break
 				}
 
+				aligned_weight = Math.round( aligned_weight * 100 ) / 100
+
 				res.push( Math.max( aligned_weight, min_weight ) )
 			}
 
