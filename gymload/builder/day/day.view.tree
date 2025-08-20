@@ -102,3 +102,36 @@ $tukanable_gymload_builder_day $mol_view
 		<= AddButton $mol_button_major
 			title @ \Add Exercise
 			click? <=> add_exercise? null
+		<= Info $mol_deck
+			style *
+				marginTop \20px
+			items /
+				<= DeletecExercises $mol_view
+					title @ \Deleted Exercises
+					sub /
+						<= DeletedRows $mol_list
+							item_width_min* 200
+							item_height_min* 96
+							rows <= deleted_rows /$mol_view
+								<= DeletedRow*0 $mol_view
+									sub /
+										<= row_exercise*
+										<= RestoreButton* $mol_button_major
+											title @ \Restore
+											click? <=> row_restore*? null
+											sub /
+												<= restore_label @ \Restore
+				<= SortExercises $mol_view
+					title @ \Sort Exercises
+					sub /
+						<= SortRows $mol_list
+							item_width_min* 200
+							item_height_min* 96
+							rows <= sort_rows /$mol_view
+								<= SortRow*0 $mol_drag
+									Sub <= SortRow_drop* $mol_drop
+										adopt?transfer <=> sort_transfer_adopt?transfer null
+										receive?obj <=> sort_receive_before*?obj null
+										Sub <= SortRow_content* $mol_view
+											sub /
+												<= row_exercise*

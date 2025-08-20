@@ -22,7 +22,7 @@ namespace $.$$ {
 
 	export class $tukanable_gymload_builder_day extends $.$tukanable_gymload_builder_day {
 		override minimal_width(): number {
-			return Math.min(800, $mol_view_visible_width())
+			return Math.min( 800, $mol_view_visible_width() )
 		}
 
 		override maximal_width(): number {
@@ -33,8 +33,18 @@ namespace $.$$ {
 			return `${ this.storage_key() }_${ s }`
 		}
 
-		override data_ids( next?: number[] ): readonly ( number )[] {
+		all_data_ids( next?: number[] ): readonly ( number )[] {
 			return this.$.$mol_state_local.value( this.build_key( 'ids' ), next ) || []
+		}
+
+		deleted_data_ids( next?: number[] ): readonly ( number )[] {
+			return this.$.$mol_state_local.value( this.build_key( 'deleted_ids' ), next ) || []
+		}
+
+		override data_ids( next?: number[] ): readonly ( number )[] {
+			const ids = this.all_data_ids( next )
+			const deleted_ids = this.deleted_data_ids()
+			return ids.filter( id => !deleted_ids.includes( id ) )
 		}
 
 		override rows() {
@@ -83,7 +93,7 @@ namespace $.$$ {
 
 				const weight = begin_weight + ( finish_weight - begin_weight ) * factor
 
-				let aligned_weight = Math.round( (weight - min_weight) / min_step ) * min_step + min_weight
+				let aligned_weight = Math.round( ( weight - min_weight ) / min_step ) * min_step + min_weight
 
 				switch( this.row_weight_type( id ) ) {
 					case 'dumbbell':
@@ -119,8 +129,9 @@ namespace $.$$ {
 		}
 
 		override row_remove( id: any ) {
-			this.data_ids( this.data_ids().filter( item => item !== id ) )
-			this.row( id, null )
+			this.deleted_data_ids( [ ...this.deleted_data_ids(), id ] )
+			// this.data_ids( this.data_ids().filter( item => item !== id ) )
+			// this.row( id, null )
 		}
 
 		change_field<K extends keyof NewItem>( key: K, id: any, next?: NewItem[ K ] ): NewItem[ K ] {
@@ -381,5 +392,16 @@ namespace $.$$ {
 			return this.row_barbell_weight( id, v ).toString()
 		}
 
+		override deleted_rows(): readonly ( $mol_view )[] {
+			return this.deleted_data_ids().map( id => this.DeletedRow( id ) )
+		}
+
+		override row_restore( id: any ) {
+			this.deleted_data_ids( this.deleted_data_ids().filter( item => item !== id ) )
+		}
+
+		override sort_rows(): readonly ( $mol_view )[] {
+			return this.data_ids().map( id => this.SortRow( id ) )
+		}
 	}
 }
