@@ -1,5 +1,0 @@
-$tukanable_gymload_extrapage $mol_view
-	body /$mol_view
-	sub /
-		<= Header $mol_view
-			sub / <= header null $mol_view|null

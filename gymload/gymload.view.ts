@@ -1,6 +1,4 @@
 namespace $.$$ {
-	type State = 'program' | 'edit_program' | 'add_program' | 'delete_program' | 'help' | 'stats' | 'print'
-
 	const defaultProgramId = 0
 
 	export class $tukanable_gymload extends $.$tukanable_gymload {
@@ -9,22 +7,49 @@ namespace $.$$ {
 			const programs: any = {}
 			const program_ids = this.program_ids()
 
-			for (let i = 0; i < this.day_count(); i++) {
-				days[`day${i + 1}`] = this.DayResultsPage(i)
+			for( let i = 0; i < this.day_count(); i++ ) {
+				days[ `day${ i + 1 }` ] = this.DayResultsPage( i )
+			}
+
+			const spreads = { ...super.spreads() } as any
+
+			if (this.program_ids().length < 2) {
+				delete spreads['editprogram']
+			}
+
+			if (this.day_count() === 0) {
+				delete spreads['print']
+				delete spreads['stats']
 			}
 
 			return {
 				...days,
-				...super.spreads(),
+				...spreads,
 			}
 		}
 
-		override day_results_title( id: any) {
-			return `${super.day_results_title( id )}${id+1}`
+		override day_results_title( id: any ) {
+			return `${ super.day_results_title( id ) }${ id + 1 }`
 		}
 
 		override day_results_body( id: any ): $mol_view {
 			return this.DayResults( id )
+		}
+
+		override spread_title( spread: string ) {
+			const page = this.Spread( spread )
+			return page instanceof $tukanable_gymload_page
+				&& page.menu_title()
+				|| super.spread_title( spread )
+		}
+
+		override menu_links() {
+			const ids = this.spread_ids_filtered()
+
+			// hide delete links from menu
+			return super.menu_links().filter( ( link, idx ) => {
+				return !ids[ idx ].includes( 'delete' )
+			} )
 		}
 
 		override programs() {
@@ -47,10 +72,6 @@ namespace $.$$ {
 
 		current_program( next?: number ): number {
 			return this.$.$mol_state_local.value( this.build_key( 'current_program' ), next ) || defaultProgramId
-		}
-
-		current_view( next?: State ): State {
-			return this.$.$mol_state_arg.value( 'view', next ) as State || 'program'
 		}
 
 		override menu_tools() {
@@ -78,12 +99,16 @@ namespace $.$$ {
 			this.program_name( id, this.new_name() )
 
 			this.current_program( id )
-			this.current_view( 'program' )
+			this.to_default_page()
 		}
 
 		override edit_program() {
 			this.program_name( this.current_program(), this.edit_name() )
-			this.current_view( 'program' )
+			this.to_default_page()
+		}
+
+		to_default_page() {
+			this.$.$mol_state_arg.value( 'nav', 'builder' )
 		}
 
 		@$mol_mem
@@ -131,11 +156,11 @@ namespace $.$$ {
 
 			this.program_ids( this.program_ids().filter( id => id !== this.current_program() ) )
 			this.current_program( this.program_ids()[ 0 ] || defaultProgramId )
-			this.current_view( 'program' )
+			this.to_default_page()
 		}
 
 		override cancel_delete_program() {
-			this.current_view( 'program' )
+			this.to_default_page()
 		}
 	}
 

@@ -39,11 +39,13 @@ $tukanable_gymload $mol_book2_catalog
 	ListPrograms $mol_select
 		dictionary <= programs *
 		value? <=> current_program_string? \0
-	NewView $mol_page
+	NewView $tukanable_gymload_page
 		title @ \New Program
+		menu_title @ \New
+		tools / <= Spread_close
 		body /
-			<= NewTitle $tukanable_gymload_title
-				title @ \Add New Program
+			<= NewPageHint $tukanable_gymload_pagehint
+				text @ \You can create multiple programs and switch between them. For example, you might create a separate program for each of your clients.
 			<= NewForm $mol_form
 				body /
 					<= NewName_field $mol_form_field
@@ -60,8 +62,10 @@ $tukanable_gymload $mol_book2_catalog
 						enabled <= add_allowed
 					<= NewResult $mol_status
 						message <= result? \
-	EditView $mol_page
+	EditView $tukanable_gymload_page
 		title @ \Edit Program
+		menu_title @ \Edit
+		tools / <= Spread_close
 		body /
 			<= EditTitle $tukanable_gymload_title
 				title @ \Edit Program

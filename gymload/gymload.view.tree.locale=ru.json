@@ -16,8 +16,11 @@
 	"$tukanable_gymload_StatsPage_title": "Статистика",
 	"$tukanable_gymload_PrintPage_title": "Печать",
 	"$tukanable_gymload_help_title": "Помощь",
-	"$tukanable_gymload_EditView_title": "Редактировать",
-	"$tukanable_gymload_NewView_title": "Новая",
+	"$tukanable_gymload_EditView_title": "Изменить программу",
+	"$tukanable_gymload_EditView_menu_title": "Изменить",
+	"$tukanable_gymload_NewView_title": "Новая программа",
+	"$tukanable_gymload_NewView_menu_title": "Новая",
 	"$tukanable_gymload_DeleteView_title": "Удалить",
+	"$tukanable_gymload_NewPageHint_text": "Вы можете создать несколько программ и переключаться между ними. Например, создать программу для каждого вашего клиента.",
 	"$tukanable_gymload_title": "Gymload"
 }
