@@ -1,5 +1,4 @@
-$tukanable_gymload_builder_day $mol_page
-	title \Day
+$tukanable_gymload_builder_day $mol_view
 	storage_key \day
 	day_index 0
 	week_count 10
@@ -49,7 +48,7 @@ $tukanable_gymload_builder_day $mol_page
 					<= Marker_hor* $mol_plot_mark_hor
 						title <= marker_hor_title \Weeks
 						labels <= week_labels* /string
-	body /
+	sub /
 		<= DayTitle $tukanable_gymload_title
 			title <= day_title @ \Day #
 		<= Rows $mol_list
@@ -90,9 +89,16 @@ $tukanable_gymload_builder_day $mol_page
 										value_min <= row_min_weight* 0
 										value? <=> row_finish_weight*? 100
 								<= min_step_labeler* null $mol_view | null
-								<= RemoveButton* $mol_button_major
-									click?event <=> row_remove*? null
-									sub / <= Remove_close_icon* $mol_icon_close
+								<= MorePick* $mol_pick
+									hint @ \Click to show more options
+									trigger_content /
+										<= Trigger_icon $mol_icon_dots_vertical
+									bubble_content /
+										<= RemoveButton* $mol_button_major
+											click?event <=> row_remove*? null
+											sub /
+												<= Remove_close_icon* $mol_icon_close
+												<= remove_label @ \Remove
 		<= AddButton $mol_button_major
 			title @ \Add Exercise
 			click? <=> add_exercise? null
