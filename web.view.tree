@@ -8,56 +8,102 @@ $mol_scroll $mol_view
 		^
 		scroll?event <=> event_scroll?event null
 
-$mol_page $mol_view
-	dom_name \article
-	attr *
-		^
-		tabIndex <= tabindex -1
-	sub /
-		<= Head $mol_view
-			minimal_height 64
-			dom_name \header
-			sub <= head /
-				<= Title $mol_view
-					dom_name \h1
-					sub <= title_content /
-						<= Logo null
-						<= title
-				<= Tools $mol_view
-					sub <= tools /$mol_view_content
-		<= Body $mol_scroll
-			scroll_top? => body_scroll_top?
-			sub <= body_content /
-				<= Body_content $mol_view
-					sub <= body /$mol_view
-		<= Foot $mol_view
-			dom_name \footer
-			sub <= foot /$mol_view
+$mol_book2 $mol_scroll
+	menu_title \
+	sub /$mol_view
+		^ pages <= pages_deep /$mol_view
+		^ placeholders /$mol_view
+			<= Placeholder $mol_view
+	minimal_width 0
+	Gap* $mol_view title \
 
-$mol_link $mol_view
-	uri \
-	dom_name \a
-	uri_off \
-	uri_native null
-	external false
+$mol_pop $mol_view
+	showed? false
+	align_vert \
+	align_hor \
+	prefer \vert
+	sub /
+		<= Anchor null
+	sub_visible /
+		<= Anchor
+		<= Bubble $mol_pop_bubble
+			align <= align \bottom_center
+			content <= bubble_content /$mol_view_content
+			height_max <= height_max 9999
+
+$mol_pop_bubble $mol_view
+	sub <= content /$mol_view_content
+	style *
+		^
+		maxHeight <= height_max 9999
 	attr *
 		^
-		href <= uri_toggle \
-		title <= hint_safe <= hint \
-		target <= target \_self
-		download <= file_name \
-		mol_link_current <= current false
-		rel <= relation \
-	sub /$mol_view_content
-		<= title
-	arg *
+		mol_pop_align <= align \
+		tabindex 0
+
+$mol_hotkey $mol_plugin
 	event *
 		^
-		click?event <=> click?event <=> event_click?event null
+		keydown?event <=> keydown?event null
+	key *
+	mod_ctrl false
+	mod_alt false
+	mod_shift false
 
-$mol_theme_auto $mol_plugin
-	light \$mol_theme_light
-	attr * mol_theme <= theme <= dark \$mol_theme_dark
+$mol_nav $mol_plugin
+	cycle? false
+	-
+	mod_ctrl false
+	mod_shift false
+	mod_alt false
+	-
+	keys_x? /
+	keys_y? /
+	-
+	current_x? null
+	current_y? null
+	-
+	event_up?event null
+	event_down?event null
+	event_left?event null
+	event_right?event null
+	event *
+		^
+		keydown?event <=> event_key?event null
+
+$mol_string $mol_view
+	dom_name \input
+	enabled true
+	minimal_height 40
+	autocomplete false
+	selection? /number
+		0
+		0
+	auto /
+		<= selection_watcher null
+		<= error_report null
+	field *
+		^
+		disabled <= disabled false
+		value <= value_changed? <=> value? \
+		placeholder <= hint_visible <= hint \
+		spellcheck <= spellcheck true
+		autocomplete <= autocomplete_native \
+		selectionEnd <= selection_end 0
+		selectionStart <= selection_start 0
+		inputMode <= keyboard \text
+		enterkeyhint <= enter \go
+	attr *
+		^
+		maxlength <= length_max +Infinity
+		type <= type? \text
+	event *
+		^
+		input?event <=> event_change?event null
+	plugins /
+		<= Submit $mol_hotkey
+			mod_ctrl <= submit_with_ctrl false
+			key * enter?event <=> submit?event null
 
 $mol_svg $mol_view
 	dom_name \svg
@@ -88,31 +134,7 @@ $mol_icon $mol_svg_root
 		<= Path $mol_svg_path
 			geometry <= path \
 
-$mol_icon_help $mol_icon path \M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5A3,3 0 0,0 9,8H6A6,6 0 0,1 12,2Z
-
-$mol_pop $mol_view
-	showed? false
-	align_vert \
-	align_hor \
-	prefer \vert
-	sub /
-		<= Anchor null
-	sub_visible /
-		<= Anchor
-		<= Bubble $mol_pop_bubble
-			align <= align \bottom_center
-			content <= bubble_content /$mol_view_content
-			height_max <= height_max 9999
-
-$mol_pop_bubble $mol_view
-	sub <= content /$mol_view_content
-	style *
-		^
-		maxHeight <= height_max 9999
-	attr *
-		^
-		mol_pop_align <= align \
-		tabindex 0
+$mol_icon_close $mol_icon path \M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
 
 $mol_speck $mol_view
 	minimal_width 12
@@ -151,32 +173,18 @@ $mol_button_typed $mol_button
 
 $mol_button_minor $mol_button_typed
 
-$mol_check $mol_button_minor
-	attr *
-		^
-		mol_check_checked <= checked? false
-		aria-checked <= aria_checked \false
-		role <= aria_role \checkbox
-	sub /$mol_view_content
-		<= Icon null
-		<= label /
-			<= Title $mol_view
-				sub /
-					<= title \
-
-$mol_pick $mol_pop
-	event *
-		^
-		keydown?event <=> keydown?event null
-	Anchor <= Trigger $mol_check
-		minimal_width 40
-		minimal_height 40
-		enabled <= trigger_enabled true
-		checked? <=> showed?
-		clicks? <=> clicks? null
-		sub <= trigger_content /$mol_view_content
-			<= title
-		hint <= hint \
+$mol_list $mol_view
+	render_visible_only true
+	render_over 0
+	sub <= rows /$mol_view
+	Empty $mol_view
+	Gap_before $mol_view style * paddingTop <= gap_before 0
+	Gap_after $mol_view style * paddingTop <= gap_after 0
+	item_height_min* 1
+	item_width_min* 1
+	view_window /
+		0
+		0
 
 $mol_paragraph $mol_view
 	line_height 24
@@ -195,85 +203,6 @@ $mol_dimmer $mol_paragraph
 	High* $mol_paragraph
 		sub /
 			<= string* \
-
-$mol_nav $mol_plugin
-	cycle? false
-	-
-	mod_ctrl false
-	mod_shift false
-	mod_alt false
-	-
-	keys_x? /
-	keys_y? /
-	-
-	current_x? null
-	current_y? null
-	-
-	event_up?event null
-	event_down?event null
-	event_left?event null
-	event_right?event null
-	event *
-		^
-		keydown?event <=> event_key?event null
-
-$mol_list $mol_view
-	render_visible_only true
-	render_over 0
-	sub <= rows /$mol_view
-	Empty $mol_view
-	Gap_before $mol_view style * paddingTop <= gap_before 0
-	Gap_after $mol_view style * paddingTop <= gap_after 0
-	item_height_min* 1
-	item_width_min* 1
-	view_window /
-		0
-		0
-
-$mol_hotkey $mol_plugin
-	event *
-		^
-		keydown?event <=> keydown?event null
-	key *
-	mod_ctrl false
-	mod_alt false
-	mod_shift false
-
-$mol_string $mol_view
-	dom_name \input
-	enabled true
-	minimal_height 40
-	autocomplete false
-	selection? /number
-		0
-		0
-	auto /
-		<= selection_watcher null
-		<= error_report null
-	field *
-		^
-		disabled <= disabled false
-		value <= value_changed? <=> value? \
-		placeholder <= hint_visible <= hint \
-		spellcheck <= spellcheck true
-		autocomplete <= autocomplete_native \
-		selectionEnd <= selection_end 0
-		selectionStart <= selection_start 0
-		inputMode <= keyboard \text
-		enterkeyhint <= enter \go
-	attr *
-		^
-		maxlength <= length_max +Infinity
-		type <= type? \text
-	event *
-		^
-		input?event <=> event_change?event null
-	plugins /
-		<= Submit $mol_hotkey
-			mod_ctrl <= submit_with_ctrl false
-			key * enter?event <=> submit?event null
-
-$mol_icon_close $mol_icon path \M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
 
 $mol_search $mol_pop
 	query? \
@@ -315,6 +244,134 @@ $mol_search $mol_pop
 				haystack <= suggest_label* \
 				needle <= query? \
 
+$mol_link $mol_view
+	uri \
+	dom_name \a
+	uri_off \
+	uri_native null
+	external false
+	attr *
+		^
+		href <= uri_toggle \
+		title <= hint_safe <= hint \
+		target <= target \_self
+		download <= file_name \
+		mol_link_current <= current false
+		rel <= relation \
+	sub /$mol_view_content
+		<= title
+	arg *
+	event *
+		^
+		click?event <=> click?event <=> event_click?event null
+
+$mol_page $mol_view
+	dom_name \article
+	attr *
+		^
+		tabIndex <= tabindex -1
+	sub /
+		<= Head $mol_view
+			minimal_height 64
+			dom_name \header
+			sub <= head /
+				<= Title $mol_view
+					dom_name \h1
+					sub <= title_content /
+						<= Logo null
+						<= title
+				<= Tools $mol_view
+					sub <= tools /$mol_view_content
+		<= Body $mol_scroll
+			scroll_top? => body_scroll_top?
+			sub <= body_content /
+				<= Body_content $mol_view
+					sub <= body /$mol_view
+		<= Foot $mol_view
+			dom_name \footer
+			sub <= foot /$mol_view
+
+$mol_book2_catalog $mol_book2
+	param \
+	spread? \
+	spreads *
+	Spread* $mol_view
+	Spread_default null
+	spread_ids /string
+	menu_filter_enabled false
+	spread_ids_filtered /string
+	spread_current null
+	menu_tools /
+	addon_tools /
+	pages /
+		<= Menu $mol_page
+			Title => Menu_title
+			title <= menu_title \
+			Tools => Menu_tools
+			Logo <= Menu_logo null
+			tools /
+				^ menu_tools
+				^ addon_tools
+			head <= menu_head /$mol_view_content
+				<= Menu_title
+				<= Menu_tools
+			body <= menu_body /$mol_view
+				<= Menu_filter $mol_search
+					query? <=> menu_filter? \
+				<= Menu_links $mol_list
+					Empty <= Menu_links_empty $mol_view
+					rows <= menu_links /$mol_view
+						<= Menu_item*0 $mol_view
+							sub <= menu_item_content* /$mol_view
+								<= Menu_link* $mol_link
+									arg <= menu_link_arg* <= arg* *
+									sub <= menu_link_content* /$mol_view_content
+										<= Menu_link_title* $mol_dimmer
+											needle <= menu_filter
+											haystack <= spread_title* \
+			foot <= menu_foot /$mol_view
+	Spread_close $mol_link
+		arg <= spread_close_arg *
+		hint @ \Close page
+		sub /
+			<= Spread_close_icon $mol_icon_close
+
+$mol_check $mol_button_minor
+	attr *
+		^
+		mol_check_checked <= checked? false
+		aria-checked <= aria_checked \false
+		role <= aria_role \checkbox
+	sub /$mol_view_content
+		<= Icon null
+		<= label /
+			<= Title $mol_view
+				sub /
+					<= title \
+
+$mol_check_icon $mol_check
+
+$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_4
+	hint @ \Toggle lights
+	checked? <=> lights? false
+
+$mol_pick $mol_pop
+	event *
+		^
+		keydown?event <=> keydown?event null
+	Anchor <= Trigger $mol_check
+		minimal_width 40
+		minimal_height 40
+		enabled <= trigger_enabled true
+		checked? <=> showed?
+		clicks? <=> clicks? null
+		sub <= trigger_content /$mol_view_content
+			<= title
+		hint <= hint \
+
 $mol_icon_dots_vertical $mol_icon path \M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z
 
 $mol_select $mol_pick
@@ -354,72 +411,9 @@ $mol_select $mol_pick
 
 $mol_locale_select $mol_select
 
-$mol_check_icon $mol_check
-
-$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
-
-$mol_lights_toggle $mol_check_icon
-	Icon <= Lights_icon $mol_icon_brightness_4
-	hint @ \Toggle lights
-	checked? <=> lights? false
-
-$mol_icon_edit $mol_icon path \M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19H5V5H12V3H5M17.78,4C17.61,4 17.43,4.07 17.3,4.2L16.08,5.41L18.58,7.91L19.8,6.7C20.06,6.44 20.06,6 19.8,5.75L18.25,4.2C18.12,4.07 17.95,4 17.78,4M15.37,6.12L8,13.5V16H10.5L17.87,8.62L15.37,6.12Z
-
-$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
-
-$tukanable_gymload_title $mol_view
-	title \Title
-	extra \
-	sub /
-		<= Title $mol_view
-			sub / <= title
-		<= Extra $mol_view
-			sub / <= extra
-
-$mol_labeler $mol_list
-	rows /
-		<= Label $mol_view
-			minimal_height 32
-			sub <= label /$mol_view_content
-				<= title
-		<= Content $mol_view
-			minimal_height 24
-			sub <= content /
-
-$mol_form_field $mol_labeler
-	bids /string
-	label /
-		<= name \
-		<= Bid $mol_view
-			sub / <= bid \
-	content / <= control null
-
-$mol_button_major $mol_button_minor
-	theme \$mol_theme_base
-
-$mol_status $mol_view
-	status <= title
-	minimal_height 24
-	minimal_width 0
-	sub /
-		<= message \
-
-$mol_row $mol_view
-
-$mol_form $mol_list
-	submit_allowed true
-	submit_blocked false
-	event *
-		^
-		keydown?event <=> keydown?event null
-	submit?event null
-	rows /
-		<= Body $mol_list
-			sub <= body <= form_fields /$mol_form_field
-		<= Foot $mol_row
-			sub <= foot <= buttons /$mol_view
-
-$mol_icon_delete $mol_icon path \M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z
+$mol_theme_auto $mol_plugin
+	light \$mol_theme_light
+	attr * mol_theme <= theme <= dark \$mol_theme_dark
 
 $mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
 
@@ -823,11 +817,36 @@ $mol_chart $mol_view
 			hue_base <= hue_base 210
 			hue_shift <= hue_shift 163
 
+$tukanable_gymload_title $mol_view
+	title \Title
+	extra \
+	sub /
+		<= Title $mol_view
+			sub / <= title
+		<= Extra $mol_view
+			sub / <= extra
+
+$mol_labeler $mol_list
+	rows /
+		<= Label $mol_view
+			minimal_height 32
+			sub <= label /$mol_view_content
+				<= title
+		<= Content $mol_view
+			minimal_height 24
+			sub <= content /
+
+$mol_button_major $mol_button_minor
+	theme \$mol_theme_base
+
+$mol_row $mol_view
+
 $tukanable_gymload_builder_day_planweights $mol_view
 	values /number
 	sub / <= weights @ \Calculated Weights:
 
-$tukanable_gymload_builder_day $mol_view
+$tukanable_gymload_builder_day $mol_page
+	title \Day
 	storage_key \day
 	day_index 0
 	week_count 10
@@ -877,7 +896,7 @@ $tukanable_gymload_builder_day $mol_view
 					<= Marker_hor* $mol_plot_mark_hor
 						title <= marker_hor_title \Weeks
 						labels <= week_labels* /string
-	sub /
+	body /
 		<= DayTitle $tukanable_gymload_title
 			title <= day_title @ \Day #
 		<= Rows $mol_list
@@ -929,6 +948,8 @@ $mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
 
 $mol_check_box $mol_check
 	Icon $mol_icon_tick
+
+$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
 
 $mol_check_expand $mol_check
 	Icon $mol_icon_chevron
@@ -1043,8 +1064,6 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 			<= WeekTitle* $tukanable_gymload_title
 				title <= week_tab_title* @ \Week #
 	sub /
-		<= DayTitle $tukanable_gymload_title
-			title <= day_title @ \Day #
 		<= Weeks $mol_deck
 			current? => current_week? \0
 			items <= week_items /$mol_view
@@ -1059,12 +1078,14 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 						<= SetRows* $mol_view
 							sub <= set_rows* /$mol_view
 
-$tukanable_gymload_builder_stats $mol_view
+$tukanable_gymload_builder_stats $mol_page
+	title @ \Stats
 	day_count 0
 	model* $tukanable_gymload_builder_day
-	sub / <= total_lifted @ \Total weight lifted: 
+	body / <= total_lifted @ \Total weight lifted: 
 
-$tukanable_gymload_builder $mol_view
+$tukanable_gymload_builder $mol_page
+	title @ \Settings
 	storage_key \gymload_builder
 	DaySettings* $tukanable_gymload_builder_day
 		storage_key <= day_storage_key* \
@@ -1137,10 +1158,44 @@ $tukanable_gymload_builder $mol_view
 				values => weight_plate_values /number
 			<= Weeks $mol_deck
 				items <= week_items /$mol_view
+	body /
+		<= Settings
+
+$tukanable_gymload_pagehint $mol_view
+	sub / <= text \
+
+$mol_form_field $mol_labeler
+	bids /string
+	label /
+		<= name \
+		<= Bid $mol_view
+			sub / <= bid \
+	content / <= control null
+
+$mol_status $mol_view
+	status <= title
+	minimal_height 24
+	minimal_width 0
 	sub /
-		<= TopDesk $mol_deck
-			current? <=> top_desk_current? \3
-			items <= top_desk_items /$mol_view
+		<= message \
+
+$mol_form $mol_list
+	submit_allowed true
+	submit_blocked false
+	event *
+		^
+		keydown?event <=> keydown?event null
+	submit?event null
+	rows /
+		<= Body $mol_list
+			sub <= body <= form_fields /$mol_form_field
+		<= Foot $mol_row
+			sub <= foot <= buttons /$mol_view
+
+$mol_icon_delete $mol_icon path \M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z
+
+$tukanable_gymload_page $mol_page
+	menu_title \
 
 $mol_stack $mol_view
 
@@ -1495,42 +1550,54 @@ $mol_text_list_item $mol_paragraph
 		^
 		mol_text_list_item_index <= index 0
 
-$tukanable_gymload $mol_page
-	title @ \Gymload
-	title_content /
-		<= LogoButton $mol_link
-			arg * view \program
-			title @ \Gymload
+$tukanable_gymload $mol_book2_catalog
+	param \nav
+	menu_title \Gymload
+	menu_filter_enabled false
+	menu_foot /
+		<= Lighter $mol_lights_toggle
+		<= List_of_languages $mol_locale_select
+			Filter null
+			dictionary *
+				ru \Русский
+				en \English
 	required_label @ \Required
 	default_program_name @ \Default
 	plugins /
 		<= Theme $mol_theme_auto
-	tools /
-		<= Help $mol_link
-			arg * view \help
-			sub / <= Help_icon $mol_icon_help
-		<= List_of_languages $mol_locale_select
-			Filter null
-			dictionary *
-				ru \Рус
-				en \Eng
-		<= Lighter $mol_lights_toggle
+	spreads *
+		builder <= BuilderPage $tukanable_gymload_builder
+			tools / <= Spread_close
+			storage_key <= builder_storage_key \gymload_builder
+			day_count => day_count
+			DaySettings* => DaySettings* $tukanable_gymload_builder_day
+			DayResults* => DayResults* $tukanable_gymload_builder_day
+		stats <= StatsPage $tukanable_gymload_builder_stats
+			title @ \Stats
+			day_count <= day_count
+			model* <= DaySettings*
+		print <= PrintPage $tukanable_gymload_builder_export_print
+			title @ \Print
+			day_count <= day_count
+			model* <= DaySettings*
+		help <= HelpPage $tukanable_gymload_help
+		editprogram <= EditView
+		newprogram <= NewView
+		deleteprogram <= DeleteView
+	DayResultsPage* $mol_page
+		title <= day_results_title* @ \Day #
+		body / <= day_results_body* $mol_view
+		tools / <= Spread_close
 	ListPrograms $mol_select
 		dictionary <= programs *
 		value? <=> current_program_string? \0
-	HelpPage $tukanable_gymload_help
-	EditProgram $mol_link
-		arg * view \edit_program
-		sub / <= EditProgram_icon $mol_icon_edit
-	AddProgram $mol_link
-		arg * view \add_program
-		sub / <= AddProgram_icon $mol_icon_plus
-	Builder $tukanable_gymload_builder
-		storage_key <= builder_storage_key \gymload_builder
-	NewView $mol_view
-		sub /
-			<= NewTitle $tukanable_gymload_title
-				title @ \Add New Program
+	NewView $tukanable_gymload_page
+		title @ \New Program
+		menu_title @ \New
+		tools / <= Spread_close
+		body /
+			<= NewPageHint $tukanable_gymload_pagehint
+				text @ \You can create multiple programs and switch between them. For example, you might create a separate program for each of your clients.
 			<= NewForm $mol_form
 				body /
 					<= NewName_field $mol_form_field
@@ -1547,8 +1614,11 @@ $tukanable_gymload $mol_page
 						enabled <= add_allowed
 					<= NewResult $mol_status
 						message <= result? \
-	EditView $mol_view
-		sub /
+	EditView $tukanable_gymload_page
+		title @ \Edit Program
+		menu_title @ \Edit
+		tools / <= Spread_close
+		body /
 			<= EditTitle $tukanable_gymload_title
 				title @ \Edit Program
 			<= EditForm $mol_form
@@ -1569,12 +1639,13 @@ $tukanable_gymload $mol_page
 						message <= result? \
 					<= Space $mol_view
 					<= DeleteLink $mol_link
-						arg * view \delete_program
+						arg * nav \deleteprogram
 						sub /
 							<= DeleteIcon $mol_icon_delete
 							<= delete_link_text @ \Delete Program
-	DeleteView $mol_view
-		sub /
+	DeleteView $mol_page
+		title @ \Delete
+		body /
 			<= DeleteTitle $tukanable_gymload_title
 				title @ \Are you sure you want to delete this program?
 			<= DeleteActions $mol_view
@@ -1586,18 +1657,20 @@ $tukanable_gymload $mol_page
 						title @ \Cancel
 						click? <=> cancel_delete_program? null
 
-$tukanable_gymload_help $mol_view
-	sub /
+$tukanable_gymload_help $mol_page
+	title @ \Help
+	body /
 		<= Text $mol_text
 			text <= content \Help not available yet.
 
-$tukanable_gymload_builder_export_print $mol_view
+$tukanable_gymload_builder_export_print $mol_page
+	title @ \Print
 	day_count 3
 	model* $tukanable_gymload_builder_day
 	Day* $tukanable_gymload_builder_export_print_day
 		model <= model*
 		day_idx <= day_idx* 0
-	sub /
+	body /
 		<= PrintButton $mol_button_major
 			title @ \Print
 			click?event <=> print_click? null

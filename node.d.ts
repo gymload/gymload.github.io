@@ -750,6 +750,7 @@ declare namespace $ {
         prefix(): string;
         postfix(): string;
         static linear_gradient<Value>(value: Value): $mol_style_func<"linear-gradient", Value>;
+        static radial_gradient<Value>(value: Value): $mol_style_func<"radial-gradient", Value>;
         static calc<Value>(value: Value): $mol_style_func<"calc", Value>;
         static vary<Name extends string, Value extends string>(name: Name, defaultValue?: Value): $mol_style_func<"var", Name | (Name | Value)[]>;
         static url<Href extends string>(href: Href): $mol_style_func<"url", string>;
@@ -1025,6 +1026,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_plugin extends $mol_view {
+        dom_node_external(next?: Element): Element;
+        render(): void;
+    }
+}
+
+declare namespace $ {
     class $mol_dom_listener extends $mol_object {
         _node: any;
         _event: string;
@@ -1123,191 +1131,306 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    let $mol_mem_cached: typeof $mol_wire_probe;
+}
+
+declare namespace $ {
+    let $mol_layer: Record<"focus" | "float" | "hover" | "speck" | "popup", $mol_style_func<"var", unknown>>;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     type $mol_type_enforce<Actual extends Expected, Expected> = Actual;
 }
 
 declare namespace $ {
-    class $mol_plugin extends $mol_view {
-        dom_node_external(next?: Element): Element;
-        render(): void;
+
+	type $mol_book2_sub__1 = $mol_type_enforce<
+		ReturnType< $mol_book2['pages'] >[number]
+		,
+		$mol_view
+	>
+	type $mol_book2_sub__2 = $mol_type_enforce<
+		ReturnType< $mol_book2['placeholders'] >[number]
+		,
+		$mol_view
+	>
+	type $mol_view__title_mol_book2_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['title'] >
+	>
+	export class $mol_book2 extends $mol_scroll {
+		pages_deep( ): readonly($mol_view)[]
+		pages( ): ReturnType< $mol_book2['pages_deep'] >
+		Placeholder( ): $mol_view
+		placeholders( ): readonly($mol_view)[]
+		menu_title( ): string
+		sub( ): readonly($mol_view)[]
+		minimal_width( ): number
+		Gap( id: any): $mol_view
+	}
+	
+}
+
+//# sourceMappingURL=book2.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_book2 extends $.$mol_book2 {
+        pages_deep(): $mol_view[];
+        title(): string;
+        menu_title(): string;
+        sub(): $mol_view[];
+        bring(): void;
     }
 }
 
 declare namespace $ {
+}
 
-	type $mol_view__dom_name_mol_page_1 = $mol_type_enforce<
-		string
+declare namespace $ {
+
+	type $mol_pop_bubble__align_mol_pop_1 = $mol_type_enforce<
+		ReturnType< $mol_pop['align'] >
 		,
-		ReturnType< $mol_view['dom_name'] >
+		ReturnType< $mol_pop_bubble['align'] >
 	>
-	type $mol_view__sub_mol_page_2 = $mol_type_enforce<
-		ReturnType< $mol_page['title_content'] >
+	type $mol_pop_bubble__content_mol_pop_2 = $mol_type_enforce<
+		ReturnType< $mol_pop['bubble_content'] >
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_pop_bubble['content'] >
 	>
-	type $mol_view__sub_mol_page_3 = $mol_type_enforce<
-		ReturnType< $mol_page['tools'] >
+	type $mol_pop_bubble__height_max_mol_pop_3 = $mol_type_enforce<
+		ReturnType< $mol_pop['height_max'] >
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_pop_bubble['height_max'] >
 	>
-	type $mol_view__minimal_height_mol_page_4 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_view['minimal_height'] >
-	>
-	type $mol_view__dom_name_mol_page_5 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_view['dom_name'] >
-	>
-	type $mol_view__sub_mol_page_6 = $mol_type_enforce<
-		ReturnType< $mol_page['head'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type __mol_page_7 = $mol_type_enforce<
-		Parameters< $mol_page['body_scroll_top'] >[0]
-		,
-		Parameters< ReturnType< $mol_page['Body'] >['scroll_top'] >[0]
-	>
-	type $mol_view__sub_mol_page_8 = $mol_type_enforce<
-		ReturnType< $mol_page['body'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_scroll__sub_mol_page_9 = $mol_type_enforce<
-		ReturnType< $mol_page['body_content'] >
-		,
-		ReturnType< $mol_scroll['sub'] >
-	>
-	type $mol_view__dom_name_mol_page_10 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_view['dom_name'] >
-	>
-	type $mol_view__sub_mol_page_11 = $mol_type_enforce<
-		ReturnType< $mol_page['foot'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_page extends $mol_view {
-		tabindex( ): number
-		Logo( ): any
-		title_content( ): readonly(any)[]
-		Title( ): $mol_view
-		tools( ): readonly($mol_view_content)[]
-		Tools( ): $mol_view
-		head( ): readonly(any)[]
-		Head( ): $mol_view
-		body_scroll_top( next?: ReturnType< ReturnType< $mol_page['Body'] >['scroll_top'] > ): ReturnType< ReturnType< $mol_page['Body'] >['scroll_top'] >
-		body( ): readonly($mol_view)[]
-		Body_content( ): $mol_view
-		body_content( ): readonly(any)[]
-		Body( ): $mol_scroll
-		foot( ): readonly($mol_view)[]
-		Foot( ): $mol_view
-		dom_name( ): string
-		attr( ): ({ 
-			'tabIndex': ReturnType< $mol_page['tabindex'] >,
-		})  & ReturnType< $mol_view['attr'] >
+	export class $mol_pop extends $mol_view {
+		Anchor( ): any
+		align( ): string
+		bubble_content( ): readonly($mol_view_content)[]
+		height_max( ): number
+		Bubble( ): $mol_pop_bubble
+		showed( next?: boolean ): boolean
+		align_vert( ): string
+		align_hor( ): string
+		prefer( ): string
 		sub( ): readonly(any)[]
+		sub_visible( ): readonly(any)[]
 	}
 	
-}
-
-//# sourceMappingURL=page.view.tree.d.ts.map
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-    let $mol_action: typeof $mol_wire_method;
-}
-
-declare namespace $ {
-    class $mol_state_arg extends $mol_object {
-        prefix: string;
-        static prolog: string;
-        static separator: string;
-        static href(next?: string): string;
-        static href_normal(): string;
-        static dict(next?: {
-            [key: string]: string | null;
-        }): Readonly<{
-            [key: string]: string;
-        }>;
-        static value(key: string, next?: string | null): string | null;
-        static link(next: Record<string, string | null>): string;
-        static make_link(next: Record<string, string | null>): string;
-        static go(next: {
-            [key: string]: string | null;
-        }): void;
-        static commit(): void;
-        constructor(prefix?: string);
-        value(key: string, next?: string): string | null;
-        sub(postfix: string): $mol_state_arg;
-        link(next: Record<string, string | null>): string;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_link extends $mol_view {
-		uri_toggle( ): string
-		hint( ): string
-		hint_safe( ): ReturnType< $mol_link['hint'] >
-		target( ): string
-		file_name( ): string
-		current( ): boolean
-		relation( ): string
-		event_click( next?: any ): any
-		click( next?: ReturnType< $mol_link['event_click'] > ): ReturnType< $mol_link['event_click'] >
-		uri( ): string
-		dom_name( ): string
-		uri_off( ): string
-		uri_native( ): any
-		external( ): boolean
+	export class $mol_pop_bubble extends $mol_view {
+		content( ): readonly($mol_view_content)[]
+		height_max( ): number
+		align( ): string
+		sub( ): ReturnType< $mol_pop_bubble['content'] >
+		style( ): ({ 
+			'maxHeight': ReturnType< $mol_pop_bubble['height_max'] >,
+		})  & ReturnType< $mol_view['style'] >
 		attr( ): ({ 
-			'href': ReturnType< $mol_link['uri_toggle'] >,
-			'title': ReturnType< $mol_link['hint_safe'] >,
-			'target': ReturnType< $mol_link['target'] >,
-			'download': ReturnType< $mol_link['file_name'] >,
-			'mol_link_current': ReturnType< $mol_link['current'] >,
-			'rel': ReturnType< $mol_link['relation'] >,
+			'mol_pop_align': ReturnType< $mol_pop_bubble['align'] >,
+			'tabindex': number,
 		})  & ReturnType< $mol_view['attr'] >
-		sub( ): readonly($mol_view_content)[]
-		arg( ): Record<string, any>
-		event( ): ({ 
-			click( next?: ReturnType< $mol_link['click'] > ): ReturnType< $mol_link['click'] >,
-		})  & ReturnType< $mol_view['event'] >
 	}
 	
 }
 
-//# sourceMappingURL=link.view.tree.d.ts.map
+//# sourceMappingURL=pop.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_link extends $.$mol_link {
-        uri_toggle(): string;
-        uri(): string;
-        uri_off(): string;
-        uri_native(): URL;
-        current(): boolean;
-        file_name(): string;
-        minimal_height(): number;
-        external(): boolean;
-        target(): '_self' | '_blank' | '_top' | '_parent' | string;
-        hint_safe(): string;
+    class $mol_pop extends $.$mol_pop {
+        showed(next?: boolean): boolean;
+        sub_visible(): any[];
+        height_max(): number;
+        align(): string;
+        align_vert(): "suspense" | "top" | "bottom";
+        align_hor(): "suspense" | "left" | "right";
+        View_port(): $mol_view;
+        view_port(): {
+            width: number;
+            height: number;
+            left: number;
+            right: number;
+            top: number;
+            bottom: number;
+        } | {
+            left: number;
+            top: number;
+            width: number;
+            height: number;
+        };
     }
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
+    enum $mol_keyboard_code {
+        backspace = 8,
+        tab = 9,
+        enter = 13,
+        shift = 16,
+        ctrl = 17,
+        alt = 18,
+        pause = 19,
+        capsLock = 20,
+        escape = 27,
+        space = 32,
+        pageUp = 33,
+        pageDown = 34,
+        end = 35,
+        home = 36,
+        left = 37,
+        up = 38,
+        right = 39,
+        down = 40,
+        insert = 45,
+        delete = 46,
+        key0 = 48,
+        key1 = 49,
+        key2 = 50,
+        key3 = 51,
+        key4 = 52,
+        key5 = 53,
+        key6 = 54,
+        key7 = 55,
+        key8 = 56,
+        key9 = 57,
+        A = 65,
+        B = 66,
+        C = 67,
+        D = 68,
+        E = 69,
+        F = 70,
+        G = 71,
+        H = 72,
+        I = 73,
+        J = 74,
+        K = 75,
+        L = 76,
+        M = 77,
+        N = 78,
+        O = 79,
+        P = 80,
+        Q = 81,
+        R = 82,
+        S = 83,
+        T = 84,
+        U = 85,
+        V = 86,
+        W = 87,
+        X = 88,
+        Y = 89,
+        Z = 90,
+        metaLeft = 91,
+        metaRight = 92,
+        select = 93,
+        numpad0 = 96,
+        numpad1 = 97,
+        numpad2 = 98,
+        numpad3 = 99,
+        numpad4 = 100,
+        numpad5 = 101,
+        numpad6 = 102,
+        numpad7 = 103,
+        numpad8 = 104,
+        numpad9 = 105,
+        multiply = 106,
+        add = 107,
+        subtract = 109,
+        decimal = 110,
+        divide = 111,
+        F1 = 112,
+        F2 = 113,
+        F3 = 114,
+        F4 = 115,
+        F5 = 116,
+        F6 = 117,
+        F7 = 118,
+        F8 = 119,
+        F9 = 120,
+        F10 = 121,
+        F11 = 122,
+        F12 = 123,
+        numLock = 144,
+        scrollLock = 145,
+        semicolon = 186,
+        equals = 187,
+        comma = 188,
+        dash = 189,
+        period = 190,
+        forwardSlash = 191,
+        graveAccent = 192,
+        bracketOpen = 219,
+        slashBack = 220,
+        slashBackLeft = 226,
+        bracketClose = 221,
+        quoteSingle = 222
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_hotkey extends $mol_plugin {
+		keydown( next?: any ): any
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_hotkey['keydown'] > ): ReturnType< $mol_hotkey['keydown'] >,
+		})  & ReturnType< $mol_plugin['event'] >
+		key( ): Record<string, any>
+		mod_ctrl( ): boolean
+		mod_alt( ): boolean
+		mod_shift( ): boolean
+	}
+	
+}
+
+//# sourceMappingURL=hotkey.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_hotkey extends $.$mol_hotkey {
+        key(): { [key in keyof typeof $mol_keyboard_code]?: (event: KeyboardEvent) => void; };
+        keydown(event?: KeyboardEvent): void;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_nav extends $mol_plugin {
+		event_key( next?: any ): any
+		cycle( next?: boolean ): boolean
+		mod_ctrl( ): boolean
+		mod_shift( ): boolean
+		mod_alt( ): boolean
+		keys_x( next?: readonly(any)[] ): readonly(any)[]
+		keys_y( next?: readonly(any)[] ): readonly(any)[]
+		current_x( next?: any ): any
+		current_y( next?: any ): any
+		event_up( next?: any ): any
+		event_down( next?: any ): any
+		event_left( next?: any ): any
+		event_right( next?: any ): any
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_nav['event_key'] > ): ReturnType< $mol_nav['event_key'] >,
+		})  & ReturnType< $mol_plugin['event'] >
+	}
+	
+}
+
+//# sourceMappingURL=nav.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_nav extends $.$mol_nav {
+        event_key(event?: KeyboardEvent): undefined;
+        event_up(event?: KeyboardEvent): undefined;
+        event_down(event?: KeyboardEvent): undefined;
+        event_left(event?: KeyboardEvent): undefined;
+        event_right(event?: KeyboardEvent): undefined;
+        index_y(): number | null;
+        index_x(): number | null;
+    }
 }
 
 declare namespace $ {
     let $mol_mem_persist: typeof $mol_wire_solid;
-}
-
-declare namespace $ {
-    let $mol_mem_cached: typeof $mol_wire_probe;
 }
 
 declare namespace $ {
@@ -1332,6 +1455,10 @@ declare namespace $ {
         prefix(): string;
         value(key: string, next?: Value): Value | null;
     }
+}
+
+declare namespace $ {
+    let $mol_action: typeof $mol_wire_method;
 }
 
 declare namespace $ {
@@ -1517,33 +1644,84 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_media extends $mol_object2 {
-        static match(query: string, next?: boolean): boolean;
-    }
-}
 
-declare namespace $ {
-    function $mol_lights(this: $, next?: boolean): boolean;
-}
-
-declare namespace $ {
-
-	export class $mol_theme_auto extends $mol_plugin {
-		dark( ): string
-		theme( ): ReturnType< $mol_theme_auto['dark'] >
-		light( ): string
-		attr( ): ({ 
-			'mol_theme': ReturnType< $mol_theme_auto['theme'] >,
+	type $mol_hotkey__mod_ctrl_mol_string_1 = $mol_type_enforce<
+		ReturnType< $mol_string['submit_with_ctrl'] >
+		,
+		ReturnType< $mol_hotkey['mod_ctrl'] >
+	>
+	type $mol_hotkey__key_mol_string_2 = $mol_type_enforce<
+		({ 
+			enter( next?: ReturnType< $mol_string['submit'] > ): ReturnType< $mol_string['submit'] >,
 		}) 
+		,
+		ReturnType< $mol_hotkey['key'] >
+	>
+	export class $mol_string extends $mol_view {
+		selection_watcher( ): any
+		error_report( ): any
+		disabled( ): boolean
+		value( next?: string ): string
+		value_changed( next?: ReturnType< $mol_string['value'] > ): ReturnType< $mol_string['value'] >
+		hint( ): string
+		hint_visible( ): ReturnType< $mol_string['hint'] >
+		spellcheck( ): boolean
+		autocomplete_native( ): string
+		selection_end( ): number
+		selection_start( ): number
+		keyboard( ): string
+		enter( ): string
+		length_max( ): number
+		type( next?: string ): string
+		event_change( next?: any ): any
+		submit_with_ctrl( ): boolean
+		submit( next?: any ): any
+		Submit( ): $mol_hotkey
+		dom_name( ): string
+		enabled( ): boolean
+		minimal_height( ): number
+		autocomplete( ): boolean
+		selection( next?: readonly(number)[] ): readonly(number)[]
+		auto( ): readonly(any)[]
+		field( ): ({ 
+			'disabled': ReturnType< $mol_string['disabled'] >,
+			'value': ReturnType< $mol_string['value_changed'] >,
+			'placeholder': ReturnType< $mol_string['hint_visible'] >,
+			'spellcheck': ReturnType< $mol_string['spellcheck'] >,
+			'autocomplete': ReturnType< $mol_string['autocomplete_native'] >,
+			'selectionEnd': ReturnType< $mol_string['selection_end'] >,
+			'selectionStart': ReturnType< $mol_string['selection_start'] >,
+			'inputMode': ReturnType< $mol_string['keyboard'] >,
+			'enterkeyhint': ReturnType< $mol_string['enter'] >,
+		})  & ReturnType< $mol_view['field'] >
+		attr( ): ({ 
+			'maxlength': ReturnType< $mol_string['length_max'] >,
+			'type': ReturnType< $mol_string['type'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		event( ): ({ 
+			input( next?: ReturnType< $mol_string['event_change'] > ): ReturnType< $mol_string['event_change'] >,
+		})  & ReturnType< $mol_view['event'] >
+		plugins( ): readonly(any)[]
 	}
 	
 }
 
-//# sourceMappingURL=auto.view.tree.d.ts.map
+//# sourceMappingURL=string.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_theme_auto extends $.$mol_theme_auto {
-        theme(): string;
+    class $mol_string extends $.$mol_string {
+        event_change(next?: Event): void;
+        error_report(): void;
+        hint_visible(): string;
+        disabled(): boolean;
+        autocomplete_native(): "on" | "off";
+        selection_watcher(): $mol_dom_listener;
+        selection_change(event: Event): void;
+        selection_start(): number;
+        selection_end(): number;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -1629,96 +1807,13 @@ declare namespace $ {
 //# sourceMappingURL=icon.view.tree.d.ts.map
 declare namespace $ {
 
-	export class $mol_icon_help extends $mol_icon {
+	export class $mol_icon_close extends $mol_icon {
 		path( ): string
 	}
 	
 }
 
-//# sourceMappingURL=help.view.tree.d.ts.map
-declare namespace $ {
-    let $mol_layer: Record<"focus" | "float" | "hover" | "speck" | "popup", $mol_style_func<"var", unknown>>;
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_pop_bubble__align_mol_pop_1 = $mol_type_enforce<
-		ReturnType< $mol_pop['align'] >
-		,
-		ReturnType< $mol_pop_bubble['align'] >
-	>
-	type $mol_pop_bubble__content_mol_pop_2 = $mol_type_enforce<
-		ReturnType< $mol_pop['bubble_content'] >
-		,
-		ReturnType< $mol_pop_bubble['content'] >
-	>
-	type $mol_pop_bubble__height_max_mol_pop_3 = $mol_type_enforce<
-		ReturnType< $mol_pop['height_max'] >
-		,
-		ReturnType< $mol_pop_bubble['height_max'] >
-	>
-	export class $mol_pop extends $mol_view {
-		Anchor( ): any
-		align( ): string
-		bubble_content( ): readonly($mol_view_content)[]
-		height_max( ): number
-		Bubble( ): $mol_pop_bubble
-		showed( next?: boolean ): boolean
-		align_vert( ): string
-		align_hor( ): string
-		prefer( ): string
-		sub( ): readonly(any)[]
-		sub_visible( ): readonly(any)[]
-	}
-	
-	export class $mol_pop_bubble extends $mol_view {
-		content( ): readonly($mol_view_content)[]
-		height_max( ): number
-		align( ): string
-		sub( ): ReturnType< $mol_pop_bubble['content'] >
-		style( ): ({ 
-			'maxHeight': ReturnType< $mol_pop_bubble['height_max'] >,
-		})  & ReturnType< $mol_view['style'] >
-		attr( ): ({ 
-			'mol_pop_align': ReturnType< $mol_pop_bubble['align'] >,
-			'tabindex': number,
-		})  & ReturnType< $mol_view['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=pop.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_pop extends $.$mol_pop {
-        showed(next?: boolean): boolean;
-        sub_visible(): any[];
-        height_max(): number;
-        align(): string;
-        align_vert(): "suspense" | "top" | "bottom";
-        align_hor(): "suspense" | "left" | "right";
-        View_port(): $mol_view;
-        view_port(): {
-            width: number;
-            height: number;
-            left: number;
-            right: number;
-            top: number;
-            bottom: number;
-        } | {
-            left: number;
-            top: number;
-            width: number;
-            height: number;
-        };
-    }
-}
-
-declare namespace $ {
-}
-
+//# sourceMappingURL=close.view.tree.d.ts.map
 declare namespace $ {
 }
 
@@ -1740,111 +1835,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=speck.view.tree.d.ts.map
-declare namespace $ {
-    enum $mol_keyboard_code {
-        backspace = 8,
-        tab = 9,
-        enter = 13,
-        shift = 16,
-        ctrl = 17,
-        alt = 18,
-        pause = 19,
-        capsLock = 20,
-        escape = 27,
-        space = 32,
-        pageUp = 33,
-        pageDown = 34,
-        end = 35,
-        home = 36,
-        left = 37,
-        up = 38,
-        right = 39,
-        down = 40,
-        insert = 45,
-        delete = 46,
-        key0 = 48,
-        key1 = 49,
-        key2 = 50,
-        key3 = 51,
-        key4 = 52,
-        key5 = 53,
-        key6 = 54,
-        key7 = 55,
-        key8 = 56,
-        key9 = 57,
-        A = 65,
-        B = 66,
-        C = 67,
-        D = 68,
-        E = 69,
-        F = 70,
-        G = 71,
-        H = 72,
-        I = 73,
-        J = 74,
-        K = 75,
-        L = 76,
-        M = 77,
-        N = 78,
-        O = 79,
-        P = 80,
-        Q = 81,
-        R = 82,
-        S = 83,
-        T = 84,
-        U = 85,
-        V = 86,
-        W = 87,
-        X = 88,
-        Y = 89,
-        Z = 90,
-        metaLeft = 91,
-        metaRight = 92,
-        select = 93,
-        numpad0 = 96,
-        numpad1 = 97,
-        numpad2 = 98,
-        numpad3 = 99,
-        numpad4 = 100,
-        numpad5 = 101,
-        numpad6 = 102,
-        numpad7 = 103,
-        numpad8 = 104,
-        numpad9 = 105,
-        multiply = 106,
-        add = 107,
-        subtract = 109,
-        decimal = 110,
-        divide = 111,
-        F1 = 112,
-        F2 = 113,
-        F3 = 114,
-        F4 = 115,
-        F5 = 116,
-        F6 = 117,
-        F7 = 118,
-        F8 = 119,
-        F9 = 120,
-        F10 = 121,
-        F11 = 122,
-        F12 = 123,
-        numLock = 144,
-        scrollLock = 145,
-        semicolon = 186,
-        equals = 187,
-        comma = 188,
-        dash = 189,
-        period = 190,
-        forwardSlash = 191,
-        graveAccent = 192,
-        bracketOpen = 219,
-        slashBack = 220,
-        slashBackLeft = 226,
-        bracketClose = 221,
-        quoteSingle = 222
-    }
-}
-
 declare namespace $ {
 
 	type $mol_speck__value_mol_button_1 = $mol_type_enforce<
@@ -1923,99 +1913,56 @@ declare namespace $ {
 
 //# sourceMappingURL=minor.view.tree.d.ts.map
 declare namespace $ {
+    function $mol_support_css_overflow_anchor(this: $): boolean;
 }
 
 declare namespace $ {
 
-	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
-		readonly(any)[]
+	type $mol_view__style_mol_list_1 = $mol_type_enforce<
+		({ 
+			'paddingTop': ReturnType< $mol_list['gap_before'] >,
+		}) 
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_view['style'] >
 	>
-	export class $mol_check extends $mol_button_minor {
-		checked( next?: boolean ): boolean
-		aria_checked( ): string
-		aria_role( ): string
-		Icon( ): any
-		title( ): string
-		Title( ): $mol_view
-		label( ): readonly(any)[]
-		attr( ): ({ 
-			'mol_check_checked': ReturnType< $mol_check['checked'] >,
-			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
-			'role': ReturnType< $mol_check['aria_role'] >,
-		})  & ReturnType< $mol_button_minor['attr'] >
-		sub( ): readonly($mol_view_content)[]
+	type $mol_view__style_mol_list_2 = $mol_type_enforce<
+		({ 
+			'paddingTop': ReturnType< $mol_list['gap_after'] >,
+		}) 
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	export class $mol_list extends $mol_view {
+		rows( ): readonly($mol_view)[]
+		gap_before( ): number
+		gap_after( ): number
+		render_visible_only( ): boolean
+		render_over( ): number
+		sub( ): ReturnType< $mol_list['rows'] >
+		Empty( ): $mol_view
+		Gap_before( ): $mol_view
+		Gap_after( ): $mol_view
+		item_height_min( id: any): number
+		item_width_min( id: any): number
+		view_window( ): readonly(any)[]
 	}
 	
 }
 
-//# sourceMappingURL=check.view.tree.d.ts.map
+//# sourceMappingURL=list.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_check extends $.$mol_check {
-        click(next?: Event): void;
-        sub(): readonly $mol_view_content[];
-        label(): readonly any[];
-        aria_checked(): string;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_check__minimal_width_mol_pick_1 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_check['minimal_width'] >
-	>
-	type $mol_check__minimal_height_mol_pick_2 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_check['minimal_height'] >
-	>
-	type $mol_check__enabled_mol_pick_3 = $mol_type_enforce<
-		ReturnType< $mol_pick['trigger_enabled'] >
-		,
-		ReturnType< $mol_check['enabled'] >
-	>
-	type $mol_check__checked_mol_pick_4 = $mol_type_enforce<
-		ReturnType< $mol_pick['showed'] >
-		,
-		ReturnType< $mol_check['checked'] >
-	>
-	type $mol_check__clicks_mol_pick_5 = $mol_type_enforce<
-		ReturnType< $mol_pick['clicks'] >
-		,
-		ReturnType< $mol_check['clicks'] >
-	>
-	type $mol_check__sub_mol_pick_6 = $mol_type_enforce<
-		ReturnType< $mol_pick['trigger_content'] >
-		,
-		ReturnType< $mol_check['sub'] >
-	>
-	type $mol_check__hint_mol_pick_7 = $mol_type_enforce<
-		ReturnType< $mol_pick['hint'] >
-		,
-		ReturnType< $mol_check['hint'] >
-	>
-	export class $mol_pick extends $mol_pop {
-		keydown( next?: any ): any
-		trigger_enabled( ): boolean
-		clicks( next?: any ): any
-		trigger_content( ): readonly($mol_view_content)[]
-		hint( ): string
-		Trigger( ): $mol_check
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_pick['keydown'] > ): ReturnType< $mol_pick['keydown'] >,
-		})  & ReturnType< $mol_pop['event'] >
-		Anchor( ): ReturnType< $mol_pick['Trigger'] >
-	}
-	
-}
-
-//# sourceMappingURL=pick.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_pick extends $.$mol_pick {
-        keydown(event: KeyboardEvent): void;
+    class $mol_list extends $.$mol_list {
+        sub(): readonly $mol_view[];
+        render_visible_only(): boolean;
+        view_window(next?: [number, number]): [number, number];
+        item_height_min(index: number): number;
+        row_width_min(index: number): number;
+        gap_before(): number;
+        gap_after(): number;
+        sub_visible(): $mol_view[];
+        minimal_height(): number;
+        minimal_width(): number;
+        force_render(path: Set<$mol_view>): void;
     }
 }
 
@@ -2188,212 +2135,6 @@ declare namespace $ {
 
 declare namespace $ {
 
-	export class $mol_nav extends $mol_plugin {
-		event_key( next?: any ): any
-		cycle( next?: boolean ): boolean
-		mod_ctrl( ): boolean
-		mod_shift( ): boolean
-		mod_alt( ): boolean
-		keys_x( next?: readonly(any)[] ): readonly(any)[]
-		keys_y( next?: readonly(any)[] ): readonly(any)[]
-		current_x( next?: any ): any
-		current_y( next?: any ): any
-		event_up( next?: any ): any
-		event_down( next?: any ): any
-		event_left( next?: any ): any
-		event_right( next?: any ): any
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_nav['event_key'] > ): ReturnType< $mol_nav['event_key'] >,
-		})  & ReturnType< $mol_plugin['event'] >
-	}
-	
-}
-
-//# sourceMappingURL=nav.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_nav extends $.$mol_nav {
-        event_key(event?: KeyboardEvent): undefined;
-        event_up(event?: KeyboardEvent): undefined;
-        event_down(event?: KeyboardEvent): undefined;
-        event_left(event?: KeyboardEvent): undefined;
-        event_right(event?: KeyboardEvent): undefined;
-        index_y(): number | null;
-        index_x(): number | null;
-    }
-}
-
-declare namespace $ {
-    function $mol_support_css_overflow_anchor(this: $): boolean;
-}
-
-declare namespace $ {
-
-	type $mol_view__style_mol_list_1 = $mol_type_enforce<
-		({ 
-			'paddingTop': ReturnType< $mol_list['gap_before'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	type $mol_view__style_mol_list_2 = $mol_type_enforce<
-		({ 
-			'paddingTop': ReturnType< $mol_list['gap_after'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	export class $mol_list extends $mol_view {
-		rows( ): readonly($mol_view)[]
-		gap_before( ): number
-		gap_after( ): number
-		render_visible_only( ): boolean
-		render_over( ): number
-		sub( ): ReturnType< $mol_list['rows'] >
-		Empty( ): $mol_view
-		Gap_before( ): $mol_view
-		Gap_after( ): $mol_view
-		item_height_min( id: any): number
-		item_width_min( id: any): number
-		view_window( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=list.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_list extends $.$mol_list {
-        sub(): readonly $mol_view[];
-        render_visible_only(): boolean;
-        view_window(next?: [number, number]): [number, number];
-        item_height_min(index: number): number;
-        row_width_min(index: number): number;
-        gap_before(): number;
-        gap_after(): number;
-        sub_visible(): $mol_view[];
-        minimal_height(): number;
-        minimal_width(): number;
-        force_render(path: Set<$mol_view>): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_hotkey extends $mol_plugin {
-		keydown( next?: any ): any
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_hotkey['keydown'] > ): ReturnType< $mol_hotkey['keydown'] >,
-		})  & ReturnType< $mol_plugin['event'] >
-		key( ): Record<string, any>
-		mod_ctrl( ): boolean
-		mod_alt( ): boolean
-		mod_shift( ): boolean
-	}
-	
-}
-
-//# sourceMappingURL=hotkey.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_hotkey extends $.$mol_hotkey {
-        key(): { [key in keyof typeof $mol_keyboard_code]?: (event: KeyboardEvent) => void; };
-        keydown(event?: KeyboardEvent): void;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_hotkey__mod_ctrl_mol_string_1 = $mol_type_enforce<
-		ReturnType< $mol_string['submit_with_ctrl'] >
-		,
-		ReturnType< $mol_hotkey['mod_ctrl'] >
-	>
-	type $mol_hotkey__key_mol_string_2 = $mol_type_enforce<
-		({ 
-			enter( next?: ReturnType< $mol_string['submit'] > ): ReturnType< $mol_string['submit'] >,
-		}) 
-		,
-		ReturnType< $mol_hotkey['key'] >
-	>
-	export class $mol_string extends $mol_view {
-		selection_watcher( ): any
-		error_report( ): any
-		disabled( ): boolean
-		value( next?: string ): string
-		value_changed( next?: ReturnType< $mol_string['value'] > ): ReturnType< $mol_string['value'] >
-		hint( ): string
-		hint_visible( ): ReturnType< $mol_string['hint'] >
-		spellcheck( ): boolean
-		autocomplete_native( ): string
-		selection_end( ): number
-		selection_start( ): number
-		keyboard( ): string
-		enter( ): string
-		length_max( ): number
-		type( next?: string ): string
-		event_change( next?: any ): any
-		submit_with_ctrl( ): boolean
-		submit( next?: any ): any
-		Submit( ): $mol_hotkey
-		dom_name( ): string
-		enabled( ): boolean
-		minimal_height( ): number
-		autocomplete( ): boolean
-		selection( next?: readonly(number)[] ): readonly(number)[]
-		auto( ): readonly(any)[]
-		field( ): ({ 
-			'disabled': ReturnType< $mol_string['disabled'] >,
-			'value': ReturnType< $mol_string['value_changed'] >,
-			'placeholder': ReturnType< $mol_string['hint_visible'] >,
-			'spellcheck': ReturnType< $mol_string['spellcheck'] >,
-			'autocomplete': ReturnType< $mol_string['autocomplete_native'] >,
-			'selectionEnd': ReturnType< $mol_string['selection_end'] >,
-			'selectionStart': ReturnType< $mol_string['selection_start'] >,
-			'inputMode': ReturnType< $mol_string['keyboard'] >,
-			'enterkeyhint': ReturnType< $mol_string['enter'] >,
-		})  & ReturnType< $mol_view['field'] >
-		attr( ): ({ 
-			'maxlength': ReturnType< $mol_string['length_max'] >,
-			'type': ReturnType< $mol_string['type'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		event( ): ({ 
-			input( next?: ReturnType< $mol_string['event_change'] > ): ReturnType< $mol_string['event_change'] >,
-		})  & ReturnType< $mol_view['event'] >
-		plugins( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=string.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_string extends $.$mol_string {
-        event_change(next?: Event): void;
-        error_report(): void;
-        hint_visible(): string;
-        disabled(): boolean;
-        autocomplete_native(): "on" | "off";
-        selection_watcher(): $mol_dom_listener;
-        selection_change(event: Event): void;
-        selection_start(): number;
-        selection_end(): number;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_close extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=close.view.tree.d.ts.map
-declare namespace $ {
-
 	type $mol_hotkey__key_mol_search_1 = $mol_type_enforce<
 		({ 
 			escape( next?: ReturnType< $mol_search['clear'] > ): ReturnType< $mol_search['clear'] >,
@@ -2540,15 +2281,490 @@ declare namespace $ {
 //# sourceMappingURL=search.view.tree.d.ts.map
 declare namespace $.$$ {
     class $mol_search extends $.$mol_search {
-        anchor_content(): ($mol_button_minor | $.$mol_string)[];
+        anchor_content(): ($.$mol_string | $mol_button_minor)[];
         suggests_showed(next?: boolean): boolean;
         suggest_selected(next?: string): void;
-        nav_components(): ($mol_button_minor | $.$mol_string)[];
+        nav_components(): ($.$mol_string | $mol_button_minor)[];
         nav_focused(component?: $mol_view): $mol_view | $.$mol_string | null;
         suggest_label(key: string): string;
         menu_items(): $mol_button_minor[];
         suggest_select(id: string, event?: MouseEvent): void;
         clear(event?: Event): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_state_arg extends $mol_object {
+        prefix: string;
+        static prolog: string;
+        static separator: string;
+        static href(next?: string): string;
+        static href_normal(): string;
+        static dict(next?: {
+            [key: string]: string | null;
+        }): Readonly<{
+            [key: string]: string;
+        }>;
+        static value(key: string, next?: string | null): string | null;
+        static link(next: Record<string, string | null>): string;
+        static make_link(next: Record<string, string | null>): string;
+        static go(next: {
+            [key: string]: string | null;
+        }): void;
+        static commit(): void;
+        constructor(prefix?: string);
+        value(key: string, next?: string): string | null;
+        sub(postfix: string): $mol_state_arg;
+        link(next: Record<string, string | null>): string;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_link extends $mol_view {
+		uri_toggle( ): string
+		hint( ): string
+		hint_safe( ): ReturnType< $mol_link['hint'] >
+		target( ): string
+		file_name( ): string
+		current( ): boolean
+		relation( ): string
+		event_click( next?: any ): any
+		click( next?: ReturnType< $mol_link['event_click'] > ): ReturnType< $mol_link['event_click'] >
+		uri( ): string
+		dom_name( ): string
+		uri_off( ): string
+		uri_native( ): any
+		external( ): boolean
+		attr( ): ({ 
+			'href': ReturnType< $mol_link['uri_toggle'] >,
+			'title': ReturnType< $mol_link['hint_safe'] >,
+			'target': ReturnType< $mol_link['target'] >,
+			'download': ReturnType< $mol_link['file_name'] >,
+			'mol_link_current': ReturnType< $mol_link['current'] >,
+			'rel': ReturnType< $mol_link['relation'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		sub( ): readonly($mol_view_content)[]
+		arg( ): Record<string, any>
+		event( ): ({ 
+			click( next?: ReturnType< $mol_link['click'] > ): ReturnType< $mol_link['click'] >,
+		})  & ReturnType< $mol_view['event'] >
+	}
+	
+}
+
+//# sourceMappingURL=link.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_link extends $.$mol_link {
+        uri_toggle(): string;
+        uri(): string;
+        uri_off(): string;
+        uri_native(): URL;
+        current(): boolean;
+        file_name(): string;
+        minimal_height(): number;
+        external(): boolean;
+        target(): '_self' | '_blank' | '_top' | '_parent' | string;
+        hint_safe(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__dom_name_mol_page_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_mol_page_2 = $mol_type_enforce<
+		ReturnType< $mol_page['title_content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_mol_page_3 = $mol_type_enforce<
+		ReturnType< $mol_page['tools'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__minimal_height_mol_page_4 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_view['minimal_height'] >
+	>
+	type $mol_view__dom_name_mol_page_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_mol_page_6 = $mol_type_enforce<
+		ReturnType< $mol_page['head'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type __mol_page_7 = $mol_type_enforce<
+		Parameters< $mol_page['body_scroll_top'] >[0]
+		,
+		Parameters< ReturnType< $mol_page['Body'] >['scroll_top'] >[0]
+	>
+	type $mol_view__sub_mol_page_8 = $mol_type_enforce<
+		ReturnType< $mol_page['body'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_scroll__sub_mol_page_9 = $mol_type_enforce<
+		ReturnType< $mol_page['body_content'] >
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $mol_view__dom_name_mol_page_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['dom_name'] >
+	>
+	type $mol_view__sub_mol_page_11 = $mol_type_enforce<
+		ReturnType< $mol_page['foot'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_page extends $mol_view {
+		tabindex( ): number
+		Logo( ): any
+		title_content( ): readonly(any)[]
+		Title( ): $mol_view
+		tools( ): readonly($mol_view_content)[]
+		Tools( ): $mol_view
+		head( ): readonly(any)[]
+		Head( ): $mol_view
+		body_scroll_top( next?: ReturnType< ReturnType< $mol_page['Body'] >['scroll_top'] > ): ReturnType< ReturnType< $mol_page['Body'] >['scroll_top'] >
+		body( ): readonly($mol_view)[]
+		Body_content( ): $mol_view
+		body_content( ): readonly(any)[]
+		Body( ): $mol_scroll
+		foot( ): readonly($mol_view)[]
+		Foot( ): $mol_view
+		dom_name( ): string
+		attr( ): ({ 
+			'tabIndex': ReturnType< $mol_page['tabindex'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=page.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+    function $mol_match_text<Variant>(query: string, values: (variant: Variant) => readonly string[]): (variant: Variant) => boolean;
+}
+
+declare namespace $ {
+
+	type $mol_search__query_mol_book2_catalog_1 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_filter'] >
+		,
+		ReturnType< $mol_search['query'] >
+	>
+	type $mol_dimmer__needle_mol_book2_catalog_2 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_filter'] >
+		,
+		ReturnType< $mol_dimmer['needle'] >
+	>
+	type $mol_dimmer__haystack_mol_book2_catalog_3 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['spread_title'] >
+		,
+		ReturnType< $mol_dimmer['haystack'] >
+	>
+	type $mol_link__arg_mol_book2_catalog_4 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_link_arg'] >
+		,
+		ReturnType< $mol_link['arg'] >
+	>
+	type $mol_link__sub_mol_book2_catalog_5 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_link_content'] >
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_view__sub_mol_book2_catalog_6 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_item_content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_list__Empty_mol_book2_catalog_7 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['Menu_links_empty'] >
+		,
+		ReturnType< $mol_list['Empty'] >
+	>
+	type $mol_list__rows_mol_book2_catalog_8 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_links'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_page__title_mol_book2_catalog_9 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_title'] >
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__Logo_mol_book2_catalog_10 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['Menu_logo'] >
+		,
+		ReturnType< $mol_page['Logo'] >
+	>
+	type $mol_page__tools_mol_book2_catalog_11 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_page['tools'] >
+	>
+	type $mol_page__head_mol_book2_catalog_12 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_head'] >
+		,
+		ReturnType< $mol_page['head'] >
+	>
+	type $mol_page__body_mol_book2_catalog_13 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_body'] >
+		,
+		ReturnType< $mol_page['body'] >
+	>
+	type $mol_page__foot_mol_book2_catalog_14 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['menu_foot'] >
+		,
+		ReturnType< $mol_page['foot'] >
+	>
+	type $mol_link__arg_mol_book2_catalog_15 = $mol_type_enforce<
+		ReturnType< $mol_book2_catalog['spread_close_arg'] >
+		,
+		ReturnType< $mol_link['arg'] >
+	>
+	type $mol_link__hint_mol_book2_catalog_16 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['hint'] >
+	>
+	type $mol_link__sub_mol_book2_catalog_17 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	export class $mol_book2_catalog extends $mol_book2 {
+		Menu_title( ): ReturnType< ReturnType< $mol_book2_catalog['Menu'] >['Title'] >
+		menu_title( ): string
+		Menu_tools( ): ReturnType< ReturnType< $mol_book2_catalog['Menu'] >['Tools'] >
+		Menu_logo( ): any
+		menu_head( ): readonly($mol_view_content)[]
+		menu_filter( next?: string ): string
+		Menu_filter( ): $mol_search
+		Menu_links_empty( ): $mol_view
+		arg( id: any): Record<string, any>
+		menu_link_arg( id: any): ReturnType< $mol_book2_catalog['arg'] >
+		spread_title( id: any): string
+		Menu_link_title( id: any): $mol_dimmer
+		menu_link_content( id: any): readonly($mol_view_content)[]
+		Menu_link( id: any): $mol_link
+		menu_item_content( id: any): readonly($mol_view)[]
+		Menu_item( id: any): $mol_view
+		menu_links( ): readonly($mol_view)[]
+		Menu_links( ): $mol_list
+		menu_body( ): readonly($mol_view)[]
+		menu_foot( ): readonly($mol_view)[]
+		Menu( ): $mol_page
+		spread_close_arg( ): Record<string, any>
+		Spread_close_icon( ): $mol_icon_close
+		param( ): string
+		spread( next?: string ): string
+		spreads( ): Record<string, any>
+		Spread( id: any): $mol_view
+		Spread_default( ): any
+		spread_ids( ): readonly(string)[]
+		menu_filter_enabled( ): boolean
+		spread_ids_filtered( ): readonly(string)[]
+		spread_current( ): any
+		menu_tools( ): readonly(any)[]
+		addon_tools( ): readonly(any)[]
+		pages( ): readonly(any)[]
+		Spread_close( ): $mol_link
+	}
+	
+}
+
+//# sourceMappingURL=catalog.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_book2_catalog extends $.$mol_book2_catalog {
+        spread_current(): any;
+        pages(): any[];
+        auto(): void;
+        spread_ids(): readonly string[];
+        menu_body(): ($.$mol_list | $.$mol_search)[];
+        menu_filter_enabled(): boolean;
+        menu_links(): $mol_view[];
+        spread_ids_filtered(): string[];
+        Spread(id: string): $mol_view;
+        Spread_default(): any;
+        spread(next?: string): string;
+        arg(spread: string): {
+            [x: string]: string | null;
+        };
+        spread_close_arg(): {
+            [x: string]: null;
+        };
+        spread_title(spread: string): string;
+        spread_current_book(): $mol_book2 | null;
+        placeholders(): readonly $mol_view[];
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+    class $mol_media extends $mol_object2 {
+        static match(query: string, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+    function $mol_lights(this: $, next?: boolean): boolean;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_check extends $mol_button_minor {
+		checked( next?: boolean ): boolean
+		aria_checked( ): string
+		aria_role( ): string
+		Icon( ): any
+		title( ): string
+		Title( ): $mol_view
+		label( ): readonly(any)[]
+		attr( ): ({ 
+			'mol_check_checked': ReturnType< $mol_check['checked'] >,
+			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
+			'role': ReturnType< $mol_check['aria_role'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+		sub( ): readonly($mol_view_content)[]
+	}
+	
+}
+
+//# sourceMappingURL=check.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_check extends $.$mol_check {
+        click(next?: Event): void;
+        sub(): readonly $mol_view_content[];
+        label(): readonly any[];
+        aria_checked(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_check_icon extends $mol_check {
+	}
+	
+}
+
+//# sourceMappingURL=icon.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_brightness_4 extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=4.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_lights_toggle extends $mol_check_icon {
+		Lights_icon( ): $mol_icon_brightness_4
+		lights( next?: boolean ): boolean
+		Icon( ): ReturnType< $mol_lights_toggle['Lights_icon'] >
+		hint( ): string
+		checked( next?: ReturnType< $mol_lights_toggle['lights'] > ): ReturnType< $mol_lights_toggle['lights'] >
+	}
+	
+}
+
+//# sourceMappingURL=toggle.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_lights_toggle extends $.$mol_lights_toggle {
+        lights(next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_check__minimal_width_mol_pick_1 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_check['minimal_width'] >
+	>
+	type $mol_check__minimal_height_mol_pick_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_check['minimal_height'] >
+	>
+	type $mol_check__enabled_mol_pick_3 = $mol_type_enforce<
+		ReturnType< $mol_pick['trigger_enabled'] >
+		,
+		ReturnType< $mol_check['enabled'] >
+	>
+	type $mol_check__checked_mol_pick_4 = $mol_type_enforce<
+		ReturnType< $mol_pick['showed'] >
+		,
+		ReturnType< $mol_check['checked'] >
+	>
+	type $mol_check__clicks_mol_pick_5 = $mol_type_enforce<
+		ReturnType< $mol_pick['clicks'] >
+		,
+		ReturnType< $mol_check['clicks'] >
+	>
+	type $mol_check__sub_mol_pick_6 = $mol_type_enforce<
+		ReturnType< $mol_pick['trigger_content'] >
+		,
+		ReturnType< $mol_check['sub'] >
+	>
+	type $mol_check__hint_mol_pick_7 = $mol_type_enforce<
+		ReturnType< $mol_pick['hint'] >
+		,
+		ReturnType< $mol_check['hint'] >
+	>
+	export class $mol_pick extends $mol_pop {
+		keydown( next?: any ): any
+		trigger_enabled( ): boolean
+		clicks( next?: any ): any
+		trigger_content( ): readonly($mol_view_content)[]
+		hint( ): string
+		Trigger( ): $mol_check
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_pick['keydown'] > ): ReturnType< $mol_pick['keydown'] >,
+		})  & ReturnType< $mol_pop['event'] >
+		Anchor( ): ReturnType< $mol_pick['Trigger'] >
+	}
+	
+}
+
+//# sourceMappingURL=pick.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_pick extends $.$mol_pick {
+        keydown(event: KeyboardEvent): void;
     }
 }
 
@@ -2564,10 +2780,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=vertical.view.tree.d.ts.map
-declare namespace $ {
-    function $mol_match_text<Variant>(query: string, values: (variant: Variant) => readonly string[]): (variant: Variant) => boolean;
-}
-
 declare namespace $ {
 
 	type $mol_dimmer__haystack_mol_select_1 = $mol_type_enforce<
@@ -2688,7 +2900,7 @@ declare namespace $.$$ {
         option_rows(): $mol_button_minor[];
         option_focused(component?: $mol_view): $mol_view | $.$mol_search | null;
         event_select(id: string, event?: MouseEvent): void;
-        nav_components(): ($mol_button_minor | $.$mol_search)[];
+        nav_components(): ($.$mol_search | $mol_button_minor)[];
         trigger_content(): readonly $mol_view_content[];
         menu_content(): $mol_view[];
     }
@@ -3085,251 +3297,25 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-}
 
-declare namespace $ {
-
-	export class $mol_check_icon extends $mol_check {
+	export class $mol_theme_auto extends $mol_plugin {
+		dark( ): string
+		theme( ): ReturnType< $mol_theme_auto['dark'] >
+		light( ): string
+		attr( ): ({ 
+			'mol_theme': ReturnType< $mol_theme_auto['theme'] >,
+		}) 
 	}
 	
 }
 
-//# sourceMappingURL=icon.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_brightness_4 extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=4.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_lights_toggle extends $mol_check_icon {
-		Lights_icon( ): $mol_icon_brightness_4
-		lights( next?: boolean ): boolean
-		Icon( ): ReturnType< $mol_lights_toggle['Lights_icon'] >
-		hint( ): string
-		checked( next?: ReturnType< $mol_lights_toggle['lights'] > ): ReturnType< $mol_lights_toggle['lights'] >
-	}
-	
-}
-
-//# sourceMappingURL=toggle.view.tree.d.ts.map
+//# sourceMappingURL=auto.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_lights_toggle extends $.$mol_lights_toggle {
-        lights(next?: boolean): boolean;
+    class $mol_theme_auto extends $.$mol_theme_auto {
+        theme(): string;
     }
 }
 
-declare namespace $ {
-
-	export class $mol_icon_edit extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=edit.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_plus extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=plus.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_view__sub_tukanable_gymload_title_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_tukanable_gymload_title_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $tukanable_gymload_title extends $mol_view {
-		Title( ): $mol_view
-		Extra( ): $mol_view
-		title( ): string
-		extra( ): string
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=title.view.tree.d.ts.map
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_view__minimal_height_mol_labeler_1 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_view['minimal_height'] >
-	>
-	type $mol_view__sub_mol_labeler_2 = $mol_type_enforce<
-		ReturnType< $mol_labeler['label'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__minimal_height_mol_labeler_3 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_view['minimal_height'] >
-	>
-	type $mol_view__sub_mol_labeler_4 = $mol_type_enforce<
-		ReturnType< $mol_labeler['content'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_labeler extends $mol_list {
-		label( ): readonly($mol_view_content)[]
-		Label( ): $mol_view
-		content( ): readonly(any)[]
-		Content( ): $mol_view
-		rows( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=labeler.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_view__sub_mol_form_field_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_form_field extends $mol_labeler {
-		name( ): string
-		bid( ): string
-		Bid( ): $mol_view
-		control( ): any
-		bids( ): readonly(string)[]
-		label( ): readonly(any)[]
-		content( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=field.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_form_field extends $.$mol_form_field {
-        bid(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_major extends $mol_button_minor {
-		theme( ): string
-	}
-	
-}
-
-//# sourceMappingURL=major.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_status extends $mol_view {
-		message( ): string
-		status( ): ReturnType< $mol_status['title'] >
-		minimal_height( ): number
-		minimal_width( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=status.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_status extends $.$mol_status {
-        message(): any;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_row extends $mol_view {
-	}
-	
-}
-
-//# sourceMappingURL=row.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_list__sub_mol_form_1 = $mol_type_enforce<
-		ReturnType< $mol_form['body'] >
-		,
-		ReturnType< $mol_list['sub'] >
-	>
-	type $mol_row__sub_mol_form_2 = $mol_type_enforce<
-		ReturnType< $mol_form['foot'] >
-		,
-		ReturnType< $mol_row['sub'] >
-	>
-	export class $mol_form extends $mol_list {
-		keydown( next?: any ): any
-		form_fields( ): readonly($mol_form_field)[]
-		body( ): ReturnType< $mol_form['form_fields'] >
-		Body( ): $mol_list
-		buttons( ): readonly($mol_view)[]
-		foot( ): ReturnType< $mol_form['buttons'] >
-		Foot( ): $mol_row
-		submit_allowed( ): boolean
-		submit_blocked( ): boolean
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_form['keydown'] > ): ReturnType< $mol_form['keydown'] >,
-		})  & ReturnType< $mol_list['event'] >
-		submit( next?: any ): any
-		rows( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=form.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_form extends $.$mol_form {
-        form_fields(): readonly $mol_form_field[];
-        submit_allowed(): boolean;
-        submit_blocked(): boolean;
-        keydown(next: KeyboardEvent): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_delete extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=delete.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_icon_chevron extends $mol_icon {
@@ -4539,6 +4525,91 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=chart.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_view__sub_tukanable_gymload_title_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_tukanable_gymload_title_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $tukanable_gymload_title extends $mol_view {
+		Title( ): $mol_view
+		Extra( ): $mol_view
+		title( ): string
+		extra( ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=title.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__minimal_height_mol_labeler_1 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_view['minimal_height'] >
+	>
+	type $mol_view__sub_mol_labeler_2 = $mol_type_enforce<
+		ReturnType< $mol_labeler['label'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__minimal_height_mol_labeler_3 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_view['minimal_height'] >
+	>
+	type $mol_view__sub_mol_labeler_4 = $mol_type_enforce<
+		ReturnType< $mol_labeler['content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_labeler extends $mol_list {
+		label( ): readonly($mol_view_content)[]
+		Label( ): $mol_view
+		content( ): readonly(any)[]
+		Content( ): $mol_view
+		rows( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=labeler.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_major extends $mol_button_minor {
+		theme( ): string
+	}
+	
+}
+
+//# sourceMappingURL=major.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_row extends $mol_view {
+	}
+	
+}
+
+//# sourceMappingURL=row.view.tree.d.ts.map
 declare namespace $.$$ {
     class $tukanable_gymload_builder_day_planweights extends $.$tukanable_gymload_builder_day_planweights {
         weights(): string;
@@ -4826,7 +4897,7 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	export class $tukanable_gymload_builder_day extends $mol_view {
+	export class $tukanable_gymload_builder_day extends $mol_page {
 		row_min_step( id: any, next?: number ): number
 		MinStep( id: any): $tukanable_gymload_smallnumber
 		row_min_weight( id: any): number
@@ -4876,6 +4947,7 @@ declare namespace $ {
 		Rows( ): $mol_list
 		add_exercise( next?: any ): any
 		AddButton( ): $mol_button_major
+		title( ): string
 		storage_key( ): string
 		day_index( ): number
 		week_count( ): number
@@ -4901,7 +4973,7 @@ declare namespace $ {
 		BarbellWeightLabeler( id: any): $mol_labeler
 		PlanWeights( id: any): $tukanable_gymload_builder_day_planweights
 		ChartView( id: any): $mol_view
-		sub( ): readonly(any)[]
+		body( ): readonly(any)[]
 	}
 	
 }
@@ -4922,6 +4994,8 @@ declare namespace $.$$ {
         barbell_weight?: number;
     };
     export class $tukanable_gymload_builder_day extends $.$tukanable_gymload_builder_day {
+        minimal_width(): number;
+        maximal_width(): number;
         build_key(s: string): string;
         data_ids(next?: number[]): readonly (number)[];
         rows(): $mol_view[];
@@ -4987,6 +5061,15 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=box.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_plus extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=plus.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_check_expand extends $mol_check {
@@ -5401,102 +5484,97 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_title['title'] >
 	>
-	type $tukanable_gymload_title__title_tukanable_gymload_builder_day_results_2 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day_results['day_title'] >
-		,
-		ReturnType< $tukanable_gymload_title['title'] >
-	>
-	type __tukanable_gymload_builder_day_results_3 = $mol_type_enforce<
+	type __tukanable_gymload_builder_day_results_2 = $mol_type_enforce<
 		Parameters< $tukanable_gymload_builder_day_results['current_week'] >[0]
 		,
 		Parameters< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] >[0]
 	>
-	type $mol_deck__items_tukanable_gymload_builder_day_results_4 = $mol_type_enforce<
+	type $mol_deck__items_tukanable_gymload_builder_day_results_3 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['week_items'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $tukanable_gymload_title__title_tukanable_gymload_builder_day_results_5 = $mol_type_enforce<
+	type $tukanable_gymload_title__title_tukanable_gymload_builder_day_results_4 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['row_exercise_extra'] >
 		,
 		ReturnType< $tukanable_gymload_title['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_6 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_results_5 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['set_rows'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_7 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_results_6 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_list__item_width_min_tukanable_gymload_builder_day_results_8 = $mol_type_enforce<
+	type $mol_list__item_width_min_tukanable_gymload_builder_day_results_7 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_width_min'] >
 	>
-	type $mol_list__item_height_min_tukanable_gymload_builder_day_results_9 = $mol_type_enforce<
+	type $mol_list__item_height_min_tukanable_gymload_builder_day_results_8 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_height_min'] >
 	>
-	type $mol_list__rows_tukanable_gymload_builder_day_results_10 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_builder_day_results_9 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__set_idx_tukanable_gymload_builder_day_results_11 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__set_idx_tukanable_gymload_builder_day_results_10 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['set_idx'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['set_idx'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__week_idx_tukanable_gymload_builder_day_results_12 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__week_idx_tukanable_gymload_builder_day_results_11 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['current_week_number'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['week_idx'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__week_count_tukanable_gymload_builder_day_results_13 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__week_count_tukanable_gymload_builder_day_results_12 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['week_count'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__excercise_idx_tukanable_gymload_builder_day_results_14 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__excercise_idx_tukanable_gymload_builder_day_results_13 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['excercise_idx'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['excercise_idx'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__reps_tukanable_gymload_builder_day_results_15 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__reps_tukanable_gymload_builder_day_results_14 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['set_reps'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['reps'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__plan_tukanable_gymload_builder_day_results_16 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__plan_tukanable_gymload_builder_day_results_15 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['excercise_plan'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['plan'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__storage_key_tukanable_gymload_builder_day_results_17 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__storage_key_tukanable_gymload_builder_day_results_16 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__weight_min_step_tukanable_gymload_builder_day_results_18 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__weight_min_step_tukanable_gymload_builder_day_results_17 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['row_min_step'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min_step'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__weight_min_tukanable_gymload_builder_day_results_19 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__weight_min_tukanable_gymload_builder_day_results_18 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['row_min_weight'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_day_results_20 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_day_results_19 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['week_tab_title_short'] >
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_21 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_results_20 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -5510,8 +5588,6 @@ declare namespace $ {
 		week_tab_title_short( id: any): string
 		week_tab_title( id: any): string
 		WeekTitle( id: any): $tukanable_gymload_title
-		day_title( ): string
-		DayTitle( ): $tukanable_gymload_title
 		current_week( next?: ReturnType< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] > ): ReturnType< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] >
 		week_items( ): readonly($mol_view)[]
 		Weeks( ): $mol_deck
@@ -5551,11 +5627,12 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
-	export class $tukanable_gymload_builder_stats extends $mol_view {
+	export class $tukanable_gymload_builder_stats extends $mol_page {
 		total_lifted( ): string
+		title( ): string
 		day_count( ): number
 		model( id: any): $tukanable_gymload_builder_day
-		sub( ): readonly(any)[]
+		body( ): readonly(any)[]
 	}
 	
 }
@@ -5691,152 +5768,142 @@ declare namespace $ {
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $mol_deck__current_tukanable_gymload_builder_24 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder['top_desk_current'] >
-		,
-		ReturnType< $mol_deck['current'] >
-	>
-	type $mol_deck__items_tukanable_gymload_builder_25 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder['top_desk_items'] >
-		,
-		ReturnType< $mol_deck['items'] >
-	>
-	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_26 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_24 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_27 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_25 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['title'] >
 	>
-	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_28 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_26 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['day_index'] >
 	>
-	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_29 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_27 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_30 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_28 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['week_count'] >
 	>
-	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_31 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_29 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_32 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_30 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_33 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_31 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['show_charts'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['show_charts'] >
 	>
-	type $tukanable_gymload_builder_day__progress_formula_tukanable_gymload_builder_34 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__progress_formula_tukanable_gymload_builder_32 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['progress_formula'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['progress_formula'] >
 	>
-	type $tukanable_gymload_builder_day__start_percent_tukanable_gymload_builder_35 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__start_percent_tukanable_gymload_builder_33 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['start_percent'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['start_percent'] >
 	>
-	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_36 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_34 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_37 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_35 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['title'] >
 	>
-	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_38 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_36 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['day_index'] >
 	>
-	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_39 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_37 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['week_count'] >
 	>
-	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_40 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_38 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_41 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_39 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_42 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_40 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__progress_formula_tukanable_gymload_builder_43 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__progress_formula_tukanable_gymload_builder_41 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['progress_formula'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['progress_formula'] >
 	>
-	type $tukanable_gymload_builder_day_results__start_percent_tukanable_gymload_builder_44 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__start_percent_tukanable_gymload_builder_42 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['start_percent'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['start_percent'] >
 	>
-	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_45 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_43 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_stats['title'] >
 	>
-	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_46 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_44 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['day_count'] >
 	>
-	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_47 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_45 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['model'] >
 	>
-	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_builder_48 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_builder_46 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['title'] >
 	>
-	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_builder_49 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_builder_47 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['day_count'] >
 	>
-	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_builder_50 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_builder_48 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['model'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_51 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_49 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_52 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_50 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	export class $tukanable_gymload_builder extends $mol_view {
+	export class $tukanable_gymload_builder extends $mol_page {
 		day_storage_key( id: any): string
 		day_title( id: any): string
 		day_index( id: any): number
@@ -5864,16 +5931,14 @@ declare namespace $ {
 		WeightPlates( ): $tukanable_gymload_builder_weights
 		week_items( ): readonly($mol_view)[]
 		Weeks( ): $mol_deck
-		top_desk_current( next?: string ): string
-		top_desk_items( ): readonly($mol_view)[]
-		TopDesk( ): $mol_deck
+		title( ): string
 		storage_key( ): string
 		DaySettings( id: any): $tukanable_gymload_builder_day
 		DayResults( id: any): $tukanable_gymload_builder_day_results
 		Stats( ): $tukanable_gymload_builder_stats
 		Print( ): $tukanable_gymload_builder_export_print
 		Settings( ): $mol_view
-		sub( ): readonly(any)[]
+		body( ): readonly(any)[]
 	}
 	
 }
@@ -5881,16 +5946,16 @@ declare namespace $ {
 //# sourceMappingURL=builder.view.tree.d.ts.map
 declare namespace $.$$ {
     class $tukanable_gymload_builder extends $.$tukanable_gymload_builder {
+        minimal_width(): number;
+        maximal_width(): number;
         week_items(): $.$tukanable_gymload_builder_day[];
         day_title(id: any): string;
         day_index(id: any): any;
-        top_desk_items(): readonly ($mol_view)[];
         build_key(s: string): string;
         day_storage_key(id: any): string;
         week_count(next?: number): number;
         day_count(next?: number): number;
         show_charts(next?: boolean): boolean;
-        top_desk_current(next?: string): string;
         progress_formula(next?: string): string;
         start_percent(next?: number): number;
     }
@@ -5899,6 +5964,132 @@ declare namespace $.$$ {
 declare namespace $.$$ {
 }
 
+declare namespace $ {
+
+	export class $tukanable_gymload_pagehint extends $mol_view {
+		text( ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=pagehint.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_mol_form_field_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_form_field extends $mol_labeler {
+		name( ): string
+		bid( ): string
+		Bid( ): $mol_view
+		control( ): any
+		bids( ): readonly(string)[]
+		label( ): readonly(any)[]
+		content( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=field.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_form_field extends $.$mol_form_field {
+        bid(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_status extends $mol_view {
+		message( ): string
+		status( ): ReturnType< $mol_status['title'] >
+		minimal_height( ): number
+		minimal_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=status.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_status extends $.$mol_status {
+        message(): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_list__sub_mol_form_1 = $mol_type_enforce<
+		ReturnType< $mol_form['body'] >
+		,
+		ReturnType< $mol_list['sub'] >
+	>
+	type $mol_row__sub_mol_form_2 = $mol_type_enforce<
+		ReturnType< $mol_form['foot'] >
+		,
+		ReturnType< $mol_row['sub'] >
+	>
+	export class $mol_form extends $mol_list {
+		keydown( next?: any ): any
+		form_fields( ): readonly($mol_form_field)[]
+		body( ): ReturnType< $mol_form['form_fields'] >
+		Body( ): $mol_list
+		buttons( ): readonly($mol_view)[]
+		foot( ): ReturnType< $mol_form['buttons'] >
+		Foot( ): $mol_row
+		submit_allowed( ): boolean
+		submit_blocked( ): boolean
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_form['keydown'] > ): ReturnType< $mol_form['keydown'] >,
+		})  & ReturnType< $mol_list['event'] >
+		submit( next?: any ): any
+		rows( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=form.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_form extends $.$mol_form {
+        form_fields(): readonly $mol_form_field[];
+        submit_allowed(): boolean;
+        submit_blocked(): boolean;
+        keydown(next: KeyboardEvent): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_delete extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=delete.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $tukanable_gymload_page extends $mol_page {
+		menu_title( ): string
+	}
+	
+}
+
+//# sourceMappingURL=page.view.tree.d.ts.map
 declare namespace $ {
 }
 
@@ -7370,44 +7561,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_offline(): void;
-}
 
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_link__arg_tukanable_gymload_1 = $mol_type_enforce<
-		({ 
-			'view': string,
-		}) 
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	type $mol_link__title_tukanable_gymload_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_link['title'] >
-	>
-	type $mol_link__arg_tukanable_gymload_3 = $mol_type_enforce<
-		({ 
-			'view': string,
-		}) 
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	type $mol_link__sub_tukanable_gymload_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_locale_select__Filter_tukanable_gymload_5 = $mol_type_enforce<
+	type $mol_locale_select__Filter_tukanable_gymload_1 = $mol_type_enforce<
 		any
 		,
 		ReturnType< $mol_locale_select['Filter'] >
 	>
-	type $mol_locale_select__dictionary_tukanable_gymload_6 = $mol_type_enforce<
+	type $mol_locale_select__dictionary_tukanable_gymload_2 = $mol_type_enforce<
 		({ 
 			'ru': string,
 			'en': string,
@@ -7415,235 +7575,310 @@ declare namespace $ {
 		,
 		ReturnType< $mol_locale_select['dictionary'] >
 	>
-	type $tukanable_gymload_title__title_tukanable_gymload_7 = $mol_type_enforce<
-		string
+	type __tukanable_gymload_3 = $mol_type_enforce<
+		Parameters< $tukanable_gymload['DaySettings'] >[0]
 		,
-		ReturnType< $tukanable_gymload_title['title'] >
+		Parameters< ReturnType< $tukanable_gymload['BuilderPage'] >['DaySettings'] >[0]
 	>
-	type $mol_string__value_tukanable_gymload_8 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['new_name'] >
+	type __tukanable_gymload_4 = $mol_type_enforce<
+		Parameters< $tukanable_gymload['DayResults'] >[0]
 		,
-		ReturnType< $mol_string['value'] >
+		Parameters< ReturnType< $tukanable_gymload['BuilderPage'] >['DayResults'] >[0]
 	>
-	type $mol_form_field__name_tukanable_gymload_9 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_form_field['name'] >
-	>
-	type $mol_form_field__bid_tukanable_gymload_10 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['new_name_bid'] >
-		,
-		ReturnType< $mol_form_field['bid'] >
-	>
-	type $mol_form_field__Content_tukanable_gymload_11 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['NewName_control'] >
-		,
-		ReturnType< $mol_form_field['Content'] >
-	>
-	type $mol_button_major__title_tukanable_gymload_12 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_major['title'] >
-	>
-	type $mol_button_major__click_tukanable_gymload_13 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['add_program'] >
-		,
-		ReturnType< $mol_button_major['click'] >
-	>
-	type $mol_button_major__enabled_tukanable_gymload_14 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['add_allowed'] >
-		,
-		ReturnType< $mol_button_major['enabled'] >
-	>
-	type $mol_status__message_tukanable_gymload_15 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['result'] >
-		,
-		ReturnType< $mol_status['message'] >
-	>
-	type $mol_form__body_tukanable_gymload_16 = $mol_type_enforce<
+	type $tukanable_gymload_builder__tools_tukanable_gymload_5 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_form['body'] >
+		ReturnType< $tukanable_gymload_builder['tools'] >
 	>
-	type $mol_form__submit_tukanable_gymload_17 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['add_program'] >
-		,
-		ReturnType< $mol_form['submit'] >
-	>
-	type $mol_form__buttons_tukanable_gymload_18 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_form['buttons'] >
-	>
-	type $tukanable_gymload_title__title_tukanable_gymload_19 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $tukanable_gymload_title['title'] >
-	>
-	type $mol_string__value_tukanable_gymload_20 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['edit_name'] >
-		,
-		ReturnType< $mol_string['value'] >
-	>
-	type $mol_form_field__name_tukanable_gymload_21 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_form_field['name'] >
-	>
-	type $mol_form_field__bid_tukanable_gymload_22 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['edit_name_bid'] >
-		,
-		ReturnType< $mol_form_field['bid'] >
-	>
-	type $mol_form_field__Content_tukanable_gymload_23 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['EditName_control'] >
-		,
-		ReturnType< $mol_form_field['Content'] >
-	>
-	type $mol_button_major__title_tukanable_gymload_24 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_major['title'] >
-	>
-	type $mol_button_major__click_tukanable_gymload_25 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['edit_program'] >
-		,
-		ReturnType< $mol_button_major['click'] >
-	>
-	type $mol_button_major__enabled_tukanable_gymload_26 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['edit_allowed'] >
-		,
-		ReturnType< $mol_button_major['enabled'] >
-	>
-	type $mol_status__message_tukanable_gymload_27 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['result'] >
-		,
-		ReturnType< $mol_status['message'] >
-	>
-	type $mol_link__arg_tukanable_gymload_28 = $mol_type_enforce<
-		({ 
-			'view': string,
-		}) 
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	type $mol_link__sub_tukanable_gymload_29 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_form__body_tukanable_gymload_30 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_form['body'] >
-	>
-	type $mol_form__submit_tukanable_gymload_31 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['edit_program'] >
-		,
-		ReturnType< $mol_form['submit'] >
-	>
-	type $mol_form__buttons_tukanable_gymload_32 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_form['buttons'] >
-	>
-	type $tukanable_gymload_title__title_tukanable_gymload_33 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $tukanable_gymload_title['title'] >
-	>
-	type $mol_button_major__title_tukanable_gymload_34 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_major['title'] >
-	>
-	type $mol_button_major__click_tukanable_gymload_35 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['delete_program'] >
-		,
-		ReturnType< $mol_button_major['click'] >
-	>
-	type $mol_button_minor__title_tukanable_gymload_36 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__click_tukanable_gymload_37 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['cancel_delete_program'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_view__sub_tukanable_gymload_38 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_select__dictionary_tukanable_gymload_39 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['programs'] >
-		,
-		ReturnType< $mol_select['dictionary'] >
-	>
-	type $mol_select__value_tukanable_gymload_40 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['current_program_string'] >
-		,
-		ReturnType< $mol_select['value'] >
-	>
-	type $mol_link__arg_tukanable_gymload_41 = $mol_type_enforce<
-		({ 
-			'view': string,
-		}) 
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	type $mol_link__sub_tukanable_gymload_42 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_link__arg_tukanable_gymload_43 = $mol_type_enforce<
-		({ 
-			'view': string,
-		}) 
-		,
-		ReturnType< $mol_link['arg'] >
-	>
-	type $mol_link__sub_tukanable_gymload_44 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $tukanable_gymload_builder__storage_key_tukanable_gymload_45 = $mol_type_enforce<
+	type $tukanable_gymload_builder__storage_key_tukanable_gymload_6 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['builder_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder['storage_key'] >
 	>
-	type $mol_view__sub_tukanable_gymload_46 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__title_tukanable_gymload_7 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_builder_stats['title'] >
+	>
+	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_8 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['day_count'] >
+		,
+		ReturnType< $tukanable_gymload_builder_stats['day_count'] >
+	>
+	type $tukanable_gymload_builder_stats__model_tukanable_gymload_9 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['DaySettings'] >
+		,
+		ReturnType< $tukanable_gymload_builder_stats['model'] >
+	>
+	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_builder_export_print['title'] >
+	>
+	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_11 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['day_count'] >
+		,
+		ReturnType< $tukanable_gymload_builder_export_print['day_count'] >
+	>
+	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_12 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['DaySettings'] >
+		,
+		ReturnType< $tukanable_gymload_builder_export_print['model'] >
+	>
+	type $tukanable_gymload_pagehint__text_tukanable_gymload_13 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_pagehint['text'] >
+	>
+	type $mol_string__value_tukanable_gymload_14 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['new_name'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_form_field__name_tukanable_gymload_15 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_form_field['name'] >
+	>
+	type $mol_form_field__bid_tukanable_gymload_16 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['new_name_bid'] >
+		,
+		ReturnType< $mol_form_field['bid'] >
+	>
+	type $mol_form_field__Content_tukanable_gymload_17 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['NewName_control'] >
+		,
+		ReturnType< $mol_form_field['Content'] >
+	>
+	type $mol_button_major__title_tukanable_gymload_18 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_19 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['add_program'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__enabled_tukanable_gymload_20 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['add_allowed'] >
+		,
+		ReturnType< $mol_button_major['enabled'] >
+	>
+	type $mol_status__message_tukanable_gymload_21 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['result'] >
+		,
+		ReturnType< $mol_status['message'] >
+	>
+	type $mol_form__body_tukanable_gymload_22 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_form['body'] >
+	>
+	type $mol_form__submit_tukanable_gymload_23 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['add_program'] >
+		,
+		ReturnType< $mol_form['submit'] >
+	>
+	type $mol_form__buttons_tukanable_gymload_24 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_form['buttons'] >
+	>
+	type $tukanable_gymload_title__title_tukanable_gymload_25 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_title['title'] >
+	>
+	type $mol_string__value_tukanable_gymload_26 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['edit_name'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_form_field__name_tukanable_gymload_27 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_form_field['name'] >
+	>
+	type $mol_form_field__bid_tukanable_gymload_28 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['edit_name_bid'] >
+		,
+		ReturnType< $mol_form_field['bid'] >
+	>
+	type $mol_form_field__Content_tukanable_gymload_29 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['EditName_control'] >
+		,
+		ReturnType< $mol_form_field['Content'] >
+	>
+	type $mol_button_major__title_tukanable_gymload_30 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_31 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['edit_program'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__enabled_tukanable_gymload_32 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['edit_allowed'] >
+		,
+		ReturnType< $mol_button_major['enabled'] >
+	>
+	type $mol_status__message_tukanable_gymload_33 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['result'] >
+		,
+		ReturnType< $mol_status['message'] >
+	>
+	type $mol_link__arg_tukanable_gymload_34 = $mol_type_enforce<
+		({ 
+			'nav': string,
+		}) 
+		,
+		ReturnType< $mol_link['arg'] >
+	>
+	type $mol_link__sub_tukanable_gymload_35 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_form__body_tukanable_gymload_36 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_form['body'] >
+	>
+	type $mol_form__submit_tukanable_gymload_37 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['edit_program'] >
+		,
+		ReturnType< $mol_form['submit'] >
+	>
+	type $mol_form__buttons_tukanable_gymload_38 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_form['buttons'] >
+	>
+	type $tukanable_gymload_title__title_tukanable_gymload_39 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_title['title'] >
+	>
+	type $mol_button_major__title_tukanable_gymload_40 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_41 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['delete_program'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_minor__title_tukanable_gymload_42 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_tukanable_gymload_43 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['cancel_delete_program'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_view__sub_tukanable_gymload_44 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_tukanable_gymload_47 = $mol_type_enforce<
+	type $mol_page__title_tukanable_gymload_45 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['day_results_title'] >
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__body_tukanable_gymload_46 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_page['body'] >
 	>
-	type $mol_view__sub_tukanable_gymload_48 = $mol_type_enforce<
+	type $mol_page__tools_tukanable_gymload_47 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_page['tools'] >
 	>
-	export class $tukanable_gymload extends $mol_page {
-		LogoButton( ): $mol_link
-		Theme( ): $mol_theme_auto
-		Help_icon( ): $mol_icon_help
-		Help( ): $mol_link
-		List_of_languages( ): $mol_locale_select
+	type $mol_select__dictionary_tukanable_gymload_48 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['programs'] >
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_select__value_tukanable_gymload_49 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['current_program_string'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $tukanable_gymload_page__title_tukanable_gymload_50 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_page['title'] >
+	>
+	type $tukanable_gymload_page__menu_title_tukanable_gymload_51 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_page['menu_title'] >
+	>
+	type $tukanable_gymload_page__tools_tukanable_gymload_52 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $tukanable_gymload_page['tools'] >
+	>
+	type $tukanable_gymload_page__body_tukanable_gymload_53 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $tukanable_gymload_page['body'] >
+	>
+	type $tukanable_gymload_page__title_tukanable_gymload_54 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_page['title'] >
+	>
+	type $tukanable_gymload_page__menu_title_tukanable_gymload_55 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_page['menu_title'] >
+	>
+	type $tukanable_gymload_page__tools_tukanable_gymload_56 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $tukanable_gymload_page['tools'] >
+	>
+	type $tukanable_gymload_page__body_tukanable_gymload_57 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $tukanable_gymload_page['body'] >
+	>
+	type $mol_page__title_tukanable_gymload_58 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__body_tukanable_gymload_59 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_page['body'] >
+	>
+	export class $tukanable_gymload extends $mol_book2_catalog {
 		Lighter( ): $mol_lights_toggle
+		List_of_languages( ): $mol_locale_select
+		Theme( ): $mol_theme_auto
+		builder_storage_key( ): string
+		day_count( ): ReturnType< ReturnType< $tukanable_gymload['BuilderPage'] >['day_count'] >
+		DaySettings( id: any): ReturnType< ReturnType< $tukanable_gymload['BuilderPage'] >['DaySettings'] >
+		DayResults( id: any): ReturnType< ReturnType< $tukanable_gymload['BuilderPage'] >['DayResults'] >
+		BuilderPage( ): $tukanable_gymload_builder
+		StatsPage( ): $tukanable_gymload_builder_stats
+		PrintPage( ): $tukanable_gymload_builder_export_print
+		HelpPage( ): $tukanable_gymload_help
+		day_results_title( id: any): string
+		day_results_body( id: any): $mol_view
 		programs( ): Record<string, any>
 		current_program_string( next?: string ): string
-		EditProgram_icon( ): $mol_icon_edit
-		AddProgram_icon( ): $mol_icon_plus
-		builder_storage_key( ): string
-		NewTitle( ): $tukanable_gymload_title
+		NewPageHint( ): $tukanable_gymload_pagehint
 		new_name_bid( ): string
 		new_name( next?: string ): string
 		NewName_control( ): $mol_string
@@ -7674,20 +7909,27 @@ declare namespace $ {
 		cancel_delete_program( next?: any ): any
 		DeleteCancelButton( ): $mol_button_minor
 		DeleteActions( ): $mol_view
-		title( ): string
-		title_content( ): readonly(any)[]
+		param( ): string
+		menu_title( ): string
+		menu_filter_enabled( ): boolean
+		menu_foot( ): readonly(any)[]
 		required_label( ): string
 		default_program_name( ): string
 		plugins( ): readonly(any)[]
-		tools( ): readonly(any)[]
+		spreads( ): ({ 
+			'builder': ReturnType< $tukanable_gymload['BuilderPage'] >,
+			'stats': ReturnType< $tukanable_gymload['StatsPage'] >,
+			'print': ReturnType< $tukanable_gymload['PrintPage'] >,
+			'help': ReturnType< $tukanable_gymload['HelpPage'] >,
+			'editprogram': ReturnType< $tukanable_gymload['EditView'] >,
+			'newprogram': ReturnType< $tukanable_gymload['NewView'] >,
+			'deleteprogram': ReturnType< $tukanable_gymload['DeleteView'] >,
+		}) 
+		DayResultsPage( id: any): $mol_page
 		ListPrograms( ): $mol_select
-		HelpPage( ): $tukanable_gymload_help
-		EditProgram( ): $mol_link
-		AddProgram( ): $mol_link
-		Builder( ): $tukanable_gymload_builder
-		NewView( ): $mol_view
-		EditView( ): $mol_view
-		DeleteView( ): $mol_view
+		NewView( ): $tukanable_gymload_page
+		EditView( ): $tukanable_gymload_page
+		DeleteView( ): $mol_page
 	}
 	
 	type $mol_text__text_tukanable_gymload_help_1 = $mol_type_enforce<
@@ -7695,30 +7937,34 @@ declare namespace $ {
 		,
 		ReturnType< $mol_text['text'] >
 	>
-	export class $tukanable_gymload_help extends $mol_view {
+	export class $tukanable_gymload_help extends $mol_page {
 		content( ): string
 		Text( ): $mol_text
-		sub( ): readonly(any)[]
+		title( ): string
+		body( ): readonly(any)[]
 	}
 	
 }
 
 //# sourceMappingURL=gymload.view.tree.d.ts.map
 declare namespace $.$$ {
-    type State = 'program' | 'edit_program' | 'add_program' | 'delete_program' | 'help';
-    export class $tukanable_gymload extends $.$tukanable_gymload {
+    class $tukanable_gymload extends $.$tukanable_gymload {
+        spreads(): any;
+        day_results_title(id: any): string;
+        day_results_body(id: any): $mol_view;
+        spread_title(spread: string): string;
+        menu_links(): $mol_view[];
         programs(): {
             [key: string]: string;
         };
         current_program_string(next?: string): string;
         current_program(next?: number): number;
-        current_view(next?: State): State;
-        tools(): any[];
-        body(): readonly $mol_view[] | $.$tukanable_gymload_builder[] | $.$tukanable_gymload_help[];
+        menu_tools(): any[];
         new_name_bid(): string;
         edit_name_bid(): string;
         add_program(): void;
         edit_program(): void;
+        to_default_page(): void;
         edit_name(next?: string): string;
         build_key(s: string): string;
         program_name(key: any, next?: string): string;
@@ -7729,10 +7975,9 @@ declare namespace $.$$ {
         delete_program(): void;
         cancel_delete_program(): void;
     }
-    export class $tukanable_gymload_help extends $.$tukanable_gymload_help {
+    class $tukanable_gymload_help extends $.$tukanable_gymload_help {
         content(): string;
     }
-    export {};
 }
 
 declare namespace $.$$ {
@@ -7760,14 +8005,15 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_builder_export_print_day['day_idx'] >
 	>
-	export class $tukanable_gymload_builder_export_print extends $mol_view {
+	export class $tukanable_gymload_builder_export_print extends $mol_page {
 		day_idx( id: any): number
 		print_click( next?: any ): any
 		PrintButton( ): $mol_button_major
+		title( ): string
 		day_count( ): number
 		model( id: any): $tukanable_gymload_builder_day
 		Day( id: any): $tukanable_gymload_builder_export_print_day
-		sub( ): readonly(any)[]
+		body( ): readonly(any)[]
 	}
 	
 	type $tukanable_gymload_title__title_tukanable_gymload_builder_export_print_day_1 = $mol_type_enforce<
@@ -7920,7 +8166,7 @@ declare namespace $.$$ {
     class $tukanable_gymload_builder_export_print extends $.$tukanable_gymload_builder_export_print {
         print_click(): void;
         day_idx(id: any): number;
-        sub(): any[];
+        body(): any[];
     }
     class $tukanable_gymload_builder_export_print_day extends $.$tukanable_gymload_builder_export_print_day {
         excercise_sets(id: any): number;
