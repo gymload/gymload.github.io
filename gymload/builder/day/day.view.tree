@@ -98,7 +98,7 @@ $tukanable_gymload_builder_day $mol_view
 											click?event <=> row_remove*? null
 											sub /
 												<= Remove_close_icon* $mol_icon_close
-												<= remove_label @ \Remove
+												<= remove_label* @ \Remove
 		<= AddButton $mol_button_major
 			title @ \Add Exercise
 			click? <=> add_exercise? null
@@ -129,6 +129,10 @@ $tukanable_gymload_builder_day $mol_view
 							item_height_min* 96
 							rows <= sort_rows /$mol_view
 								<= SortRow*0 $mol_drag
+									transfer *
+										text/plain <= sort_row_title* \
+										text/html <= sort_row_html* \
+										text/uri-list <= sort_row_uri* \
 									Sub <= SortRow_drop* $mol_drop
 										adopt?transfer <=> sort_transfer_adopt?transfer null
 										receive?obj <=> sort_receive_before*?obj null

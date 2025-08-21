@@ -403,5 +403,40 @@ namespace $.$$ {
 		override sort_rows(): readonly ( $mol_view )[] {
 			return this.data_ids().map( id => this.SortRow( id ) )
 		}
+
+		override sort_transfer_adopt( transfer: DataTransfer ) {
+			const uri = transfer.getData( "text/uri-list" )
+			if( !uri ) return
+
+			return this.data_ids().find( id => this.sort_row_uri( id ) === uri )
+		}
+
+		@$mol_mem_key
+		sort_row_uri( id: any ) {
+			return this.$.$mol_state_arg.make_link( {
+				... this.$.$mol_state_arg.dict(),
+				'day': this.day_index().toString(),
+				'eid': id.toString(),
+			} )
+		}
+
+		override sort_receive_before( anchor: any, item_id: any ) {
+			if( anchor === item_id ) return
+
+			const original_ids = this.data_ids()
+			const original_item_index = original_ids.indexOf( item_id )
+			const original_anchor_index = original_ids.indexOf( anchor )
+
+			const ids = original_ids.filter( p => p !== item_id )
+			const anchor_index = ids.indexOf( anchor )
+
+			if( original_item_index < original_anchor_index ) {
+				ids.splice( anchor_index + 1, 0, item_id )
+			} else {
+				ids.splice( anchor_index, 0, item_id )
+			}
+
+			this.data_ids( ids )
+		}
 	}
 }
