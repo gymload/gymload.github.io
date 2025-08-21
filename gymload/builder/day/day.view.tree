@@ -92,7 +92,7 @@ $tukanable_gymload_builder_day $mol_view
 								<= MorePick* $mol_pick
 									hint @ \Click to show more options
 									trigger_content /
-										<= Trigger_icon $mol_icon_dots_vertical
+										<= Trigger_icon* $mol_icon_dots_vertical
 									bubble_content /
 										<= RemoveButton* $mol_button_major
 											click?event <=> row_remove*? null
