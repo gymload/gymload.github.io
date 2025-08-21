@@ -2,7 +2,6 @@ namespace $.$$ {
 	const { rem } = $mol_style_unit
 
 	$mol_style_define( $tukanable_gymload_builder, {
-		maxWidth: '800px',
 		flex: {
 			direction: 'column',
 			shrink: 1,

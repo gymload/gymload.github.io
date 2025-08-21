@@ -18,5 +18,17 @@ namespace $.$$ {
 		AddButton: {
 			alignSelf: 'start',
 		},
+		DeleteRowExercise: {
+			padding: $mol_gap.text,
+		},
+		SortRow_content: {
+			padding: $mol_gap.text,
+		},
+		SortExercisesHelp: {
+			padding: $mol_gap.text,
+		},
+		SortExercises: {
+			flexDirection: 'column',
+		},
 	} )
 }

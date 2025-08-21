@@ -11,5 +11,9 @@
 	"$tukanable_gymload_builder_day_weight_types_custom": "Произвольный",
 	"$tukanable_gymload_builder_day_weight_types_dumbbell": "Гантели",
 	"$tukanable_gymload_builder_day_weight_types_barbell": "Штанга",
+	"$tukanable_gymload_builder_day_SortExercises_title": "Сортировка",
+	"$tukanable_gymload_builder_day_sort_help_text": "Начните перетаскивать упражнения, чтобы отсортировать:",
+	"$tukanable_gymload_builder_day_MorePick_hint": "Больше действий",
+	"$tukanable_gymload_builder_day_remove_label": "Удалить",
 	"$tukanable_gymload_builder_day_MinStepLabeler_title": "Мин. шаг"
 }

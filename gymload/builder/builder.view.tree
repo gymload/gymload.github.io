@@ -35,14 +35,14 @@ $tukanable_gymload_builder $mol_page
 		sub /
 			<= Header $mol_row
 				sub /
-					<= WeekCount_labeler $mol_labeler
-						title @ \Week Count
-						Content <= WeekCount $mol_number
-							value? <=> week_count? 10
 					<= DayCount_labeler $mol_labeler
 						title @ \Day Count
 						Content <= DayCount $mol_number
 							value? <=> day_count? 3
+					<= WeekCount_labeler $mol_labeler
+						title @ \Week Count
+						Content <= WeekCount $mol_number
+							value? <=> week_count? 10
 					<= ShowCharts_labeler $mol_labeler
 						title @ \Show Charts
 						Content <= ShowCharts_wrapper $mol_check_box

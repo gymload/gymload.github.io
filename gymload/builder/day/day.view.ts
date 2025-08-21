@@ -25,9 +25,9 @@ namespace $.$$ {
 			return Math.min( 800, $mol_view_visible_width() )
 		}
 
-		override maximal_width(): number {
-			return 1000
-		}
+		// override maximal_width(): number {
+		// 	return 1000
+		// }
 
 		build_key( s: string ) {
 			return `${ this.storage_key() }_${ s }`
@@ -437,6 +437,20 @@ namespace $.$$ {
 			}
 
 			this.data_ids( ids )
+		}
+
+		override info_tabs() {
+			const items: $mol_view[] = []
+
+			if( this.data_ids().length > 1 ) {
+				items.push( this.SortExercises() )
+			}
+
+			if( this.deleted_data_ids().length > 0 ) {
+				items.push( this.DeletecExercises() )
+			}
+
+			return items
 		}
 	}
 }
