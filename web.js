@@ -12826,8 +12826,8 @@ var $;
                 return `${this.storage_key()}_${this.excercise_idx()}_${week_idx}_${set_idx}_${prop_name}`;
             }
             week_weight_value(week_idx, next, set_idx = this.set_idx()) {
-                const v = this.$.$mol_state_local.value(this.build_key(week_idx, 'weight', set_idx), next) || -1;
-                if (v < 0) {
+                const v = this.$.$mol_state_local.value(this.build_key(week_idx, 'weight', set_idx), next) || 0;
+                if (v < 0 && next === undefined) {
                     const old_value = this.$.$mol_state_local.value(this.build_key(week_idx, 'weigth'));
                     if (typeof old_value === 'number' && old_value >= 0) {
                         return old_value;
@@ -12836,7 +12836,7 @@ var $;
                 return Math.round(v * 10) / 10;
             }
             week_reps_value(week_idx, next, set_idx) {
-                return this.$.$mol_state_local.value(this.build_key(week_idx, 'reps', set_idx), next) || -1;
+                return this.$.$mol_state_local.value(this.build_key(week_idx, 'reps', set_idx), next) || 0;
             }
             week_weight(next) {
                 if (next !== undefined) {
