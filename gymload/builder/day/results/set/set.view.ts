@@ -22,8 +22,19 @@ namespace $.$$ {
 			return items
 		}
 
+		done_weight() {
+			if( this.set_idx() > 0 ) {
+				const prev_weight = this.week_weight_value( this.week_idx(), undefined, this.set_idx() - 1 )
+				if ( prev_weight >= 0 ) {
+					return prev_weight
+				}
+			}
+
+			return this.plan_weight()
+		}
+
 		override done_week_click() {
-			this.week_weight_value( this.week_idx(), this.plan_weight() )
+			this.week_weight_value( this.week_idx(), this.done_weight() )
 			this.week_reps( this.default_reps() ) // immediately save to storage
 		}
 
@@ -78,8 +89,17 @@ namespace $.$$ {
 			return `${ this.storage_key() }_${ this.excercise_idx() }_${ week_idx }_${ set_idx }_${ prop_name }`
 		}
 
-		week_weight_value( week_idx: number, next?: number ): number {
-			const v = this.$.$mol_state_local.value( this.build_key( week_idx, 'weight' ), next ) || -1
+		week_weight_value( week_idx: number, next?: number, set_idx: number = this.set_idx() ): number {
+			const v = this.$.$mol_state_local.value( this.build_key( week_idx, 'weight', set_idx ), next ) || -1
+
+			if( v < 0 ) {
+				// the previous code stored the weight for all sets in the same key
+				const old_value = this.$.$mol_state_local.value( this.build_key( week_idx, 'weigth' ) )
+				if( typeof old_value === 'number' && old_value >= 0 ) {
+					return old_value
+				}
+			}
+
 			return Math.round( v * 10 ) / 10
 		}
 
