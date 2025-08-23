@@ -446,6 +446,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_try<Result>(handler: () => Result): Result | Error;
+}
+
+declare namespace $ {
     function $mol_fail_log(error: unknown): boolean;
 }
 
@@ -4610,6 +4614,229 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=row.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_ghost extends $mol_view {
+		Sub( ): $mol_view
+	}
+	
+}
+
+//# sourceMappingURL=ghost.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_ghost extends $.$mol_ghost {
+        dom_node_external(next?: Element): Element;
+        dom_node_actual(): Element;
+        dom_tree(): Element;
+        title(): string;
+        minimal_width(): number;
+        minimal_height(): number;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_drop extends $mol_ghost {
+		enter( next?: any ): any
+		move( next?: any ): any
+		leave( next?: any ): any
+		drop( next?: any ): any
+		status( next?: string ): string
+		enabled( next?: boolean ): boolean
+		event( ): ({ 
+			dragenter( next?: ReturnType< $mol_drop['enter'] > ): ReturnType< $mol_drop['enter'] >,
+			dragover( next?: ReturnType< $mol_drop['move'] > ): ReturnType< $mol_drop['move'] >,
+			dragleave( next?: ReturnType< $mol_drop['leave'] > ): ReturnType< $mol_drop['leave'] >,
+			drop( next?: ReturnType< $mol_drop['drop'] > ): ReturnType< $mol_drop['drop'] >,
+		}) 
+		attr( ): ({ 
+			'mol_drop_status': ReturnType< $mol_drop['status'] >,
+		}) 
+		adopt( next?: Record<string, any> ): Record<string, any>
+		receive( next?: any ): any
+		allow( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=drop.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_drop extends $.$mol_drop {
+        status(next?: "ready" | "drag"): "ready" | "drag";
+        protected _target: EventTarget | null;
+        enter(event: DragEvent): void;
+        move(event: DragEvent): void;
+        decide_action(event: DragEvent): any;
+        leave(event: DragEvent): void;
+        receive(transfer: unknown): unknown;
+        drop(event: DragEvent): void;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_drag extends $mol_ghost {
+		start( next?: any ): any
+		drag_start( next?: ReturnType< $mol_drag['start'] > ): ReturnType< $mol_drag['start'] >
+		move( next?: any ): any
+		drag_move( next?: ReturnType< $mol_drag['move'] > ): ReturnType< $mol_drag['move'] >
+		end( next?: any ): any
+		drag_end( next?: ReturnType< $mol_drag['end'] > ): ReturnType< $mol_drag['end'] >
+		status( next?: string ): string
+		event( ): ({ 
+			dragstart( next?: ReturnType< $mol_drag['drag_start'] > ): ReturnType< $mol_drag['drag_start'] >,
+			drag( next?: ReturnType< $mol_drag['drag_move'] > ): ReturnType< $mol_drag['drag_move'] >,
+			dragend( next?: ReturnType< $mol_drag['drag_end'] > ): ReturnType< $mol_drag['drag_end'] >,
+		}) 
+		attr( ): ({ 
+			'draggable': boolean,
+			'mol_drag_status': ReturnType< $mol_drag['status'] >,
+		}) 
+		transfer( ): ({ 
+			'text/plain': string,
+			'text/html': string,
+			'text/uri-list': string,
+		}) 
+		allow_copy( ): boolean
+		allow_link( ): boolean
+		allow_move( ): boolean
+		image( ): ReturnType< $mol_drag['dom_node'] >
+	}
+	
+}
+
+//# sourceMappingURL=drag.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_drag extends $.$mol_drag {
+        status(next?: "ready" | "drag"): "ready" | "drag";
+        drag_start(event: DragEvent): void;
+        drag_end(event: DragEvent): void;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_check__checked_mol_check_list_1 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_checked'] >
+		,
+		ReturnType< $mol_check['checked'] >
+	>
+	type $mol_check__label_mol_check_list_2 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_label'] >
+		,
+		ReturnType< $mol_check['label'] >
+	>
+	type $mol_check__enabled_mol_check_list_3 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_enabled'] >
+		,
+		ReturnType< $mol_check['enabled'] >
+	>
+	type $mol_check__hint_mol_check_list_4 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_hint'] >
+		,
+		ReturnType< $mol_check['hint'] >
+	>
+	type $mol_check__minimal_height_mol_check_list_5 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_check['minimal_height'] >
+	>
+	export class $mol_check_list extends $mol_view {
+		option_checked( id: any, next?: boolean ): boolean
+		option_title( id: any): string
+		option_label( id: any): readonly(any)[]
+		enabled( ): boolean
+		option_enabled( id: any): ReturnType< $mol_check_list['enabled'] >
+		option_hint( id: any): string
+		items( ): readonly($mol_check)[]
+		dictionary( ): Record<string, any>
+		Option( id: any): $mol_check
+		options( ): Record<string, any>
+		keys( ): readonly(string)[]
+		sub( ): ReturnType< $mol_check_list['items'] >
+	}
+	
+}
+
+//# sourceMappingURL=list.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_check_list extends $.$mol_check_list {
+        options(): {
+            [key: string]: string;
+        };
+        dictionary(next?: Record<string, boolean>): Record<string, boolean>;
+        option_checked(id: string, next?: boolean | null): boolean;
+        keys(): readonly string[];
+        items(): $.$mol_check[];
+        option_title(key: string): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_state_session<Value> extends $mol_object {
+        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
+        static native(): Storage | {
+            getItem(key: string): any;
+            setItem(key: string, value: string): void;
+            removeItem(key: string): void;
+        };
+        static value<Value>(key: string, next?: Value): Value;
+        prefix(): string;
+        value(key: string, next?: Value): Value;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_switch extends $mol_check_list {
+		value( next?: string ): string
+	}
+	
+}
+
+//# sourceMappingURL=switch.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_switch extends $.$mol_switch {
+        value(next?: string): string;
+        option_checked(key: string, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_switch__value_mol_deck_1 = $mol_type_enforce<
+		ReturnType< $mol_deck['current'] >
+		,
+		ReturnType< $mol_switch['value'] >
+	>
+	type $mol_switch__options_mol_deck_2 = $mol_type_enforce<
+		ReturnType< $mol_deck['switch_options'] >
+		,
+		ReturnType< $mol_switch['options'] >
+	>
+	export class $mol_deck extends $mol_list {
+		current( next?: string ): string
+		switch_options( ): Record<string, any>
+		Switch( ): $mol_switch
+		Content( ): $mol_view
+		items( ): readonly($mol_view)[]
+		rows( ): readonly($mol_view)[]
+	}
+	
+}
+
+//# sourceMappingURL=deck.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_deck extends $.$mol_deck {
+        current(next?: string): string;
+        switch_options(): Record<string, string>;
+        Content(): $mol_view;
+    }
+}
+
 declare namespace $.$$ {
     class $tukanable_gymload_builder_day_planweights extends $.$tukanable_gymload_builder_day_planweights {
         weights(): string;
@@ -4817,87 +5044,228 @@ declare namespace $ {
 		,
 		ReturnType< $mol_button_major['sub'] >
 	>
-	type $mol_row__sub_tukanable_gymload_builder_day_38 = $mol_type_enforce<
+	type $mol_pick__hint_tukanable_gymload_builder_day_38 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_pick['hint'] >
+	>
+	type $mol_pick__trigger_content_tukanable_gymload_builder_day_39 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_pick['trigger_content'] >
+	>
+	type $mol_pick__bubble_content_tukanable_gymload_builder_day_40 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_pick['bubble_content'] >
+	>
+	type $mol_row__sub_tukanable_gymload_builder_day_41 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['row_content'] >
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_39 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_42 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['row_view'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_list__item_width_min_tukanable_gymload_builder_day_40 = $mol_type_enforce<
+	type $mol_list__item_width_min_tukanable_gymload_builder_day_43 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_width_min'] >
 	>
-	type $mol_list__item_height_min_tukanable_gymload_builder_day_41 = $mol_type_enforce<
+	type $mol_list__item_height_min_tukanable_gymload_builder_day_44 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_height_min'] >
 	>
-	type $mol_list__Empty_tukanable_gymload_builder_day_42 = $mol_type_enforce<
+	type $mol_list__Empty_tukanable_gymload_builder_day_45 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['EmptyExercises'] >
 		,
 		ReturnType< $mol_list['Empty'] >
 	>
-	type $mol_list__rows_tukanable_gymload_builder_day_43 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_builder_day_46 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_button_major__title_tukanable_gymload_builder_day_44 = $mol_type_enforce<
+	type $mol_button_major__title_tukanable_gymload_builder_day_47 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_tukanable_gymload_builder_day_45 = $mol_type_enforce<
+	type $mol_button_major__click_tukanable_gymload_builder_day_48 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['add_exercise'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_46 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_49 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_button_major__title_tukanable_gymload_builder_day_50 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_labeler['title'] >
+		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_47 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day['MinStep'] >
+	type $mol_button_major__click_tukanable_gymload_builder_day_51 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['row_restore'] >
 		,
-		ReturnType< $mol_labeler['Content'] >
+		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_48 = $mol_type_enforce<
-		string
+	type $mol_button_major__sub_tukanable_gymload_builder_day_52 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_49 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day['BeginWeight'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_50 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_labeler['title'] >
-	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_51 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day['BarbellWeight'] >
-		,
-		ReturnType< $mol_labeler['Content'] >
-	>
-	type $tukanable_gymload_builder_day_planweights__values_tukanable_gymload_builder_day_52 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day['plan'] >
-		,
-		ReturnType< $tukanable_gymload_builder_day_planweights['values'] >
+		ReturnType< $mol_button_major['sub'] >
 	>
 	type $mol_view__sub_tukanable_gymload_builder_day_53 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	export class $tukanable_gymload_builder_day extends $mol_page {
+	type $mol_list__item_width_min_tukanable_gymload_builder_day_54 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_list['item_width_min'] >
+	>
+	type $mol_list__item_height_min_tukanable_gymload_builder_day_55 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_list['item_height_min'] >
+	>
+	type $mol_list__rows_tukanable_gymload_builder_day_56 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['deleted_rows'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_view__title_tukanable_gymload_builder_day_57 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['title'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_58 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_59 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_60 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_drop__adopt_tukanable_gymload_builder_day_61 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_transfer_adopt'] >
+		,
+		ReturnType< $mol_drop['adopt'] >
+	>
+	type $mol_drop__receive_tukanable_gymload_builder_day_62 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_receive_before'] >
+		,
+		ReturnType< $mol_drop['receive'] >
+	>
+	type $mol_drop__Sub_tukanable_gymload_builder_day_63 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['SortRow_content'] >
+		,
+		ReturnType< $mol_drop['Sub'] >
+	>
+	type $mol_drag__transfer_tukanable_gymload_builder_day_64 = $mol_type_enforce<
+		({ 
+			'text/plain': ReturnType< $tukanable_gymload_builder_day['sort_row_title'] >,
+			'text/html': ReturnType< $tukanable_gymload_builder_day['sort_row_html'] >,
+			'text/uri-list': ReturnType< $tukanable_gymload_builder_day['sort_row_uri'] >,
+		}) 
+		,
+		ReturnType< $mol_drag['transfer'] >
+	>
+	type $mol_drag__Sub_tukanable_gymload_builder_day_65 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['SortRow_drop'] >
+		,
+		ReturnType< $mol_drag['Sub'] >
+	>
+	type $mol_list__item_width_min_tukanable_gymload_builder_day_66 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_list['item_width_min'] >
+	>
+	type $mol_list__item_height_min_tukanable_gymload_builder_day_67 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_list['item_height_min'] >
+	>
+	type $mol_list__rows_tukanable_gymload_builder_day_68 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_rows'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_view__title_tukanable_gymload_builder_day_69 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['title'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_70 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_deck__style_tukanable_gymload_builder_day_71 = $mol_type_enforce<
+		({ 
+			'marginTop': string,
+		}) 
+		,
+		ReturnType< $mol_deck['style'] >
+	>
+	type $mol_deck__items_tukanable_gymload_builder_day_72 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['info_tabs'] >
+		,
+		ReturnType< $mol_deck['items'] >
+	>
+	type $mol_labeler__title_tukanable_gymload_builder_day_73 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_tukanable_gymload_builder_day_74 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['MinStep'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_labeler__title_tukanable_gymload_builder_day_75 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_tukanable_gymload_builder_day_76 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['BeginWeight'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $mol_labeler__title_tukanable_gymload_builder_day_77 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__Content_tukanable_gymload_builder_day_78 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['BarbellWeight'] >
+		,
+		ReturnType< $mol_labeler['Content'] >
+	>
+	type $tukanable_gymload_builder_day_planweights__values_tukanable_gymload_builder_day_79 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['plan'] >
+		,
+		ReturnType< $tukanable_gymload_builder_day_planweights['values'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_80 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $tukanable_gymload_builder_day extends $mol_view {
 		row_min_step( id: any, next?: number ): number
 		MinStep( id: any): $tukanable_gymload_smallnumber
 		row_min_weight( id: any): number
@@ -4936,9 +5304,12 @@ declare namespace $ {
 		FinishWeight( id: any): $tukanable_gymload_smallnumber
 		FinishWeight_labeler( id: any): $mol_labeler
 		min_step_labeler( id: any): $mol_view | null
+		Trigger_icon( id: any): $mol_icon_dots_vertical
 		row_remove( id: any, next?: any ): any
 		Remove_close_icon( id: any): $mol_icon_close
+		remove_label( id: any): string
 		RemoveButton( id: any): $mol_button_major
+		MorePick( id: any): $mol_pick
 		row_content( id: any): readonly(any)[]
 		InputRow( id: any): $mol_row
 		row_view( id: any): readonly(any)[]
@@ -4947,7 +5318,29 @@ declare namespace $ {
 		Rows( ): $mol_list
 		add_exercise( next?: any ): any
 		AddButton( ): $mol_button_major
-		title( ): string
+		DeleteRowExercise( id: any): $mol_view
+		row_restore( id: any, next?: any ): any
+		restore_label( ): string
+		RestoreButton( id: any): $mol_button_major
+		DeletedRow( id: any): $mol_view
+		deleted_rows( ): readonly($mol_view)[]
+		DeletedRows( ): $mol_list
+		DeletecExercises( ): $mol_view
+		sort_help_text( ): string
+		SortExercisesHelp( ): $mol_view
+		sort_row_title( id: any): string
+		sort_row_html( id: any): string
+		sort_row_uri( id: any): string
+		sort_transfer_adopt( next?: any ): any
+		sort_receive_before( id: any, next?: any ): any
+		SortRow_content( id: any): $mol_view
+		SortRow_drop( id: any): $mol_drop
+		SortRow( id: any): $mol_drag
+		sort_rows( ): readonly($mol_view)[]
+		SortRows( ): $mol_list
+		SortExercises( ): $mol_view
+		info_tabs( ): readonly($mol_view)[]
+		Info( ): $mol_deck
 		storage_key( ): string
 		day_index( ): number
 		week_count( ): number
@@ -4973,7 +5366,7 @@ declare namespace $ {
 		BarbellWeightLabeler( id: any): $mol_labeler
 		PlanWeights( id: any): $tukanable_gymload_builder_day_planweights
 		ChartView( id: any): $mol_view
-		body( ): readonly(any)[]
+		sub( ): readonly(any)[]
 	}
 	
 }
@@ -4995,8 +5388,9 @@ declare namespace $.$$ {
     };
     export class $tukanable_gymload_builder_day extends $.$tukanable_gymload_builder_day {
         minimal_width(): number;
-        maximal_width(): number;
         build_key(s: string): string;
+        all_data_ids(next?: number[]): readonly (number)[];
+        deleted_data_ids(next?: number[]): readonly (number)[];
         data_ids(next?: number[]): readonly (number)[];
         rows(): $mol_view[];
         row(id: any, next?: NewItem | null): NewItem;
@@ -5036,6 +5430,13 @@ declare namespace $.$$ {
         default_row_barbell_weight(): number;
         row_barbell_weight(id: any, next?: number): number;
         row_barbell_weight_string(id: any, next?: string): string;
+        deleted_rows(): readonly ($mol_view)[];
+        row_restore(id: any): void;
+        sort_rows(): readonly ($mol_view)[];
+        sort_transfer_adopt(transfer: DataTransfer): number | undefined;
+        sort_row_uri(id: any): string;
+        sort_receive_before(anchor: any, item_id: any): void;
+        info_tabs(): $mol_view[];
     }
     export {};
 }
@@ -5210,129 +5611,6 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
-	type $mol_check__checked_mol_check_list_1 = $mol_type_enforce<
-		ReturnType< $mol_check_list['option_checked'] >
-		,
-		ReturnType< $mol_check['checked'] >
-	>
-	type $mol_check__label_mol_check_list_2 = $mol_type_enforce<
-		ReturnType< $mol_check_list['option_label'] >
-		,
-		ReturnType< $mol_check['label'] >
-	>
-	type $mol_check__enabled_mol_check_list_3 = $mol_type_enforce<
-		ReturnType< $mol_check_list['option_enabled'] >
-		,
-		ReturnType< $mol_check['enabled'] >
-	>
-	type $mol_check__hint_mol_check_list_4 = $mol_type_enforce<
-		ReturnType< $mol_check_list['option_hint'] >
-		,
-		ReturnType< $mol_check['hint'] >
-	>
-	type $mol_check__minimal_height_mol_check_list_5 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_check['minimal_height'] >
-	>
-	export class $mol_check_list extends $mol_view {
-		option_checked( id: any, next?: boolean ): boolean
-		option_title( id: any): string
-		option_label( id: any): readonly(any)[]
-		enabled( ): boolean
-		option_enabled( id: any): ReturnType< $mol_check_list['enabled'] >
-		option_hint( id: any): string
-		items( ): readonly($mol_check)[]
-		dictionary( ): Record<string, any>
-		Option( id: any): $mol_check
-		options( ): Record<string, any>
-		keys( ): readonly(string)[]
-		sub( ): ReturnType< $mol_check_list['items'] >
-	}
-	
-}
-
-//# sourceMappingURL=list.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_check_list extends $.$mol_check_list {
-        options(): {
-            [key: string]: string;
-        };
-        dictionary(next?: Record<string, boolean>): Record<string, boolean>;
-        option_checked(id: string, next?: boolean | null): boolean;
-        keys(): readonly string[];
-        items(): $.$mol_check[];
-        option_title(key: string): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_state_session<Value> extends $mol_object {
-        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
-        static native(): Storage | {
-            getItem(key: string): any;
-            setItem(key: string, value: string): void;
-            removeItem(key: string): void;
-        };
-        static value<Value>(key: string, next?: Value): Value;
-        prefix(): string;
-        value(key: string, next?: Value): Value;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_switch extends $mol_check_list {
-		value( next?: string ): string
-	}
-	
-}
-
-//# sourceMappingURL=switch.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_switch extends $.$mol_switch {
-        value(next?: string): string;
-        option_checked(key: string, next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_switch__value_mol_deck_1 = $mol_type_enforce<
-		ReturnType< $mol_deck['current'] >
-		,
-		ReturnType< $mol_switch['value'] >
-	>
-	type $mol_switch__options_mol_deck_2 = $mol_type_enforce<
-		ReturnType< $mol_deck['switch_options'] >
-		,
-		ReturnType< $mol_switch['options'] >
-	>
-	export class $mol_deck extends $mol_list {
-		current( next?: string ): string
-		switch_options( ): Record<string, any>
-		Switch( ): $mol_switch
-		Content( ): $mol_view
-		items( ): readonly($mol_view)[]
-		rows( ): readonly($mol_view)[]
-	}
-	
-}
-
-//# sourceMappingURL=deck.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_deck extends $.$mol_deck {
-        current(next?: string): string;
-        switch_options(): Record<string, string>;
-        Content(): $mol_view;
-    }
-}
-
-declare namespace $ {
-
 	type $tukanable_gymload_smallnumber__precision_view_tukanable_gymload_builder_day_results_set_1 = $mol_type_enforce<
 		number
 		,
@@ -5460,6 +5738,7 @@ declare namespace $.$$ {
 declare namespace $.$$ {
     class $tukanable_gymload_builder_day_results_set extends $.$tukanable_gymload_builder_day_results_set {
         sub(): $mol_view[];
+        done_weight(): number;
         done_week_click(): void;
         done_plan_label(): string;
         past_week_results(): string;
@@ -5468,7 +5747,7 @@ declare namespace $.$$ {
         week_plan_reps(): string;
         plan_weight(): number;
         build_key(week_idx: number, prop_name: string, set_idx?: number): string;
-        week_weight_value(week_idx: number, next?: number): number;
+        week_weight_value(week_idx: number, next?: number, set_idx?: number): number;
         week_reps_value(week_idx: number, next?: number, set_idx?: number): number;
         week_weight(next?: number): number;
         default_reps(): number;
@@ -5650,7 +5929,7 @@ declare namespace $.$$ {
 declare namespace $ {
 
 	type $mol_number__value_tukanable_gymload_builder_1 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder['week_count'] >
+		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $mol_number['value'] >
 	>
@@ -5660,12 +5939,12 @@ declare namespace $ {
 		ReturnType< $mol_labeler['title'] >
 	>
 	type $mol_labeler__Content_tukanable_gymload_builder_3 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder['WeekCount'] >
+		ReturnType< $tukanable_gymload_builder['DayCount'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
 	type $mol_number__value_tukanable_gymload_builder_4 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder['day_count'] >
+		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $mol_number['value'] >
 	>
@@ -5675,7 +5954,7 @@ declare namespace $ {
 		ReturnType< $mol_labeler['title'] >
 	>
 	type $mol_labeler__Content_tukanable_gymload_builder_6 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder['DayCount'] >
+		ReturnType< $tukanable_gymload_builder['WeekCount'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
@@ -5907,12 +6186,12 @@ declare namespace $ {
 		day_storage_key( id: any): string
 		day_title( id: any): string
 		day_index( id: any): number
-		week_count( next?: number ): number
-		WeekCount( ): $mol_number
-		WeekCount_labeler( ): $mol_labeler
 		day_count( next?: number ): number
 		DayCount( ): $mol_number
 		DayCount_labeler( ): $mol_labeler
+		week_count( next?: number ): number
+		WeekCount( ): $mol_number
+		WeekCount_labeler( ): $mol_labeler
 		show_charts( next?: boolean ): boolean
 		ShowCharts_wrapper( ): $mol_check_box
 		ShowCharts_labeler( ): $mol_labeler

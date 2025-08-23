@@ -841,12 +841,70 @@ $mol_button_major $mol_button_minor
 
 $mol_row $mol_view
 
+$mol_ghost $mol_view
+	Sub $mol_view
+
+$mol_drop $mol_ghost
+	enabled? true
+	event *
+		dragenter?event <=> enter?event null
+		dragover?event <=> move?event null
+		dragleave?event <=> leave?event null
+		drop?event <=> drop?event null
+	attr * mol_drop_status <= status? \ready
+	adopt?transfer *
+	receive?transfer null
+	allow /
+		\copy
+		\move
+		\link
+
+$mol_drag $mol_ghost
+	event *
+		dragstart?event <=> drag_start?event <=> start?event null
+		drag?event <=> drag_move?event <=> move?event null
+		dragend?event <=> drag_end?event <=> end?event null
+	attr *
+		draggable true
+		mol_drag_status <= status? \ready
+	transfer *
+		text/plain \
+		text/html \
+		text/uri-list \
+	allow_copy true
+	allow_link true
+	allow_move true
+	image <= dom_node
+
+$mol_check_list $mol_view
+	dictionary *
+	Option* $mol_check
+		checked? <=> option_checked*? false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
+$mol_switch $mol_check_list
+	value? \
+
+$mol_deck $mol_list
+	items /$mol_view
+	rows /$mol_view
+		<= Switch $mol_switch
+			value? <=> current? \0
+			options <= switch_options *
+		<= Content $mol_view
+
 $tukanable_gymload_builder_day_planweights $mol_view
 	values /number
 	sub / <= weights @ \Calculated Weights:
 
-$tukanable_gymload_builder_day $mol_page
-	title \Day
+$tukanable_gymload_builder_day $mol_view
 	storage_key \day
 	day_index 0
 	week_count 10
@@ -896,7 +954,7 @@ $tukanable_gymload_builder_day $mol_page
 					<= Marker_hor* $mol_plot_mark_hor
 						title <= marker_hor_title \Weeks
 						labels <= week_labels* /string
-	body /
+	sub /
 		<= DayTitle $tukanable_gymload_title
 			title <= day_title @ \Day #
 		<= Rows $mol_list
@@ -937,12 +995,59 @@ $tukanable_gymload_builder_day $mol_page
 										value_min <= row_min_weight* 0
 										value? <=> row_finish_weight*? 100
 								<= min_step_labeler* null $mol_view | null
-								<= RemoveButton* $mol_button_major
-									click?event <=> row_remove*? null
-									sub / <= Remove_close_icon* $mol_icon_close
+								<= MorePick* $mol_pick
+									hint @ \Click to show more options
+									trigger_content /
+										<= Trigger_icon* $mol_icon_dots_vertical
+									bubble_content /
+										<= RemoveButton* $mol_button_major
+											click?event <=> row_remove*? null
+											sub /
+												<= Remove_close_icon* $mol_icon_close
+												<= remove_label* @ \Remove
 		<= AddButton $mol_button_major
 			title @ \Add Exercise
 			click? <=> add_exercise? null
+		<= Info $mol_deck
+			style *
+				marginTop \20px
+			items <= info_tabs /$mol_view
+				<= DeletecExercises $mol_view
+					title @ \Deleted Exercises
+					sub /
+						<= DeletedRows $mol_list
+							item_width_min* 200
+							item_height_min* 96
+							rows <= deleted_rows /$mol_view
+								<= DeletedRow*0 $mol_view
+									sub /
+										<= DeleteRowExercise* $mol_view
+											sub / <= row_exercise*
+										<= RestoreButton* $mol_button_major
+											title @ \Restore
+											click? <=> row_restore*? null
+											sub /
+												<= restore_label @ \Restore
+				<= SortExercises $mol_view
+					title @ \Sort Exercises
+					sub /
+						<= SortExercisesHelp $mol_view
+							sub / <= sort_help_text @ \Drag and drop exercises to sort them:
+						<= SortRows $mol_list
+							item_width_min* 200
+							item_height_min* 96
+							rows <= sort_rows /$mol_view
+								<= SortRow*0 $mol_drag
+									transfer *
+										text/plain <= sort_row_title* \
+										text/html <= sort_row_html* \
+										text/uri-list <= sort_row_uri* \
+									Sub <= SortRow_drop* $mol_drop
+										adopt?transfer <=> sort_transfer_adopt?transfer null
+										receive?obj <=> sort_receive_before*?obj null
+										Sub <= SortRow_content* $mol_view
+											sub /
+												<= row_exercise*
 
 $mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
 
@@ -983,30 +1088,6 @@ $tukanable_gymload_builder_weights $mol_view
 			checked? <=> enabled? false
 		<= Items $mol_view
 			sub <= items /$mol_view
-
-$mol_check_list $mol_view
-	dictionary *
-	Option* $mol_check
-		checked? <=> option_checked*? false
-		label <= option_label* /
-			<= option_title* \
-		enabled <= option_enabled* <= enabled true
-		hint <= option_hint* \
-		minimal_height 24
-	options *
-	keys /string
-	sub <= items /$mol_check
-
-$mol_switch $mol_check_list
-	value? \
-
-$mol_deck $mol_list
-	items /$mol_view
-	rows /$mol_view
-		<= Switch $mol_switch
-			value? <=> current? \0
-			options <= switch_options *
-		<= Content $mol_view
 
 $tukanable_gymload_builder_day_results_set $mol_view
 	storage_key \setresult
@@ -1121,14 +1202,14 @@ $tukanable_gymload_builder $mol_page
 		sub /
 			<= Header $mol_row
 				sub /
-					<= WeekCount_labeler $mol_labeler
-						title @ \Week Count
-						Content <= WeekCount $mol_number
-							value? <=> week_count? 10
 					<= DayCount_labeler $mol_labeler
 						title @ \Day Count
 						Content <= DayCount $mol_number
 							value? <=> day_count? 3
+					<= WeekCount_labeler $mol_labeler
+						title @ \Week Count
+						Content <= WeekCount $mol_number
+							value? <=> week_count? 10
 					<= ShowCharts_labeler $mol_labeler
 						title @ \Show Charts
 						Content <= ShowCharts_wrapper $mol_check_box
