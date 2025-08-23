@@ -90,9 +90,9 @@ namespace $.$$ {
 		}
 
 		week_weight_value( week_idx: number, next?: number, set_idx: number = this.set_idx() ): number {
-			const v = this.$.$mol_state_local.value( this.build_key( week_idx, 'weight', set_idx ), next ) || -1
+			const v = this.$.$mol_state_local.value( this.build_key( week_idx, 'weight', set_idx ), next ) || 0
 
-			if( v < 0 ) {
+			if( v < 0 && next === undefined ) {
 				// the previous code stored the weight for all sets in the same key
 				const old_value = this.$.$mol_state_local.value( this.build_key( week_idx, 'weigth' ) )
 				if( typeof old_value === 'number' && old_value >= 0 ) {
@@ -104,7 +104,7 @@ namespace $.$$ {
 		}
 
 		week_reps_value( week_idx: number, next?: number, set_idx?: number ): number {
-			return this.$.$mol_state_local.value( this.build_key( week_idx, 'reps', set_idx ), next ) || -1
+			return this.$.$mol_state_local.value( this.build_key( week_idx, 'reps', set_idx ), next ) || 0
 		}
 
 		override week_weight( next?: number ): number {
