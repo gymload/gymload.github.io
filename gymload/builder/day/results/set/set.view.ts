@@ -7,9 +7,9 @@ namespace $.$$ {
 				items.push( this.PastWeekView() )
 			}
 
-			const w = this.week_weight_value( this.week_idx() )
+			const w = this.original_week_weight( this.week_idx() )
 
-			if( w < 0 ) {
+			if( w === null ) {
 				items.push( this.DoneWeekView() )
 			} else {
 				items.push( this.CurrentWeekView() )
@@ -89,8 +89,12 @@ namespace $.$$ {
 			return `${ this.storage_key() }_${ this.excercise_idx() }_${ week_idx }_${ set_idx }_${ prop_name }`
 		}
 
-		week_weight_value( week_idx: number, next?: number, set_idx: number = this.set_idx() ): number {
-			const v = this.$.$mol_state_local.value( this.build_key( week_idx, 'weight', set_idx ), next ) || 0
+		original_week_weight( week_idx: number, next?: number, set_idx: number = this.set_idx() ) {
+			return  this.$.$mol_state_local.value( this.build_key( week_idx, 'weight', set_idx ), next )
+		}
+
+		week_weight_value( week_idx: number, next?: number, set_idx?: number ): number {
+			const v = this.original_week_weight( week_idx, next, set_idx )
 
 			if( v < 0 && next === undefined ) {
 				// the previous code stored the weight for all sets in the same key
