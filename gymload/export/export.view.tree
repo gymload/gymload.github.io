@@ -8,10 +8,6 @@ $tukanable_gymload_export $mol_page
 			title @ \Copy to Clipboard
 			text <= raw_data
 		<= Raw $mol_textarea
-			maximum_width 800
 			value <= raw_data \
-			event *
-				^ event
-				click?event <=> copy?event null
 		<= FooterHint $tukanable_gymload_pagehint
 			text @ \The data contains only the current program, not all data.

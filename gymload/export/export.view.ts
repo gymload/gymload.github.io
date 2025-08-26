@@ -59,10 +59,11 @@ namespace $.$$ {
 			return JSON.parse( json )
 		}
 
+		/*
 		override copy() {
 			const cb = $mol_wire_sync( this.$.$mol_dom_context.navigator.clipboard )
 
 			cb.writeText?.( this.raw_data() )
-		}
+		}*/
 	}
 }

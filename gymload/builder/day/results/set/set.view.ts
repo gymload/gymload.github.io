@@ -94,7 +94,7 @@ namespace $.$$ {
 		}
 
 		week_weight_value( week_idx: number, next?: number, set_idx?: number ): number {
-			const v = this.original_week_weight( week_idx, next, set_idx )
+			const v = this.original_week_weight( week_idx, next, set_idx ) || 0
 
 			if( v < 0 && next === undefined ) {
 				// the previous code stored the weight for all sets in the same key
