@@ -13,13 +13,13 @@ namespace $.$$ {
 
 			const spreads = { ...super.spreads() } as any
 
-			if (this.program_ids().length < 2) {
-				delete spreads['editprogram']
+			if( this.program_ids().length < 2 ) {
+				delete spreads[ 'editprogram' ]
 			}
 
-			if (this.day_count() === 0) {
-				delete spreads['print']
-				delete spreads['stats']
+			if( this.day_count() === 0 ) {
+				delete spreads[ 'print' ]
+				delete spreads[ 'stats' ]
 			}
 
 			return {
@@ -100,6 +100,10 @@ namespace $.$$ {
 
 			this.current_program( id )
 			this.to_default_page()
+
+			if (this.new_import_data().trim() !== '') {
+				$tukanable_gymload_export.inject( this.builder_storage_key(), this.new_import_data().trim() )
+			}
 		}
 
 		override edit_program() {
@@ -161,6 +165,23 @@ namespace $.$$ {
 
 		override cancel_delete_program() {
 			this.to_default_page()
+		}
+
+		@$mol_mem
+		override new_import_bid(): string {
+			const raw = this.new_import_data().trim()
+			if( !raw ) return ''
+
+			try {
+				const data = $mol_wire_sync($tukanable_gymload_export).decompress( raw )
+				if (!data) {
+					return 'Invalid data'
+				}
+
+				return ''
+			} catch (err) {
+				return `Invalid data: ${ err }`
+			}
 		}
 	}
 

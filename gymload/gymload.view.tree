@@ -55,6 +55,11 @@ $tukanable_gymload $mol_book2_catalog
 						bid <= new_name_bid \
 						Content <= NewName_control $mol_string
 							value? <=> new_name? \
+					<= NewNameImport_field $mol_form_field
+						name @ \Import
+						bid <= new_import_bid \
+						Content <= NewNameImport_control $mol_textarea
+							value? <=> new_import_data? \
 				submit? <=> add_program? null
 				submit_allowed => add_allowed
 				buttons /

@@ -2,8 +2,11 @@ namespace $.$$ {
 	export class $tukanable_gymload_export extends $.$tukanable_gymload_export {
 		override raw_data(): string {
 			const prefix = this.storage_key()
+			return $tukanable_gymload_export.extract( this.storage_key() )
+		}
+
+		static extract( prefix: string ) {
 			const result: any = {}
-			console.log(prefix)
 
 			Object.keys( this.$.$mol_state_local.native() )
 				.forEach( key => {
@@ -13,13 +16,24 @@ namespace $.$$ {
 
 					const short_key = key.slice( prefix.length )
 
-					result[ short_key ] = this.$.$mol_state_local.native().getItem( key )
+					result[ short_key ] = this.$.$mol_state_local.value(key)
 				} )
 
-			return $mol_wire_sync( this ).compress( result )
+			return $mol_wire_sync( $tukanable_gymload_export ).compress( result )
 		}
 
-		async compress( data: any ) {
+		static inject( prefix: string, raw: string ) {
+			const data = $mol_wire_sync( $tukanable_gymload_export ).decompress( raw )
+
+			Object.keys( data )
+				.forEach( key => {
+					this.$.$mol_state_local.value( prefix + key, data[ key ] )
+				} )
+
+			return data
+		}
+
+		static async compress( data: any ) {
 			const json = JSON.stringify( data, null, '  ' )
 
 			const cs = new CompressionStream( "gzip" )
@@ -30,15 +44,24 @@ namespace $.$$ {
 			const compressed = await new Response( cs.readable ).arrayBuffer()
 			const raw = new Uint8Array( compressed )
 
-			const res = $mol_base64_encode_web(raw)
-			console.log('size', json.length, raw.length, raw.length / json.length * 100)
-
-			return res
+			return $mol_base64_encode_web( raw )
 		}
 
-		override copy(  ) {
+		static async decompress( raw: string ) {
+			const bin = $mol_base64_decode_web( raw )
+
+			const ds = new DecompressionStream( "gzip" )
+			const writer = ds.writable.getWriter()
+			writer.write( bin )
+			writer.close()
+
+			const json = await new Response( ds.readable ).text()
+			return JSON.parse( json )
+		}
+
+		override copy() {
 			const cb = $mol_wire_sync( this.$.$mol_dom_context.navigator.clipboard )
-			
+
 			cb.writeText?.( this.raw_data() )
 		}
 	}
