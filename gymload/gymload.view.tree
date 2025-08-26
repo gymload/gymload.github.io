@@ -32,6 +32,8 @@ $tukanable_gymload $mol_book2_catalog
 		editprogram <= EditView
 		newprogram <= NewView
 		deleteprogram <= DeleteView
+		export <= ExportView $tukanable_gymload_export
+			storage_key <= builder_storage_key \gymload_builder
 	DayResultsPage* $mol_page
 		title <= day_results_title* @ \Day #
 		body / <= day_results_body* $mol_view

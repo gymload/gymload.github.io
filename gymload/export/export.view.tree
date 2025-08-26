@@ -1,0 +1,17 @@
+$tukanable_gymload_export $mol_page
+	storage_key \
+	title @ \Export
+	body /
+		<= Hint $tukanable_gymload_pagehint
+			text @ \This program does not store your data on any server. Your information is saved only on your device. If you want to move it to another device or create a backup, simply copy the data shown below:
+		<= Copy $mol_button_copy
+			title @ \Copy to Clipboard
+			text <= raw_data
+		<= Raw $mol_textarea
+			maximum_width 800
+			value <= raw_data \
+			event *
+				^ event
+				click?event <=> copy?event null
+		<= FooterHint $tukanable_gymload_pagehint
+			text @ \The data contains only the current program, not all data.
