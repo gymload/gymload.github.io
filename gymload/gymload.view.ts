@@ -102,7 +102,7 @@ namespace $.$$ {
 			this.to_default_page()
 
 			if (this.new_import_data().trim() !== '') {
-				$tukanable_gymload_export.inject( this.builder_storage_key(), this.new_import_data().trim() )
+				$tukanable_gymload_page_export.inject( this.builder_storage_key(), this.new_import_data().trim() )
 			}
 		}
 
@@ -173,7 +173,7 @@ namespace $.$$ {
 			if( !raw ) return ''
 
 			try {
-				const data = $mol_wire_sync($tukanable_gymload_export).decompress( raw )
+				const data = $mol_wire_sync($tukanable_gymload_page_export).decompress( raw )
 				if (!data) {
 					return 'Invalid data'
 				}

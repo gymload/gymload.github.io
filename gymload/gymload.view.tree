@@ -32,7 +32,7 @@ $tukanable_gymload $mol_book2_catalog
 		editprogram <= EditView
 		newprogram <= NewView
 		deleteprogram <= DeleteView
-		export <= ExportView $tukanable_gymload_export
+		export <= ExportView $tukanable_gymload_page_export
 			storage_key <= builder_storage_key \gymload_builder
 	DayResultsPage* $mol_page
 		title <= day_results_title* @ \Day #
@@ -56,7 +56,7 @@ $tukanable_gymload $mol_book2_catalog
 						Content <= NewName_control $mol_string
 							value? <=> new_name? \
 					<= NewNameImport_field $mol_form_field
-						name @ \Import
+						name @ \Import Data
 						bid <= new_import_bid \
 						Content <= NewNameImport_control $mol_textarea
 							value? <=> new_import_data? \

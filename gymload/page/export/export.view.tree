@@ -1,4 +1,4 @@
-$tukanable_gymload_export $mol_page
+$tukanable_gymload_page_export $tukanable_gymload_page
 	storage_key \
 	title @ \Export
 	body /
@@ -8,6 +8,8 @@ $tukanable_gymload_export $mol_page
 			title @ \Copy to Clipboard
 			text <= raw_data
 		<= Raw $mol_textarea
+			syntax <= empty_syntax null
+			spellcheck false
 			value <= raw_data \
 		<= FooterHint $tukanable_gymload_pagehint
-			text @ \The data contains only the current program, not all data.
+			text @ \The data contains only the current program, not all data. The data can be imported on the New Program page.

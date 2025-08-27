@@ -21,6 +21,7 @@
 	"$tukanable_gymload_NewView_title": "Новая программа",
 	"$tukanable_gymload_NewView_menu_title": "Новая",
 	"$tukanable_gymload_DeleteView_title": "Удалить",
+	"$tukanable_gymload_NewNameImport_field_name": "Даннае импорта",
 	"$tukanable_gymload_NewPageHint_text": "Вы можете создать несколько программ и переключаться между ними. Например, создать программу для каждого вашего клиента.",
 	"$tukanable_gymload_title": "Gymload"
 }

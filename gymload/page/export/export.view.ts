@@ -1,8 +1,8 @@
 namespace $.$$ {
-	export class $tukanable_gymload_export extends $.$tukanable_gymload_export {
+	export class $tukanable_gymload_page_export extends $.$tukanable_gymload_page_export {
 		override raw_data(): string {
 			const prefix = this.storage_key()
-			return $tukanable_gymload_export.extract( this.storage_key() )
+			return $tukanable_gymload_page_export.extract( this.storage_key() )
 		}
 
 		static extract( prefix: string ) {
@@ -16,14 +16,14 @@ namespace $.$$ {
 
 					const short_key = key.slice( prefix.length )
 
-					result[ short_key ] = this.$.$mol_state_local.value(key)
+					result[ short_key ] = this.$.$mol_state_local.value( key )
 				} )
 
-			return $mol_wire_sync( $tukanable_gymload_export ).compress( result )
+			return $mol_wire_sync( $tukanable_gymload_page_export ).compress( result )
 		}
 
 		static inject( prefix: string, raw: string ) {
-			const data = $mol_wire_sync( $tukanable_gymload_export ).decompress( raw )
+			const data = $mol_wire_sync( $tukanable_gymload_page_export ).decompress( raw )
 
 			Object.keys( data )
 				.forEach( key => {
@@ -59,11 +59,17 @@ namespace $.$$ {
 			return JSON.parse( json )
 		}
 
-		/*
-		override copy() {
-			const cb = $mol_wire_sync( this.$.$mol_dom_context.navigator.clipboard )
+		override event() {
+			return {
+				...super.event(),
+				click: ( e: Event ) => this.Copy().click( e ),
+			}
+		}
 
-			cb.writeText?.( this.raw_data() )
-		}*/
+		override empty_syntax() {
+			return new $mol_syntax2( {
+				'any': /\?/,
+			} )
+		}
 	}
 }
