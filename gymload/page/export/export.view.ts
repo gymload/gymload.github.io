@@ -44,11 +44,11 @@ namespace $.$$ {
 			const compressed = await new Response( cs.readable ).arrayBuffer()
 			const raw = new Uint8Array( compressed )
 
-			return $mol_base64_encode_web( raw )
+			return $mol_base64_encode( raw )
 		}
 
 		static async decompress( raw: string ) {
-			const bin = $mol_base64_decode_web( raw )
+			const bin = $mol_base64_decode( raw )
 
 			const ds = new DecompressionStream( "gzip" )
 			const writer = ds.writable.getWriter()
