@@ -17,6 +17,7 @@
 	"$tukanable_gymload_EditTitle_title": "Edit Program",
 	"$tukanable_gymload_EditView_menu_title": "Edit",
 	"$tukanable_gymload_EditView_title": "Edit Program",
+	"$tukanable_gymload_NewNameImport_field_name": "Import Data",
 	"$tukanable_gymload_NewName_field_name": "Name",
 	"$tukanable_gymload_NewPageHint_text": "You can create multiple programs and switch between them. For example, you might create a separate program for each of your clients.",
 	"$tukanable_gymload_NewSubmit_title": "Add",
@@ -79,5 +80,9 @@
 	"$tukanable_gymload_default_program_name": "Default",
 	"$tukanable_gymload_delete_link_text": "Delete Program",
 	"$tukanable_gymload_help_title": "Help",
+	"$tukanable_gymload_page_export_Copy_title": "Copy to Clipboard",
+	"$tukanable_gymload_page_export_FooterHint_text": "The data contains only the current program, not all data. The data can be imported on the New Program page.",
+	"$tukanable_gymload_page_export_Hint_text": "This program does not store your data on any server. Your information is saved only on your device. If you want to move it to another device or create a backup, simply copy the data shown below:",
+	"$tukanable_gymload_page_export_title": "Export",
 	"$tukanable_gymload_required_label": "Required"
 }

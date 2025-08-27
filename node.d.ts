@@ -6,6 +6,7 @@ declare class $ extends _$_ {
 declare namespace $ {
     export type $ = typeof $$;
     export class $$ extends $ {
+        static $: $;
     }
     namespace $$ {
         type $$ = $;
@@ -159,7 +160,7 @@ declare namespace $ {
     function $mol_dev_format_native(obj: any): any[];
     function $mol_dev_format_auto(obj: any): any[];
     function $mol_dev_format_element(element: string, style: object, ...content: any[]): any[];
-    function $mol_dev_format_span(style: object, ...content: any[]): any[];
+    let $mol_dev_format_span: (style: object, ...content: any[]) => any[];
     let $mol_dev_format_div: (style: object, ...content: any[]) => any[];
     let $mol_dev_format_ol: (style: object, ...content: any[]) => any[];
     let $mol_dev_format_li: (style: object, ...content: any[]) => any[];
@@ -5747,6 +5748,7 @@ declare namespace $.$$ {
         week_plan_reps(): string;
         plan_weight(): number;
         build_key(week_idx: number, prop_name: string, set_idx?: number): string;
+        original_week_weight(week_idx: number, next?: number, set_idx?: number): number | null;
         week_weight_value(week_idx: number, next?: number, set_idx?: number): number;
         week_reps_value(week_idx: number, next?: number, set_idx?: number): number;
         week_weight(next?: number): number;
@@ -6245,6 +6247,18 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	export class $tukanable_gymload_page extends $mol_page {
+		menu_title( ): string
+	}
+	
+}
+
+//# sourceMappingURL=page.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
 	export class $tukanable_gymload_pagehint extends $mol_view {
 		text( ): string
 		sub( ): readonly(any)[]
@@ -6257,118 +6271,77 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-
-	type $mol_view__sub_mol_form_field_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_form_field extends $mol_labeler {
-		name( ): string
-		bid( ): string
-		Bid( ): $mol_view
-		control( ): any
-		bids( ): readonly(string)[]
-		label( ): readonly(any)[]
-		content( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=field.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_form_field extends $.$mol_form_field {
-        bid(): string;
-    }
-}
-
-declare namespace $ {
+    type $mol_blob = Blob;
+    let $mol_blob: {
+        prototype: Blob;
+        new (blobParts?: readonly BlobPart[], options?: BlobPropertyBag): Blob;
+    };
 }
 
 declare namespace $ {
 
-	export class $mol_status extends $mol_view {
-		message( ): string
-		status( ): ReturnType< $mol_status['title'] >
-		minimal_height( ): number
-		minimal_width( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=status.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_status extends $.$mol_status {
-        message(): any;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_list__sub_mol_form_1 = $mol_type_enforce<
-		ReturnType< $mol_form['body'] >
-		,
-		ReturnType< $mol_list['sub'] >
-	>
-	type $mol_row__sub_mol_form_2 = $mol_type_enforce<
-		ReturnType< $mol_form['foot'] >
-		,
-		ReturnType< $mol_row['sub'] >
-	>
-	export class $mol_form extends $mol_list {
-		keydown( next?: any ): any
-		form_fields( ): readonly($mol_form_field)[]
-		body( ): ReturnType< $mol_form['form_fields'] >
-		Body( ): $mol_list
-		buttons( ): readonly($mol_view)[]
-		foot( ): ReturnType< $mol_form['buttons'] >
-		Foot( ): $mol_row
-		submit_allowed( ): boolean
-		submit_blocked( ): boolean
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_form['keydown'] > ): ReturnType< $mol_form['keydown'] >,
-		})  & ReturnType< $mol_list['event'] >
-		submit( next?: any ): any
-		rows( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=form.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_form extends $.$mol_form {
-        form_fields(): readonly $mol_form_field[];
-        submit_allowed(): boolean;
-        submit_blocked(): boolean;
-        keydown(next: KeyboardEvent): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_delete extends $mol_icon {
+	export class $mol_icon_clipboard extends $mol_icon {
 		path( ): string
 	}
 	
 }
 
-//# sourceMappingURL=delete.view.tree.d.ts.map
+//# sourceMappingURL=clipboard.view.tree.d.ts.map
 declare namespace $ {
 
-	export class $tukanable_gymload_page extends $mol_page {
-		menu_title( ): string
+	export class $mol_icon_clipboard_outline extends $mol_icon {
+		path( ): string
 	}
 	
 }
 
-//# sourceMappingURL=page.view.tree.d.ts.map
+//# sourceMappingURL=outline.view.tree.d.ts.map
+declare namespace $ {
+    function $mol_html_encode(text: string): string;
+}
+
+declare namespace $ {
+
+	type $mol_blob__mol_button_copy_1 = $mol_type_enforce<
+		[ readonly(BlobPart)[], ({ 
+			'type': string,
+		})  ]
+		,
+		ConstructorParameters< typeof $mol_blob >
+	>
+	type $mol_blob__mol_button_copy_2 = $mol_type_enforce<
+		[ readonly(BlobPart)[], ({ 
+			'type': string,
+		})  ]
+		,
+		ConstructorParameters< typeof $mol_blob >
+	>
+	export class $mol_button_copy extends $mol_button_minor {
+		text( ): ReturnType< $mol_button_copy['title'] >
+		text_blob( next?: $mol_blob ): $mol_blob
+		html( ): string
+		html_blob( next?: $mol_blob ): $mol_blob
+		Icon( ): $mol_icon_clipboard_outline
+		title( ): string
+		blobs( ): readonly($mol_blob)[]
+		data( ): Record<string, any>
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=copy.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_button_copy extends $.$mol_button_copy {
+        data(): {
+            [k: string]: Blob;
+        };
+        html(): string;
+        attachments(): ClipboardItem[];
+        click(event?: Event): void;
+    }
+}
+
 declare namespace $ {
 }
 
@@ -6380,6 +6353,25 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=stack.view.tree.d.ts.map
+declare namespace $ {
+    class $mol_syntax2<Lexems extends {
+        [name: string]: RegExp;
+    } = {}> {
+        lexems: Lexems;
+        constructor(lexems: Lexems);
+        rules: Array<{
+            regExp: RegExp;
+            name: string;
+            size: number;
+        }>;
+        regexp: RegExp;
+        tokenize(text: string, handle: (name: string, found: string, chunks: string[], offset: number) => void): void;
+        parse(text: string, handlers: {
+            [key in keyof Lexems | '']: (found: string, chunks: string[], offset: number) => void;
+        }): void;
+    }
+}
+
 declare namespace $ {
 
 	export class $mol_text_code_token extends $mol_dimmer {
@@ -6403,25 +6395,6 @@ declare namespace $ {
 
 //# sourceMappingURL=token.view.tree.d.ts.map
 declare namespace $.$$ {
-}
-
-declare namespace $ {
-    class $mol_syntax2<Lexems extends {
-        [name: string]: RegExp;
-    } = {}> {
-        lexems: Lexems;
-        constructor(lexems: Lexems);
-        rules: Array<{
-            regExp: RegExp;
-            name: string;
-            size: number;
-        }>;
-        regexp: RegExp;
-        tokenize(text: string, handle: (name: string, found: string, chunks: string[], offset: number) => void): void;
-        parse(text: string, handlers: {
-            [key in keyof Lexems | '']: (found: string, chunks: string[], offset: number) => void;
-        }): void;
-    }
 }
 
 declare namespace $ {
@@ -6575,78 +6548,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    type $mol_blob = Blob;
-    let $mol_blob: {
-        prototype: Blob;
-        new (blobParts?: readonly BlobPart[], options?: BlobPropertyBag): Blob;
-    };
-}
-
-declare namespace $ {
-
-	export class $mol_icon_clipboard extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=clipboard.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_clipboard_outline extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=outline.view.tree.d.ts.map
-declare namespace $ {
-    function $mol_html_encode(text: string): string;
-}
-
-declare namespace $ {
-
-	type $mol_blob__mol_button_copy_1 = $mol_type_enforce<
-		[ readonly(BlobPart)[], ({ 
-			'type': string,
-		})  ]
-		,
-		ConstructorParameters< typeof $mol_blob >
-	>
-	type $mol_blob__mol_button_copy_2 = $mol_type_enforce<
-		[ readonly(BlobPart)[], ({ 
-			'type': string,
-		})  ]
-		,
-		ConstructorParameters< typeof $mol_blob >
-	>
-	export class $mol_button_copy extends $mol_button_minor {
-		text( ): ReturnType< $mol_button_copy['title'] >
-		text_blob( next?: $mol_blob ): $mol_blob
-		html( ): string
-		html_blob( next?: $mol_blob ): $mol_blob
-		Icon( ): $mol_icon_clipboard_outline
-		title( ): string
-		blobs( ): readonly($mol_blob)[]
-		data( ): Record<string, any>
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=copy.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_button_copy extends $.$mol_button_copy {
-        data(): {
-            [k: string]: Blob;
-        };
-        html(): string;
-        attachments(): ClipboardItem[];
-        click(event?: Event): void;
-    }
-}
-
-declare namespace $ {
 
 	type $mol_text_code_line__numb_showed_mol_text_code_1 = $mol_type_enforce<
 		ReturnType< $mol_text_code['sidebar_showed'] >
@@ -6768,6 +6669,346 @@ declare namespace $.$$ {
 declare namespace $.$$ {
 }
 
+declare namespace $ {
+
+	type $mol_textarea_edit__value_mol_textarea_1 = $mol_type_enforce<
+		ReturnType< $mol_textarea['value'] >
+		,
+		ReturnType< $mol_textarea_edit['value'] >
+	>
+	type $mol_textarea_edit__hint_mol_textarea_2 = $mol_type_enforce<
+		ReturnType< $mol_textarea['hint'] >
+		,
+		ReturnType< $mol_textarea_edit['hint'] >
+	>
+	type $mol_textarea_edit__enabled_mol_textarea_3 = $mol_type_enforce<
+		ReturnType< $mol_textarea['enabled'] >
+		,
+		ReturnType< $mol_textarea_edit['enabled'] >
+	>
+	type $mol_textarea_edit__spellcheck_mol_textarea_4 = $mol_type_enforce<
+		ReturnType< $mol_textarea['spellcheck'] >
+		,
+		ReturnType< $mol_textarea_edit['spellcheck'] >
+	>
+	type $mol_textarea_edit__length_max_mol_textarea_5 = $mol_type_enforce<
+		ReturnType< $mol_textarea['length_max'] >
+		,
+		ReturnType< $mol_textarea_edit['length_max'] >
+	>
+	type $mol_textarea_edit__selection_mol_textarea_6 = $mol_type_enforce<
+		ReturnType< $mol_textarea['selection'] >
+		,
+		ReturnType< $mol_textarea_edit['selection'] >
+	>
+	type $mol_textarea_edit__submit_mol_textarea_7 = $mol_type_enforce<
+		ReturnType< $mol_textarea['submit'] >
+		,
+		ReturnType< $mol_textarea_edit['submit'] >
+	>
+	type $mol_textarea_edit__submit_with_ctrl_mol_textarea_8 = $mol_type_enforce<
+		ReturnType< $mol_textarea['submit_with_ctrl'] >
+		,
+		ReturnType< $mol_textarea_edit['submit_with_ctrl'] >
+	>
+	type $mol_text_code__text_mol_textarea_9 = $mol_type_enforce<
+		ReturnType< $mol_textarea['value'] >
+		,
+		ReturnType< $mol_text_code['text'] >
+	>
+	type $mol_text_code__render_visible_only_mol_textarea_10 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_text_code['render_visible_only'] >
+	>
+	type $mol_text_code__row_numb_mol_textarea_11 = $mol_type_enforce<
+		ReturnType< $mol_textarea['row_numb'] >
+		,
+		ReturnType< $mol_text_code['row_numb'] >
+	>
+	type $mol_text_code__sidebar_showed_mol_textarea_12 = $mol_type_enforce<
+		ReturnType< $mol_textarea['sidebar_showed'] >
+		,
+		ReturnType< $mol_text_code['sidebar_showed'] >
+	>
+	type $mol_text_code__highlight_mol_textarea_13 = $mol_type_enforce<
+		ReturnType< $mol_textarea['highlight'] >
+		,
+		ReturnType< $mol_text_code['highlight'] >
+	>
+	type $mol_text_code__syntax_mol_textarea_14 = $mol_type_enforce<
+		ReturnType< $mol_textarea['syntax'] >
+		,
+		ReturnType< $mol_text_code['syntax'] >
+	>
+	export class $mol_textarea extends $mol_stack {
+		clickable( next?: boolean ): boolean
+		sidebar_showed( ): boolean
+		press( next?: any ): any
+		hover( next?: any ): any
+		value( next?: string ): string
+		hint( ): string
+		enabled( ): boolean
+		spellcheck( ): boolean
+		length_max( ): number
+		selection( next?: readonly(number)[] ): readonly(number)[]
+		bring( ): ReturnType< ReturnType< $mol_textarea['Edit'] >['bring'] >
+		submit( next?: any ): any
+		submit_with_ctrl( ): boolean
+		Edit( ): $mol_textarea_edit
+		row_numb( id: any): number
+		highlight( ): string
+		syntax( ): $mol_syntax2
+		View( ): $mol_text_code
+		attr( ): ({ 
+			'mol_textarea_clickable': ReturnType< $mol_textarea['clickable'] >,
+			'mol_textarea_sidebar_showed': ReturnType< $mol_textarea['sidebar_showed'] >,
+		})  & ReturnType< $mol_stack['attr'] >
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_textarea['press'] > ): ReturnType< $mol_textarea['press'] >,
+			pointermove( next?: ReturnType< $mol_textarea['hover'] > ): ReturnType< $mol_textarea['hover'] >,
+		}) 
+		sub( ): readonly(any)[]
+		symbols_alt( ): Record<string, string>
+		symbols_alt_ctrl( ): Record<string, string>
+		symbols_alt_shift( ): Record<string, string>
+	}
+	
+	export class $mol_textarea_edit extends $mol_string {
+		dom_name( ): string
+		enter( ): string
+		field( ): ({ 
+			'scrollTop': number,
+		})  & ReturnType< $mol_string['field'] >
+	}
+	
+}
+
+//# sourceMappingURL=textarea.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_textarea extends $.$mol_textarea {
+        indent_inc(): void;
+        indent_dec(): void;
+        symbol_insert(event: KeyboardEvent): void;
+        clickable(next?: boolean): boolean;
+        hover(event: PointerEvent): void;
+        press(event: KeyboardEvent): void;
+        row_numb(index: number): number;
+        syntax(): $mol_syntax2<{
+            'code-indent': RegExp;
+            'code-docs': RegExp;
+            'code-comment-block': RegExp;
+            'code-link': RegExp;
+            'code-comment-inline': RegExp;
+            'code-string': RegExp;
+            'code-number': RegExp;
+            'code-call': RegExp;
+            'code-sexpr': RegExp;
+            'code-field': RegExp;
+            'code-keyword': RegExp;
+            'code-global': RegExp;
+            'code-word': RegExp;
+            'code-decorator': RegExp;
+            'code-tag': RegExp;
+            'code-punctuation': RegExp;
+        }>;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    function $mol_base64_encode(src: string | Uint8Array<ArrayBuffer>): string;
+}
+
+declare namespace $ {
+    function $mol_base64_encode_node(str: string | Uint8Array<ArrayBuffer>): string;
+}
+
+declare namespace $ {
+    function $mol_base64_decode(base64: string): Uint8Array<ArrayBuffer>;
+}
+
+declare namespace $ {
+    function $mol_base64_decode_node(base64Str: string): Uint8Array<ArrayBuffer>;
+}
+
+declare namespace $ {
+
+	type $tukanable_gymload_pagehint__text_tukanable_gymload_page_export_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_pagehint['text'] >
+	>
+	type $mol_button_copy__title_tukanable_gymload_page_export_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_copy['title'] >
+	>
+	type $mol_button_copy__text_tukanable_gymload_page_export_3 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['raw_data'] >
+		,
+		ReturnType< $mol_button_copy['text'] >
+	>
+	type $mol_textarea__syntax_tukanable_gymload_page_export_4 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['empty_syntax'] >
+		,
+		ReturnType< $mol_textarea['syntax'] >
+	>
+	type $mol_textarea__spellcheck_tukanable_gymload_page_export_5 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_textarea['spellcheck'] >
+	>
+	type $mol_textarea__value_tukanable_gymload_page_export_6 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['raw_data'] >
+		,
+		ReturnType< $mol_textarea['value'] >
+	>
+	type $tukanable_gymload_pagehint__text_tukanable_gymload_page_export_7 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_pagehint['text'] >
+	>
+	export class $tukanable_gymload_page_export extends $tukanable_gymload_page {
+		Hint( ): $tukanable_gymload_pagehint
+		Copy( ): $mol_button_copy
+		empty_syntax( ): any
+		raw_data( ): string
+		Raw( ): $mol_textarea
+		FooterHint( ): $tukanable_gymload_pagehint
+		storage_key( ): string
+		title( ): string
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=export.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $tukanable_gymload_page_export extends $.$tukanable_gymload_page_export {
+        raw_data(): string;
+        static extract(prefix: string): string;
+        static inject(prefix: string, raw: string): any;
+        static compress(data: any): Promise<string>;
+        static decompress(raw: string): Promise<any>;
+        event(): {
+            click: (e: Event) => any;
+        };
+        empty_syntax(): $mol_syntax2<{
+            any: RegExp;
+        }>;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_mol_form_field_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_form_field extends $mol_labeler {
+		name( ): string
+		bid( ): string
+		Bid( ): $mol_view
+		control( ): any
+		bids( ): readonly(string)[]
+		label( ): readonly(any)[]
+		content( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=field.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_form_field extends $.$mol_form_field {
+        bid(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_status extends $mol_view {
+		message( ): string
+		status( ): ReturnType< $mol_status['title'] >
+		minimal_height( ): number
+		minimal_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=status.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_status extends $.$mol_status {
+        message(): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_list__sub_mol_form_1 = $mol_type_enforce<
+		ReturnType< $mol_form['body'] >
+		,
+		ReturnType< $mol_list['sub'] >
+	>
+	type $mol_row__sub_mol_form_2 = $mol_type_enforce<
+		ReturnType< $mol_form['foot'] >
+		,
+		ReturnType< $mol_row['sub'] >
+	>
+	export class $mol_form extends $mol_list {
+		keydown( next?: any ): any
+		form_fields( ): readonly($mol_form_field)[]
+		body( ): ReturnType< $mol_form['form_fields'] >
+		Body( ): $mol_list
+		buttons( ): readonly($mol_view)[]
+		foot( ): ReturnType< $mol_form['buttons'] >
+		Foot( ): $mol_row
+		submit_allowed( ): boolean
+		submit_blocked( ): boolean
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_form['keydown'] > ): ReturnType< $mol_form['keydown'] >,
+		})  & ReturnType< $mol_list['event'] >
+		submit( next?: any ): any
+		rows( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=form.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_form extends $.$mol_form {
+        form_fields(): readonly $mol_form_field[];
+        submit_allowed(): boolean;
+        submit_blocked(): boolean;
+        keydown(next: KeyboardEvent): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_delete extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=delete.view.tree.d.ts.map
 declare namespace $ {
 }
 
@@ -7904,239 +8145,264 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['model'] >
 	>
-	type $tukanable_gymload_pagehint__text_tukanable_gymload_13 = $mol_type_enforce<
+	type $tukanable_gymload_page_export__storage_key_tukanable_gymload_13 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['builder_storage_key'] >
+		,
+		ReturnType< $tukanable_gymload_page_export['storage_key'] >
+	>
+	type $tukanable_gymload_pagehint__text_tukanable_gymload_14 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_pagehint['text'] >
 	>
-	type $mol_string__value_tukanable_gymload_14 = $mol_type_enforce<
+	type $mol_string__value_tukanable_gymload_15 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['new_name'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_form_field__name_tukanable_gymload_15 = $mol_type_enforce<
+	type $mol_form_field__name_tukanable_gymload_16 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_form_field['name'] >
 	>
-	type $mol_form_field__bid_tukanable_gymload_16 = $mol_type_enforce<
+	type $mol_form_field__bid_tukanable_gymload_17 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['new_name_bid'] >
 		,
 		ReturnType< $mol_form_field['bid'] >
 	>
-	type $mol_form_field__Content_tukanable_gymload_17 = $mol_type_enforce<
+	type $mol_form_field__Content_tukanable_gymload_18 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['NewName_control'] >
 		,
 		ReturnType< $mol_form_field['Content'] >
 	>
-	type $mol_button_major__title_tukanable_gymload_18 = $mol_type_enforce<
-		string
+	type $mol_textarea__value_tukanable_gymload_19 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['new_import_data'] >
 		,
-		ReturnType< $mol_button_major['title'] >
+		ReturnType< $mol_textarea['value'] >
 	>
-	type $mol_button_major__click_tukanable_gymload_19 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['add_program'] >
-		,
-		ReturnType< $mol_button_major['click'] >
-	>
-	type $mol_button_major__enabled_tukanable_gymload_20 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['add_allowed'] >
-		,
-		ReturnType< $mol_button_major['enabled'] >
-	>
-	type $mol_status__message_tukanable_gymload_21 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['result'] >
-		,
-		ReturnType< $mol_status['message'] >
-	>
-	type $mol_form__body_tukanable_gymload_22 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_form['body'] >
-	>
-	type $mol_form__submit_tukanable_gymload_23 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['add_program'] >
-		,
-		ReturnType< $mol_form['submit'] >
-	>
-	type $mol_form__buttons_tukanable_gymload_24 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_form['buttons'] >
-	>
-	type $tukanable_gymload_title__title_tukanable_gymload_25 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $tukanable_gymload_title['title'] >
-	>
-	type $mol_string__value_tukanable_gymload_26 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['edit_name'] >
-		,
-		ReturnType< $mol_string['value'] >
-	>
-	type $mol_form_field__name_tukanable_gymload_27 = $mol_type_enforce<
+	type $mol_form_field__name_tukanable_gymload_20 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_form_field['name'] >
 	>
-	type $mol_form_field__bid_tukanable_gymload_28 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['edit_name_bid'] >
+	type $mol_form_field__bid_tukanable_gymload_21 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['new_import_bid'] >
 		,
 		ReturnType< $mol_form_field['bid'] >
 	>
-	type $mol_form_field__Content_tukanable_gymload_29 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['EditName_control'] >
+	type $mol_form_field__Content_tukanable_gymload_22 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['NewNameImport_control'] >
 		,
 		ReturnType< $mol_form_field['Content'] >
 	>
-	type $mol_button_major__title_tukanable_gymload_30 = $mol_type_enforce<
+	type $mol_button_major__title_tukanable_gymload_23 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_tukanable_gymload_31 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['edit_program'] >
+	type $mol_button_major__click_tukanable_gymload_24 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['add_program'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__enabled_tukanable_gymload_32 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload['edit_allowed'] >
+	type $mol_button_major__enabled_tukanable_gymload_25 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['add_allowed'] >
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $mol_status__message_tukanable_gymload_33 = $mol_type_enforce<
+	type $mol_status__message_tukanable_gymload_26 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['result'] >
 		,
 		ReturnType< $mol_status['message'] >
 	>
-	type $mol_link__arg_tukanable_gymload_34 = $mol_type_enforce<
+	type $mol_form__body_tukanable_gymload_27 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_form['body'] >
+	>
+	type $mol_form__submit_tukanable_gymload_28 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['add_program'] >
+		,
+		ReturnType< $mol_form['submit'] >
+	>
+	type $mol_form__buttons_tukanable_gymload_29 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_form['buttons'] >
+	>
+	type $tukanable_gymload_title__title_tukanable_gymload_30 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_title['title'] >
+	>
+	type $mol_string__value_tukanable_gymload_31 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['edit_name'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_form_field__name_tukanable_gymload_32 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_form_field['name'] >
+	>
+	type $mol_form_field__bid_tukanable_gymload_33 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['edit_name_bid'] >
+		,
+		ReturnType< $mol_form_field['bid'] >
+	>
+	type $mol_form_field__Content_tukanable_gymload_34 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['EditName_control'] >
+		,
+		ReturnType< $mol_form_field['Content'] >
+	>
+	type $mol_button_major__title_tukanable_gymload_35 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_36 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['edit_program'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__enabled_tukanable_gymload_37 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['edit_allowed'] >
+		,
+		ReturnType< $mol_button_major['enabled'] >
+	>
+	type $mol_status__message_tukanable_gymload_38 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload['result'] >
+		,
+		ReturnType< $mol_status['message'] >
+	>
+	type $mol_link__arg_tukanable_gymload_39 = $mol_type_enforce<
 		({ 
 			'nav': string,
 		}) 
 		,
 		ReturnType< $mol_link['arg'] >
 	>
-	type $mol_link__sub_tukanable_gymload_35 = $mol_type_enforce<
+	type $mol_link__sub_tukanable_gymload_40 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_link['sub'] >
 	>
-	type $mol_form__body_tukanable_gymload_36 = $mol_type_enforce<
+	type $mol_form__body_tukanable_gymload_41 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_form['body'] >
 	>
-	type $mol_form__submit_tukanable_gymload_37 = $mol_type_enforce<
+	type $mol_form__submit_tukanable_gymload_42 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['edit_program'] >
 		,
 		ReturnType< $mol_form['submit'] >
 	>
-	type $mol_form__buttons_tukanable_gymload_38 = $mol_type_enforce<
+	type $mol_form__buttons_tukanable_gymload_43 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_form['buttons'] >
 	>
-	type $tukanable_gymload_title__title_tukanable_gymload_39 = $mol_type_enforce<
+	type $tukanable_gymload_title__title_tukanable_gymload_44 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_title['title'] >
 	>
-	type $mol_button_major__title_tukanable_gymload_40 = $mol_type_enforce<
+	type $mol_button_major__title_tukanable_gymload_45 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_tukanable_gymload_41 = $mol_type_enforce<
+	type $mol_button_major__click_tukanable_gymload_46 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['delete_program'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_minor__title_tukanable_gymload_42 = $mol_type_enforce<
+	type $mol_button_minor__title_tukanable_gymload_47 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_tukanable_gymload_43 = $mol_type_enforce<
+	type $mol_button_minor__click_tukanable_gymload_48 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['cancel_delete_program'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_view__sub_tukanable_gymload_44 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_49 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_page__title_tukanable_gymload_45 = $mol_type_enforce<
+	type $mol_page__title_tukanable_gymload_50 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['day_results_title'] >
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__body_tukanable_gymload_46 = $mol_type_enforce<
+	type $mol_page__body_tukanable_gymload_51 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $mol_page__tools_tukanable_gymload_47 = $mol_type_enforce<
+	type $mol_page__tools_tukanable_gymload_52 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['tools'] >
 	>
-	type $mol_select__dictionary_tukanable_gymload_48 = $mol_type_enforce<
+	type $mol_select__dictionary_tukanable_gymload_53 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['programs'] >
 		,
 		ReturnType< $mol_select['dictionary'] >
 	>
-	type $mol_select__value_tukanable_gymload_49 = $mol_type_enforce<
+	type $mol_select__value_tukanable_gymload_54 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['current_program_string'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $tukanable_gymload_page__title_tukanable_gymload_50 = $mol_type_enforce<
+	type $tukanable_gymload_page__title_tukanable_gymload_55 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_page['title'] >
 	>
-	type $tukanable_gymload_page__menu_title_tukanable_gymload_51 = $mol_type_enforce<
+	type $tukanable_gymload_page__menu_title_tukanable_gymload_56 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_page['menu_title'] >
 	>
-	type $tukanable_gymload_page__tools_tukanable_gymload_52 = $mol_type_enforce<
+	type $tukanable_gymload_page__tools_tukanable_gymload_57 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page['tools'] >
 	>
-	type $tukanable_gymload_page__body_tukanable_gymload_53 = $mol_type_enforce<
+	type $tukanable_gymload_page__body_tukanable_gymload_58 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page['body'] >
 	>
-	type $tukanable_gymload_page__title_tukanable_gymload_54 = $mol_type_enforce<
+	type $tukanable_gymload_page__title_tukanable_gymload_59 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_page['title'] >
 	>
-	type $tukanable_gymload_page__menu_title_tukanable_gymload_55 = $mol_type_enforce<
+	type $tukanable_gymload_page__menu_title_tukanable_gymload_60 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_page['menu_title'] >
 	>
-	type $tukanable_gymload_page__tools_tukanable_gymload_56 = $mol_type_enforce<
+	type $tukanable_gymload_page__tools_tukanable_gymload_61 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page['tools'] >
 	>
-	type $tukanable_gymload_page__body_tukanable_gymload_57 = $mol_type_enforce<
+	type $tukanable_gymload_page__body_tukanable_gymload_62 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page['body'] >
 	>
-	type $mol_page__title_tukanable_gymload_58 = $mol_type_enforce<
+	type $mol_page__title_tukanable_gymload_63 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__body_tukanable_gymload_59 = $mol_type_enforce<
+	type $mol_page__body_tukanable_gymload_64 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
@@ -8153,6 +8419,7 @@ declare namespace $ {
 		StatsPage( ): $tukanable_gymload_builder_stats
 		PrintPage( ): $tukanable_gymload_builder_export_print
 		HelpPage( ): $tukanable_gymload_help
+		ExportView( ): $tukanable_gymload_page_export
 		day_results_title( id: any): string
 		day_results_body( id: any): $mol_view
 		programs( ): Record<string, any>
@@ -8162,6 +8429,10 @@ declare namespace $ {
 		new_name( next?: string ): string
 		NewName_control( ): $mol_string
 		NewName_field( ): $mol_form_field
+		new_import_bid( ): string
+		new_import_data( next?: string ): string
+		NewNameImport_control( ): $mol_textarea
+		NewNameImport_field( ): $mol_form_field
 		add_program( next?: any ): any
 		add_allowed( ): ReturnType< ReturnType< $tukanable_gymload['NewForm'] >['submit_allowed'] >
 		NewSubmit( ): $mol_button_major
@@ -8203,6 +8474,7 @@ declare namespace $ {
 			'editprogram': ReturnType< $tukanable_gymload['EditView'] >,
 			'newprogram': ReturnType< $tukanable_gymload['NewView'] >,
 			'deleteprogram': ReturnType< $tukanable_gymload['DeleteView'] >,
+			'export': ReturnType< $tukanable_gymload['ExportView'] >,
 		}) 
 		DayResultsPage( id: any): $mol_page
 		ListPrograms( ): $mol_select
@@ -8253,6 +8525,7 @@ declare namespace $.$$ {
         builder_storage_key(): string;
         delete_program(): void;
         cancel_delete_program(): void;
+        new_import_bid(): string;
     }
     class $tukanable_gymload_help extends $.$tukanable_gymload_help {
         content(): string;

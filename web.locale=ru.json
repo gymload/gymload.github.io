@@ -17,6 +17,7 @@
 	"$tukanable_gymload_EditTitle_title": "Редактировать программу",
 	"$tukanable_gymload_EditView_menu_title": "Изменить",
 	"$tukanable_gymload_EditView_title": "Изменить программу",
+	"$tukanable_gymload_NewNameImport_field_name": "Даннае импорта",
 	"$tukanable_gymload_NewName_field_name": "Название",
 	"$tukanable_gymload_NewPageHint_text": "Вы можете создать несколько программ и переключаться между ними. Например, создать программу для каждого вашего клиента.",
 	"$tukanable_gymload_NewSubmit_title": "Добавить",
@@ -72,5 +73,9 @@
 	"$tukanable_gymload_default_program_name": "Первая",
 	"$tukanable_gymload_delete_link_text": "Удалить программу",
 	"$tukanable_gymload_help_title": "Помощь",
+	"$tukanable_gymload_page_export_Copy_title": "Скопировать",
+	"$tukanable_gymload_page_export_FooterHint_text": "Данные содержат только текущую программу, а не все данные. Данные могут быть импортированы при создании новой программы.",
+	"$tukanable_gymload_page_export_Hint_text": "Эта программа не хранит ваши данные на сервере. Вся информация сохраняется только на вашем устройстве. Для переноса данных на другое устройство или создания резервной копии вы можете скопировать данные ниже:",
+	"$tukanable_gymload_page_export_title": "Экспорт",
 	"$tukanable_gymload_required_label": "Обязательное поле"
 }
