@@ -20,6 +20,8 @@ namespace $.$$ {
 			if( this.day_count() === 0 ) {
 				delete spreads[ 'print' ]
 				delete spreads[ 'stats' ]
+				delete spreads[ 'export' ]
+				delete spreads[ 'newprogram' ]
 			}
 
 			return {

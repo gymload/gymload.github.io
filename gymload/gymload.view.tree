@@ -13,6 +13,7 @@ $tukanable_gymload $mol_book2_catalog
 	default_program_name @ \Default
 	plugins /
 		<= Theme $mol_theme_auto
+	spread? \builder
 	spreads *
 		builder <= BuilderPage $tukanable_gymload_builder
 			tools / <= Spread_close

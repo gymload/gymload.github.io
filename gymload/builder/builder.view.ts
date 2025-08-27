@@ -8,6 +8,18 @@ namespace $.$$ {
 			return 800
 		}
 
+		override body() {
+			const items: $mol_view[] = []
+
+			if (this.day_count() === 0) {
+				items.push(this.HelloHint())
+			}
+
+			items.push(this.Settings())
+
+			return items
+		}
+
 		override week_items() {
 			return Array.from( { length: this.day_count() }, ( _, i ) => this.DaySettings( i ) )
 		}

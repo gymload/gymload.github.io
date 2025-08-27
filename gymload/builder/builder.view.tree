@@ -72,5 +72,7 @@ $tukanable_gymload_builder $mol_page
 				values => weight_plate_values /number
 			<= Weeks $mol_deck
 				items <= week_items /$mol_view
+	HelloHint $tukanable_gymload_pagehint
+		text @ \Specify the number of training days per week in the first field below or create a workout program from a ready-made template.
 	body /
 		<= Settings
