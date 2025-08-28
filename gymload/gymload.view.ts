@@ -2,6 +2,10 @@ namespace $.$$ {
 	const defaultProgramId = 0
 
 	export class $tukanable_gymload extends $.$tukanable_gymload {
+		override Spread_default() {
+			return this.spreads()[ 'builder' ]
+		}
+
 		override spreads() {
 			const days: any = {}
 			const programs: any = {}
@@ -103,7 +107,7 @@ namespace $.$$ {
 			this.current_program( id )
 			this.to_default_page()
 
-			if (this.new_import_data().trim() !== '') {
+			if( this.new_import_data().trim() !== '' ) {
 				$tukanable_gymload_page_export.inject( this.builder_storage_key(), this.new_import_data().trim() )
 			}
 		}
@@ -175,15 +179,24 @@ namespace $.$$ {
 			if( !raw ) return ''
 
 			try {
-				const data = $mol_wire_sync($tukanable_gymload_page_export).decompress( raw )
-				if (!data) {
+				const data = $mol_wire_sync( $tukanable_gymload_page_export ).decompress( raw )
+				if( !data ) {
 					return 'Invalid data'
 				}
 
 				return ''
-			} catch (err) {
+			} catch( err ) {
 				return `Invalid data: ${ err }`
 			}
+		}
+
+		@$mol_mem
+		override new_import_data( next?: string ): string {
+			if( next === undefined ) {
+				return this.$.$mol_state_arg.value( 'import' ) || ''
+			}
+
+			return next
 		}
 	}
 

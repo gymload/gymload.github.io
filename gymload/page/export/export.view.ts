@@ -1,11 +1,38 @@
 namespace $.$$ {
 	export class $tukanable_gymload_page_export extends $.$tukanable_gymload_page_export {
+		@$mol_mem
 		override raw_data(): string {
 			const prefix = this.storage_key()
-			return $tukanable_gymload_page_export.extract( this.storage_key() )
+			const only_settings = this.only_settings()
+
+			return $tukanable_gymload_page_export.extract( prefix, only_settings )
 		}
 
-		static extract( prefix: string ) {
+		override data_url(): string {
+			return this.$.$mol_state_arg.link( {
+				nav: 'newprogram',
+				import: this.raw_data(),
+			} )
+		}
+
+		override url_block(): $mol_view | null {
+			if( this.raw_data().length < 2000 ) {
+				return this.UrlBlock()
+			}
+
+			return null
+		}
+
+		override only_settings( next?: boolean ): boolean {
+			let next_val: string | undefined
+			if( next !== undefined ) {
+				next_val = next ? '1' : '0'
+			}
+
+			return this.$.$mol_state_arg.value( 'only_settings', next_val ) !== '0'
+		}
+
+		static extract( prefix: string, only_settings: boolean ) {
 			const result: any = {}
 
 			Object.keys( this.$.$mol_state_local.native() )
@@ -14,10 +41,20 @@ namespace $.$$ {
 						return
 					}
 
+					// fix it if you can
+					// tukanable/gymload/builder/day/results/set/set.view.ts#89
+					if( only_settings && key.match( /\d+_\d+_\d+_\d+_(reps|weight)$/ ) ) {
+						return
+					}
+
 					const short_key = key.slice( prefix.length )
 
 					result[ short_key ] = this.$.$mol_state_local.value( key )
 				} )
+
+			if( this.$.$mol_state_arg.value( 'json' ) ) {
+				return JSON.stringify( result, null, '  ' )
+			}
 
 			return $mol_wire_sync( $tukanable_gymload_page_export ).compress( result )
 		}
@@ -59,17 +96,24 @@ namespace $.$$ {
 			return JSON.parse( json )
 		}
 
-		override event() {
-			return {
-				...super.event(),
-				click: ( e: Event ) => this.Copy().click( e ),
-			}
-		}
-
 		override empty_syntax() {
 			return new $mol_syntax2( {
 				'any': /\?/,
 			} )
+		}
+	}
+
+	export class $tukanable_gymload_page_export_textarea extends $.$tukanable_gymload_page_export_textarea {
+		override event() {
+			return {
+				...super.event(),
+				click: ( e: Event ) => {
+					const b = this.copyButton()
+					if( b ) {
+						b.click( e )
+					}
+				}
+			}
 		}
 	}
 }

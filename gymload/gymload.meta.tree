@@ -1,5 +1,6 @@
 deploy \/tukanable/gymload/help.ru.md
 deploy \/tukanable/gymload/help.en.md
+deploy \/tukanable/gymload/templates.json
 deploy \/tukanable/gymload/icon.svg
 deploy \/tukanable/gymload/icon-48x48.png
 deploy \/tukanable/gymload/icon-72x72.png

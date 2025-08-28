@@ -15,5 +15,6 @@
 	"$tukanable_gymload_builder_StartPercent_labeler_title": "Стартовый процент",
 	"$tukanable_gymload_builder_day_no_exercises": "Упражнений пока нет",
 	"$tukanable_gymload_builder_day_BarbellWeightLabeler_title": "Штанга",
+	"$tukanable_gymload_builder_HelloHint_text": "Укажите количество тренировочных дней в неделю в первом поле ниже или создайте программу занятий из готового шаблона:",
 	"$tukanable_gymload_builder_title": "Настройки"
 }

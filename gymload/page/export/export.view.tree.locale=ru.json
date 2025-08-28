@@ -1,6 +1,11 @@
 {
 	"$tukanable_gymload_page_export_Hint_text": "Эта программа не хранит ваши данные на сервере. Вся информация сохраняется только на вашем устройстве. Для переноса данных на другое устройство или создания резервной копии вы можете скопировать данные ниже:",
 	"$tukanable_gymload_page_export_FooterHint_text": "Данные содержат только текущую программу, а не все данные. Данные могут быть импортированы при создании новой программы.",
+	"$tukanable_gymload_page_export_OnlySettings_title": "Исключить результаты",
 	"$tukanable_gymload_page_export_Copy_title": "Скопировать",
+	"$tukanable_gymload_page_export_UrlBlock_title": "Данные в ссылке",
+	"$tukanable_gymload_page_export_RawSection_title": "Сырые данные",
+	"$tukanable_gymload_page_export_SettingsSection_title": "Настройки экспорта",
+	"$tukanable_gymload_page_export_CopyUrl_title": "Скопировать",
 	"$tukanable_gymload_page_export_title": "Экспорт"
 }

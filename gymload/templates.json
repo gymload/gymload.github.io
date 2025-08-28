@@ -1,0 +1,23 @@
+{
+	"items": [
+		{
+			"id": "demo",
+			"name": "Demo",
+			"data:": {
+				"_v1_day_0_item_1": {
+					"excercise": "Присяд",
+					"weight_type": "custom",
+					"sets": 3,
+					"reps": 12,
+					"begin_weight": 20,
+					"finish_weight": 50,
+					"min_step": 5
+				},
+				"_v1_day_count": 3,
+				"_v1_day_0_ids": [
+					1
+				]
+			}
+		}
+	]
+}

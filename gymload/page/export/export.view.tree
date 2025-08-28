@@ -1,15 +1,40 @@
 $tukanable_gymload_page_export $tukanable_gymload_page
 	storage_key \
 	title @ \Export
+	UrlBlock $mol_section
+		title @ \Data in URL
+		content /
+			<= CopyUrl $mol_button_copy
+				title @ \Copy to Clipboard
+				text <= data_url
+			<= Url $tukanable_gymload_page_export_textarea
+				copyButton <= CopyUrl
+				syntax <= empty_syntax null
+				spellcheck false
+				value <= data_url \
 	body /
 		<= Hint $tukanable_gymload_pagehint
 			text @ \This program does not store your data on any server. Your information is saved only on your device. If you want to move it to another device or create a backup, simply copy the data shown below:
-		<= Copy $mol_button_copy
-			title @ \Copy to Clipboard
-			text <= raw_data
-		<= Raw $mol_textarea
-			syntax <= empty_syntax null
-			spellcheck false
-			value <= raw_data \
+		<= url_block null $mol_view
+		<= RawSection $mol_section
+			title @ \Raw Data
+			content /
+				<= Copy $mol_button_copy
+					title @ \Copy to Clipboard
+					text <= raw_data
+				<= Raw $tukanable_gymload_page_export_textarea
+					copyButton <= Copy
+					syntax <= empty_syntax null
+					spellcheck false
+					value <= raw_data \
+		<= SettingsSection $mol_section
+			title @ \Settings
+			content /
+				<= OnlySettings $mol_check_box
+					title @ \Do not include results
+					checked? <=> only_settings? false
 		<= FooterHint $tukanable_gymload_pagehint
 			text @ \The data contains only the current program, not all data. The data can be imported on the New Program page.
+
+$tukanable_gymload_page_export_textarea $mol_textarea
+	copyButton null $mol_button_copy

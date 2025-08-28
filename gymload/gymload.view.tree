@@ -13,7 +13,6 @@ $tukanable_gymload $mol_book2_catalog
 	default_program_name @ \Default
 	plugins /
 		<= Theme $mol_theme_auto
-	spread? \builder
 	spreads *
 		builder <= BuilderPage $tukanable_gymload_builder
 			tools / <= Spread_close
@@ -35,6 +34,7 @@ $tukanable_gymload $mol_book2_catalog
 		deleteprogram <= DeleteView
 		export <= ExportView $tukanable_gymload_page_export
 			storage_key <= builder_storage_key \gymload_builder
+		templates <= Templates $tukanable_gymload_page_templates
 	DayResultsPage* $mol_page
 		title <= day_results_title* @ \Day #
 		body / <= day_results_body* $mol_view

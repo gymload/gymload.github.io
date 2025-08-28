@@ -1,0 +1,5 @@
+$tukanable_gymload_page_templates $tukanable_gymload_page
+	body /
+		<= Button $mol_button_major
+			title \Run
+			click? <=> run? null
