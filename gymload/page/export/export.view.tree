@@ -6,12 +6,12 @@ $tukanable_gymload_page_export $tukanable_gymload_page
 		content /
 			<= CopyUrl $mol_button_copy
 				title @ \Copy to Clipboard
-				text <= data_url
+				text <= current_data_url
 			<= Url $tukanable_gymload_page_export_textarea
 				copyButton <= CopyUrl
 				syntax <= empty_syntax null
 				spellcheck false
-				value <= data_url \
+				value <= current_data_url \
 	body /
 		<= Hint $tukanable_gymload_pagehint
 			text @ \This program does not store your data on any server. Your information is saved only on your device. If you want to move it to another device or create a backup, simply copy the data shown below:

@@ -1,5 +1,18 @@
 $tukanable_gymload_page_templates $tukanable_gymload_page
 	body /
-		<= Button $mol_button_major
-			title \Run
-			click? <=> run? null
+		<= List $mol_list
+			rows <= rows /$mol_view
+				<= Row*0 $mol_row
+					sub /
+						<= NameLabeler* $mol_labeler
+							title @ \Name
+							content / <= row_name* \
+						<= DescriptionLabeler* $mol_labeler
+							title @ \Description
+							content / <= row_description* \
+						<= DayCountLabeler* $mol_labeler
+							title @ \DayCount
+							content / <= row_day_count* \
+						<= ImportButton* $mol_button_major
+							title \Import
+							click? <=> import*? null

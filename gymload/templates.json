@@ -2,8 +2,12 @@
 	"items": [
 		{
 			"id": "demo",
-			"name": "Demo",
-			"data:": {
+			"name": {
+				"en": "Demo",
+				"ru": "Демо"
+			},
+			"description": "Демо программа с прогрессией веса",
+			"data": {
 				"_v1_day_0_item_1": {
 					"excercise": "Присяд",
 					"weight_type": "custom",

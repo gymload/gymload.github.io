@@ -8,11 +8,8 @@ namespace $.$$ {
 			return $tukanable_gymload_page_export.extract( prefix, only_settings )
 		}
 
-		override data_url(): string {
-			return this.$.$mol_state_arg.link( {
-				nav: 'newprogram',
-				import: this.raw_data(),
-			} )
+		override current_data_url(): string {
+			return $tukanable_gymload_page_export.data_url( this.raw_data() )
 		}
 
 		override url_block(): $mol_view | null {
@@ -30,6 +27,13 @@ namespace $.$$ {
 			}
 
 			return this.$.$mol_state_arg.value( 'only_settings', next_val ) !== '0'
+		}
+
+		static data_url(raw: string) {
+			return this.$.$mol_state_arg.link( {
+				nav: 'newprogram',
+				import: raw,
+			} )
 		}
 
 		static extract( prefix: string, only_settings: boolean ) {
