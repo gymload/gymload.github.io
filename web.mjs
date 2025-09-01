@@ -5509,7 +5509,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\talign-content: center;\n\talign-items: center;\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tgap: var(--mol_gap_space);\n\tuser-select: none;\n\tcursor: pointer;\n}\n\n[mol_button_typed][disabled] {\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus-visible {\n\tbox-shadow: inset 0 0 0 10rem var(--mol_theme_hover);\n}\n\n[mol_button_typed]:active {\n\tcolor: var(--mol_theme_focus);\n}\n\n");
+    $mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\talign-content: center;\n\talign-items: center;\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tgap: var(--mol_gap_space);\n\tuser-select: none;\n\tcursor: pointer;\n}\n\n[mol_button_typed][disabled] {\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus-visible {\n\tbox-shadow: inset 0 0 0 100vmax var(--mol_theme_hover);\n}\n\n[mol_button_typed]:active {\n\tcolor: var(--mol_theme_focus);\n}\n\n");
 })($ || ($ = {}));
 
 ;
@@ -11916,7 +11916,7 @@ var $;
     var $$;
     (function ($$) {
         const empty_item = {
-            excercise: '',
+            exercise: '',
             weight_type: 'custom',
             sets: 3,
             reps: 12,
@@ -11945,12 +11945,30 @@ var $;
             rows() {
                 return this.data_ids().map(id => this.Row(id));
             }
+            fix_exercise_typo(data) {
+                if (!data) {
+                    return data;
+                }
+                const { exercise, excercise, ...rest } = data;
+                if (excercise) {
+                    return {
+                        ...rest,
+                        exercise: excercise || '???',
+                    };
+                }
+                return data;
+            }
             row(id, next) {
                 const key = this.build_key(`item_${id}`);
                 if (next === undefined) {
-                    return this.$.$mol_state_local.value(key) || empty_item;
+                    const data = this.$.$mol_state_local.value(key);
+                    const fixed_data = this.fix_exercise_typo(data);
+                    if (fixed_data !== data) {
+                        this.$.$mol_state_local.value(key, fixed_data);
+                    }
+                    return fixed_data || empty_item;
                 }
-                this.$.$mol_state_local.value(key, next);
+                this.$.$mol_state_local.value(key, this.fix_exercise_typo(next));
                 return next || empty_item;
             }
             plan(id) {
@@ -12015,7 +12033,7 @@ var $;
                 return this.row(id)[key];
             }
             row_exercise(id, next) {
-                return this.change_field('excercise', id, next);
+                return this.change_field('exercise', id, next);
             }
             row_sets(id, next) {
                 return this.change_field('sets', id, next);
@@ -13104,6 +13122,33 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$tukanable_gymload_pagehint) = class $tukanable_gymload_pagehint extends ($.$mol_view) {
+		text(){
+			return "";
+		}
+		sub(){
+			return [(this.text())];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { rem } = $mol_style_unit;
+        $mol_style_define($tukanable_gymload_pagehint, {
+            padding: rem(1),
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$tukanable_gymload_builder) = class $tukanable_gymload_builder extends ($.$mol_page) {
 		day_storage_key(id){
 			return "";
@@ -13298,6 +13343,11 @@ var $;
 			]);
 			return obj;
 		}
+		HelloHint(){
+			const obj = new this.$.$tukanable_gymload_pagehint();
+			(obj.text) = () => ((this.$.$mol_locale.text("$tukanable_gymload_builder_HelloHint_text")));
+			return obj;
+		}
 		body(){
 			return [(this.Settings())];
 		}
@@ -13327,6 +13377,7 @@ var $;
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "Stats"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "Print"));
 	($mol_mem(($.$tukanable_gymload_builder.prototype), "Settings"));
+	($mol_mem(($.$tukanable_gymload_builder.prototype), "HelloHint"));
 
 
 ;
@@ -13344,6 +13395,14 @@ var $;
             }
             maximal_width() {
                 return 800;
+            }
+            body() {
+                const items = [];
+                if (this.day_count() === 0) {
+                    items.push(this.HelloHint());
+                }
+                items.push(this.Settings());
+                return items;
             }
             week_items() {
                 return Array.from({ length: this.day_count() }, (_, i) => this.DaySettings(i));
@@ -13430,33 +13489,6 @@ var $;
     (function ($$) {
         $mol_style_define($tukanable_gymload_page, {
             maxWidth: '600px',
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$tukanable_gymload_pagehint) = class $tukanable_gymload_pagehint extends ($.$mol_view) {
-		text(){
-			return "";
-		}
-		sub(){
-			return [(this.text())];
-		}
-	};
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        const { rem } = $mol_style_unit;
-        $mol_style_define($tukanable_gymload_pagehint, {
-            padding: rem(1),
         });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -13582,6 +13614,79 @@ var $;
         ], $mol_button_copy.prototype, "attachments", null);
         $$.$mol_button_copy = $mol_button_copy;
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_section) = class $mol_section extends ($.$mol_list) {
+		title_dom_name(){
+			return "h1";
+		}
+		Title(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.dom_name) = () => ((this.title_dom_name()));
+			(obj.title) = () => ((this.title()));
+			return obj;
+		}
+		tools(){
+			return [];
+		}
+		Tools(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.tools()));
+			return obj;
+		}
+		head(){
+			return [(this.Title()), (this.Tools())];
+		}
+		Head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.head()));
+			return obj;
+		}
+		content(){
+			return [];
+		}
+		Content(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.content()));
+			return obj;
+		}
+		level(){
+			return 1;
+		}
+		rows(){
+			return [(this.Head()), (this.Content())];
+		}
+	};
+	($mol_mem(($.$mol_section.prototype), "Title"));
+	($mol_mem(($.$mol_section.prototype), "Tools"));
+	($mol_mem(($.$mol_section.prototype), "Head"));
+	($mol_mem(($.$mol_section.prototype), "Content"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_section extends $.$mol_section {
+            title_dom_name() {
+                return 'h' + this.level();
+            }
+        }
+        $$.$mol_section = $mol_section;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/section/section.view.css", "[mol_section_head] {\n\tjustify-content: space-between;\n\talign-items: flex-end;\n\tflex-wrap: wrap;\n}\n\n[mol_section_title] {\n\tpadding: var(--mol_gap_text);\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n}\n\n[mol_section_title]:where(h1) {\n\tfont-size: 1.5rem;\n}\n\n[mol_section_title]:where(h2) {\n\tfont-size: 1.5rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h3) {\n\tfont-size: 1.25rem;\n}\n\n[mol_section_title]:where(h4) {\n\tfont-size: 1.25rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h5) {\n\tfont-size: 1rem;\n}\n\n[mol_section_title]:where(h6) {\n\tfont-size: 1rem;\n\tfont-style: italic;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -14473,10 +14578,33 @@ var $;
 
 ;
 	($.$tukanable_gymload_page_export) = class $tukanable_gymload_page_export extends ($.$tukanable_gymload_page) {
+		CopyUrl(){
+			const obj = new this.$.$mol_button_copy();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_page_export_CopyUrl_title")));
+			(obj.text) = () => ((this.current_data_url()));
+			return obj;
+		}
+		empty_syntax(){
+			return null;
+		}
+		current_data_url(){
+			return "";
+		}
+		Url(){
+			const obj = new this.$.$tukanable_gymload_page_export_textarea();
+			(obj.copyButton) = () => ((this.CopyUrl()));
+			(obj.syntax) = () => ((this.empty_syntax()));
+			(obj.spellcheck) = () => (false);
+			(obj.value) = () => ((this.current_data_url()));
+			return obj;
+		}
 		Hint(){
 			const obj = new this.$.$tukanable_gymload_pagehint();
 			(obj.text) = () => ((this.$.$mol_locale.text("$tukanable_gymload_page_export_Hint_text")));
 			return obj;
+		}
+		url_block(){
+			return null;
 		}
 		Copy(){
 			const obj = new this.$.$mol_button_copy();
@@ -14484,17 +14612,37 @@ var $;
 			(obj.text) = () => ((this.raw_data()));
 			return obj;
 		}
-		empty_syntax(){
-			return null;
-		}
 		raw_data(){
 			return "";
 		}
 		Raw(){
-			const obj = new this.$.$mol_textarea();
+			const obj = new this.$.$tukanable_gymload_page_export_textarea();
+			(obj.copyButton) = () => ((this.Copy()));
 			(obj.syntax) = () => ((this.empty_syntax()));
 			(obj.spellcheck) = () => (false);
 			(obj.value) = () => ((this.raw_data()));
+			return obj;
+		}
+		RawSection(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_page_export_RawSection_title")));
+			(obj.content) = () => ([(this.Copy()), (this.Raw())]);
+			return obj;
+		}
+		only_settings(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		OnlySettings(){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_page_export_OnlySettings_title")));
+			(obj.checked) = (next) => ((this.only_settings(next)));
+			return obj;
+		}
+		SettingsSection(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_page_export_SettingsSection_title")));
+			(obj.content) = () => ([(this.OnlySettings())]);
 			return obj;
 		}
 		FooterHint(){
@@ -14508,19 +14656,38 @@ var $;
 		title(){
 			return (this.$.$mol_locale.text("$tukanable_gymload_page_export_title"));
 		}
+		UrlBlock(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_page_export_UrlBlock_title")));
+			(obj.content) = () => ([(this.CopyUrl()), (this.Url())]);
+			return obj;
+		}
 		body(){
 			return [
 				(this.Hint()), 
-				(this.Copy()), 
-				(this.Raw()), 
+				(this.url_block()), 
+				(this.RawSection()), 
+				(this.SettingsSection()), 
 				(this.FooterHint())
 			];
 		}
 	};
+	($mol_mem(($.$tukanable_gymload_page_export.prototype), "CopyUrl"));
+	($mol_mem(($.$tukanable_gymload_page_export.prototype), "Url"));
 	($mol_mem(($.$tukanable_gymload_page_export.prototype), "Hint"));
 	($mol_mem(($.$tukanable_gymload_page_export.prototype), "Copy"));
 	($mol_mem(($.$tukanable_gymload_page_export.prototype), "Raw"));
+	($mol_mem(($.$tukanable_gymload_page_export.prototype), "RawSection"));
+	($mol_mem(($.$tukanable_gymload_page_export.prototype), "only_settings"));
+	($mol_mem(($.$tukanable_gymload_page_export.prototype), "OnlySettings"));
+	($mol_mem(($.$tukanable_gymload_page_export.prototype), "SettingsSection"));
 	($mol_mem(($.$tukanable_gymload_page_export.prototype), "FooterHint"));
+	($mol_mem(($.$tukanable_gymload_page_export.prototype), "UrlBlock"));
+	($.$tukanable_gymload_page_export_textarea) = class $tukanable_gymload_page_export_textarea extends ($.$mol_textarea) {
+		copyButton(){
+			return null;
+		}
+	};
 
 
 ;
@@ -14588,18 +14755,47 @@ var $;
         class $tukanable_gymload_page_export extends $.$tukanable_gymload_page_export {
             raw_data() {
                 const prefix = this.storage_key();
-                return $tukanable_gymload_page_export.extract(this.storage_key());
+                const only_settings = this.only_settings();
+                return $tukanable_gymload_page_export.extract(prefix, only_settings);
             }
-            static extract(prefix) {
+            current_data_url() {
+                return $tukanable_gymload_page_export.data_url(this.raw_data());
+            }
+            url_block() {
+                if (this.raw_data().length < 2000) {
+                    return this.UrlBlock();
+                }
+                return null;
+            }
+            only_settings(next) {
+                let next_val;
+                if (next !== undefined) {
+                    next_val = next ? '1' : '0';
+                }
+                return this.$.$mol_state_arg.value('only_settings', next_val) !== '0';
+            }
+            static data_url(raw) {
+                return this.$.$mol_state_arg.link({
+                    nav: 'newprogram',
+                    import: raw,
+                });
+            }
+            static extract(prefix, only_settings) {
                 const result = {};
                 Object.keys(this.$.$mol_state_local.native())
                     .forEach(key => {
                     if (!key.startsWith(prefix)) {
                         return;
                     }
+                    if (only_settings && key.match(/\d+_\d+_\d+_\d+_(reps|weight)$/)) {
+                        return;
+                    }
                     const short_key = key.slice(prefix.length);
                     result[short_key] = this.$.$mol_state_local.value(key);
                 });
+                if (this.$.$mol_state_arg.value('json')) {
+                    return JSON.stringify(result, null, '  ');
+                }
                 return $mol_wire_sync($tukanable_gymload_page_export).compress(result);
             }
             static inject(prefix, raw) {
@@ -14629,19 +14825,30 @@ var $;
                 const json = await new Response(ds.readable).text();
                 return JSON.parse(json);
             }
-            event() {
-                return {
-                    ...super.event(),
-                    click: (e) => this.Copy().click(e),
-                };
-            }
             empty_syntax() {
                 return new $mol_syntax2({
                     'any': /\?/,
                 });
             }
         }
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload_page_export.prototype, "raw_data", null);
         $$.$tukanable_gymload_page_export = $tukanable_gymload_page_export;
+        class $tukanable_gymload_page_export_textarea extends $.$tukanable_gymload_page_export_textarea {
+            event() {
+                return {
+                    ...super.event(),
+                    click: (e) => {
+                        const b = this.copyButton();
+                        if (b) {
+                            b.click(e);
+                        }
+                    }
+                };
+            }
+        }
+        $$.$tukanable_gymload_page_export_textarea = $tukanable_gymload_page_export_textarea;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -14651,8 +14858,261 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
+        const { rem } = $mol_style_unit;
         $mol_style_define($tukanable_gymload_page_export, {
             maxWidth: '800px',
+            UrlBlock: {
+                flexDirection: 'column',
+            },
+            RawSection: {
+                marginTop: rem(1),
+            },
+            SettingsSection: {
+                marginTop: rem(1),
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$tukanable_gymload_page_templates) = class $tukanable_gymload_page_templates extends ($.$mol_book2_catalog) {
+		row(id){
+			return null;
+		}
+		title(){
+			return (this.$.$mol_locale.text("$tukanable_gymload_page_templates_title"));
+		}
+		menu_title(){
+			return (this.$.$mol_locale.text("$tukanable_gymload_page_templates_menu_title"));
+		}
+		param(){
+			return "id";
+		}
+		Page(id){
+			const obj = new this.$.$tukanable_gymload_page_templates_details();
+			(obj.Spread_close) = () => ((this.Spread_close()));
+			(obj.row) = () => ((this.row(id)));
+			return obj;
+		}
+	};
+	($mol_mem_key(($.$tukanable_gymload_page_templates.prototype), "Page"));
+	($.$tukanable_gymload_page_templates_details) = class $tukanable_gymload_page_templates_details extends ($.$tukanable_gymload_page) {
+		row_name(){
+			return "";
+		}
+		import(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		ImportButton(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_page_templates_details_ImportButton_title")));
+			(obj.click) = (next) => ((this.import(next)));
+			return obj;
+		}
+		row_description(){
+			return "";
+		}
+		DescriptionLabeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$tukanable_gymload_page_templates_details_DescriptionLabeler_title")));
+			(obj.content) = () => ([(this.row_description())]);
+			return obj;
+		}
+		day_name(id){
+			return (this.$.$mol_locale.text("$tukanable_gymload_page_templates_details_day_name"));
+		}
+		exercise_info(id){
+			return "";
+		}
+		ExerciseRow(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.exercise_info(id))]);
+			return obj;
+		}
+		exercises(id){
+			return [(this.ExerciseRow("0"))];
+		}
+		Excersises(id){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.exercises(id)));
+			return obj;
+		}
+		DayRow(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.day_name(id)));
+			(obj.content) = () => ([(this.Excersises(id))]);
+			return obj;
+		}
+		days(){
+			return [(this.DayRow("0"))];
+		}
+		Days(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.days()));
+			return obj;
+		}
+		DetailsRow(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.DescriptionLabeler()), (this.Days())]);
+			return obj;
+		}
+		title(){
+			return (this.row_name());
+		}
+		row(){
+			return null;
+		}
+		Spread_close(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		tools(){
+			return [(this.ImportButton()), (this.Spread_close())];
+		}
+		body(){
+			return [(this.DetailsRow())];
+		}
+	};
+	($mol_mem(($.$tukanable_gymload_page_templates_details.prototype), "import"));
+	($mol_mem(($.$tukanable_gymload_page_templates_details.prototype), "ImportButton"));
+	($mol_mem(($.$tukanable_gymload_page_templates_details.prototype), "DescriptionLabeler"));
+	($mol_mem_key(($.$tukanable_gymload_page_templates_details.prototype), "ExerciseRow"));
+	($mol_mem_key(($.$tukanable_gymload_page_templates_details.prototype), "Excersises"));
+	($mol_mem_key(($.$tukanable_gymload_page_templates_details.prototype), "DayRow"));
+	($mol_mem(($.$tukanable_gymload_page_templates_details.prototype), "Days"));
+	($mol_mem(($.$tukanable_gymload_page_templates_details.prototype), "DetailsRow"));
+	($mol_mem(($.$tukanable_gymload_page_templates_details.prototype), "Spread_close"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const getLangStr = (val) => {
+            if (typeof val === 'string')
+                return val;
+            return val['en'] ?? Object.values(val)[0] ?? '';
+        };
+        class $tukanable_gymload_page_templates extends $.$tukanable_gymload_page_templates {
+            data() {
+                return this.$.$mol_fetch.json(`tukanable/gymload/templates.json`);
+            }
+            spreads() {
+                const pages = super.spreads();
+                this.data().items.forEach(item => {
+                    pages[item.id] = this.Page(item.id);
+                });
+                return pages;
+            }
+            row(id) {
+                return this.data().items.find(item => item.id === id);
+            }
+            lang_str(val) {
+                if (typeof val === 'string')
+                    return val;
+                const lang = this.$.$mol_locale.lang();
+                return val[lang] ?? val['en'] ?? Object.values(val)[0] ?? '';
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload_page_templates.prototype, "data", null);
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload_page_templates.prototype, "spreads", null);
+        __decorate([
+            $mol_mem_key
+        ], $tukanable_gymload_page_templates.prototype, "row", null);
+        $$.$tukanable_gymload_page_templates = $tukanable_gymload_page_templates;
+        class $tukanable_gymload_page_templates_details extends $.$tukanable_gymload_page_templates_details {
+            lang_str(val) {
+                if (typeof val === 'string')
+                    return val;
+                const lang = this.$.$mol_locale.lang();
+                return val[lang] ?? val['en'] ?? Object.values(val)[0] ?? '';
+            }
+            row() {
+                const row = super.row();
+                if (!row)
+                    throw new Error('row not set');
+                return row;
+            }
+            row_name() {
+                return this.lang_str(this.row().name);
+            }
+            row_description() {
+                return this.lang_str(this.row().description);
+            }
+            import() {
+                const data = $mol_wire_sync($tukanable_gymload_page_export).compress(this.row().data);
+                const url = $tukanable_gymload_page_export.data_url(data);
+                this.$.$mol_state_arg.href(url);
+            }
+            data() {
+                const raw = this.row().data;
+                const days = {};
+                const exercises = [];
+                Object.keys(raw).forEach(key => {
+                    const m = key.match(/_v1_day_(\d+)_item_(\d+)/);
+                    if (m) {
+                        const day = parseInt(m[1], 10);
+                        const item = parseInt(m[2], 10);
+                        if (!days[day])
+                            days[day] = [];
+                        days[day].push(exercises.length.toString());
+                        exercises.push(raw[key]);
+                    }
+                });
+                return { days, exercises };
+            }
+            days() {
+                return Object.keys(this.data().days).map(key => this.DayRow(key));
+            }
+            day_name(id) {
+                return `${super.day_name(id)}${parseInt(id, 10) + 1}`;
+            }
+            exercises(id) {
+                return this.data().days[id].map(key => this.ExerciseRow(key));
+            }
+            exercise(id) {
+                return this.data().exercises[parseInt(id, 10)];
+            }
+            exercise_info(id) {
+                const { exercise, sets, reps } = this.exercise(id);
+                return `${exercise} ${reps} x ${sets}`;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload_page_templates_details.prototype, "data", null);
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload_page_templates_details.prototype, "days", null);
+        $$.$tukanable_gymload_page_templates_details = $tukanable_gymload_page_templates_details;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { rem } = $mol_style_unit;
+        $mol_style_define($tukanable_gymload_page_templates, {});
+        $mol_style_define($tukanable_gymload_page_templates_details, {
+            DetailsRow: {
+                flexDirection: 'column',
+            },
+            DayRow: {
+                flexDirection: 'column',
+            },
         });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -14751,6 +15211,7 @@ var $;
                 catch (error) {
                     if (error instanceof Promise)
                         $mol_fail_hidden(error);
+                    $mol_fail_log(error);
                     return error.message;
                 }
             }
@@ -16667,6 +17128,11 @@ var $;
 			(obj.storage_key) = () => ((this.builder_storage_key()));
 			return obj;
 		}
+		Templates(){
+			const obj = new this.$.$tukanable_gymload_page_templates();
+			(obj.menu_tools) = () => ([(this.Spread_close())]);
+			return obj;
+		}
 		day_results_title(id){
 			return (this.$.$mol_locale.text("$tukanable_gymload_day_results_title"));
 		}
@@ -16886,7 +17352,8 @@ var $;
 				"editprogram": (this.EditView()), 
 				"newprogram": (this.NewView()), 
 				"deleteprogram": (this.DeleteView()), 
-				"export": (this.ExportView())
+				"export": (this.ExportView()), 
+				"templates": (this.Templates())
 			};
 		}
 		DayResultsPage(id){
@@ -16933,6 +17400,7 @@ var $;
 	($mol_mem(($.$tukanable_gymload.prototype), "PrintPage"));
 	($mol_mem(($.$tukanable_gymload.prototype), "HelpPage"));
 	($mol_mem(($.$tukanable_gymload.prototype), "ExportView"));
+	($mol_mem(($.$tukanable_gymload.prototype), "Templates"));
 	($mol_mem_key(($.$tukanable_gymload.prototype), "day_results_body"));
 	($mol_mem(($.$tukanable_gymload.prototype), "current_program_string"));
 	($mol_mem(($.$tukanable_gymload.prototype), "NewPageHint"));
@@ -17008,6 +17476,9 @@ var $;
     (function ($$) {
         const defaultProgramId = 0;
         class $tukanable_gymload extends $.$tukanable_gymload {
+            Spread_default() {
+                return this.spreads()['builder'];
+            }
             spreads() {
                 const days = {};
                 const programs = {};
@@ -17022,6 +17493,8 @@ var $;
                 if (this.day_count() === 0) {
                     delete spreads['print'];
                     delete spreads['stats'];
+                    delete spreads['export'];
+                    delete spreads['newprogram'];
                 }
                 return {
                     ...days,
@@ -17145,6 +17618,12 @@ var $;
                     return `Invalid data: ${err}`;
                 }
             }
+            new_import_data(next) {
+                if (next === undefined) {
+                    return this.$.$mol_state_arg.value('import') || '';
+                }
+                return next;
+            }
         }
         __decorate([
             $mol_mem
@@ -17155,6 +17634,9 @@ var $;
         __decorate([
             $mol_mem
         ], $tukanable_gymload.prototype, "new_import_bid", null);
+        __decorate([
+            $mol_mem
+        ], $tukanable_gymload.prototype, "new_import_data", null);
         $$.$tukanable_gymload = $tukanable_gymload;
         class $tukanable_gymload_help extends $.$tukanable_gymload_help {
             content() {

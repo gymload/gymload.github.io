@@ -5378,7 +5378,8 @@ declare namespace $.$$ {
 
 declare namespace $.$$ {
     type NewItem = {
-        excercise: string;
+        excercise?: string;
+        exercise: string;
         weight_type: 'custom' | 'barbell' | 'dumbbell';
         sets: number;
         reps: number;
@@ -5394,6 +5395,7 @@ declare namespace $.$$ {
         deleted_data_ids(next?: number[]): readonly (number)[];
         data_ids(next?: number[]): readonly (number)[];
         rows(): $mol_view[];
+        fix_exercise_typo(data: NewItem | null | undefined): NewItem | null | undefined;
         row(id: any, next?: NewItem | null): NewItem;
         plan(id: any): number[];
         closest_dumbell_value(val: number): number;
@@ -5930,6 +5932,19 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	export class $tukanable_gymload_pagehint extends $mol_view {
+		text( ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=pagehint.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
 	type $mol_number__value_tukanable_gymload_builder_1 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
@@ -6184,6 +6199,11 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
+	type $tukanable_gymload_pagehint__text_tukanable_gymload_builder_51 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_pagehint['text'] >
+	>
 	export class $tukanable_gymload_builder extends $mol_page {
 		day_storage_key( id: any): string
 		day_title( id: any): string
@@ -6219,6 +6239,7 @@ declare namespace $ {
 		Stats( ): $tukanable_gymload_builder_stats
 		Print( ): $tukanable_gymload_builder_export_print
 		Settings( ): $mol_view
+		HelloHint( ): $tukanable_gymload_pagehint
 		body( ): readonly(any)[]
 	}
 	
@@ -6229,6 +6250,7 @@ declare namespace $.$$ {
     class $tukanable_gymload_builder extends $.$tukanable_gymload_builder {
         minimal_width(): number;
         maximal_width(): number;
+        body(): $mol_view[];
         week_items(): $.$tukanable_gymload_builder_day[];
         day_title(id: any): string;
         day_index(id: any): any;
@@ -6254,19 +6276,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=page.view.tree.d.ts.map
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	export class $tukanable_gymload_pagehint extends $mol_view {
-		text( ): string
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=pagehint.view.tree.d.ts.map
 declare namespace $.$$ {
 }
 
@@ -6340,6 +6349,58 @@ declare namespace $.$$ {
         attachments(): ClipboardItem[];
         click(event?: Event): void;
     }
+}
+
+declare namespace $ {
+
+	type $mol_paragraph__dom_name_mol_section_1 = $mol_type_enforce<
+		ReturnType< $mol_section['title_dom_name'] >
+		,
+		ReturnType< $mol_paragraph['dom_name'] >
+	>
+	type $mol_paragraph__title_mol_section_2 = $mol_type_enforce<
+		ReturnType< $mol_section['title'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_view__sub_mol_section_3 = $mol_type_enforce<
+		ReturnType< $mol_section['tools'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_mol_section_4 = $mol_type_enforce<
+		ReturnType< $mol_section['head'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_list__rows_mol_section_5 = $mol_type_enforce<
+		ReturnType< $mol_section['content'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	export class $mol_section extends $mol_list {
+		title_dom_name( ): string
+		Title( ): $mol_paragraph
+		tools( ): readonly(any)[]
+		Tools( ): $mol_view
+		head( ): readonly(any)[]
+		Head( ): $mol_view
+		content( ): readonly(any)[]
+		Content( ): $mol_list
+		level( ): number
+		rows( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=section.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_section extends $.$mol_section {
+        title_dom_name(): string;
+    }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -6836,51 +6897,139 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $tukanable_gymload_pagehint__text_tukanable_gymload_page_export_1 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $tukanable_gymload_pagehint['text'] >
-	>
-	type $mol_button_copy__title_tukanable_gymload_page_export_2 = $mol_type_enforce<
+	type $mol_button_copy__title_tukanable_gymload_page_export_1 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_copy['title'] >
 	>
-	type $mol_button_copy__text_tukanable_gymload_page_export_3 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_page_export['raw_data'] >
+	type $mol_button_copy__text_tukanable_gymload_page_export_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['current_data_url'] >
 		,
 		ReturnType< $mol_button_copy['text'] >
 	>
-	type $mol_textarea__syntax_tukanable_gymload_page_export_4 = $mol_type_enforce<
+	type $tukanable_gymload_page_export_textarea__copyButton_tukanable_gymload_page_export_3 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['CopyUrl'] >
+		,
+		ReturnType< $tukanable_gymload_page_export_textarea['copyButton'] >
+	>
+	type $tukanable_gymload_page_export_textarea__syntax_tukanable_gymload_page_export_4 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_page_export['empty_syntax'] >
 		,
-		ReturnType< $mol_textarea['syntax'] >
+		ReturnType< $tukanable_gymload_page_export_textarea['syntax'] >
 	>
-	type $mol_textarea__spellcheck_tukanable_gymload_page_export_5 = $mol_type_enforce<
+	type $tukanable_gymload_page_export_textarea__spellcheck_tukanable_gymload_page_export_5 = $mol_type_enforce<
 		boolean
 		,
-		ReturnType< $mol_textarea['spellcheck'] >
+		ReturnType< $tukanable_gymload_page_export_textarea['spellcheck'] >
 	>
-	type $mol_textarea__value_tukanable_gymload_page_export_6 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_page_export['raw_data'] >
+	type $tukanable_gymload_page_export_textarea__value_tukanable_gymload_page_export_6 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['current_data_url'] >
 		,
-		ReturnType< $mol_textarea['value'] >
+		ReturnType< $tukanable_gymload_page_export_textarea['value'] >
 	>
 	type $tukanable_gymload_pagehint__text_tukanable_gymload_page_export_7 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_pagehint['text'] >
 	>
+	type $mol_button_copy__title_tukanable_gymload_page_export_8 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_copy['title'] >
+	>
+	type $mol_button_copy__text_tukanable_gymload_page_export_9 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['raw_data'] >
+		,
+		ReturnType< $mol_button_copy['text'] >
+	>
+	type $tukanable_gymload_page_export_textarea__copyButton_tukanable_gymload_page_export_10 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['Copy'] >
+		,
+		ReturnType< $tukanable_gymload_page_export_textarea['copyButton'] >
+	>
+	type $tukanable_gymload_page_export_textarea__syntax_tukanable_gymload_page_export_11 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['empty_syntax'] >
+		,
+		ReturnType< $tukanable_gymload_page_export_textarea['syntax'] >
+	>
+	type $tukanable_gymload_page_export_textarea__spellcheck_tukanable_gymload_page_export_12 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $tukanable_gymload_page_export_textarea['spellcheck'] >
+	>
+	type $tukanable_gymload_page_export_textarea__value_tukanable_gymload_page_export_13 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['raw_data'] >
+		,
+		ReturnType< $tukanable_gymload_page_export_textarea['value'] >
+	>
+	type $mol_section__title_tukanable_gymload_page_export_14 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_section['title'] >
+	>
+	type $mol_section__content_tukanable_gymload_page_export_15 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_section['content'] >
+	>
+	type $mol_check_box__title_tukanable_gymload_page_export_16 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_tukanable_gymload_page_export_17 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_export['only_settings'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_section__title_tukanable_gymload_page_export_18 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_section['title'] >
+	>
+	type $mol_section__content_tukanable_gymload_page_export_19 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_section['content'] >
+	>
+	type $tukanable_gymload_pagehint__text_tukanable_gymload_page_export_20 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $tukanable_gymload_pagehint['text'] >
+	>
+	type $mol_section__title_tukanable_gymload_page_export_21 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_section['title'] >
+	>
+	type $mol_section__content_tukanable_gymload_page_export_22 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_section['content'] >
+	>
 	export class $tukanable_gymload_page_export extends $tukanable_gymload_page {
-		Hint( ): $tukanable_gymload_pagehint
-		Copy( ): $mol_button_copy
+		CopyUrl( ): $mol_button_copy
 		empty_syntax( ): any
+		current_data_url( ): string
+		Url( ): $tukanable_gymload_page_export_textarea
+		Hint( ): $tukanable_gymload_pagehint
+		url_block( ): $mol_view | null
+		Copy( ): $mol_button_copy
 		raw_data( ): string
-		Raw( ): $mol_textarea
+		Raw( ): $tukanable_gymload_page_export_textarea
+		RawSection( ): $mol_section
+		only_settings( next?: boolean ): boolean
+		OnlySettings( ): $mol_check_box
+		SettingsSection( ): $mol_section
 		FooterHint( ): $tukanable_gymload_pagehint
 		storage_key( ): string
 		title( ): string
+		UrlBlock( ): $mol_section
 		body( ): readonly(any)[]
+	}
+	
+	export class $tukanable_gymload_page_export_textarea extends $mol_textarea {
+		copyButton( ): $mol_button_copy | null
 	}
 	
 }
@@ -6889,17 +7038,212 @@ declare namespace $ {
 declare namespace $.$$ {
     class $tukanable_gymload_page_export extends $.$tukanable_gymload_page_export {
         raw_data(): string;
-        static extract(prefix: string): string;
+        current_data_url(): string;
+        url_block(): $mol_view | null;
+        only_settings(next?: boolean): boolean;
+        static data_url(raw: string): string;
+        static extract(prefix: string, only_settings: boolean): string;
         static inject(prefix: string, raw: string): any;
         static compress(data: any): Promise<string>;
         static decompress(raw: string): Promise<any>;
-        event(): {
-            click: (e: Event) => any;
-        };
         empty_syntax(): $mol_syntax2<{
             any: RegExp;
         }>;
     }
+    class $tukanable_gymload_page_export_textarea extends $.$tukanable_gymload_page_export_textarea {
+        event(): {
+            click: (e: Event) => void;
+            keydown(next?: ReturnType<$.$mol_textarea["press"]>): ReturnType<$.$mol_textarea["press"]>;
+            pointermove(next?: ReturnType<$.$mol_textarea["hover"]>): ReturnType<$.$mol_textarea["hover"]>;
+        };
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+    function $mol_dom_parse(text: string, type?: DOMParserSupportedType): Document;
+}
+
+declare namespace $ {
+    class $mol_fetch_response extends $mol_object2 {
+        readonly native: Response;
+        constructor(native: Response);
+        status(): "success" | "unknown" | "inform" | "redirect" | "wrong" | "failed";
+        code(): number;
+        message(): string;
+        headers(): Headers;
+        mime(): string | null;
+        stream(): ReadableStream<Uint8Array<ArrayBuffer>> | null;
+        text(): string;
+        json(): unknown;
+        blob(): Blob;
+        buffer(): ArrayBuffer;
+        xml(): Document;
+        xhtml(): Document;
+        html(): Document;
+    }
+    class $mol_fetch extends $mol_object2 {
+        static request(input: RequestInfo, init?: RequestInit): Promise<Response> & {
+            destructor: () => void;
+        };
+        static response(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
+        static success(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
+        static stream(input: RequestInfo, init?: RequestInit): ReadableStream<Uint8Array<ArrayBuffer>> | null;
+        static text(input: RequestInfo, init?: RequestInit): string;
+        static json(input: RequestInfo, init?: RequestInit): unknown;
+        static blob(input: RequestInfo, init?: RequestInit): Blob;
+        static buffer(input: RequestInfo, init?: RequestInit): ArrayBuffer;
+        static xml(input: RequestInfo, init?: RequestInit): Document;
+        static xhtml(input: RequestInfo, init?: RequestInit): Document;
+        static html(input: RequestInfo, init?: RequestInit): Document;
+    }
+}
+
+declare namespace $ {
+
+	type $tukanable_gymload_page_templates_details__Spread_close_tukanable_gymload_page_templates_1 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates['Spread_close'] >
+		,
+		ReturnType< $tukanable_gymload_page_templates_details['Spread_close'] >
+	>
+	type $tukanable_gymload_page_templates_details__row_tukanable_gymload_page_templates_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates['row'] >
+		,
+		ReturnType< $tukanable_gymload_page_templates_details['row'] >
+	>
+	export class $tukanable_gymload_page_templates extends $mol_book2_catalog {
+		row( id: any): any
+		title( ): string
+		menu_title( ): string
+		param( ): string
+		Page( id: any): $tukanable_gymload_page_templates_details
+	}
+	
+	type $mol_button_major__title_tukanable_gymload_page_templates_details_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_page_templates_details_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['import'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_labeler__title_tukanable_gymload_page_templates_details_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_tukanable_gymload_page_templates_details_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	type $mol_row__sub_tukanable_gymload_page_templates_details_5 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_row['sub'] >
+	>
+	type $mol_list__rows_tukanable_gymload_page_templates_details_6 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['exercises'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_labeler__title_tukanable_gymload_page_templates_details_7 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['day_name'] >
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_tukanable_gymload_page_templates_details_8 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	type $mol_list__rows_tukanable_gymload_page_templates_details_9 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['days'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_row__sub_tukanable_gymload_page_templates_details_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_row['sub'] >
+	>
+	export class $tukanable_gymload_page_templates_details extends $tukanable_gymload_page {
+		row_name( ): string
+		import( next?: any ): any
+		ImportButton( ): $mol_button_major
+		row_description( ): string
+		DescriptionLabeler( ): $mol_labeler
+		day_name( id: any): string
+		exercise_info( id: any): string
+		ExerciseRow( id: any): $mol_row
+		exercises( id: any): readonly($mol_view)[]
+		Excersises( id: any): $mol_list
+		DayRow( id: any): $mol_labeler
+		days( ): readonly($mol_view)[]
+		Days( ): $mol_list
+		DetailsRow( ): $mol_row
+		title( ): ReturnType< $tukanable_gymload_page_templates_details['row_name'] >
+		row( ): any
+		Spread_close( ): $mol_view
+		tools( ): readonly(any)[]
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=templates.view.tree.d.ts.map
+declare namespace $.$$ {
+    type LangStr = string | {
+        [lang: string]: string;
+    };
+    type Template = {
+        id: string;
+        name: LangStr;
+        description: LangStr;
+        data: {
+            [key: string]: any;
+        };
+    };
+    type DataFile = {
+        items: Template[];
+    };
+    export class $tukanable_gymload_page_templates extends $.$tukanable_gymload_page_templates {
+        data(): DataFile;
+        spreads(): Record<string, any>;
+        row(id: string): Template;
+        lang_str(val: LangStr): string;
+    }
+    export class $tukanable_gymload_page_templates_details extends $.$tukanable_gymload_page_templates_details {
+        lang_str(val: LangStr): string;
+        row(): Template;
+        row_name(): string;
+        row_description(): string;
+        import(): void;
+        data(): {
+            days: {
+                [key: string]: string[];
+            };
+            exercises: {
+                exercise: string;
+                sets: number;
+                reps: number;
+            }[];
+        };
+        days(): $mol_labeler[];
+        day_name(id: any): string;
+        exercises(id: any): $mol_row[];
+        exercise(id: any): {
+            exercise: string;
+            sets: number;
+            reps: number;
+        };
+        exercise_info(id: any): string;
+    }
+    export {};
 }
 
 declare namespace $.$$ {
@@ -8042,45 +8386,6 @@ declare namespace $ {
 
 //# sourceMappingURL=list.view.tree.d.ts.map
 declare namespace $ {
-    function $mol_dom_parse(text: string, type?: DOMParserSupportedType): Document;
-}
-
-declare namespace $ {
-    class $mol_fetch_response extends $mol_object2 {
-        readonly native: Response;
-        constructor(native: Response);
-        status(): "success" | "unknown" | "inform" | "redirect" | "wrong" | "failed";
-        code(): number;
-        message(): string;
-        headers(): Headers;
-        mime(): string | null;
-        stream(): ReadableStream<Uint8Array<ArrayBuffer>> | null;
-        text(): string;
-        json(): unknown;
-        blob(): Blob;
-        buffer(): ArrayBuffer;
-        xml(): Document;
-        xhtml(): Document;
-        html(): Document;
-    }
-    class $mol_fetch extends $mol_object2 {
-        static request(input: RequestInfo, init?: RequestInit): Promise<Response> & {
-            destructor: () => void;
-        };
-        static response(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
-        static success(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
-        static stream(input: RequestInfo, init?: RequestInit): ReadableStream<Uint8Array<ArrayBuffer>> | null;
-        static text(input: RequestInfo, init?: RequestInit): string;
-        static json(input: RequestInfo, init?: RequestInit): unknown;
-        static blob(input: RequestInfo, init?: RequestInit): Blob;
-        static buffer(input: RequestInfo, init?: RequestInit): ArrayBuffer;
-        static xml(input: RequestInfo, init?: RequestInit): Document;
-        static xhtml(input: RequestInfo, init?: RequestInit): Document;
-        static html(input: RequestInfo, init?: RequestInit): Document;
-    }
-}
-
-declare namespace $ {
 
 	type $mol_locale_select__Filter_tukanable_gymload_1 = $mol_type_enforce<
 		any
@@ -8150,259 +8455,264 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_page_export['storage_key'] >
 	>
-	type $tukanable_gymload_pagehint__text_tukanable_gymload_14 = $mol_type_enforce<
+	type $tukanable_gymload_page_templates__menu_tools_tukanable_gymload_14 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $tukanable_gymload_page_templates['menu_tools'] >
+	>
+	type $tukanable_gymload_pagehint__text_tukanable_gymload_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_pagehint['text'] >
 	>
-	type $mol_string__value_tukanable_gymload_15 = $mol_type_enforce<
+	type $mol_string__value_tukanable_gymload_16 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['new_name'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_form_field__name_tukanable_gymload_16 = $mol_type_enforce<
+	type $mol_form_field__name_tukanable_gymload_17 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_form_field['name'] >
 	>
-	type $mol_form_field__bid_tukanable_gymload_17 = $mol_type_enforce<
+	type $mol_form_field__bid_tukanable_gymload_18 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['new_name_bid'] >
 		,
 		ReturnType< $mol_form_field['bid'] >
 	>
-	type $mol_form_field__Content_tukanable_gymload_18 = $mol_type_enforce<
+	type $mol_form_field__Content_tukanable_gymload_19 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['NewName_control'] >
 		,
 		ReturnType< $mol_form_field['Content'] >
 	>
-	type $mol_textarea__value_tukanable_gymload_19 = $mol_type_enforce<
+	type $mol_textarea__value_tukanable_gymload_20 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['new_import_data'] >
 		,
 		ReturnType< $mol_textarea['value'] >
 	>
-	type $mol_form_field__name_tukanable_gymload_20 = $mol_type_enforce<
+	type $mol_form_field__name_tukanable_gymload_21 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_form_field['name'] >
 	>
-	type $mol_form_field__bid_tukanable_gymload_21 = $mol_type_enforce<
+	type $mol_form_field__bid_tukanable_gymload_22 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['new_import_bid'] >
 		,
 		ReturnType< $mol_form_field['bid'] >
 	>
-	type $mol_form_field__Content_tukanable_gymload_22 = $mol_type_enforce<
+	type $mol_form_field__Content_tukanable_gymload_23 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['NewNameImport_control'] >
 		,
 		ReturnType< $mol_form_field['Content'] >
 	>
-	type $mol_button_major__title_tukanable_gymload_23 = $mol_type_enforce<
+	type $mol_button_major__title_tukanable_gymload_24 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_tukanable_gymload_24 = $mol_type_enforce<
+	type $mol_button_major__click_tukanable_gymload_25 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['add_program'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__enabled_tukanable_gymload_25 = $mol_type_enforce<
+	type $mol_button_major__enabled_tukanable_gymload_26 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['add_allowed'] >
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $mol_status__message_tukanable_gymload_26 = $mol_type_enforce<
+	type $mol_status__message_tukanable_gymload_27 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['result'] >
 		,
 		ReturnType< $mol_status['message'] >
 	>
-	type $mol_form__body_tukanable_gymload_27 = $mol_type_enforce<
+	type $mol_form__body_tukanable_gymload_28 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_form['body'] >
 	>
-	type $mol_form__submit_tukanable_gymload_28 = $mol_type_enforce<
+	type $mol_form__submit_tukanable_gymload_29 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['add_program'] >
 		,
 		ReturnType< $mol_form['submit'] >
 	>
-	type $mol_form__buttons_tukanable_gymload_29 = $mol_type_enforce<
+	type $mol_form__buttons_tukanable_gymload_30 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_form['buttons'] >
 	>
-	type $tukanable_gymload_title__title_tukanable_gymload_30 = $mol_type_enforce<
+	type $tukanable_gymload_title__title_tukanable_gymload_31 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_title['title'] >
 	>
-	type $mol_string__value_tukanable_gymload_31 = $mol_type_enforce<
+	type $mol_string__value_tukanable_gymload_32 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['edit_name'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_form_field__name_tukanable_gymload_32 = $mol_type_enforce<
+	type $mol_form_field__name_tukanable_gymload_33 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_form_field['name'] >
 	>
-	type $mol_form_field__bid_tukanable_gymload_33 = $mol_type_enforce<
+	type $mol_form_field__bid_tukanable_gymload_34 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['edit_name_bid'] >
 		,
 		ReturnType< $mol_form_field['bid'] >
 	>
-	type $mol_form_field__Content_tukanable_gymload_34 = $mol_type_enforce<
+	type $mol_form_field__Content_tukanable_gymload_35 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['EditName_control'] >
 		,
 		ReturnType< $mol_form_field['Content'] >
 	>
-	type $mol_button_major__title_tukanable_gymload_35 = $mol_type_enforce<
+	type $mol_button_major__title_tukanable_gymload_36 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_tukanable_gymload_36 = $mol_type_enforce<
+	type $mol_button_major__click_tukanable_gymload_37 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['edit_program'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__enabled_tukanable_gymload_37 = $mol_type_enforce<
+	type $mol_button_major__enabled_tukanable_gymload_38 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['edit_allowed'] >
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $mol_status__message_tukanable_gymload_38 = $mol_type_enforce<
+	type $mol_status__message_tukanable_gymload_39 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['result'] >
 		,
 		ReturnType< $mol_status['message'] >
 	>
-	type $mol_link__arg_tukanable_gymload_39 = $mol_type_enforce<
+	type $mol_link__arg_tukanable_gymload_40 = $mol_type_enforce<
 		({ 
 			'nav': string,
 		}) 
 		,
 		ReturnType< $mol_link['arg'] >
 	>
-	type $mol_link__sub_tukanable_gymload_40 = $mol_type_enforce<
+	type $mol_link__sub_tukanable_gymload_41 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_link['sub'] >
 	>
-	type $mol_form__body_tukanable_gymload_41 = $mol_type_enforce<
+	type $mol_form__body_tukanable_gymload_42 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_form['body'] >
 	>
-	type $mol_form__submit_tukanable_gymload_42 = $mol_type_enforce<
+	type $mol_form__submit_tukanable_gymload_43 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['edit_program'] >
 		,
 		ReturnType< $mol_form['submit'] >
 	>
-	type $mol_form__buttons_tukanable_gymload_43 = $mol_type_enforce<
+	type $mol_form__buttons_tukanable_gymload_44 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_form['buttons'] >
 	>
-	type $tukanable_gymload_title__title_tukanable_gymload_44 = $mol_type_enforce<
+	type $tukanable_gymload_title__title_tukanable_gymload_45 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_title['title'] >
 	>
-	type $mol_button_major__title_tukanable_gymload_45 = $mol_type_enforce<
+	type $mol_button_major__title_tukanable_gymload_46 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_tukanable_gymload_46 = $mol_type_enforce<
+	type $mol_button_major__click_tukanable_gymload_47 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['delete_program'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_minor__title_tukanable_gymload_47 = $mol_type_enforce<
+	type $mol_button_minor__title_tukanable_gymload_48 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_tukanable_gymload_48 = $mol_type_enforce<
+	type $mol_button_minor__click_tukanable_gymload_49 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['cancel_delete_program'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_view__sub_tukanable_gymload_49 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_50 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_page__title_tukanable_gymload_50 = $mol_type_enforce<
+	type $mol_page__title_tukanable_gymload_51 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['day_results_title'] >
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__body_tukanable_gymload_51 = $mol_type_enforce<
+	type $mol_page__body_tukanable_gymload_52 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $mol_page__tools_tukanable_gymload_52 = $mol_type_enforce<
+	type $mol_page__tools_tukanable_gymload_53 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['tools'] >
 	>
-	type $mol_select__dictionary_tukanable_gymload_53 = $mol_type_enforce<
+	type $mol_select__dictionary_tukanable_gymload_54 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['programs'] >
 		,
 		ReturnType< $mol_select['dictionary'] >
 	>
-	type $mol_select__value_tukanable_gymload_54 = $mol_type_enforce<
+	type $mol_select__value_tukanable_gymload_55 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['current_program_string'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $tukanable_gymload_page__title_tukanable_gymload_55 = $mol_type_enforce<
+	type $tukanable_gymload_page__title_tukanable_gymload_56 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_page['title'] >
 	>
-	type $tukanable_gymload_page__menu_title_tukanable_gymload_56 = $mol_type_enforce<
+	type $tukanable_gymload_page__menu_title_tukanable_gymload_57 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_page['menu_title'] >
 	>
-	type $tukanable_gymload_page__tools_tukanable_gymload_57 = $mol_type_enforce<
+	type $tukanable_gymload_page__tools_tukanable_gymload_58 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page['tools'] >
 	>
-	type $tukanable_gymload_page__body_tukanable_gymload_58 = $mol_type_enforce<
+	type $tukanable_gymload_page__body_tukanable_gymload_59 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page['body'] >
 	>
-	type $tukanable_gymload_page__title_tukanable_gymload_59 = $mol_type_enforce<
+	type $tukanable_gymload_page__title_tukanable_gymload_60 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_page['title'] >
 	>
-	type $tukanable_gymload_page__menu_title_tukanable_gymload_60 = $mol_type_enforce<
+	type $tukanable_gymload_page__menu_title_tukanable_gymload_61 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_page['menu_title'] >
 	>
-	type $tukanable_gymload_page__tools_tukanable_gymload_61 = $mol_type_enforce<
+	type $tukanable_gymload_page__tools_tukanable_gymload_62 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page['tools'] >
 	>
-	type $tukanable_gymload_page__body_tukanable_gymload_62 = $mol_type_enforce<
+	type $tukanable_gymload_page__body_tukanable_gymload_63 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page['body'] >
 	>
-	type $mol_page__title_tukanable_gymload_63 = $mol_type_enforce<
+	type $mol_page__title_tukanable_gymload_64 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__body_tukanable_gymload_64 = $mol_type_enforce<
+	type $mol_page__body_tukanable_gymload_65 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
@@ -8420,6 +8730,7 @@ declare namespace $ {
 		PrintPage( ): $tukanable_gymload_builder_export_print
 		HelpPage( ): $tukanable_gymload_help
 		ExportView( ): $tukanable_gymload_page_export
+		Templates( ): $tukanable_gymload_page_templates
 		day_results_title( id: any): string
 		day_results_body( id: any): $mol_view
 		programs( ): Record<string, any>
@@ -8475,6 +8786,7 @@ declare namespace $ {
 			'newprogram': ReturnType< $tukanable_gymload['NewView'] >,
 			'deleteprogram': ReturnType< $tukanable_gymload['DeleteView'] >,
 			'export': ReturnType< $tukanable_gymload['ExportView'] >,
+			'templates': ReturnType< $tukanable_gymload['Templates'] >,
 		}) 
 		DayResultsPage( id: any): $mol_page
 		ListPrograms( ): $mol_select
@@ -8500,6 +8812,7 @@ declare namespace $ {
 //# sourceMappingURL=gymload.view.tree.d.ts.map
 declare namespace $.$$ {
     class $tukanable_gymload extends $.$tukanable_gymload {
+        Spread_default(): any;
         spreads(): any;
         day_results_title(id: any): string;
         day_results_body(id: any): $mol_view;
@@ -8526,6 +8839,7 @@ declare namespace $.$$ {
         delete_program(): void;
         cancel_delete_program(): void;
         new_import_bid(): string;
+        new_import_data(next?: string): string;
     }
     class $tukanable_gymload_help extends $.$tukanable_gymload_help {
         content(): string;

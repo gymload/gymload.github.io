@@ -238,15 +238,16 @@
     "$tukanable_gymload_builder_stats",
     "$tukanable_gymload_builder_export_print",
     "$tukanable_gymload_builder_export",
+    "$tukanable_gymload_pagehint",
     "$tukanable_gymload_page_export",
     "$tukanable_gymload_page",
-    "$tukanable_gymload_pagehint",
     "$mol_button_copy",
     "$mol_blob",
     "$mol_icon_clipboard_outline",
     "$mol_icon_clipboard",
     "$mol_html_encode",
     "$mol_html",
+    "$mol_section",
     "$mol_textarea",
     "$mol_stack",
     "$mol_syntax2",
@@ -258,6 +259,9 @@
     "$mol_base64_encode",
     "$mol_base64",
     "$mol_base64_decode",
+    "$tukanable_gymload_page_templates",
+    "$mol_fetch",
+    "$mol_dom_parse",
     "$mol_form_field",
     "$mol_form",
     "$mol_status",
@@ -278,9 +282,7 @@
     "$mol_icon_youtube",
     "$mol_frame",
     "$mol_embed_rutube",
-    "$mol_expander",
-    "$mol_fetch",
-    "$mol_dom_parse"
+    "$mol_expander"
   ],
   "dependencies": {
     "jsdom": "*"

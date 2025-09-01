@@ -1165,6 +1165,9 @@ $tukanable_gymload_builder_stats $mol_page
 	model* $tukanable_gymload_builder_day
 	body / <= total_lifted @ \Total weight lifted: 
 
+$tukanable_gymload_pagehint $mol_view
+	sub / <= text \
+
 $tukanable_gymload_builder $mol_page
 	title @ \Settings
 	storage_key \gymload_builder
@@ -1239,14 +1242,13 @@ $tukanable_gymload_builder $mol_page
 				values => weight_plate_values /number
 			<= Weeks $mol_deck
 				items <= week_items /$mol_view
+	HelloHint $tukanable_gymload_pagehint
+		text @ \Specify the number of training days per week in the first field below or create a workout program from a ready-made template.
 	body /
 		<= Settings
 
 $tukanable_gymload_page $mol_page
 	menu_title \
-
-$tukanable_gymload_pagehint $mol_view
-	sub / <= text \
 
 $mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
 
@@ -1265,6 +1267,18 @@ $mol_button_copy $mol_button_minor
 		<= Icon $mol_icon_clipboard_outline
 		<= title \
 
+
+$mol_section $mol_list
+	level 1
+	rows /
+		<= Head $mol_view
+			sub <= head /
+				<= Title $mol_paragraph
+					dom_name <= title_dom_name \h1
+					title <= title
+				<= Tools $mol_view sub <= tools /
+		<= Content $mol_list
+			rows <= content /
 
 $mol_stack $mol_view
 
@@ -1403,18 +1417,77 @@ $mol_textarea_edit $mol_string
 $tukanable_gymload_page_export $tukanable_gymload_page
 	storage_key \
 	title @ \Export
+	UrlBlock $mol_section
+		title @ \Data in URL
+		content /
+			<= CopyUrl $mol_button_copy
+				title @ \Copy to Clipboard
+				text <= current_data_url
+			<= Url $tukanable_gymload_page_export_textarea
+				copyButton <= CopyUrl
+				syntax <= empty_syntax null
+				spellcheck false
+				value <= current_data_url \
 	body /
 		<= Hint $tukanable_gymload_pagehint
 			text @ \This program does not store your data on any server. Your information is saved only on your device. If you want to move it to another device or create a backup, simply copy the data shown below:
-		<= Copy $mol_button_copy
-			title @ \Copy to Clipboard
-			text <= raw_data
-		<= Raw $mol_textarea
-			syntax <= empty_syntax null
-			spellcheck false
-			value <= raw_data \
+		<= url_block null $mol_view
+		<= RawSection $mol_section
+			title @ \Raw Data
+			content /
+				<= Copy $mol_button_copy
+					title @ \Copy to Clipboard
+					text <= raw_data
+				<= Raw $tukanable_gymload_page_export_textarea
+					copyButton <= Copy
+					syntax <= empty_syntax null
+					spellcheck false
+					value <= raw_data \
+		<= SettingsSection $mol_section
+			title @ \Settings
+			content /
+				<= OnlySettings $mol_check_box
+					title @ \Do not include results
+					checked? <=> only_settings? false
 		<= FooterHint $tukanable_gymload_pagehint
 			text @ \The data contains only the current program, not all data. The data can be imported on the New Program page.
+
+$tukanable_gymload_page_export_textarea $mol_textarea
+	copyButton null $mol_button_copy
+
+$tukanable_gymload_page_templates $mol_book2_catalog
+	title @ \Templates
+	menu_title @ \Templates
+	param \id
+	Page* $tukanable_gymload_page_templates_details 
+		Spread_close <= Spread_close
+		row <= row* null
+
+$tukanable_gymload_page_templates_details $tukanable_gymload_page
+	title <= row_name \
+	row null
+	Spread_close $mol_view
+	tools /
+		<= ImportButton $mol_button_major
+			title @ \Import
+			click? <=> import? null
+		<= Spread_close
+	body /
+		<= DetailsRow $mol_row
+			sub /
+				<= DescriptionLabeler $mol_labeler
+					title @ \Description
+					content / <= row_description \
+				<= Days $mol_list
+					rows <= days /$mol_view
+						<= DayRow*0 $mol_labeler
+							title <= day_name* @ \Day #
+							content /
+								<= Excersises* $mol_list
+									rows <= exercises* /$mol_view
+										<= ExerciseRow*0 $mol_row
+											sub /
+												<= exercise_info* \
 
 $mol_form_field $mol_labeler
 	bids /string
@@ -1758,6 +1831,8 @@ $tukanable_gymload $mol_book2_catalog
 		deleteprogram <= DeleteView
 		export <= ExportView $tukanable_gymload_page_export
 			storage_key <= builder_storage_key \gymload_builder
+		templates <= Templates $tukanable_gymload_page_templates
+			menu_tools / <= Spread_close
 	DayResultsPage* $mol_page
 		title <= day_results_title* @ \Day #
 		body / <= day_results_body* $mol_view
