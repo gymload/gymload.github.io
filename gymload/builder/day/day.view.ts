@@ -1,6 +1,7 @@
 namespace $.$$ {
 	type NewItem = {
-		excercise: string
+		excercise?: string // typo, deprecated
+		exercise: string
 		weight_type: 'custom' | 'barbell' | 'dumbbell'
 		sets: number
 		reps: number
@@ -11,7 +12,7 @@ namespace $.$$ {
 	}
 
 	const empty_item: NewItem = {
-		excercise: '',
+		exercise: '',
 		weight_type: 'custom',
 		sets: 3,
 		reps: 12,
@@ -51,13 +52,37 @@ namespace $.$$ {
 			return this.data_ids().map( id => this.Row( id ) )
 		}
 
+		fix_exercise_typo(data: NewItem | null | undefined) {
+			if (!data) {
+				return data
+			}
+
+			const { exercise, excercise, ...rest } = data
+
+			if (excercise) {
+				return {
+					...rest,
+					exercise: excercise || '???',
+				}
+			}
+
+			return data
+		}
+
 		row( id: any, next?: NewItem | null ): NewItem {
 			const key = this.build_key( `item_${ id }` )
 			if( next === undefined ) {
-				return this.$.$mol_state_local.value<NewItem>( key ) || empty_item
+				const data = this.$.$mol_state_local.value<NewItem>( key )
+				const fixed_data = this.fix_exercise_typo(data)
+
+				if (fixed_data !== data) {
+					this.$.$mol_state_local.value<NewItem>( key, fixed_data )
+				}
+
+				return fixed_data || empty_item
 			}
 
-			this.$.$mol_state_local.value<NewItem>( key, next )
+			this.$.$mol_state_local.value<NewItem>( key, this.fix_exercise_typo(next) )
 
 			return next || empty_item
 		}
@@ -148,7 +173,7 @@ namespace $.$$ {
 		}
 
 		override row_exercise( id: any, next?: string ) {
-			return this.change_field( 'excercise', id, next )
+			return this.change_field( 'exercise', id, next )
 		}
 
 		override row_sets( id: any, next?: number ) {

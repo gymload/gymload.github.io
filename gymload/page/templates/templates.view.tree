@@ -1,18 +1,33 @@
-$tukanable_gymload_page_templates $tukanable_gymload_page
+$tukanable_gymload_page_templates $mol_book2_catalog
+	title @ \Templates
+	menu_title @ \Templates
+	param \id
+	Page* $tukanable_gymload_page_templates_details 
+		Spread_close <= Spread_close
+		row <= row* null
+
+$tukanable_gymload_page_templates_details $tukanable_gymload_page
+	title <= row_name \
+	row null
+	Spread_close $mol_view
+	tools /
+		<= ImportButton $mol_button_major
+			title @ \Import
+			click? <=> import? null
+		<= Spread_close
 	body /
-		<= List $mol_list
-			rows <= rows /$mol_view
-				<= Row*0 $mol_row
-					sub /
-						<= NameLabeler* $mol_labeler
-							title @ \Name
-							content / <= row_name* \
-						<= DescriptionLabeler* $mol_labeler
-							title @ \Description
-							content / <= row_description* \
-						<= DayCountLabeler* $mol_labeler
-							title @ \DayCount
-							content / <= row_day_count* \
-						<= ImportButton* $mol_button_major
-							title \Import
-							click? <=> import*? null
+		<= DetailsRow $mol_row
+			sub /
+				<= DescriptionLabeler $mol_labeler
+					title @ \Description
+					content / <= row_description \
+				<= Days $mol_list
+					rows <= days /$mol_view
+						<= DayRow*0 $mol_labeler
+							title <= day_name* @ \Day #
+							content /
+								<= Excersises* $mol_list
+									rows <= exercises* /$mol_view
+										<= ExerciseRow*0 $mol_row
+											sub /
+												<= exercise_info* \

@@ -42,8 +42,15 @@ namespace $.$$ {
 			return this.$.$mol_fetch.json( `tukanable/gymload/templates.json` ) as DataFile
 		}
 
-		override rows(): readonly ( $mol_view )[] {
-			return this.data().items.map( item => this.Row( item.id ) )
+		@$mol_mem
+		override spreads() {
+			const pages = super.spreads()
+
+			this.data().items.forEach( item => {
+				pages[ item.id ] = this.Page( item.id )
+			} )
+
+			return pages
 		}
 
 		@$mol_mem_key
@@ -57,22 +64,84 @@ namespace $.$$ {
 			return val[ lang ] ?? val[ 'en' ] ?? Object.values( val )[ 0 ] ?? ''
 		}
 
-		override row_name( id: string ) {
-			return this.lang_str( this.row( id ).name )
+	}
+
+	export class $tukanable_gymload_page_templates_details extends $.$tukanable_gymload_page_templates_details {
+		lang_str( val: LangStr ) {
+			if( typeof val === 'string' ) return val
+			const lang = this.$.$mol_locale.lang()
+			return val[ lang ] ?? val[ 'en' ] ?? Object.values( val )[ 0 ] ?? ''
 		}
 
-		override row_description( id: string ) {
-			return this.lang_str( this.row( id ).description )
+		override row() {
+			const row = super.row() as Template
+			if( !row ) throw new Error( 'row not set' )
+			return row
 		}
 
-		override row_day_count( id: any ): string {
-			return this.row( id ).data?._v1_day_count ?? ''
+		override row_name() {
+			return this.lang_str( this.row().name )
 		}
 
-		override import( id: any ) {
-			const data = $mol_wire_sync( $tukanable_gymload_page_export ).compress( this.row( id ).data )
+		override row_description() {
+			return this.lang_str( this.row().description )
+		}
+
+		override import() {
+			const data = $mol_wire_sync( $tukanable_gymload_page_export ).compress( this.row().data )
 			const url = $tukanable_gymload_page_export.data_url( data )
 			this.$.$mol_state_arg.href( url )
+		}
+
+		@$mol_mem
+		data() {
+			type Exercise = {
+				exercise: string
+				sets: number
+				reps: number
+			}
+
+			const raw = this.row().data
+			const days: { [ key: string ]: string[] } = {} // list of keys
+			const exercises: Exercise[] = []
+
+			Object.keys( raw ).forEach( key => {
+				// _v1_day_0_item_1
+				const m = key.match( /_v1_day_(\d+)_item_(\d+)/ )
+				if( m ) {
+					const day = parseInt( m[ 1 ], 10 )
+					const item = parseInt( m[ 2 ], 10 )
+
+					if( !days[ day ] ) days[ day ] = []
+
+					days[ day ].push( exercises.length.toString() )
+					exercises.push(raw[ key ] as Exercise)
+				}
+			} )
+
+			return { days, exercises }
+		}
+
+		@$mol_mem
+		override days() {
+			return Object.keys( this.data().days ).map( key => this.DayRow(key) )
+		}
+
+		override day_name( id: any ): string {
+			return `${super.day_name(id)}${parseInt(id, 10) + 1}`
+		}
+
+		override exercises( id: any ) {
+			return this.data( ).days[id].map( key => this.ExerciseRow( key ) )
+		}
+
+		exercise(id: any) {
+			return this.data().exercises[ parseInt( id, 10 ) ]
+		}
+
+		override exercise_info( id: any ): string {
+			const {exercise, sets, reps} = this.exercise(id)
+			return `${exercise} ${reps} x ${sets}`
 		}
 	}
 }

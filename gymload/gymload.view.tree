@@ -35,6 +35,7 @@ $tukanable_gymload $mol_book2_catalog
 		export <= ExportView $tukanable_gymload_page_export
 			storage_key <= builder_storage_key \gymload_builder
 		templates <= Templates $tukanable_gymload_page_templates
+			menu_tools / <= Spread_close
 	DayResultsPage* $mol_page
 		title <= day_results_title* @ \Day #
 		body / <= day_results_body* $mol_view

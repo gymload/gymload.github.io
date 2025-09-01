@@ -9,7 +9,19 @@
 			"description": "Демо программа с прогрессией веса",
 			"data": {
 				"_v1_day_0_item_1": {
-					"excercise": "Присяд",
+					"weight_type": "custom",
+					"sets": 3,
+					"reps": 12,
+					"begin_weight": 20,
+					"finish_weight": 50,
+					"min_step": 5,
+					"exercise": "Присяд"
+				},
+				"_v1_day_2_ids": [
+					1
+				],
+				"_v1_day_2_item_1": {
+					"exercise": "Становая тяга",
 					"weight_type": "custom",
 					"sets": 3,
 					"reps": 12,
@@ -17,10 +29,22 @@
 					"finish_weight": 50,
 					"min_step": 5
 				},
-				"_v1_day_count": 3,
 				"_v1_day_0_ids": [
 					1
-				]
+				],
+				"_v1_day_1_ids": [
+					1
+				],
+				"_v1_day_1_item_1": {
+					"exercise": "Жим лежа",
+					"weight_type": "custom",
+					"sets": 3,
+					"reps": 12,
+					"begin_weight": 20,
+					"finish_weight": 50,
+					"min_step": 5
+				},
+				"_v1_day_count": 3
 			}
 		}
 	]
