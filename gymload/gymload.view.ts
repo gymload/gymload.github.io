@@ -54,7 +54,12 @@ namespace $.$$ {
 
 			// hide delete links from menu
 			return super.menu_links().filter( ( link, idx ) => {
-				return !ids[ idx ].includes( 'delete' )
+				const page = this.Spread( ids[ idx ] )
+				if (page instanceof $tukanable_gymload_page) {
+					return !page.hide_in_menu()
+				}
+
+				return true
 			} )
 		}
 

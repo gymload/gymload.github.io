@@ -1,0 +1,13 @@
+$tukanable_gymload_page_exerciseparams $tukanable_gymload_page
+	title @ \Exercise Properties
+	hide_in_menu true
+	body /
+		<= Params $tukanable_gymload_exercise_params
+			sets <= sets 3
+			reps <= reps 12
+			Link null
+		<= help_text @ \
+			\ The notation "$S×$R" means that the exercise is performed in $S sets, and in each set you do $R repetitions;
+			\ a set is a series of movements performed consecutively without a long rest, so first you do $R reps,
+			\ rest, then $R reps again, rest, and continue this way until you complete all $S sets.
+

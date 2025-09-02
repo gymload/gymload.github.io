@@ -136,12 +136,19 @@ namespace $.$$ {
 		}
 
 		exercise(id: any) {
-			return this.data().exercises[ parseInt( id, 10 ) ]
+			return this.data().exercises[ this.exercise_idx(id) ]
 		}
 
-		override exercise_info( id: any ): string {
-			const {exercise, sets, reps} = this.exercise(id)
-			return `${exercise} ${reps} x ${sets}`
+		override exercise_idx( id: any ) {
+			return parseInt(id, 10)
+		}
+
+		override exercise_sets( id: any ): number {
+			return this.exercise(id).sets
+		}
+
+		override exercise_reps( id: any ): number {
+			return this.exercise(id).reps
 		}
 	}
 }

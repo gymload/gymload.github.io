@@ -1,2 +1,3 @@
 $tukanable_gymload_page $mol_page
 	menu_title \
+	hide_in_menu false

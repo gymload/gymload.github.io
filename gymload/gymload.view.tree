@@ -36,6 +36,8 @@ $tukanable_gymload $mol_book2_catalog
 			storage_key <= builder_storage_key \gymload_builder
 		templates <= Templates $tukanable_gymload_page_templates
 			menu_tools / <= Spread_close
+		exerciseparams <= ExerciseParams $tukanable_gymload_page_exerciseparams
+			tools / <= Spread_close
 	DayResultsPage* $mol_page
 		title <= day_results_title* @ \Day #
 		body / <= day_results_body* $mol_view
@@ -100,8 +102,9 @@ $tukanable_gymload $mol_book2_catalog
 						sub /
 							<= DeleteIcon $mol_icon_delete
 							<= delete_link_text @ \Delete Program
-	DeleteView $mol_page
+	DeleteView $tukanable_gymload_page
 		title @ \Delete
+		hide_in_menu true
 		body /
 			<= DeleteTitle $tukanable_gymload_title
 				title @ \Are you sure you want to delete this program?

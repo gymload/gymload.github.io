@@ -16,12 +16,10 @@ namespace $.$$ {
 	} as const;
 
 	$mol_style_define( $tukanable_gymload_title, {
+		alignItems: 'center',
 		Title: {
 			...baseTitle,
 			fontWeight: 'bold',
-			flex: {
-				grow: 1,
-			}
 		},
 		Extra: {
 			...baseTitle,
