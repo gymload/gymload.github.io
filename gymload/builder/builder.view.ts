@@ -61,5 +61,9 @@ namespace $.$$ {
 		override start_percent( next?: number ): number {
 			return this.$.$mol_state_local.value( this.build_key( 'start_percent' ), next ) || super.start_percent()
 		}
+
+		override current_week_item(next?: string): string {
+			return this.$.$mol_state_arg.value( 'wi', next ) || '0'
+		}
 	}
 }
