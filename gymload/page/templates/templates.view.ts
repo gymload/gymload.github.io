@@ -143,6 +143,10 @@ namespace $.$$ {
 			return parseInt(id, 10)
 		}
 
+		override exercise_name( id: any ): string {
+			return this.exercise(id).exercise
+		}
+
 		override exercise_sets( id: any ): number {
 			return this.exercise(id).sets
 		}

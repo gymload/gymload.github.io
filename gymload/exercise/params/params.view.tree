@@ -3,10 +3,10 @@ $tukanable_gymload_exercise_params $mol_view
 	sets 0
 	idx null number|null
 	QuestionIcon $mol_icon_chat_question
+	Link $mol_link
+		uri <= uri \/
+		sub / <= Icon $mol_icon_chat_question
 	sub /
 		<= sets
 		\ × 
 		<= reps
-		<= Link $mol_link
-			uri <= uri \/
-			sub / <= Icon $mol_icon_chat_question

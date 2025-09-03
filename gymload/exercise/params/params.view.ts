@@ -10,10 +10,10 @@ namespace $.$$ {
 
 		override sub() {
 			if (this.idx() === null || this.idx() === 0) {
-				return super.sub()
+				return [...super.sub(), this.Link()]
 			}
 
-			return []
+			return super.sub()
 		}
 	}
 }

@@ -28,6 +28,7 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 						<= ExcerciseTitle* $tukanable_gymload_title
 							title <= row_exercise*
 							Extra <= ExcerciseExtra* $tukanable_gymload_exercise_params
+								idx <= row_idx* 0
 								sets <= row_sets* 3
 								reps <= row_reps* 15
 						<= SetRows* $mol_view

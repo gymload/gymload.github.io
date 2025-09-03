@@ -4,6 +4,10 @@ namespace $.$$ {
 			return this.data_ids().map( id => this.Row( id ) )
 		}
 
+		override row_idx( id: any ): number {
+			return id - 1
+		}
+
 		override set_rows( id: any ) {
 			return Array.from( { length: this.row_sets( id ) } ).map( ( _, idx ) => this.SetResult( `${ id }_${ idx }` ) )
 		}

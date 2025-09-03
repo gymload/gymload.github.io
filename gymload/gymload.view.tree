@@ -15,7 +15,6 @@ $tukanable_gymload $mol_book2_catalog
 		<= Theme $mol_theme_auto
 	spreads *
 		builder <= BuilderPage $tukanable_gymload_builder
-			tools / <= Spread_close
 			storage_key <= builder_storage_key \gymload_builder
 			day_count => day_count
 			DaySettings* => DaySettings* $tukanable_gymload_builder_day

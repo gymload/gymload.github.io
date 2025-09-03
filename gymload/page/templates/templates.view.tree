@@ -30,6 +30,7 @@ $tukanable_gymload_page_templates_details $tukanable_gymload_page
 									rows <= exercises* /$mol_view
 										<= ExerciseRow*0 $mol_row
 											sub /
+												<= exercise_name* \
 												<= Params* $tukanable_gymload_exercise_params
 													idx <= exercise_idx* null
 													sets <= exercise_sets* 0
