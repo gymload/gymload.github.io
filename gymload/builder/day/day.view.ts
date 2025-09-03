@@ -477,5 +477,41 @@ namespace $.$$ {
 
 			return items
 		}
+
+		override sort_down_disabled( id: any ): boolean {
+			const ids = this.data_ids()
+			const idx = ids.indexOf(id)
+			return idx === ids.length - 1
+		}
+
+		override sort_up_disabled( id: any ): boolean {
+			const ids = this.data_ids()
+			const idx = ids.indexOf(id)
+			return idx === 0
+		}
+
+		override sort_down_click( id: any ) {
+			const ids = this.data_ids()
+			const idx = ids.indexOf(id)
+			if( idx === -1 || idx === ids.length - 1 ) return
+			
+			const new_ids = [ ...ids ]
+			new_ids[ idx ] = ids[ idx + 1 ]
+			new_ids[ idx + 1 ] = ids[ idx ]
+
+			this.data_ids( new_ids )
+		}
+
+		override sort_up_click( id: any ) {
+			const ids = this.data_ids()
+			const idx = ids.indexOf(id)
+			if( idx === -1 || idx === 0 ) return
+
+			const new_ids = [ ...ids ]
+			new_ids[ idx ] = ids[ idx - 1 ]
+			new_ids[ idx - 1 ] = ids[ idx ]
+
+			this.data_ids( new_ids )
+		}
 	}
 }

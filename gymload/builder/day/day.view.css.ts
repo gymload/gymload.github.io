@@ -23,6 +23,10 @@ namespace $.$$ {
 		},
 		SortRow_content: {
 			padding: $mol_gap.text,
+			alignItems: 'center',
+		},
+		SortDownButton: {
+			marginRight: rem(0.5),
 		},
 		SortExercisesHelp: {
 			padding: $mol_gap.text,

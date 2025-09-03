@@ -141,4 +141,13 @@ $tukanable_gymload_builder_day $mol_view
 										receive?obj <=> sort_receive_before*?obj null
 										Sub <= SortRow_content* $mol_view
 											sub /
+												<= SortUpButton* $mol_button_major
+													disabled <= sort_up_disabled* false
+													click? <=> sort_up_click*? null
+													sub / <= UpButtonIcon* $mol_icon_arrow_up
+												<= SortDownButton* $mol_button_major
+													disabled <= sort_down_disabled* false
+													click? <=> sort_down_click*? null
+													sub / <= DownButtonIcon* $mol_icon_arrow_down
 												<= row_exercise*
+
