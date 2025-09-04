@@ -17,8 +17,8 @@ $tukanable_gymload $mol_book2_catalog
 		builder <= BuilderPage $tukanable_gymload_builder
 			storage_key <= builder_storage_key \gymload_builder
 			day_count => day_count
-			DaySettings* => DaySettings* $tukanable_gymload_builder_day
-			DayResults* => DayResults* $tukanable_gymload_builder_day
+			DaySettings* => DaySettings*
+			DayResults* => DayResults*
 		stats <= StatsPage $tukanable_gymload_builder_stats
 			title @ \Stats
 			day_count <= day_count

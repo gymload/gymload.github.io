@@ -25,7 +25,15 @@ namespace $.$$ {
 		}
 
 		override week_items() {
-			return Array.from( { length: this.week_count() }, ( _, i ) => this.WeekTab( i ) )
+			const items: $mol_view[] = []
+			const week_count = this.week_count()
+
+			for (let i = 0; i < week_count; i++)
+				items.push(this.WeekTab(i))
+
+			items.push(this.EditTab())
+
+			return items
 		}
 
 		override week_tab_title_short( id: any ): string {

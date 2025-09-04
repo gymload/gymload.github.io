@@ -39,7 +39,9 @@ namespace $.$$ {
 		}
 
 		override day_results_body( id: any ): $mol_view {
-			return this.DayResults( id )
+			const r = this.DayResults( id )
+			r.DaySettings = () => this.DaySettings(id)
+			return r
 		}
 
 		override spread_title( spread: string ) {

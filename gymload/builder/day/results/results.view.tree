@@ -1,5 +1,6 @@
 $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 	week_count 1
+	DaySettings null $tukanable_gymload_builder_day
 	SetResult* $tukanable_gymload_builder_day_results_set
 		set_idx <= set_idx* 0
 		week_idx <= current_week_number 0
@@ -15,21 +16,24 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 		sub /
 			<= WeekTitle* $tukanable_gymload_title
 				title <= week_tab_title* @ \Week #
+			<= Rows $mol_list
+				item_width_min* 200
+				item_height_min* 96
+				rows <= rows /$mol_view
+					<= Row*0 $mol_view
+						sub /
+							<= ExcerciseTitle* $tukanable_gymload_title
+								title <= row_exercise*
+								Extra <= ExcerciseExtra* $tukanable_gymload_exercise_params
+									idx <= row_idx* 0
+									sets <= row_sets*
+									reps <= row_reps*
+							<= SetRows* $mol_view
+								sub <= set_rows* /$mol_view
+	EditTab $mol_view
+		title @ \Edit
+		sub / <= DaySettings
 	sub /
 		<= Weeks $mol_deck
 			current? => current_week? \0
 			items <= week_items /$mol_view
-		<= Rows $mol_list
-			item_width_min* 200
-			item_height_min* 96
-			rows <= rows /$mol_view
-				<= Row*0 $mol_view
-					sub /
-						<= ExcerciseTitle* $tukanable_gymload_title
-							title <= row_exercise*
-							Extra <= ExcerciseExtra* $tukanable_gymload_exercise_params
-								idx <= row_idx* 0
-								sets <= row_sets* 3
-								reps <= row_reps* 15
-						<= SetRows* $mol_view
-							sub <= set_rows* /$mol_view

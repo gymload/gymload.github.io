@@ -3,5 +3,11 @@ namespace $.$$ {
 		SetRows: {
 			flexDirection: 'column',
 		},
+		WeekTab: {
+			flexDirection: 'column',
+		},
+		EditTab: {
+			flexDirection: 'column',
+		},
 	})
 }
