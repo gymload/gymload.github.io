@@ -35,5 +35,5 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 		sub / <= DaySettings
 	sub /
 		<= Weeks $mol_deck
-			current? => current_week? \0
+			current? <=> current_week? \0
 			items <= week_items /$mol_view

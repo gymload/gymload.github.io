@@ -8,6 +8,7 @@ $tukanable_gymload_builder_day_results_set $mol_view
 	reps 3
 	weight_min_step 0.1
 	weight_min 0
+	original_week_weight? null null|number
 	PastWeekView $mol_view
 		sub / <= past_week_results \
 	CurrentWeekView $mol_view
