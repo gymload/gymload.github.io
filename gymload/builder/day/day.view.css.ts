@@ -8,6 +8,7 @@ namespace $.$$ {
 		},
 		Row: {
 			flexDirection: 'column',
+			marginBottom: rem(1),
 		},
 		ChartView: {
 			maxHeight: '200px',

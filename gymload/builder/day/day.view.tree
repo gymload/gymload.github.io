@@ -21,12 +21,12 @@ $tukanable_gymload_builder_day $mol_view
 	MinStepLabeler* $mol_labeler
 		title @ \Min Step
 		Content <= MinStep* $tukanable_gymload_smallnumber
-			precision 0.1
+			precision 0.05
 			value? <=> row_min_step*? 2.5
 	BeginWeightLabeler* $mol_labeler
 		title @ \Begin Weight
 		Content <= BeginWeight* $tukanable_gymload_smallnumber
-			precision_view 0.1
+			precision_view 0.05
 			precision_change <= row_min_step*?
 			value_min <= row_min_weight* 0
 			value? <=> row_begin_weight*? 50
