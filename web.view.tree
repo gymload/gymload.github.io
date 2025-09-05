@@ -841,6 +841,10 @@ $mol_button_major $mol_button_minor
 
 $mol_row $mol_view
 
+$mol_icon_arrow_up $mol_icon path \M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z
+
+$mol_icon_arrow_down $mol_icon path \M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z
+
 $mol_ghost $mol_view
 	Sub $mol_view
 
@@ -927,12 +931,12 @@ $tukanable_gymload_builder_day $mol_view
 	MinStepLabeler* $mol_labeler
 		title @ \Min Step
 		Content <= MinStep* $tukanable_gymload_smallnumber
-			precision 0.1
+			precision 0.05
 			value? <=> row_min_step*? 2.5
 	BeginWeightLabeler* $mol_labeler
 		title @ \Begin Weight
 		Content <= BeginWeight* $tukanable_gymload_smallnumber
-			precision_view 0.1
+			precision_view 0.05
 			precision_change <= row_min_step*?
 			value_min <= row_min_weight* 0
 			value? <=> row_begin_weight*? 50
@@ -1047,7 +1051,16 @@ $tukanable_gymload_builder_day $mol_view
 										receive?obj <=> sort_receive_before*?obj null
 										Sub <= SortRow_content* $mol_view
 											sub /
+												<= SortUpButton* $mol_button_major
+													disabled <= sort_up_disabled* false
+													click? <=> sort_up_click*? null
+													sub / <= UpButtonIcon* $mol_icon_arrow_up
+												<= SortDownButton* $mol_button_major
+													disabled <= sort_down_disabled* false
+													click? <=> sort_down_click*? null
+													sub / <= DownButtonIcon* $mol_icon_arrow_down
 												<= row_exercise*
+
 
 $mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
 
@@ -1089,6 +1102,23 @@ $tukanable_gymload_builder_weights $mol_view
 		<= Items $mol_view
 			sub <= items /$mol_view
 
+$mol_icon_chat $mol_icon path \M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z
+
+$mol_icon_chat_question $mol_icon path \M12 3C6.5 3 2 6.6 2 11C2 13.1 3 15.1 4.8 16.5C4.8 17.1 4.4 18.7 2 21C2 21 5.5 21 8.5 18.5C9.6 18.8 10.8 19 12 19C17.5 19 22 15.4 22 11S17.5 3 12 3M13 15H11V13H13V15M14.8 10C14.5 10.4 14.1 10.6 13.7 10.8C13.4 11 13.3 11.1 13.2 11.3C13 11.5 13 11.7 13 12H11C11 11.5 11.1 11.2 11.3 10.9C11.5 10.7 11.9 10.4 12.4 10.1C12.7 10 12.9 9.8 13 9.6C13.1 9.4 13.2 9.1 13.2 8.9C13.2 8.6 13.1 8.4 12.9 8.2C12.7 8 12.4 7.9 12.1 7.9C11.8 7.9 11.6 8 11.4 8.1C11.2 8.2 11.1 8.4 11.1 8.7H9.1C9.2 8 9.5 7.4 10 7C10.5 6.6 11.2 6.5 12.1 6.5C13 6.5 13.8 6.7 14.3 7.1C14.8 7.5 15.1 8.1 15.1 8.8C15.2 9.2 15.1 9.6 14.8 10Z
+
+$tukanable_gymload_exercise_params $mol_view
+	reps 0
+	sets 0
+	idx null number|null
+	QuestionIcon $mol_icon_chat_question
+	Link $mol_link
+		uri <= uri \/
+		sub / <= Icon $mol_icon_chat_question
+	sub /
+		<= sets
+		\ × 
+		<= reps
+
 $tukanable_gymload_builder_day_results_set $mol_view
 	storage_key \setresult
 	set_idx 0
@@ -1099,6 +1129,7 @@ $tukanable_gymload_builder_day_results_set $mol_view
 	reps 3
 	weight_min_step 0.1
 	weight_min 0
+	original_week_weight? null null|number
 	PastWeekView $mol_view
 		sub / <= past_week_results \
 	CurrentWeekView $mol_view
@@ -1129,6 +1160,7 @@ $tukanable_gymload_builder_day_results_set $mol_view
 
 $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 	week_count 1
+	DaySettings null $tukanable_gymload_builder_day
 	SetResult* $tukanable_gymload_builder_day_results_set
 		set_idx <= set_idx* 0
 		week_idx <= current_week_number 0
@@ -1144,20 +1176,27 @@ $tukanable_gymload_builder_day_results $tukanable_gymload_builder_day
 		sub /
 			<= WeekTitle* $tukanable_gymload_title
 				title <= week_tab_title* @ \Week #
+			<= Rows $mol_list
+				item_width_min* 200
+				item_height_min* 96
+				rows <= rows /$mol_view
+					<= Row*0 $mol_view
+						sub /
+							<= ExcerciseTitle* $tukanable_gymload_title
+								title <= row_exercise*
+								Extra <= ExcerciseExtra* $tukanable_gymload_exercise_params
+									idx <= row_idx* 0
+									sets <= row_sets*
+									reps <= row_reps*
+							<= SetRows* $mol_view
+								sub <= set_rows* /$mol_view
+	EditTab $mol_view
+		title @ \Edit
+		sub / <= DaySettings
 	sub /
 		<= Weeks $mol_deck
-			current? => current_week? \0
+			current? <=> current_week? \0
 			items <= week_items /$mol_view
-		<= Rows $mol_list
-			item_width_min* 200
-			item_height_min* 96
-			rows <= rows /$mol_view
-				<= Row*0 $mol_view
-					sub /
-						<= ExcerciseTitle* $tukanable_gymload_title
-							title <= row_exercise_extra*
-						<= SetRows* $mol_view
-							sub <= set_rows* /$mol_view
 
 $tukanable_gymload_builder_stats $mol_page
 	title @ \Stats
@@ -1242,6 +1281,7 @@ $tukanable_gymload_builder $mol_page
 				values => weight_plate_values /number
 			<= Weeks $mol_deck
 				items <= week_items /$mol_view
+				current? <=> current_week_item? \0
 	HelloHint $tukanable_gymload_pagehint
 		text @ \Specify the number of training days per week in the first field below or create a workout program from a ready-made template.
 	body /
@@ -1249,6 +1289,7 @@ $tukanable_gymload_builder $mol_page
 
 $tukanable_gymload_page $mol_page
 	menu_title \
+	hide_in_menu false
 
 $mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
 
@@ -1487,7 +1528,25 @@ $tukanable_gymload_page_templates_details $tukanable_gymload_page
 									rows <= exercises* /$mol_view
 										<= ExerciseRow*0 $mol_row
 											sub /
-												<= exercise_info* \
+												<= exercise_name* \
+												<= Params* $tukanable_gymload_exercise_params
+													idx <= exercise_idx* null
+													sets <= exercise_sets* 0
+													reps <= exercise_reps* 0
+
+$tukanable_gymload_page_exerciseparams $tukanable_gymload_page
+	title @ \Exercise Properties
+	hide_in_menu true
+	body /
+		<= Params $tukanable_gymload_exercise_params
+			sets <= sets 3
+			reps <= reps 12
+			Link null
+		<= help_text @ \
+			\ The notation "$S×$R" means that the exercise is performed in $S sets, and in each set you do $R repetitions;
+			\ a set is a series of movements performed consecutively without a long rest, so first you do $R reps,
+			\ rest, then $R reps again, rest, and continue this way until you complete all $S sets.
+
 
 $mol_form_field $mol_labeler
 	bids /string
@@ -1812,11 +1871,10 @@ $tukanable_gymload $mol_book2_catalog
 		<= Theme $mol_theme_auto
 	spreads *
 		builder <= BuilderPage $tukanable_gymload_builder
-			tools / <= Spread_close
 			storage_key <= builder_storage_key \gymload_builder
 			day_count => day_count
-			DaySettings* => DaySettings* $tukanable_gymload_builder_day
-			DayResults* => DayResults* $tukanable_gymload_builder_day
+			DaySettings* => DaySettings*
+			DayResults* => DayResults*
 		stats <= StatsPage $tukanable_gymload_builder_stats
 			title @ \Stats
 			day_count <= day_count
@@ -1833,6 +1891,8 @@ $tukanable_gymload $mol_book2_catalog
 			storage_key <= builder_storage_key \gymload_builder
 		templates <= Templates $tukanable_gymload_page_templates
 			menu_tools / <= Spread_close
+		exerciseparams <= ExerciseParams $tukanable_gymload_page_exerciseparams
+			tools / <= Spread_close
 	DayResultsPage* $mol_page
 		title <= day_results_title* @ \Day #
 		body / <= day_results_body* $mol_view
@@ -1897,8 +1957,9 @@ $tukanable_gymload $mol_book2_catalog
 						sub /
 							<= DeleteIcon $mol_icon_delete
 							<= delete_link_text @ \Delete Program
-	DeleteView $mol_page
+	DeleteView $tukanable_gymload_page
 		title @ \Delete
+		hide_in_menu true
 		body /
 			<= DeleteTitle $tukanable_gymload_title
 				title @ \Are you sure you want to delete this program?

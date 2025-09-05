@@ -15,6 +15,283 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    var $mol_dom_context: typeof globalThis;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    var $mol_dom: typeof globalThis;
+}
+
+declare namespace $ {
+    function $mol_style_attach(id: string, text: string): HTMLStyleElement | null;
+}
+
+declare namespace $ {
+    class $mol_promise<Result = void> extends Promise<Result> {
+        done: (value: Result | PromiseLike<Result>) => void;
+        fail: (reason?: any) => void;
+        constructor(executor?: (done: (value: Result | PromiseLike<Result>) => void, fail: (reason?: any) => void) => void);
+    }
+}
+
+declare namespace $ {
+    class $mol_promise_blocker<Result> extends $mol_promise<Result> {
+        static [Symbol.toStringTag]: string;
+    }
+}
+
+declare namespace $ {
+    class $mol_decor<Value> {
+        readonly value: Value;
+        constructor(value: Value);
+        prefix(): string;
+        valueOf(): Value;
+        postfix(): string;
+        toString(): string;
+    }
+}
+
+declare namespace $ {
+    type $mol_style_unit_length = '%' | 'px' | 'cm' | 'mm' | 'Q' | 'in' | 'pc' | 'pt' | 'cap' | 'ch' | 'em' | 'rem' | 'ex' | 'ic' | 'lh' | 'rlh' | 'vh' | 'vw' | 'vi' | 'vb' | 'vmin' | 'vmax';
+    type $mol_style_unit_angle = 'deg' | 'rad' | 'grad' | 'turn';
+    type $mol_style_unit_time = 's' | 'ms';
+    type $mol_style_unit_any = $mol_style_unit_length | $mol_style_unit_angle | $mol_style_unit_time;
+    type $mol_style_unit_str<Quanity extends $mol_style_unit_any = $mol_style_unit_any> = `${number}${Quanity}`;
+    class $mol_style_unit<Literal extends $mol_style_unit_any> extends $mol_decor<number> {
+        readonly literal: Literal;
+        constructor(value: number, literal: Literal);
+        postfix(): Literal;
+        static per(value: number): `${number}%`;
+        static px(value: number): `${number}px`;
+        static mm(value: number): `${number}mm`;
+        static cm(value: number): `${number}cm`;
+        static Q(value: number): `${number}Q`;
+        static in(value: number): `${number}in`;
+        static pc(value: number): `${number}pc`;
+        static pt(value: number): `${number}pt`;
+        static cap(value: number): `${number}cap`;
+        static ch(value: number): `${number}ch`;
+        static em(value: number): `${number}em`;
+        static rem(value: number): `${number}rem`;
+        static ex(value: number): `${number}ex`;
+        static ic(value: number): `${number}ic`;
+        static lh(value: number): `${number}lh`;
+        static rlh(value: number): `${number}rlh`;
+        static vh(value: number): `${number}vh`;
+        static vw(value: number): `${number}vw`;
+        static vi(value: number): `${number}vi`;
+        static vb(value: number): `${number}vb`;
+        static vmin(value: number): `${number}vmin`;
+        static vmax(value: number): `${number}vmax`;
+        static deg(value: number): `${number}deg`;
+        static rad(value: number): `${number}rad`;
+        static grad(value: number): `${number}grad`;
+        static turn(value: number): `${number}turn`;
+        static s(value: number): `${number}s`;
+        static ms(value: number): `${number}ms`;
+    }
+}
+
+declare namespace $ {
+    type $mol_style_func_name = 'calc' | 'hsla' | 'rgba' | 'var' | 'clamp' | 'scale' | 'cubic-bezier' | 'linear' | 'steps' | $mol_style_func_image | $mol_style_func_filter;
+    type $mol_style_func_image = 'url' | 'linear-gradient' | 'radial-gradient' | 'conic-gradient';
+    type $mol_style_func_filter = 'blur' | 'brightness' | 'contrast' | 'drop-shadow' | 'grayscale' | 'hue-rotate' | 'invert' | 'opacity' | 'sepia' | 'saturate';
+    class $mol_style_func<Name extends $mol_style_func_name, Value = unknown> extends $mol_decor<Value> {
+        readonly name: Name;
+        constructor(name: Name, value: Value);
+        prefix(): string;
+        postfix(): string;
+        static linear_gradient<Value>(value: Value): $mol_style_func<"linear-gradient", Value>;
+        static radial_gradient<Value>(value: Value): $mol_style_func<"radial-gradient", Value>;
+        static calc<Value>(value: Value): $mol_style_func<"calc", Value>;
+        static vary<Name extends string, Value extends string>(name: Name, defaultValue?: Value): $mol_style_func<"var", Name | (Name | Value)[]>;
+        static url<Href extends string>(href: Href): $mol_style_func<"url", string>;
+        static hsla(hue: number, saturation: number, lightness: number, alpha: number): $mol_style_func<"hsla", (number | `${number}%`)[]>;
+        static clamp(min: $mol_style_unit_str<any>, mid: $mol_style_unit_str<any>, max: $mol_style_unit_str<any>): $mol_style_func<"clamp", `${number}${any}`[]>;
+        static rgba(red: number, green: number, blue: number, alpha: number): $mol_style_func<"rgba", number[]>;
+        static scale(zoom: number): $mol_style_func<"scale", number[]>;
+        static linear(...breakpoints: Array<number | [number, number | $mol_style_unit_str<'%'>]>): $mol_style_func<"linear", string[]>;
+        static cubic_bezier(x1: number, y1: number, x2: number, y2: number): $mol_style_func<"cubic-bezier", number[]>;
+        static steps(value: number, step_position: 'jump-start' | 'jump-end' | 'jump-none' | 'jump-both' | 'start' | 'end'): $mol_style_func<"steps", (number | "end" | "start" | "jump-start" | "jump-end" | "jump-none" | "jump-both")[]>;
+        static blur(value?: $mol_style_unit_str<$mol_style_unit_length>): $mol_style_func<"blur", string>;
+        static brightness(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"brightness", string | number>;
+        static contrast(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"contrast", string | number>;
+        static drop_shadow(color: $mol_style_properties_color, x_offset: $mol_style_unit_str<$mol_style_unit_length>, y_offset: $mol_style_unit_str<$mol_style_unit_length>, blur_radius?: $mol_style_unit_str<$mol_style_unit_length>): $mol_style_func<"drop-shadow", (`${number}%` | `${number}px` | `${number}mm` | `${number}cm` | `${number}Q` | `${number}in` | `${number}pc` | `${number}pt` | `${number}cap` | `${number}ch` | `${number}em` | `${number}rem` | `${number}ex` | `${number}ic` | `${number}lh` | `${number}rlh` | `${number}vh` | `${number}vw` | `${number}vi` | `${number}vb` | `${number}vmin` | `${number}vmax` | $mol_style_properties_color)[]>;
+        static grayscale(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"grayscale", string | number>;
+        static hue_rotate(value?: 0 | $mol_style_unit_str<$mol_style_unit_angle>): $mol_style_func<"hue-rotate", string | 0>;
+        static invert(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"invert", string | number>;
+        static opacity(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"opacity", string | number>;
+        static sepia(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"sepia", string | number>;
+        static saturate(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"saturate", string | number>;
+    }
+}
+
+declare namespace $ {
+    type $mol_type_override<Base, Over> = Omit<Base, keyof Over> & Over;
+}
+
+declare namespace $ {
+    export type $mol_style_properties = Partial<$mol_type_override<CSSStyleDeclaration, Overrides>>;
+    type Common = 'inherit' | 'initial' | 'unset' | 'revert' | 'revert-layer' | 'none' | $mol_style_func<'var'>;
+    export type $mol_style_properties_color = 'aliceblue' | 'antiquewhite' | 'aqua' | 'aquamarine' | 'azure' | 'beige' | 'bisque' | 'black' | 'blanchedalmond' | 'blue' | 'blueviolet' | 'brown' | 'burlywood' | 'cadetblue' | 'chartreuse' | 'chocolate' | 'coral' | 'cornflowerblue' | 'cornsilk' | 'crimson' | 'cyan' | 'darkblue' | 'darkcyan' | 'darkgoldenrod' | 'darkgray' | 'darkgreen' | 'darkgrey' | 'darkkhaki' | 'darkmagenta' | 'darkolivegreen' | 'darkorange' | 'darkorchid' | 'darkred' | 'darksalmon' | 'darkseagreen' | 'darkslateblue' | 'darkslategrey' | 'darkturquoise' | 'darkviolet' | 'deeppink' | 'deepskyblue' | 'dimgray' | 'dimgrey' | 'dodgerblue' | 'firebrick' | 'floralwhite' | 'forestgreen' | 'fuchsia' | 'gainsboro' | 'ghostwhite' | 'gold' | 'goldenrod' | 'gray' | 'green' | 'greenyellow' | 'grey' | 'honeydew' | 'hotpink' | 'indianred' | 'indigo' | 'ivory' | 'khaki' | 'lavender' | 'lavenderblush' | 'lawngreen' | 'lemonchiffon' | 'lightblue' | 'lightcoral' | 'lightcyan' | 'lightgoldenrodyellow' | 'lightgray' | 'lightgreen' | 'lightgrey' | 'lightpink' | 'lightsalmon' | 'lightseagreen' | 'lightskyblue' | 'lightslategray' | 'lightslategrey' | 'lightsteelblue' | 'lightyellow' | 'lime' | 'limegreen' | 'linen' | 'magenta' | 'maroon' | 'mediumaquamarine' | 'mediumblue' | 'mediumorchid' | 'mediumpurple' | 'mediumseagreen' | 'mediumslateblue' | 'mediumspringgreen' | 'mediumturquoise' | 'mediumvioletred' | 'midnightblue' | 'mintcream' | 'mistyrose' | 'moccasin' | 'navajowhite' | 'navy' | 'oldlace' | 'olive' | 'olivedrab' | 'orange' | 'orangered' | 'orchid' | 'palegoldenrod' | 'palegreen' | 'paleturquoise' | 'palevioletred' | 'papayawhip' | 'peachpuff' | 'peru' | 'pink' | 'plum' | 'powderblue' | 'purple' | 'rebeccapurple' | 'red' | 'rosybrown' | 'royalblue' | 'saddlebrown' | 'salmon' | 'sandybrown' | 'seagreen' | 'seashell' | 'sienna' | 'silver' | 'skyblue' | 'slateblue' | 'slategray' | 'slategrey' | 'snow' | 'springgreen' | 'steelblue' | 'tan' | 'teal' | 'thistle' | 'tomato' | 'turquoise' | 'violet' | 'wheat' | 'white' | 'whitesmoke' | 'yellow' | 'yellowgreen' | 'transparent' | 'currentcolor' | $mol_style_func<'hsla' | 'rgba' | 'var'> | `#${string}`;
+    type Length = 0 | `${number}${$mol_style_unit_length}` | $mol_style_func<'calc' | 'var' | 'clamp'>;
+    type Size = 'auto' | 'max-content' | 'min-content' | 'fit-content' | Length | Common;
+    type Directions<Value> = Value | readonly [Value, Value] | {
+        top?: Value;
+        right?: Value;
+        bottom?: Value;
+        left?: Value;
+    };
+    type Single_animation_composition = 'replace' | 'add' | 'accumulate';
+    type Single_animation_direction = 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
+    type Single_animation_fill_mode = 'none' | 'forwards' | 'backwards' | 'both';
+    type Single_animation_iteration_count = 'infinite' | number;
+    type Single_animation_play_state = 'running' | 'paused';
+    type Easing_function = Linear_easing_function | Cubic_bezier_easing_function | Step_easing_function;
+    type Linear_easing_function = 'linear' | $mol_style_func<'linear'>;
+    type Cubic_bezier_easing_function = 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | $mol_style_func<'cubic-bezier'>;
+    type Step_easing_function = 'step-start' | 'step-end' | $mol_style_func<'steps'>;
+    type Compat_auto = 'searchfield' | 'textarea' | 'push-button' | 'slider-horizontal' | 'checkbox' | 'radio' | 'menulist' | 'listbox' | 'meter' | 'progress-bar' | 'button';
+    type Compat_special = 'textfield' | 'menulist-button';
+    type Mix_blend_mode = Blend_mode | 'plus-darker' | 'plus-lighter';
+    type Blend_mode = 'normal' | 'multiply' | 'screen' | 'overlay' | 'darken' | 'lighten' | 'color-dodge' | 'color-burn' | 'hard-light' | 'soft-light' | 'difference' | 'exclusion' | 'hue' | 'saturation' | 'color' | 'luminosity';
+    type Box = 'border-box' | 'padding-box' | 'content-box';
+    type Baseline_position = 'baseline' | `${'first' | 'last'} baseline`;
+    type Content_distribution = 'space-between' | 'space-around' | 'space-evenly' | 'stretch';
+    type Self_position = 'center' | 'start' | 'end' | 'self-start' | 'self-end' | 'flex-start' | 'flex-end';
+    type Content_position = 'center' | 'start' | 'end' | 'flex-start' | 'flex-end';
+    type Span_align = 'none' | 'start' | 'end' | 'center' | $mol_style_func<'var'>;
+    type Snap_axis = 'x' | 'y' | 'block' | 'inline' | 'both' | $mol_style_func<'var'>;
+    type Overflow = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto' | 'overlay' | Common;
+    type Overflow_position = 'unsafe' | 'safe';
+    type ContainRule = 'size' | 'layout' | 'style' | 'paint' | $mol_style_func<'var'>;
+    type Repeat = 'repeat-x' | 'repeat-y' | 'repeat' | 'space' | 'round' | 'no-repeat' | $mol_style_func<'var'>;
+    type BG_size = Length | 'auto' | 'contain' | 'cover';
+    interface Overrides {
+        accentColor?: $mol_style_properties_color | Common;
+        align?: {
+            content?: 'normal' | Baseline_position | Content_distribution | Content_position | `${Overflow_position} ${Content_position}` | Common;
+            items?: 'normal' | 'stretch' | Baseline_position | Self_position | `${Overflow_position} ${Self_position}` | Common;
+            self?: 'auto' | 'normal' | 'stretch' | Baseline_position | Self_position | `${Overflow_position} ${Self_position}` | Common;
+        };
+        justify?: {
+            content?: 'normal' | Baseline_position | Content_distribution | Content_position | `${Overflow_position} ${Content_position}` | Common;
+            items?: 'normal' | 'stretch' | Baseline_position | Self_position | `${Overflow_position} ${Self_position}` | Common;
+            self?: 'auto' | 'normal' | 'stretch' | Baseline_position | Self_position | `${Overflow_position} ${Self_position}` | Common;
+        };
+        all?: Common;
+        animation?: {
+            composition?: Single_animation_composition | Single_animation_composition[][] | Common;
+            delay?: $mol_style_unit_str<$mol_style_unit_time> | $mol_style_unit_str<$mol_style_unit_time>[][] | Common;
+            direction?: Single_animation_direction | Single_animation_direction[][] | Common;
+            duration?: $mol_style_unit_str<$mol_style_unit_time> | $mol_style_unit_str<$mol_style_unit_time>[][] | Common;
+            fillMode?: Single_animation_fill_mode | Single_animation_fill_mode[][] | Common;
+            iterationCount?: Single_animation_iteration_count | Single_animation_iteration_count[][] | Common;
+            name?: 'none' | string & {} | ('none' | string & {})[][] | Common;
+            playState?: Single_animation_play_state | Single_animation_play_state[][] | Common;
+            timingFunction?: Easing_function | Easing_function[][] | Common;
+        };
+        appearance?: 'none' | 'auto' | Compat_auto | Compat_special | Common;
+        aspectRatio?: 'auto' | number | `${number} / ${number}`;
+        backdropFilter: $mol_style_func<$mol_style_func_filter> | $mol_style_func<'url'> | ($mol_style_func<$mol_style_func_filter> | $mol_style_func<'url'>)[][] | 'none' | Common;
+        backfaceVisibility: 'visible' | 'hidden' | Common;
+        justifyContent?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'left' | 'right' | 'space-between' | 'space-around' | 'space-evenly' | 'normal' | 'stretch' | 'center' | Common;
+        gap?: Length;
+        background?: 'none' | {
+            attachment?: 'scroll' | 'fixed' | 'local' | ('scroll' | 'fixed' | 'local')[][] | Common;
+            blendMode?: Mix_blend_mode | Mix_blend_mode[][] | Common;
+            clip?: Box | Box[][] | Common;
+            color?: $mol_style_properties_color | Common;
+            image?: readonly (readonly [$mol_style_func<$mol_style_func_image> | string & {}])[] | 'none' | Common;
+            repeat?: Repeat | [Repeat, Repeat] | Common;
+            position?: 'left' | 'right' | 'top' | 'bottom' | 'center' | Common;
+            size?: (BG_size | [BG_size] | [BG_size, BG_size])[];
+        };
+        box?: {
+            shadow?: readonly ([
+                ...[inset: 'inset'] | [],
+                x: Length,
+                y: Length,
+                blur: Length,
+                spread: Length,
+                color: $mol_style_properties_color
+            ] | {
+                inset?: boolean;
+                x: Length;
+                y: Length;
+                blur: Length;
+                spread: Length;
+                color: $mol_style_properties_color;
+            })[] | 'none' | Common;
+        };
+        font?: {
+            style?: 'normal' | 'italic' | Common;
+            weight?: 'normal' | 'bold' | 'lighter' | 'bolder' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Common;
+            size?: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | 'xxx-large' | 'smaller' | 'larger' | Length | Common;
+            family?: string & {} | 'serif' | 'sans-serif' | 'monospace' | 'cursive' | 'fantasy' | 'system-ui' | 'ui-serif' | 'ui-sans-serif' | 'ui-monospace' | 'ui-rounded' | 'emoji' | 'math' | 'fangsong' | Common;
+        };
+        color?: $mol_style_properties_color | Common;
+        display?: 'block' | 'inline' | 'run-in' | 'list-item' | 'none' | 'flow' | 'flow-root' | 'table' | 'flex' | 'grid' | 'contents' | 'table-row-group' | 'table-header-group' | 'table-footer-group' | 'table-column-group' | 'table-row' | 'table-cell' | 'table-column' | 'table-caption' | 'inline-block' | 'inline-table' | 'inline-flex' | 'inline-grid' | 'ruby' | 'ruby-base' | 'ruby-text' | 'ruby-base-container' | 'ruby-text-container' | Common;
+        overflow?: Overflow | {
+            x?: Overflow | Common;
+            y?: Overflow | Common;
+            anchor?: 'auto' | 'none' | Common;
+        };
+        contain?: 'none' | 'strict' | 'content' | ContainRule | readonly ContainRule[] | Common;
+        whiteSpace?: 'normal' | 'nowrap' | 'break-spaces' | 'pre' | 'pre-wrap' | 'pre-line' | Common;
+        webkitOverflowScrolling?: 'auto' | 'touch' | Common;
+        scrollbar?: {
+            color?: readonly [$mol_style_properties_color, $mol_style_properties_color] | 'auto' | Common;
+            width?: 'auto' | 'thin' | 'none' | Common;
+        };
+        scroll?: {
+            snap?: {
+                type: 'none' | Snap_axis | readonly [Snap_axis, 'mandatory' | 'proximity'] | Common;
+                stop: 'normal' | 'always' | Common;
+                align: Span_align | readonly [Span_align, Span_align] | Common;
+            };
+            padding?: Directions<Length | 'auto'>;
+        };
+        width?: Size;
+        minWidth?: Size;
+        maxWidth?: Size;
+        height?: Size;
+        minHeight?: Size;
+        maxHeight?: Size;
+        margin?: Directions<Length | 'auto'>;
+        padding?: Directions<Length | 'auto'>;
+        position?: 'static' | 'relative' | 'absolute' | 'sticky' | 'fixed' | Common;
+        top?: Length | 'auto' | Common;
+        right?: Length | 'auto' | Common;
+        bottom?: Length | 'auto' | Common;
+        left?: Length | 'auto' | Common;
+        border?: Directions<{
+            radius?: Length | [Length, Length];
+            style?: 'none' | 'hidden' | 'dotted' | 'dashed' | 'solid' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | Common;
+            color?: $mol_style_properties_color | Common;
+            width?: Length | Common;
+        }>;
+        flex?: 'none' | 'auto' | {
+            grow?: number | Common;
+            shrink?: number | Common;
+            basis?: Size | Common;
+            direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse' | Common;
+            wrap?: 'wrap' | 'nowrap' | 'wrap-reverse' | Common;
+        };
+        zIndex: number | Common;
+        opacity: number | Common;
+    }
+    export {};
+}
+
+declare namespace $ {
+    function $mol_style_prop<Keys extends string[]>(prefix: string, keys: Keys): Record<Keys[number], $mol_style_func<"var", unknown>>;
+}
+
+declare namespace $ {
     const $mol_ambient_ref: unique symbol;
     type $mol_ambient_context = $;
     function $mol_ambient(this: $ | void, overrides: Partial<$>): $;
@@ -372,6 +649,169 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    let $mol_action: typeof $mol_wire_method;
+}
+
+declare namespace $ {
+    class $mol_state_arg extends $mol_object {
+        prefix: string;
+        static href(next?: string): string;
+        static href_normal(): string;
+        static href_absolute(): string;
+        static dict(next?: {
+            [key: string]: string | null;
+        }): Readonly<{
+            [key: string]: string;
+        }>;
+        static dict_cut(except: string[]): {
+            [key: string]: string;
+        };
+        static value(key: string, next?: string | null): string | null;
+        static link(next: Record<string, string | null>): string;
+        static prolog: string;
+        static separator: string;
+        static make_link(next: {
+            [key: string]: string | null;
+        }): string;
+        static commit(): void;
+        static go(next: {
+            [key: string]: string | null;
+        }): void;
+        static encode(str: string): string;
+        constructor(prefix?: string);
+        value(key: string, next?: string): string | null;
+        sub(postfix: string): $mol_state_arg;
+        link(next: Record<string, string | null>): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_media extends $mol_object2 {
+        static match(query: string, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+    function $mol_wire_solid(): void;
+}
+
+declare namespace $ {
+    let $mol_mem_persist: typeof $mol_wire_solid;
+}
+
+declare namespace $ {
+    function $mol_wire_probe<Value>(task: () => Value, def?: Value): Value | undefined;
+}
+
+declare namespace $ {
+    let $mol_mem_cached: typeof $mol_wire_probe;
+}
+
+declare namespace $ {
+    export function $mol_wire_sync<Host extends object>(obj: Host): ObjectOrFunctionResultAwaited<Host>;
+    type FunctionResultAwaited<Some> = Some extends (...args: infer Args) => infer Res ? (...args: Args) => Awaited<Res> : Some;
+    type ConstructorResultAwaited<Some> = Some extends new (...args: infer Args) => infer Res ? new (...args: Args) => Res : {};
+    type MethodsResultAwaited<Host extends Object> = {
+        [K in keyof Host]: FunctionResultAwaited<Host[K]>;
+    };
+    type ObjectOrFunctionResultAwaited<Some> = (Some extends (...args: any) => unknown ? FunctionResultAwaited<Some> : {}) & (Some extends Object ? MethodsResultAwaited<Some> & ConstructorResultAwaited<Some> : Some);
+    export {};
+}
+
+declare namespace $ {
+    class $mol_storage extends $mol_object2 {
+        static native(): StorageManager;
+        static persisted(next?: boolean, cache?: 'cache'): boolean;
+        static estimate(): StorageEstimate;
+        static dir(): FileSystemDirectoryHandle;
+    }
+}
+
+declare namespace $ {
+    class $mol_state_local<Value> extends $mol_object {
+        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
+        static native(): Storage | {
+            getItem(key: string): any;
+            setItem(key: string, value: string): void;
+            removeItem(key: string): void;
+        };
+        static changes(next?: StorageEvent): StorageEvent | undefined;
+        static value<Value>(key: string, next?: Value | null): Value | null;
+        prefix(): string;
+        value(key: string, next?: Value): Value | null;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    function $mol_lights(this: $, next?: boolean): boolean;
+}
+
+declare namespace $ {
+    const $mol_theme: Record<"image" | "line" | "text" | "field" | "focus" | "back" | "hover" | "card" | "current" | "special" | "control" | "shade" | "spirit", $mol_style_func<"var", unknown>>;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    let $mol_gap: Record<"text" | "space" | "block" | "blur" | "round", $mol_style_func<"var", unknown>>;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    function $mol_dom_render_children(el: Element | DocumentFragment, childNodes: NodeList | Array<Node | string | null>): void;
+}
+
+declare namespace $ {
+    type $mol_type_partial_deep<Val> = Val extends object ? Val extends Function ? Val : {
+        [field in keyof Val]?: $mol_type_partial_deep<Val[field]> | undefined;
+    } : Val;
+}
+
+declare namespace $ {
+    let $mol_jsx_prefix: string;
+    let $mol_jsx_crumbs: string;
+    let $mol_jsx_booked: null | Set<string>;
+    let $mol_jsx_document: $mol_jsx.JSX.ElementClass['ownerDocument'];
+    const $mol_jsx_frag = "";
+    function $mol_jsx<Props extends $mol_jsx.JSX.IntrinsicAttributes, Children extends Array<Node | string>>(Elem: string | ((props: Props, ...children: Children) => Element), props: Props, ...childNodes: Children): Element | DocumentFragment;
+    namespace $mol_jsx.JSX {
+        interface Element extends HTMLElement {
+            class?: string;
+        }
+        interface ElementClass {
+            attributes: {};
+            ownerDocument: Pick<Document, 'getElementById' | 'createElementNS' | 'createDocumentFragment'>;
+            childNodes: Array<Node | string>;
+            valueOf(): Element;
+        }
+        type OrString<Dict> = {
+            [key in keyof Dict]: Dict[key] | string;
+        };
+        type IntrinsicElements = {
+            [key in keyof ElementTagNameMap]?: $.$mol_type_partial_deep<OrString<Element & IntrinsicAttributes & ElementTagNameMap[key]>>;
+        };
+        interface IntrinsicAttributes {
+            id?: string;
+            xmlns?: string;
+        }
+        interface ElementAttributesProperty {
+            attributes: {};
+        }
+        interface ElementChildrenAttribute {
+        }
+    }
+}
+
+declare namespace $ {
     class $mol_window extends $mol_object {
         static size(): {
             width: number;
@@ -382,10 +822,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    var $mol_dom_context: typeof globalThis;
-}
-
-declare namespace $ {
+    function $mol_guard_defined<T>(value: T): value is NonNullable<T>;
 }
 
 declare namespace $ {
@@ -396,10 +833,6 @@ declare namespace $ {
 
 declare namespace $ {
     function $mol_maybe<Value>(value: Value | null | undefined): Value[];
-}
-
-declare namespace $ {
-    var $mol_dom: typeof globalThis;
 }
 
 declare namespace $ {
@@ -532,10 +965,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_wire_probe<Value>(task: () => Value, def?: Value): Value | undefined;
-}
-
-declare namespace $ {
     function $mol_wire_watch(): void;
 }
 
@@ -544,10 +973,6 @@ declare namespace $ {
         (): Value;
         '()': Value;
     };
-}
-
-declare namespace $ {
-    function $mol_wire_solid(): void;
 }
 
 declare namespace $ {
@@ -566,10 +991,6 @@ declare namespace $ {
     function $mol_dom_render_styles(el: Element, styles: {
         [key: string]: string | number;
     }): void;
-}
-
-declare namespace $ {
-    function $mol_dom_render_children(el: Element | DocumentFragment, childNodes: NodeList | Array<Node | string | null>): void;
 }
 
 declare namespace $ {
@@ -603,283 +1024,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_style_attach(id: string, text: string): HTMLStyleElement | null;
-}
-
-declare namespace $ {
-    class $mol_promise<Result = void> extends Promise<Result> {
-        done: (value: Result | PromiseLike<Result>) => void;
-        fail: (reason?: any) => void;
-        constructor(executor?: (done: (value: Result | PromiseLike<Result>) => void, fail: (reason?: any) => void) => void);
-    }
-}
-
-declare namespace $ {
-    class $mol_promise_blocker<Result> extends $mol_promise<Result> {
-        static [Symbol.toStringTag]: string;
-    }
-}
-
-declare namespace $ {
-    class $mol_decor<Value> {
-        readonly value: Value;
-        constructor(value: Value);
-        prefix(): string;
-        valueOf(): Value;
-        postfix(): string;
-        toString(): string;
-    }
-}
-
-declare namespace $ {
-    type $mol_style_unit_length = '%' | 'px' | 'cm' | 'mm' | 'Q' | 'in' | 'pc' | 'pt' | 'cap' | 'ch' | 'em' | 'rem' | 'ex' | 'ic' | 'lh' | 'rlh' | 'vh' | 'vw' | 'vi' | 'vb' | 'vmin' | 'vmax';
-    type $mol_style_unit_angle = 'deg' | 'rad' | 'grad' | 'turn';
-    type $mol_style_unit_time = 's' | 'ms';
-    type $mol_style_unit_any = $mol_style_unit_length | $mol_style_unit_angle | $mol_style_unit_time;
-    type $mol_style_unit_str<Quanity extends $mol_style_unit_any = $mol_style_unit_any> = `${number}${Quanity}`;
-    class $mol_style_unit<Literal extends $mol_style_unit_any> extends $mol_decor<number> {
-        readonly literal: Literal;
-        constructor(value: number, literal: Literal);
-        postfix(): Literal;
-        static per(value: number): `${number}%`;
-        static px(value: number): `${number}px`;
-        static mm(value: number): `${number}mm`;
-        static cm(value: number): `${number}cm`;
-        static Q(value: number): `${number}Q`;
-        static in(value: number): `${number}in`;
-        static pc(value: number): `${number}pc`;
-        static pt(value: number): `${number}pt`;
-        static cap(value: number): `${number}cap`;
-        static ch(value: number): `${number}ch`;
-        static em(value: number): `${number}em`;
-        static rem(value: number): `${number}rem`;
-        static ex(value: number): `${number}ex`;
-        static ic(value: number): `${number}ic`;
-        static lh(value: number): `${number}lh`;
-        static rlh(value: number): `${number}rlh`;
-        static vh(value: number): `${number}vh`;
-        static vw(value: number): `${number}vw`;
-        static vi(value: number): `${number}vi`;
-        static vb(value: number): `${number}vb`;
-        static vmin(value: number): `${number}vmin`;
-        static vmax(value: number): `${number}vmax`;
-        static deg(value: number): `${number}deg`;
-        static rad(value: number): `${number}rad`;
-        static grad(value: number): `${number}grad`;
-        static turn(value: number): `${number}turn`;
-        static s(value: number): `${number}s`;
-        static ms(value: number): `${number}ms`;
-    }
-}
-
-declare namespace $ {
-    type $mol_style_func_name = 'calc' | 'hsla' | 'rgba' | 'var' | 'clamp' | 'scale' | 'cubic-bezier' | 'linear' | 'steps' | $mol_style_func_image | $mol_style_func_filter;
-    type $mol_style_func_image = 'url' | 'linear-gradient' | 'radial-gradient' | 'conic-gradient';
-    type $mol_style_func_filter = 'blur' | 'brightness' | 'contrast' | 'drop-shadow' | 'grayscale' | 'hue-rotate' | 'invert' | 'opacity' | 'sepia' | 'saturate';
-    class $mol_style_func<Name extends $mol_style_func_name, Value = unknown> extends $mol_decor<Value> {
-        readonly name: Name;
-        constructor(name: Name, value: Value);
-        prefix(): string;
-        postfix(): string;
-        static linear_gradient<Value>(value: Value): $mol_style_func<"linear-gradient", Value>;
-        static radial_gradient<Value>(value: Value): $mol_style_func<"radial-gradient", Value>;
-        static calc<Value>(value: Value): $mol_style_func<"calc", Value>;
-        static vary<Name extends string, Value extends string>(name: Name, defaultValue?: Value): $mol_style_func<"var", Name | (Name | Value)[]>;
-        static url<Href extends string>(href: Href): $mol_style_func<"url", string>;
-        static hsla(hue: number, saturation: number, lightness: number, alpha: number): $mol_style_func<"hsla", (number | `${number}%`)[]>;
-        static clamp(min: $mol_style_unit_str<any>, mid: $mol_style_unit_str<any>, max: $mol_style_unit_str<any>): $mol_style_func<"clamp", `${number}${any}`[]>;
-        static rgba(red: number, green: number, blue: number, alpha: number): $mol_style_func<"rgba", number[]>;
-        static scale(zoom: number): $mol_style_func<"scale", number[]>;
-        static linear(...breakpoints: Array<number | [number, number | $mol_style_unit_str<'%'>]>): $mol_style_func<"linear", string[]>;
-        static cubic_bezier(x1: number, y1: number, x2: number, y2: number): $mol_style_func<"cubic-bezier", number[]>;
-        static steps(value: number, step_position: 'jump-start' | 'jump-end' | 'jump-none' | 'jump-both' | 'start' | 'end'): $mol_style_func<"steps", (number | "end" | "start" | "jump-start" | "jump-end" | "jump-none" | "jump-both")[]>;
-        static blur(value?: $mol_style_unit_str<$mol_style_unit_length>): $mol_style_func<"blur", string>;
-        static brightness(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"brightness", string | number>;
-        static contrast(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"contrast", string | number>;
-        static drop_shadow(color: $mol_style_properties_color, x_offset: $mol_style_unit_str<$mol_style_unit_length>, y_offset: $mol_style_unit_str<$mol_style_unit_length>, blur_radius?: $mol_style_unit_str<$mol_style_unit_length>): $mol_style_func<"drop-shadow", (`${number}%` | `${number}px` | `${number}mm` | `${number}cm` | `${number}Q` | `${number}in` | `${number}pc` | `${number}pt` | `${number}cap` | `${number}ch` | `${number}em` | `${number}rem` | `${number}ex` | `${number}ic` | `${number}lh` | `${number}rlh` | `${number}vh` | `${number}vw` | `${number}vi` | `${number}vb` | `${number}vmin` | `${number}vmax` | $mol_style_properties_color)[]>;
-        static grayscale(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"grayscale", string | number>;
-        static hue_rotate(value?: 0 | $mol_style_unit_str<$mol_style_unit_angle>): $mol_style_func<"hue-rotate", string | 0>;
-        static invert(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"invert", string | number>;
-        static opacity(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"opacity", string | number>;
-        static sepia(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"sepia", string | number>;
-        static saturate(value?: number | $mol_style_unit_str<'%'>): $mol_style_func<"saturate", string | number>;
-    }
-}
-
-declare namespace $ {
-    type $mol_type_override<Base, Over> = Omit<Base, keyof Over> & Over;
-}
-
-declare namespace $ {
-    export type $mol_style_properties = Partial<$mol_type_override<CSSStyleDeclaration, Overrides>>;
-    type Common = 'inherit' | 'initial' | 'unset' | 'revert' | 'revert-layer' | 'none' | $mol_style_func<'var'>;
-    export type $mol_style_properties_color = 'aliceblue' | 'antiquewhite' | 'aqua' | 'aquamarine' | 'azure' | 'beige' | 'bisque' | 'black' | 'blanchedalmond' | 'blue' | 'blueviolet' | 'brown' | 'burlywood' | 'cadetblue' | 'chartreuse' | 'chocolate' | 'coral' | 'cornflowerblue' | 'cornsilk' | 'crimson' | 'cyan' | 'darkblue' | 'darkcyan' | 'darkgoldenrod' | 'darkgray' | 'darkgreen' | 'darkgrey' | 'darkkhaki' | 'darkmagenta' | 'darkolivegreen' | 'darkorange' | 'darkorchid' | 'darkred' | 'darksalmon' | 'darkseagreen' | 'darkslateblue' | 'darkslategrey' | 'darkturquoise' | 'darkviolet' | 'deeppink' | 'deepskyblue' | 'dimgray' | 'dimgrey' | 'dodgerblue' | 'firebrick' | 'floralwhite' | 'forestgreen' | 'fuchsia' | 'gainsboro' | 'ghostwhite' | 'gold' | 'goldenrod' | 'gray' | 'green' | 'greenyellow' | 'grey' | 'honeydew' | 'hotpink' | 'indianred' | 'indigo' | 'ivory' | 'khaki' | 'lavender' | 'lavenderblush' | 'lawngreen' | 'lemonchiffon' | 'lightblue' | 'lightcoral' | 'lightcyan' | 'lightgoldenrodyellow' | 'lightgray' | 'lightgreen' | 'lightgrey' | 'lightpink' | 'lightsalmon' | 'lightseagreen' | 'lightskyblue' | 'lightslategray' | 'lightslategrey' | 'lightsteelblue' | 'lightyellow' | 'lime' | 'limegreen' | 'linen' | 'magenta' | 'maroon' | 'mediumaquamarine' | 'mediumblue' | 'mediumorchid' | 'mediumpurple' | 'mediumseagreen' | 'mediumslateblue' | 'mediumspringgreen' | 'mediumturquoise' | 'mediumvioletred' | 'midnightblue' | 'mintcream' | 'mistyrose' | 'moccasin' | 'navajowhite' | 'navy' | 'oldlace' | 'olive' | 'olivedrab' | 'orange' | 'orangered' | 'orchid' | 'palegoldenrod' | 'palegreen' | 'paleturquoise' | 'palevioletred' | 'papayawhip' | 'peachpuff' | 'peru' | 'pink' | 'plum' | 'powderblue' | 'purple' | 'rebeccapurple' | 'red' | 'rosybrown' | 'royalblue' | 'saddlebrown' | 'salmon' | 'sandybrown' | 'seagreen' | 'seashell' | 'sienna' | 'silver' | 'skyblue' | 'slateblue' | 'slategray' | 'slategrey' | 'snow' | 'springgreen' | 'steelblue' | 'tan' | 'teal' | 'thistle' | 'tomato' | 'turquoise' | 'violet' | 'wheat' | 'white' | 'whitesmoke' | 'yellow' | 'yellowgreen' | 'transparent' | 'currentcolor' | $mol_style_func<'hsla' | 'rgba' | 'var'> | `#${string}`;
-    type Length = 0 | `${number}${$mol_style_unit_length}` | $mol_style_func<'calc' | 'var' | 'clamp'>;
-    type Size = 'auto' | 'max-content' | 'min-content' | 'fit-content' | Length | Common;
-    type Directions<Value> = Value | readonly [Value, Value] | {
-        top?: Value;
-        right?: Value;
-        bottom?: Value;
-        left?: Value;
-    };
-    type Single_animation_composition = 'replace' | 'add' | 'accumulate';
-    type Single_animation_direction = 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
-    type Single_animation_fill_mode = 'none' | 'forwards' | 'backwards' | 'both';
-    type Single_animation_iteration_count = 'infinite' | number;
-    type Single_animation_play_state = 'running' | 'paused';
-    type Easing_function = Linear_easing_function | Cubic_bezier_easing_function | Step_easing_function;
-    type Linear_easing_function = 'linear' | $mol_style_func<'linear'>;
-    type Cubic_bezier_easing_function = 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | $mol_style_func<'cubic-bezier'>;
-    type Step_easing_function = 'step-start' | 'step-end' | $mol_style_func<'steps'>;
-    type Compat_auto = 'searchfield' | 'textarea' | 'push-button' | 'slider-horizontal' | 'checkbox' | 'radio' | 'menulist' | 'listbox' | 'meter' | 'progress-bar' | 'button';
-    type Compat_special = 'textfield' | 'menulist-button';
-    type Mix_blend_mode = Blend_mode | 'plus-darker' | 'plus-lighter';
-    type Blend_mode = 'normal' | 'multiply' | 'screen' | 'overlay' | 'darken' | 'lighten' | 'color-dodge' | 'color-burn' | 'hard-light' | 'soft-light' | 'difference' | 'exclusion' | 'hue' | 'saturation' | 'color' | 'luminosity';
-    type Box = 'border-box' | 'padding-box' | 'content-box';
-    type Baseline_position = 'baseline' | `${'first' | 'last'} baseline`;
-    type Content_distribution = 'space-between' | 'space-around' | 'space-evenly' | 'stretch';
-    type Self_position = 'center' | 'start' | 'end' | 'self-start' | 'self-end' | 'flex-start' | 'flex-end';
-    type Content_position = 'center' | 'start' | 'end' | 'flex-start' | 'flex-end';
-    type Span_align = 'none' | 'start' | 'end' | 'center' | $mol_style_func<'var'>;
-    type Snap_axis = 'x' | 'y' | 'block' | 'inline' | 'both' | $mol_style_func<'var'>;
-    type Overflow = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto' | 'overlay' | Common;
-    type Overflow_position = 'unsafe' | 'safe';
-    type ContainRule = 'size' | 'layout' | 'style' | 'paint' | $mol_style_func<'var'>;
-    type Repeat = 'repeat-x' | 'repeat-y' | 'repeat' | 'space' | 'round' | 'no-repeat' | $mol_style_func<'var'>;
-    type BG_size = Length | 'auto' | 'contain' | 'cover';
-    interface Overrides {
-        accentColor?: $mol_style_properties_color | Common;
-        align?: {
-            content?: 'normal' | Baseline_position | Content_distribution | Content_position | `${Overflow_position} ${Content_position}` | Common;
-            items?: 'normal' | 'stretch' | Baseline_position | Self_position | `${Overflow_position} ${Self_position}` | Common;
-            self?: 'auto' | 'normal' | 'stretch' | Baseline_position | Self_position | `${Overflow_position} ${Self_position}` | Common;
-        };
-        justify?: {
-            content?: 'normal' | Baseline_position | Content_distribution | Content_position | `${Overflow_position} ${Content_position}` | Common;
-            items?: 'normal' | 'stretch' | Baseline_position | Self_position | `${Overflow_position} ${Self_position}` | Common;
-            self?: 'auto' | 'normal' | 'stretch' | Baseline_position | Self_position | `${Overflow_position} ${Self_position}` | Common;
-        };
-        all?: Common;
-        animation?: {
-            composition?: Single_animation_composition | Single_animation_composition[][] | Common;
-            delay?: $mol_style_unit_str<$mol_style_unit_time> | $mol_style_unit_str<$mol_style_unit_time>[][] | Common;
-            direction?: Single_animation_direction | Single_animation_direction[][] | Common;
-            duration?: $mol_style_unit_str<$mol_style_unit_time> | $mol_style_unit_str<$mol_style_unit_time>[][] | Common;
-            fillMode?: Single_animation_fill_mode | Single_animation_fill_mode[][] | Common;
-            iterationCount?: Single_animation_iteration_count | Single_animation_iteration_count[][] | Common;
-            name?: 'none' | string & {} | ('none' | string & {})[][] | Common;
-            playState?: Single_animation_play_state | Single_animation_play_state[][] | Common;
-            timingFunction?: Easing_function | Easing_function[][] | Common;
-        };
-        appearance?: 'none' | 'auto' | Compat_auto | Compat_special | Common;
-        aspectRatio?: 'auto' | number | `${number} / ${number}`;
-        backdropFilter: $mol_style_func<$mol_style_func_filter> | $mol_style_func<'url'> | ($mol_style_func<$mol_style_func_filter> | $mol_style_func<'url'>)[][] | 'none' | Common;
-        backfaceVisibility: 'visible' | 'hidden' | Common;
-        justifyContent?: 'start' | 'end' | 'flex-start' | 'flex-end' | 'left' | 'right' | 'space-between' | 'space-around' | 'space-evenly' | 'normal' | 'stretch' | 'center' | Common;
-        gap?: Length;
-        background?: 'none' | {
-            attachment?: 'scroll' | 'fixed' | 'local' | ('scroll' | 'fixed' | 'local')[][] | Common;
-            blendMode?: Mix_blend_mode | Mix_blend_mode[][] | Common;
-            clip?: Box | Box[][] | Common;
-            color?: $mol_style_properties_color | Common;
-            image?: readonly (readonly [$mol_style_func<$mol_style_func_image> | string & {}])[] | 'none' | Common;
-            repeat?: Repeat | [Repeat, Repeat] | Common;
-            position?: 'left' | 'right' | 'top' | 'bottom' | 'center' | Common;
-            size?: (BG_size | [BG_size] | [BG_size, BG_size])[];
-        };
-        box?: {
-            shadow?: readonly ([
-                ...[inset: 'inset'] | [],
-                x: Length,
-                y: Length,
-                blur: Length,
-                spread: Length,
-                color: $mol_style_properties_color
-            ] | {
-                inset?: boolean;
-                x: Length;
-                y: Length;
-                blur: Length;
-                spread: Length;
-                color: $mol_style_properties_color;
-            })[] | 'none' | Common;
-        };
-        font?: {
-            style?: 'normal' | 'italic' | Common;
-            weight?: 'normal' | 'bold' | 'lighter' | 'bolder' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Common;
-            size?: 'xx-small' | 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-large' | 'xxx-large' | 'smaller' | 'larger' | Length | Common;
-            family?: string & {} | 'serif' | 'sans-serif' | 'monospace' | 'cursive' | 'fantasy' | 'system-ui' | 'ui-serif' | 'ui-sans-serif' | 'ui-monospace' | 'ui-rounded' | 'emoji' | 'math' | 'fangsong' | Common;
-        };
-        color?: $mol_style_properties_color | Common;
-        display?: 'block' | 'inline' | 'run-in' | 'list-item' | 'none' | 'flow' | 'flow-root' | 'table' | 'flex' | 'grid' | 'contents' | 'table-row-group' | 'table-header-group' | 'table-footer-group' | 'table-column-group' | 'table-row' | 'table-cell' | 'table-column' | 'table-caption' | 'inline-block' | 'inline-table' | 'inline-flex' | 'inline-grid' | 'ruby' | 'ruby-base' | 'ruby-text' | 'ruby-base-container' | 'ruby-text-container' | Common;
-        overflow?: Overflow | {
-            x?: Overflow | Common;
-            y?: Overflow | Common;
-            anchor?: 'auto' | 'none' | Common;
-        };
-        contain?: 'none' | 'strict' | 'content' | ContainRule | readonly ContainRule[] | Common;
-        whiteSpace?: 'normal' | 'nowrap' | 'break-spaces' | 'pre' | 'pre-wrap' | 'pre-line' | Common;
-        webkitOverflowScrolling?: 'auto' | 'touch' | Common;
-        scrollbar?: {
-            color?: readonly [$mol_style_properties_color, $mol_style_properties_color] | 'auto' | Common;
-            width?: 'auto' | 'thin' | 'none' | Common;
-        };
-        scroll?: {
-            snap?: {
-                type: 'none' | Snap_axis | readonly [Snap_axis, 'mandatory' | 'proximity'] | Common;
-                stop: 'normal' | 'always' | Common;
-                align: Span_align | readonly [Span_align, Span_align] | Common;
-            };
-            padding?: Directions<Length | 'auto'>;
-        };
-        width?: Size;
-        minWidth?: Size;
-        maxWidth?: Size;
-        height?: Size;
-        minHeight?: Size;
-        maxHeight?: Size;
-        margin?: Directions<Length | 'auto'>;
-        padding?: Directions<Length | 'auto'>;
-        position?: 'static' | 'relative' | 'absolute' | 'sticky' | 'fixed' | Common;
-        top?: Length | 'auto' | Common;
-        right?: Length | 'auto' | Common;
-        bottom?: Length | 'auto' | Common;
-        left?: Length | 'auto' | Common;
-        border?: Directions<{
-            radius?: Length | [Length, Length];
-            style?: 'none' | 'hidden' | 'dotted' | 'dashed' | 'solid' | 'double' | 'groove' | 'ridge' | 'inset' | 'outset' | Common;
-            color?: $mol_style_properties_color | Common;
-            width?: Length | Common;
-        }>;
-        flex?: 'none' | 'auto' | {
-            grow?: number | Common;
-            shrink?: number | Common;
-            basis?: Size | Common;
-            direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse' | Common;
-            wrap?: 'wrap' | 'nowrap' | 'wrap-reverse' | Common;
-        };
-        zIndex: number | Common;
-        opacity: number | Common;
-    }
-    export {};
-}
-
-declare namespace $ {
-    function $mol_style_prop<Keys extends string[]>(prefix: string, keys: Keys): Record<Keys[number], $mol_style_func<"var", unknown>>;
-}
-
-declare namespace $ {
-    const $mol_theme: Record<"image" | "line" | "text" | "field" | "focus" | "back" | "hover" | "card" | "current" | "special" | "control" | "shade" | "spirit", $mol_style_func<"var", unknown>>;
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    let $mol_gap: Record<"text" | "space" | "block" | "blur" | "round", $mol_style_func<"var", unknown>>;
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -889,9 +1033,10 @@ declare namespace $ {
     function $mol_view_state_key(suffix: string): string;
     class $mol_view extends $mol_object {
         static Root<This extends typeof $mol_view>(this: This, id: number): InstanceType<This>;
-        autorun(): void;
-        static autobind(): void;
+        static roots(): $mol_view[];
+        static auto(): void;
         title(): string;
+        hint(): string;
         focused(next?: boolean): boolean;
         state_key(suffix?: string): string;
         dom_name(): string;
@@ -952,9 +1097,6 @@ declare namespace $ {
         destructor(): void;
     }
     type $mol_view_all = $mol_type_pick<$, typeof $mol_view>;
-}
-
-declare namespace $ {
 }
 
 interface Window {
@@ -1069,11 +1211,7 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    let $mol_mem_cached: typeof $mol_wire_probe;
-}
-
-declare namespace $ {
-    let $mol_layer: Record<"focus" | "float" | "hover" | "speck" | "popup", $mol_style_func<"var", unknown>>;
+    let $mol_layer: Record<"float" | "focus" | "hover" | "speck" | "popup", $mol_style_func<"var", unknown>>;
 }
 
 declare namespace $ {
@@ -1260,52 +1398,6 @@ declare namespace $.$$ {
         index_y(): number | null;
         index_x(): number | null;
     }
-}
-
-declare namespace $ {
-    let $mol_mem_persist: typeof $mol_wire_solid;
-}
-
-declare namespace $ {
-    export function $mol_wire_sync<Host extends object>(obj: Host): ObjectOrFunctionResultAwaited<Host>;
-    type FunctionResultAwaited<Some> = Some extends (...args: infer Args) => infer Res ? (...args: Args) => Awaited<Res> : Some;
-    type ConstructorResultAwaited<Some> = Some extends new (...args: infer Args) => infer Res ? new (...args: Args) => Res : {};
-    type MethodsResultAwaited<Host extends Object> = {
-        [K in keyof Host]: FunctionResultAwaited<Host[K]>;
-    };
-    type ObjectOrFunctionResultAwaited<Some> = (Some extends (...args: any) => unknown ? FunctionResultAwaited<Some> : {}) & (Some extends Object ? MethodsResultAwaited<Some> & ConstructorResultAwaited<Some> : Some);
-    export {};
-}
-
-declare namespace $ {
-    class $mol_storage extends $mol_object2 {
-        static native(): StorageManager;
-        static persisted(next?: boolean, cache?: 'cache'): boolean;
-        static estimate(): StorageEstimate;
-        static dir(): FileSystemDirectoryHandle;
-    }
-}
-
-declare namespace $ {
-    class $mol_state_local<Value> extends $mol_object {
-        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
-        static native(): Storage | {
-            getItem(key: string): any;
-            setItem(key: string, value: string): void;
-            removeItem(key: string): void;
-        };
-        static changes(next?: StorageEvent): StorageEvent | undefined;
-        static value<Value>(key: string, next?: Value | null): Value | null;
-        prefix(): string;
-        value(key: string, next?: Value): Value | null;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    let $mol_action: typeof $mol_wire_method;
 }
 
 declare namespace $ {
@@ -2180,39 +2272,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_state_arg extends $mol_object {
-        prefix: string;
-        static href(next?: string): string;
-        static href_normal(): string;
-        static href_absolute(): string;
-        static dict(next?: {
-            [key: string]: string | null;
-        }): Readonly<{
-            [key: string]: string;
-        }>;
-        static dict_cut(except: string[]): {
-            [key: string]: string;
-        };
-        static value(key: string, next?: string | null): string | null;
-        static link(next: Record<string, string | null>): string;
-        static prolog: string;
-        static separator: string;
-        static make_link(next: {
-            [key: string]: string | null;
-        }): string;
-        static commit(): void;
-        static go(next: {
-            [key: string]: string | null;
-        }): void;
-        static encode(str: string): string;
-        constructor(prefix?: string);
-        value(key: string, next?: string): string | null;
-        sub(postfix: string): $mol_state_arg;
-        link(next: Record<string, string | null>): string;
-    }
-}
-
-declare namespace $ {
 
 	export class $mol_link extends $mol_view {
 		uri_toggle( ): string
@@ -2510,16 +2569,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
-}
-
-declare namespace $ {
-    class $mol_media extends $mol_object2 {
-        static match(query: string, next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-    function $mol_lights(this: $, next?: boolean): boolean;
 }
 
 declare namespace $ {
@@ -4502,6 +4551,24 @@ declare namespace $ {
 //# sourceMappingURL=row.view.tree.d.ts.map
 declare namespace $ {
 
+	export class $mol_icon_arrow_up extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=up.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_arrow_down extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=down.view.tree.d.ts.map
+declare namespace $ {
+
 	export class $mol_ghost extends $mol_view {
 		Sub( ): $mol_view
 	}
@@ -5040,27 +5107,57 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_60 = $mol_type_enforce<
+	type $mol_button_major__disabled_tukanable_gymload_builder_day_60 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_up_disabled'] >
+		,
+		ReturnType< $mol_button_major['disabled'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_builder_day_61 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_up_click'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__sub_tukanable_gymload_builder_day_62 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_major['sub'] >
+	>
+	type $mol_button_major__disabled_tukanable_gymload_builder_day_63 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_down_disabled'] >
+		,
+		ReturnType< $mol_button_major['disabled'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_builder_day_64 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_down_click'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__sub_tukanable_gymload_builder_day_65 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_major['sub'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_66 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_drop__adopt_tukanable_gymload_builder_day_61 = $mol_type_enforce<
+	type $mol_drop__adopt_tukanable_gymload_builder_day_67 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['sort_transfer_adopt'] >
 		,
 		ReturnType< $mol_drop['adopt'] >
 	>
-	type $mol_drop__receive_tukanable_gymload_builder_day_62 = $mol_type_enforce<
+	type $mol_drop__receive_tukanable_gymload_builder_day_68 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['sort_receive_before'] >
 		,
 		ReturnType< $mol_drop['receive'] >
 	>
-	type $mol_drop__Sub_tukanable_gymload_builder_day_63 = $mol_type_enforce<
+	type $mol_drop__Sub_tukanable_gymload_builder_day_69 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['SortRow_content'] >
 		,
 		ReturnType< $mol_drop['Sub'] >
 	>
-	type $mol_drag__transfer_tukanable_gymload_builder_day_64 = $mol_type_enforce<
+	type $mol_drag__transfer_tukanable_gymload_builder_day_70 = $mol_type_enforce<
 		({ 
 			'text/plain': ReturnType< $tukanable_gymload_builder_day['sort_row_title'] >,
 			'text/html': ReturnType< $tukanable_gymload_builder_day['sort_row_html'] >,
@@ -5069,84 +5166,84 @@ declare namespace $ {
 		,
 		ReturnType< $mol_drag['transfer'] >
 	>
-	type $mol_drag__Sub_tukanable_gymload_builder_day_65 = $mol_type_enforce<
+	type $mol_drag__Sub_tukanable_gymload_builder_day_71 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['SortRow_drop'] >
 		,
 		ReturnType< $mol_drag['Sub'] >
 	>
-	type $mol_list__item_width_min_tukanable_gymload_builder_day_66 = $mol_type_enforce<
+	type $mol_list__item_width_min_tukanable_gymload_builder_day_72 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_width_min'] >
 	>
-	type $mol_list__item_height_min_tukanable_gymload_builder_day_67 = $mol_type_enforce<
+	type $mol_list__item_height_min_tukanable_gymload_builder_day_73 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_height_min'] >
 	>
-	type $mol_list__rows_tukanable_gymload_builder_day_68 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_builder_day_74 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['sort_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_day_69 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_day_75 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_70 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_76 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_deck__style_tukanable_gymload_builder_day_71 = $mol_type_enforce<
+	type $mol_deck__style_tukanable_gymload_builder_day_77 = $mol_type_enforce<
 		({ 
 			'marginTop': string,
 		}) 
 		,
 		ReturnType< $mol_deck['style'] >
 	>
-	type $mol_deck__items_tukanable_gymload_builder_day_72 = $mol_type_enforce<
+	type $mol_deck__items_tukanable_gymload_builder_day_78 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['info_tabs'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_73 = $mol_type_enforce<
+	type $mol_labeler__title_tukanable_gymload_builder_day_79 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_74 = $mol_type_enforce<
+	type $mol_labeler__Content_tukanable_gymload_builder_day_80 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['MinStep'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_75 = $mol_type_enforce<
+	type $mol_labeler__title_tukanable_gymload_builder_day_81 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_76 = $mol_type_enforce<
+	type $mol_labeler__Content_tukanable_gymload_builder_day_82 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['BeginWeight'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_77 = $mol_type_enforce<
+	type $mol_labeler__title_tukanable_gymload_builder_day_83 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_78 = $mol_type_enforce<
+	type $mol_labeler__Content_tukanable_gymload_builder_day_84 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['BarbellWeight'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $tukanable_gymload_builder_day_planweights__values_tukanable_gymload_builder_day_79 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_planweights__values_tukanable_gymload_builder_day_85 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['plan'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_planweights['values'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_80 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_86 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -5219,6 +5316,14 @@ declare namespace $ {
 		sort_row_uri( id: any): string
 		sort_transfer_adopt( next?: any ): any
 		sort_receive_before( id: any, next?: any ): any
+		sort_up_disabled( id: any): boolean
+		sort_up_click( id: any, next?: any ): any
+		UpButtonIcon( id: any): $mol_icon_arrow_up
+		SortUpButton( id: any): $mol_button_major
+		sort_down_disabled( id: any): boolean
+		sort_down_click( id: any, next?: any ): any
+		DownButtonIcon( id: any): $mol_icon_arrow_down
+		SortDownButton( id: any): $mol_button_major
 		SortRow_content( id: any): $mol_view
 		SortRow_drop( id: any): $mol_drop
 		SortRow( id: any): $mol_drag
@@ -5325,6 +5430,10 @@ declare namespace $.$$ {
         sort_row_uri(id: any): string;
         sort_receive_before(anchor: any, item_id: any): void;
         info_tabs(): $mol_view[];
+        sort_down_disabled(id: any): boolean;
+        sort_up_disabled(id: any): boolean;
+        sort_down_click(id: any): void;
+        sort_up_click(id: any): void;
     }
     export {};
 }
@@ -5499,6 +5608,60 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	export class $mol_icon_chat extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=chat.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_chat_question extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=question.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_link__uri_tukanable_gymload_exercise_params_1 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_exercise_params['uri'] >
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_link__sub_tukanable_gymload_exercise_params_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	export class $tukanable_gymload_exercise_params extends $mol_view {
+		uri( ): string
+		Icon( ): $mol_icon_chat_question
+		reps( ): number
+		sets( ): number
+		idx( ): number|null | null
+		QuestionIcon( ): $mol_icon_chat_question
+		Link( ): $mol_link
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=params.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $tukanable_gymload_exercise_params extends $.$tukanable_gymload_exercise_params {
+        uri(): string;
+        sub(): readonly any[];
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
 	type $tukanable_gymload_smallnumber__precision_view_tukanable_gymload_builder_day_results_set_1 = $mol_type_enforce<
 		number
 		,
@@ -5610,6 +5773,7 @@ declare namespace $ {
 		reps( ): number
 		weight_min_step( ): number
 		weight_min( ): number
+		original_week_weight( next?: null|number | null ): null|number | null
 		PastWeekView( ): $mol_view
 		CurrentWeekView( ): $mol_view
 		DoneWeekView( ): $mol_view
@@ -5652,97 +5816,127 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_title['title'] >
 	>
-	type __tukanable_gymload_builder_day_results_2 = $mol_type_enforce<
-		Parameters< $tukanable_gymload_builder_day_results['current_week'] >[0]
+	type $tukanable_gymload_exercise_params__idx_tukanable_gymload_builder_day_results_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_idx'] >
 		,
-		Parameters< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] >[0]
+		ReturnType< $tukanable_gymload_exercise_params['idx'] >
 	>
-	type $mol_deck__items_tukanable_gymload_builder_day_results_3 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day_results['week_items'] >
+	type $tukanable_gymload_exercise_params__sets_tukanable_gymload_builder_day_results_3 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_sets'] >
 		,
-		ReturnType< $mol_deck['items'] >
+		ReturnType< $tukanable_gymload_exercise_params['sets'] >
 	>
-	type $tukanable_gymload_title__title_tukanable_gymload_builder_day_results_4 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day_results['row_exercise_extra'] >
+	type $tukanable_gymload_exercise_params__reps_tukanable_gymload_builder_day_results_4 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_reps'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['reps'] >
+	>
+	type $tukanable_gymload_title__title_tukanable_gymload_builder_day_results_5 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_exercise'] >
 		,
 		ReturnType< $tukanable_gymload_title['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_5 = $mol_type_enforce<
+	type $tukanable_gymload_title__Extra_tukanable_gymload_builder_day_results_6 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['ExcerciseExtra'] >
+		,
+		ReturnType< $tukanable_gymload_title['Extra'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_results_7 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['set_rows'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_6 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_results_8 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_list__item_width_min_tukanable_gymload_builder_day_results_7 = $mol_type_enforce<
+	type $mol_list__item_width_min_tukanable_gymload_builder_day_results_9 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_width_min'] >
 	>
-	type $mol_list__item_height_min_tukanable_gymload_builder_day_results_8 = $mol_type_enforce<
+	type $mol_list__item_height_min_tukanable_gymload_builder_day_results_10 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_height_min'] >
 	>
-	type $mol_list__rows_tukanable_gymload_builder_day_results_9 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_builder_day_results_11 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__set_idx_tukanable_gymload_builder_day_results_10 = $mol_type_enforce<
+	type $mol_deck__current_tukanable_gymload_builder_day_results_12 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['current_week'] >
+		,
+		ReturnType< $mol_deck['current'] >
+	>
+	type $mol_deck__items_tukanable_gymload_builder_day_results_13 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['week_items'] >
+		,
+		ReturnType< $mol_deck['items'] >
+	>
+	type $tukanable_gymload_builder_day_results_set__set_idx_tukanable_gymload_builder_day_results_14 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['set_idx'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['set_idx'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__week_idx_tukanable_gymload_builder_day_results_11 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__week_idx_tukanable_gymload_builder_day_results_15 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['current_week_number'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['week_idx'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__week_count_tukanable_gymload_builder_day_results_12 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__week_count_tukanable_gymload_builder_day_results_16 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['week_count'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__excercise_idx_tukanable_gymload_builder_day_results_13 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__excercise_idx_tukanable_gymload_builder_day_results_17 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['excercise_idx'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['excercise_idx'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__reps_tukanable_gymload_builder_day_results_14 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__reps_tukanable_gymload_builder_day_results_18 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['set_reps'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['reps'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__plan_tukanable_gymload_builder_day_results_15 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__plan_tukanable_gymload_builder_day_results_19 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['excercise_plan'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['plan'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__storage_key_tukanable_gymload_builder_day_results_16 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__storage_key_tukanable_gymload_builder_day_results_20 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__weight_min_step_tukanable_gymload_builder_day_results_17 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__weight_min_step_tukanable_gymload_builder_day_results_21 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['row_min_step'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min_step'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__weight_min_tukanable_gymload_builder_day_results_18 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__weight_min_tukanable_gymload_builder_day_results_22 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['row_min_weight'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_day_results_19 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_day_results_23 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['week_tab_title_short'] >
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_20 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_results_24 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__title_tukanable_gymload_builder_day_results_25 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['title'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_results_26 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -5756,18 +5950,22 @@ declare namespace $ {
 		week_tab_title_short( id: any): string
 		week_tab_title( id: any): string
 		WeekTitle( id: any): $tukanable_gymload_title
-		current_week( next?: ReturnType< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] > ): ReturnType< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] >
-		week_items( ): readonly($mol_view)[]
-		Weeks( ): $mol_deck
+		row_idx( id: any): number
+		ExcerciseExtra( id: any): $tukanable_gymload_exercise_params
 		ExcerciseTitle( id: any): $tukanable_gymload_title
 		set_rows( id: any): readonly($mol_view)[]
 		SetRows( id: any): $mol_view
 		Row( id: any): $mol_view
 		rows( ): readonly($mol_view)[]
 		Rows( ): $mol_list
+		current_week( next?: string ): string
+		week_items( ): readonly($mol_view)[]
+		Weeks( ): $mol_deck
 		week_count( ): number
+		DaySettings( ): $tukanable_gymload_builder_day | null
 		SetResult( id: any): $tukanable_gymload_builder_day_results_set
 		WeekTab( id: any): $mol_view
+		EditTab( ): $mol_view
 		sub( ): readonly(any)[]
 	}
 	
@@ -5777,6 +5975,7 @@ declare namespace $ {
 declare namespace $.$$ {
     class $tukanable_gymload_builder_day_results extends $.$tukanable_gymload_builder_day_results {
         rows(): $mol_view[];
+        row_idx(id: any): number;
         set_rows(id: any): $.$tukanable_gymload_builder_day_results_set[];
         set_idx(id: any): any;
         excercise_idx(id: any): number;
@@ -5787,6 +5986,8 @@ declare namespace $.$$ {
         current_week_number(): number;
         day_title(): string;
         set_reps(id: any): number;
+        next_unworked_week(): number;
+        current_week(next?: string): string;
     }
 }
 
@@ -5949,142 +6150,147 @@ declare namespace $ {
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_24 = $mol_type_enforce<
+	type $mol_deck__current_tukanable_gymload_builder_24 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder['current_week_item'] >
+		,
+		ReturnType< $mol_deck['current'] >
+	>
+	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_25 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_25 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_26 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['title'] >
 	>
-	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_26 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_27 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['day_index'] >
 	>
-	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_27 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_28 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_28 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_29 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['week_count'] >
 	>
-	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_29 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_30 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_30 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_31 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_31 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_32 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['show_charts'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['show_charts'] >
 	>
-	type $tukanable_gymload_builder_day__progress_formula_tukanable_gymload_builder_32 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__progress_formula_tukanable_gymload_builder_33 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['progress_formula'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['progress_formula'] >
 	>
-	type $tukanable_gymload_builder_day__start_percent_tukanable_gymload_builder_33 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__start_percent_tukanable_gymload_builder_34 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['start_percent'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['start_percent'] >
 	>
-	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_34 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_35 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_35 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_36 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['title'] >
 	>
-	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_36 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_37 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['day_index'] >
 	>
-	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_37 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_38 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['week_count'] >
 	>
-	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_38 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_39 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_39 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_40 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_40 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_41 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__progress_formula_tukanable_gymload_builder_41 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__progress_formula_tukanable_gymload_builder_42 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['progress_formula'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['progress_formula'] >
 	>
-	type $tukanable_gymload_builder_day_results__start_percent_tukanable_gymload_builder_42 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__start_percent_tukanable_gymload_builder_43 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['start_percent'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['start_percent'] >
 	>
-	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_43 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_44 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_stats['title'] >
 	>
-	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_44 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_45 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['day_count'] >
 	>
-	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_45 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_46 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['model'] >
 	>
-	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_builder_46 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_builder_47 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['title'] >
 	>
-	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_builder_47 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_builder_48 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['day_count'] >
 	>
-	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_builder_48 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_builder_49 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['model'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_49 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_50 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_50 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_51 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $tukanable_gymload_pagehint__text_tukanable_gymload_builder_51 = $mol_type_enforce<
+	type $tukanable_gymload_pagehint__text_tukanable_gymload_builder_52 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_pagehint['text'] >
@@ -6116,6 +6322,7 @@ declare namespace $ {
 		weight_plate_values( ): ReturnType< ReturnType< $tukanable_gymload_builder['WeightPlates'] >['values'] >
 		WeightPlates( ): $tukanable_gymload_builder_weights
 		week_items( ): readonly($mol_view)[]
+		current_week_item( next?: string ): string
 		Weeks( ): $mol_deck
 		title( ): string
 		storage_key( ): string
@@ -6146,6 +6353,7 @@ declare namespace $.$$ {
         show_charts(next?: boolean): boolean;
         progress_formula(next?: string): string;
         start_percent(next?: number): number;
+        current_week_item(next?: string): string;
     }
 }
 
@@ -6156,6 +6364,7 @@ declare namespace $ {
 
 	export class $tukanable_gymload_page extends $mol_page {
 		menu_title( ): string
+		hide_in_menu( ): boolean
 	}
 	
 }
@@ -6987,32 +7196,47 @@ declare namespace $ {
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
-	type $mol_row__sub_tukanable_gymload_page_templates_details_5 = $mol_type_enforce<
+	type $tukanable_gymload_exercise_params__idx_tukanable_gymload_page_templates_details_5 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['exercise_idx'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['idx'] >
+	>
+	type $tukanable_gymload_exercise_params__sets_tukanable_gymload_page_templates_details_6 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['exercise_sets'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['sets'] >
+	>
+	type $tukanable_gymload_exercise_params__reps_tukanable_gymload_page_templates_details_7 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['exercise_reps'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['reps'] >
+	>
+	type $mol_row__sub_tukanable_gymload_page_templates_details_8 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_list__rows_tukanable_gymload_page_templates_details_6 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_page_templates_details_9 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_page_templates_details['exercises'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_page_templates_details_7 = $mol_type_enforce<
+	type $mol_labeler__title_tukanable_gymload_page_templates_details_10 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_page_templates_details['day_name'] >
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__content_tukanable_gymload_page_templates_details_8 = $mol_type_enforce<
+	type $mol_labeler__content_tukanable_gymload_page_templates_details_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
-	type $mol_list__rows_tukanable_gymload_page_templates_details_9 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_page_templates_details_12 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_page_templates_details['days'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_row__sub_tukanable_gymload_page_templates_details_10 = $mol_type_enforce<
+	type $mol_row__sub_tukanable_gymload_page_templates_details_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
@@ -7024,7 +7248,11 @@ declare namespace $ {
 		row_description( ): string
 		DescriptionLabeler( ): $mol_labeler
 		day_name( id: any): string
-		exercise_info( id: any): string
+		exercise_name( id: any): string
+		exercise_idx( id: any): any
+		exercise_sets( id: any): number
+		exercise_reps( id: any): number
+		Params( id: any): $tukanable_gymload_exercise_params
 		ExerciseRow( id: any): $mol_row
 		exercises( id: any): readonly($mol_view)[]
 		Excersises( id: any): $mol_list
@@ -7087,12 +7315,53 @@ declare namespace $.$$ {
             sets: number;
             reps: number;
         };
-        exercise_info(id: any): string;
+        exercise_idx(id: any): number;
+        exercise_name(id: any): string;
+        exercise_sets(id: any): number;
+        exercise_reps(id: any): number;
     }
     export {};
 }
 
 declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $tukanable_gymload_exercise_params__sets_tukanable_gymload_page_exerciseparams_1 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_exerciseparams['sets'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['sets'] >
+	>
+	type $tukanable_gymload_exercise_params__reps_tukanable_gymload_page_exerciseparams_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_exerciseparams['reps'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['reps'] >
+	>
+	type $tukanable_gymload_exercise_params__Link_tukanable_gymload_page_exerciseparams_3 = $mol_type_enforce<
+		any
+		,
+		ReturnType< $tukanable_gymload_exercise_params['Link'] >
+	>
+	export class $tukanable_gymload_page_exerciseparams extends $tukanable_gymload_page {
+		sets( ): number
+		reps( ): number
+		Params( ): $tukanable_gymload_exercise_params
+		help_text( ): string
+		title( ): string
+		hide_in_menu( ): boolean
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=exerciseparams.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $tukanable_gymload_page_exerciseparams extends $.$tukanable_gymload_page_exerciseparams {
+        sets(): number;
+        reps(): number;
+        help_text(): string;
+    }
 }
 
 declare namespace $ {
@@ -8256,55 +8525,55 @@ declare namespace $ {
 		,
 		Parameters< ReturnType< $tukanable_gymload['BuilderPage'] >['DayResults'] >[0]
 	>
-	type $tukanable_gymload_builder__tools_tukanable_gymload_5 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $tukanable_gymload_builder['tools'] >
-	>
-	type $tukanable_gymload_builder__storage_key_tukanable_gymload_6 = $mol_type_enforce<
+	type $tukanable_gymload_builder__storage_key_tukanable_gymload_5 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['builder_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder['storage_key'] >
 	>
-	type $tukanable_gymload_builder_stats__title_tukanable_gymload_7 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__title_tukanable_gymload_6 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_stats['title'] >
 	>
-	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_8 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_7 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['day_count'] >
 	>
-	type $tukanable_gymload_builder_stats__model_tukanable_gymload_9 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__model_tukanable_gymload_8 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['model'] >
 	>
-	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_10 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_9 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['title'] >
 	>
-	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_11 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_10 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['day_count'] >
 	>
-	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_12 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_11 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['model'] >
 	>
-	type $tukanable_gymload_page_export__storage_key_tukanable_gymload_13 = $mol_type_enforce<
+	type $tukanable_gymload_page_export__storage_key_tukanable_gymload_12 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['builder_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_page_export['storage_key'] >
 	>
-	type $tukanable_gymload_page_templates__menu_tools_tukanable_gymload_14 = $mol_type_enforce<
+	type $tukanable_gymload_page_templates__menu_tools_tukanable_gymload_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page_templates['menu_tools'] >
+	>
+	type $tukanable_gymload_page_exerciseparams__tools_tukanable_gymload_14 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $tukanable_gymload_page_exerciseparams['tools'] >
 	>
 	type $tukanable_gymload_pagehint__text_tukanable_gymload_15 = $mol_type_enforce<
 		string
@@ -8553,15 +8822,20 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_page['body'] >
 	>
-	type $mol_page__title_tukanable_gymload_64 = $mol_type_enforce<
+	type $tukanable_gymload_page__title_tukanable_gymload_64 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_page['title'] >
+		ReturnType< $tukanable_gymload_page['title'] >
 	>
-	type $mol_page__body_tukanable_gymload_65 = $mol_type_enforce<
+	type $tukanable_gymload_page__hide_in_menu_tukanable_gymload_65 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $tukanable_gymload_page['hide_in_menu'] >
+	>
+	type $tukanable_gymload_page__body_tukanable_gymload_66 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_page['body'] >
+		ReturnType< $tukanable_gymload_page['body'] >
 	>
 	export class $tukanable_gymload extends $mol_book2_catalog {
 		Lighter( ): $mol_lights_toggle
@@ -8577,6 +8851,7 @@ declare namespace $ {
 		HelpPage( ): $tukanable_gymload_help
 		ExportView( ): $tukanable_gymload_page_export
 		Templates( ): $tukanable_gymload_page_templates
+		ExerciseParams( ): $tukanable_gymload_page_exerciseparams
 		day_results_title( id: any): string
 		day_results_body( id: any): $mol_view
 		programs( ): Record<string, any>
@@ -8633,12 +8908,13 @@ declare namespace $ {
 			'deleteprogram': ReturnType< $tukanable_gymload['DeleteView'] >,
 			'export': ReturnType< $tukanable_gymload['ExportView'] >,
 			'templates': ReturnType< $tukanable_gymload['Templates'] >,
+			'exerciseparams': ReturnType< $tukanable_gymload['ExerciseParams'] >,
 		}) 
 		DayResultsPage( id: any): $mol_page
 		ListPrograms( ): $mol_select
 		NewView( ): $tukanable_gymload_page
 		EditView( ): $tukanable_gymload_page
-		DeleteView( ): $mol_page
+		DeleteView( ): $tukanable_gymload_page
 	}
 	
 	type $mol_text__text_tukanable_gymload_help_1 = $mol_type_enforce<

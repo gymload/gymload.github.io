@@ -15,6 +15,56 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    var $mol_dom_context: typeof globalThis;
+}
+
+declare namespace $ {
+    function $mol_fail(error: any): never;
+}
+
+declare namespace $ {
+    function $mol_promise_like(val: any): val is Promise<any>;
+}
+
+declare namespace $ {
+    function $mol_fail_hidden(error: any): never;
+}
+
+declare namespace $ {
+    function $mol_fail_catch(error: unknown): boolean;
+}
+
+declare namespace $ {
+    function $mol_try<Result>(handler: () => Result): Result | Error;
+}
+
+declare namespace $ {
+    function $mol_fail_log(error: unknown): boolean;
+}
+
+interface $node {
+    [key: string]: any;
+}
+declare var $node: $node;
+declare const cache: Map<string, any>;
+
+declare namespace $ {
+    function $mol_func_name(this: $, func: Function): string;
+    function $mol_func_name_from<Target extends Function>(target: Target, source: Function): Target;
+}
+
+declare namespace $ {
+    class $mol_error_mix<Cause extends {} = {}> extends AggregateError {
+        readonly cause: Cause;
+        name: string;
+        constructor(message: string, cause?: Cause, ...errors: readonly Error[]);
+        static [Symbol.toPrimitive](): string;
+        static toString(): string;
+        static make(...params: ConstructorParameters<typeof $mol_error_mix>): $mol_error_mix<{}>;
+    }
+}
+
+declare namespace $ {
     const $mol_ambient_ref: unique symbol;
     type $mol_ambient_context = $;
     function $mol_ambient(this: $ | void, overrides: Partial<$>): $;
@@ -39,22 +89,9 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_fail(error: any): never;
-}
-
-declare namespace $ {
-    function $mol_fail_hidden(error: any): never;
-}
-
-declare namespace $ {
     type $mol_type_writable<T> = {
         -readonly [P in keyof T]: T[P];
     };
-}
-
-declare namespace $ {
-    function $mol_func_name(this: $, func: Function): string;
-    function $mol_func_name_from<Target extends Function>(target: Target, source: Function): Target;
 }
 
 declare namespace $ {
@@ -83,12 +120,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_window extends $mol_object {
-        static size(): {
-            width: number;
-            height: number;
-        };
-    }
+    function $mol_env(): Record<string, string | undefined>;
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -206,10 +241,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_promise_like(val: any): val is Promise<any>;
-}
-
-declare namespace $ {
     abstract class $mol_wire_fiber<Host, Args extends readonly unknown[], Result> extends $mol_wire_pub_sub {
         readonly task: (this: Host, ...args: Args) => Result;
         readonly host?: Host | undefined;
@@ -242,28 +273,6 @@ declare namespace $ {
         };
         step(): Promise<null>;
         destructor(): void;
-    }
-}
-
-declare namespace $ {
-    const $mol_key_store: WeakMap<object, string>;
-    function $mol_key<Value>(value: Value): string;
-}
-
-declare namespace $ {
-    class $mol_after_timeout extends $mol_object2 {
-        delay: number;
-        task: () => void;
-        id: any;
-        constructor(delay: number, task: () => void);
-        destructor(): void;
-    }
-}
-
-declare namespace $ {
-    class $mol_after_frame extends $mol_after_timeout {
-        task: () => void;
-        constructor(task: () => void);
     }
 }
 
@@ -424,105 +433,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_wire_method<Host extends object, Args extends readonly any[]>(host: Host, field: PropertyKey, descr?: TypedPropertyDescriptor<(...args: Args) => any>): {
-        value: (this: Host, ...args: Args) => any;
-        enumerable?: boolean;
-        configurable?: boolean;
-        writable?: boolean;
-        get?: (() => (...args: Args) => any) | undefined;
-        set?: ((value: (...args: Args) => any) => void) | undefined;
-    };
-}
-
-declare namespace $ {
-    type $mol_type_tail<Tuple extends readonly any[]> = ((...tail: Tuple) => any) extends ((head: any, ...tail: infer Tail) => any) ? Tail : never;
-}
-
-declare namespace $ {
-    type $mol_type_foot<Tuple extends readonly any[]> = Tuple['length'] extends 0 ? never : Tuple[$mol_type_tail<Tuple>['length']];
-}
-
-declare namespace $ {
-    function $mol_fail_catch(error: unknown): boolean;
-}
-
-declare namespace $ {
-    function $mol_try<Result>(handler: () => Result): Result | Error;
-}
-
-declare namespace $ {
-    function $mol_fail_log(error: unknown): boolean;
-}
-
-declare namespace $ {
-    class $mol_wire_atom<Host, Args extends readonly unknown[], Result> extends $mol_wire_fiber<Host, Args, Result> {
-        static solo<Host, Args extends readonly unknown[], Result>(host: Host, task: (this: Host, ...args: Args) => Result): $mol_wire_atom<Host, Args, Result>;
-        static plex<Host, Args extends readonly unknown[], Result>(host: Host, task: (this: Host, ...args: Args) => Result, key: Args[0]): $mol_wire_atom<Host, Args, Result>;
-        static watching: Set<$mol_wire_atom<any, any, any>>;
-        static watcher: $mol_after_frame | null;
-        static watch(): void;
-        watch(): void;
-        resync(args: Args): Error | Result | Promise<Error | Result>;
-        once(): Awaited<Result>;
-        channel(): ((next?: $mol_type_foot<Args>) => Awaited<Result>) & {
-            atom: $mol_wire_atom<Host, Args, Result>;
-        };
-        destructor(): void;
-        put(next: Result | Error | Promise<Result | Error>): Error | Result | Promise<Error | Result>;
-    }
-}
-
-declare namespace $ {
-    export function $mol_wire_solo<Args extends any[]>(host: object, field: string, descr?: TypedPropertyDescriptor<(...args: Args) => any>): TypedPropertyDescriptor<(...args: First_optional<Args>) => any>;
-    type First_optional<Args extends any[]> = Args extends [] ? [] : [Args[0] | undefined, ...$mol_type_tail<Args>];
-    export {};
-}
-
-declare namespace $ {
-    function $mol_wire_plex<Args extends [any, ...any[]]>(host: object, field: string, descr?: TypedPropertyDescriptor<(...args: Args) => any>): {
-        value: (this: typeof host, ...args: Args) => any;
-        enumerable?: boolean;
-        configurable?: boolean;
-        writable?: boolean;
-        get?: (() => (...args: Args) => any) | undefined;
-        set?: ((value: (...args: Args) => any) => void) | undefined;
-    };
-}
-
-declare namespace $ {
-    let $mol_mem: typeof $mol_wire_solo;
-    let $mol_mem_key: typeof $mol_wire_plex;
-}
-
-declare namespace $ {
-    var $mol_dom_context: typeof globalThis;
-}
-
-interface $node {
-    [key: string]: any;
-}
-declare var $node: $node;
-declare const cache: Map<string, any>;
-
-declare namespace $ {
-    class $mol_error_mix<Cause extends {} = {}> extends AggregateError {
-        readonly cause: Cause;
-        name: string;
-        constructor(message: string, cause?: Cause, ...errors: readonly Error[]);
-        static [Symbol.toPrimitive](): string;
-        static toString(): string;
-        static make(...params: ConstructorParameters<typeof $mol_error_mix>): $mol_error_mix<{}>;
-    }
-}
-
-declare namespace $ {
-    function $mol_env(): Record<string, string | undefined>;
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
     export function $mol_wire_sync<Host extends object>(obj: Host): ObjectOrFunctionResultAwaited<Host>;
     type FunctionResultAwaited<Some> = Some extends (...args: infer Args) => infer Res ? (...args: Args) => Awaited<Res> : Some;
     type ConstructorResultAwaited<Some> = Some extends new (...args: infer Args) => infer Res ? new (...args: Args) => Res : {};
@@ -576,103 +486,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_view_selection extends $mol_object {
-        static focused(next?: Element[], notify?: 'notify'): Element[];
-    }
-}
-
-declare namespace $ {
-    class $mol_wrapper extends $mol_object2 {
-        static wrap: (task: (...ags: any[]) => any) => (...ags: any[]) => any;
-        static run<Result>(task: () => Result): Result;
-        static func<Args extends any[], Result, Host = void>(func: (this: Host, ...args: Args) => Result): (this: Host, ...args: Args) => Result;
-        static get class(): <Class extends new (...args: any[]) => any>(Class: Class) => Class;
-        static get method(): (obj: object, name: PropertyKey, descr: PropertyDescriptor) => PropertyDescriptor;
-        static get field(): <Host, Field extends keyof Host, Args extends any[], Result>(obj: Host, name: Field, descr: TypedPropertyDescriptor<Result>) => TypedPropertyDescriptor<Result>;
-    }
-}
-
-declare namespace $ {
-    class $mol_memo extends $mol_wrapper {
-        static wrap<This extends object, Value>(task: (this: This, next?: Value) => Value): (this: This, next?: Value) => Value | undefined;
-    }
-}
-
-declare namespace $ {
     var $mol_dom: typeof globalThis;
-}
-
-declare namespace $ {
-    function $mol_dom_qname(name: string): string;
-}
-
-declare namespace $ {
-    function $mol_wire_probe<Value>(task: () => Value, def?: Value): Value | undefined;
-}
-
-declare namespace $ {
-    function $mol_wire_watch(): void;
-}
-
-declare namespace $ {
-    function $mol_const<Value>(value: Value): {
-        (): Value;
-        '()': Value;
-    };
-}
-
-declare namespace $ {
-    function $mol_wire_solid(): void;
-}
-
-declare namespace $ {
-    function $mol_dom_render_attributes(el: Element, attrs: {
-        [key: string]: string | number | boolean | null;
-    }): void;
-}
-
-declare namespace $ {
-    function $mol_dom_render_events(el: Element, events: {
-        [key: string]: (event: Event) => any;
-    }, passive?: boolean): void;
-}
-
-declare namespace $ {
-    function $mol_dom_render_styles(el: Element, styles: {
-        [key: string]: string | number;
-    }): void;
-}
-
-declare namespace $ {
-    function $mol_dom_render_children(el: Element | DocumentFragment, childNodes: NodeList | Array<Node | string | null>): void;
-}
-
-declare namespace $ {
-    function $mol_dom_render_fields(el: Element, fields: {
-        [key: string]: any;
-    }): void;
-}
-
-declare namespace $ {
-    export function $mol_wire_async<Host extends object>(obj: Host): ObjectOrFunctionResultPromisify<Host>;
-    type FunctionResultPromisify<Some> = Some extends (...args: infer Args) => infer Res ? Res extends PromiseLike<unknown> ? Some : (...args: Args) => Promise<Res> : Some;
-    type MethodsResultPromisify<Host extends Object> = {
-        [K in keyof Host]: FunctionResultPromisify<Host[K]>;
-    };
-    type ObjectOrFunctionResultPromisify<Some> = (Some extends (...args: any) => unknown ? FunctionResultPromisify<Some> : {}) & (Some extends Object ? MethodsResultPromisify<Some> : Some);
-    export {};
-}
-
-declare namespace $ {
-    type $mol_type_keys_extract<Input, Upper, Lower = never> = {
-        [Field in keyof Input]: unknown extends Input[Field] ? never : Input[Field] extends never ? never : Input[Field] extends Upper ? [
-            Lower
-        ] extends [Input[Field]] ? Field : never : never;
-    }[keyof Input];
-}
-
-declare namespace $ {
-    type $mol_type_pick<Input, Upper> = Pick<Input, $mol_type_keys_extract<Input, Upper>>;
 }
 
 declare namespace $ {
@@ -942,7 +756,356 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    const $mol_key_store: WeakMap<object, string>;
+    function $mol_key<Value>(value: Value): string;
+}
+
+declare namespace $ {
+    class $mol_after_timeout extends $mol_object2 {
+        delay: number;
+        task: () => void;
+        id: any;
+        constructor(delay: number, task: () => void);
+        destructor(): void;
+    }
+}
+
+declare namespace $ {
+    class $mol_after_frame extends $mol_after_timeout {
+        task: () => void;
+        constructor(task: () => void);
+    }
+}
+
+declare namespace $ {
+    function $mol_wire_method<Host extends object, Args extends readonly any[]>(host: Host, field: PropertyKey, descr?: TypedPropertyDescriptor<(...args: Args) => any>): {
+        value: (this: Host, ...args: Args) => any;
+        enumerable?: boolean;
+        configurable?: boolean;
+        writable?: boolean;
+        get?: (() => (...args: Args) => any) | undefined;
+        set?: ((value: (...args: Args) => any) => void) | undefined;
+    };
+}
+
+declare namespace $ {
+    type $mol_type_tail<Tuple extends readonly any[]> = ((...tail: Tuple) => any) extends ((head: any, ...tail: infer Tail) => any) ? Tail : never;
+}
+
+declare namespace $ {
+    type $mol_type_foot<Tuple extends readonly any[]> = Tuple['length'] extends 0 ? never : Tuple[$mol_type_tail<Tuple>['length']];
+}
+
+declare namespace $ {
+    class $mol_wire_atom<Host, Args extends readonly unknown[], Result> extends $mol_wire_fiber<Host, Args, Result> {
+        static solo<Host, Args extends readonly unknown[], Result>(host: Host, task: (this: Host, ...args: Args) => Result): $mol_wire_atom<Host, Args, Result>;
+        static plex<Host, Args extends readonly unknown[], Result>(host: Host, task: (this: Host, ...args: Args) => Result, key: Args[0]): $mol_wire_atom<Host, Args, Result>;
+        static watching: Set<$mol_wire_atom<any, any, any>>;
+        static watcher: $mol_after_frame | null;
+        static watch(): void;
+        watch(): void;
+        resync(args: Args): Error | Result | Promise<Error | Result>;
+        once(): Awaited<Result>;
+        channel(): ((next?: $mol_type_foot<Args>) => Awaited<Result>) & {
+            atom: $mol_wire_atom<Host, Args, Result>;
+        };
+        destructor(): void;
+        put(next: Result | Error | Promise<Result | Error>): Error | Result | Promise<Error | Result>;
+    }
+}
+
+declare namespace $ {
+    export function $mol_wire_solo<Args extends any[]>(host: object, field: string, descr?: TypedPropertyDescriptor<(...args: Args) => any>): TypedPropertyDescriptor<(...args: First_optional<Args>) => any>;
+    type First_optional<Args extends any[]> = Args extends [] ? [] : [Args[0] | undefined, ...$mol_type_tail<Args>];
+    export {};
+}
+
+declare namespace $ {
+    function $mol_wire_plex<Args extends [any, ...any[]]>(host: object, field: string, descr?: TypedPropertyDescriptor<(...args: Args) => any>): {
+        value: (this: typeof host, ...args: Args) => any;
+        enumerable?: boolean;
+        configurable?: boolean;
+        writable?: boolean;
+        get?: (() => (...args: Args) => any) | undefined;
+        set?: ((value: (...args: Args) => any) => void) | undefined;
+    };
+}
+
+declare namespace $ {
+    let $mol_mem: typeof $mol_wire_solo;
+    let $mol_mem_key: typeof $mol_wire_plex;
+}
+
+declare namespace $ {
+    let $mol_action: typeof $mol_wire_method;
+}
+
+declare namespace $ {
+    class $mol_state_arg extends $mol_object {
+        prefix: string;
+        static prolog: string;
+        static separator: string;
+        static href(next?: string): string;
+        static href_normal(): string;
+        static dict(next?: {
+            [key: string]: string | null;
+        }): Readonly<{
+            [key: string]: string;
+        }>;
+        static value(key: string, next?: string | null): string | null;
+        static link(next: Record<string, string | null>): string;
+        static make_link(next: Record<string, string | null>): string;
+        static go(next: {
+            [key: string]: string | null;
+        }): void;
+        static commit(): void;
+        constructor(prefix?: string);
+        value(key: string, next?: string): string | null;
+        sub(postfix: string): $mol_state_arg;
+        link(next: Record<string, string | null>): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_media extends $mol_object2 {
+        static match(query: string, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+    function $mol_wire_solid(): void;
+}
+
+declare namespace $ {
+    let $mol_mem_persist: typeof $mol_wire_solid;
+}
+
+declare namespace $ {
+    function $mol_wire_probe<Value>(task: () => Value, def?: Value): Value | undefined;
+}
+
+declare namespace $ {
+    let $mol_mem_cached: typeof $mol_wire_probe;
+}
+
+declare namespace $ {
+    class $mol_storage extends $mol_object2 {
+        static native(): StorageManager;
+        static persisted(next?: boolean, cache?: 'cache'): boolean;
+        static estimate(): StorageEstimate;
+        static dir(): FileSystemDirectoryHandle;
+    }
+}
+
+declare namespace $ {
+    class $mol_state_local<Value> extends $mol_object {
+        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
+        static native(): Storage | {
+            getItem(key: string): any;
+            setItem(key: string, value: string): void;
+            removeItem(key: string): void;
+        };
+        static changes(next?: StorageEvent): StorageEvent | undefined;
+        static value<Value>(key: string, next?: Value | null): Value | null;
+        prefix(): string;
+        value(key: string, next?: Value): Value | null;
+    }
+}
+
+declare namespace $ {
+    function $mol_const<Value>(value: Value): {
+        (): Value;
+        '()': Value;
+    };
+}
+
+declare namespace $ {
+    export function $mol_wire_async<Host extends object>(obj: Host): ObjectOrFunctionResultPromisify<Host>;
+    type FunctionResultPromisify<Some> = Some extends (...args: infer Args) => infer Res ? Res extends PromiseLike<unknown> ? Some : (...args: Args) => Promise<Res> : Some;
+    type MethodsResultPromisify<Host extends Object> = {
+        [K in keyof Host]: FunctionResultPromisify<Host[K]>;
+    };
+    type ObjectOrFunctionResultPromisify<Some> = (Some extends (...args: any) => unknown ? FunctionResultPromisify<Some> : {}) & (Some extends Object ? MethodsResultPromisify<Some> : Some);
+    export {};
+}
+
+declare namespace $ {
+    class $mol_lock extends $mol_object {
+        protected promise: null | Promise<void>;
+        wait(): Promise<() => void>;
+        grab(): () => void;
+    }
+}
+
+declare namespace $ {
+    function $mol_compare_array<Value extends ArrayLike<unknown>>(a: Value, b: Value): boolean;
+}
+
+declare namespace $ {
+    type $mol_charset_encoding = 'utf8' | 'utf-16le' | 'utf-16be' | 'ibm866' | 'iso-8859-2' | 'iso-8859-3' | 'iso-8859-4' | 'iso-8859-5' | 'iso-8859-6' | 'iso-8859-7' | 'iso-8859-8' | 'iso-8859-8i' | 'iso-8859-10' | 'iso-8859-13' | 'iso-8859-14' | 'iso-8859-15' | 'iso-8859-16' | 'koi8-r' | 'koi8-u' | 'koi8-r' | 'macintosh' | 'windows-874' | 'windows-1250' | 'windows-1251' | 'windows-1252' | 'windows-1253' | 'windows-1254' | 'windows-1255' | 'windows-1256' | 'windows-1257' | 'windows-1258' | 'x-mac-cyrillic' | 'gbk' | 'gb18030' | 'hz-gb-2312' | 'big5' | 'euc-jp' | 'iso-2022-jp' | 'shift-jis' | 'euc-kr' | 'iso-2022-kr';
+}
+
+declare namespace $ {
+    function $mol_charset_decode(buffer: BufferSource, encoding?: $mol_charset_encoding): string;
+}
+
+declare namespace $ {
+    function $mol_charset_encode(value: string): Uint8Array<ArrayBuffer>;
+}
+
+declare namespace $ {
+    type $mol_file_transaction_mode = 'create' | 'exists_truncate' | 'exists_fail' | 'read_only' | 'write_only' | 'read_write' | 'append';
+    type $mol_file_transaction_buffer = ArrayBufferView;
+    class $mol_file_transaction extends $mol_object {
+        path(): string;
+        modes(): readonly $mol_file_transaction_mode[];
+        write(options: {
+            buffer: ArrayBufferView | string | readonly ArrayBufferView[];
+            offset?: number | null;
+            length?: number | null;
+            position?: number | null;
+        }): number;
+        read(): Uint8Array<ArrayBuffer>;
+        truncate(size: number): void;
+        close(): void;
+        destructor(): void;
+    }
+}
+
+declare namespace $ {
+    class $mol_file_transaction_node extends $mol_file_transaction {
+        protected descr(): number;
+        write({ buffer, offset, length, position }: {
+            buffer: ArrayBufferView | string | readonly ArrayBufferView[];
+            offset?: number | null;
+            length?: number | null;
+            position?: number | null;
+        }): number;
+        truncate(size: number): void;
+        read(): Uint8Array<ArrayBuffer>;
+        close(): void;
+    }
+}
+
+declare namespace $ {
+    class $mol_file_base extends $mol_object {
+        static absolute<This extends typeof $mol_file_base>(this: This, path: string): InstanceType<This>;
+        static relative<This extends typeof $mol_file_base>(this: This, path: string): InstanceType<This>;
+        static base: string;
+        path(): string;
+        parent(): this;
+        exists_cut(): boolean;
+        protected root(): boolean;
+        protected stat(next?: $mol_file_stat | null, virt?: 'virt'): $mol_file_stat | null;
+        protected static changed: Set<$mol_file_base>;
+        protected static frame: null | $mol_after_timeout;
+        protected static changed_add(type: 'change' | 'rename', path: string): void;
+        static watch_debounce(): number;
+        static flush(): void;
+        protected static watching: boolean;
+        protected static lock: $mol_lock;
+        protected static watch_off(path: string): void;
+        static unwatched<Result>(side_effect: () => Result, affected_dir: string): Result;
+        reset(): void;
+        modified(): Date | null;
+        version(): string;
+        protected info(path: string): null | $mol_file_stat;
+        protected ensure(): void;
+        protected drop(): void;
+        protected copy(to: string): void;
+        protected read(): Uint8Array<ArrayBuffer>;
+        protected write(buffer: Uint8Array<ArrayBuffer>): void;
+        protected kids(): readonly this[];
+        readable(opts: {
+            start?: number;
+            end?: number;
+        }): ReadableStream<Uint8Array<ArrayBuffer>>;
+        writable(opts: {
+            start?: number;
+        }): WritableStream<Uint8Array<ArrayBuffer>>;
+        buffer(next?: Uint8Array<ArrayBuffer>): Uint8Array<ArrayBuffer>;
+        stat_make(size: number): {
+            readonly type: "file";
+            readonly size: number;
+            readonly atime: Date;
+            readonly mtime: Date;
+            readonly ctime: Date;
+        };
+        clone(to: string): this | null;
+        watcher(): {
+            destructor(): void;
+        };
+        exists(next?: boolean): boolean;
+        type(): "" | $mol_file_type;
+        name(): string;
+        ext(): string;
+        text(next?: string, virt?: 'virt'): string;
+        text_int(next?: string, virt?: 'virt'): string;
+        sub(reset?: null): this[];
+        resolve(path: string): this;
+        relate(base?: $mol_file_base): string;
+        find(include?: RegExp, exclude?: RegExp): this[];
+        size(): number;
+        toJSON(): string;
+        open(...modes: readonly $mol_file_transaction_mode[]): $mol_file_transaction;
+    }
+}
+
+declare namespace $ {
+    type $mol_file_type = 'file' | 'dir' | 'link';
+    interface $mol_file_stat {
+        type: $mol_file_type;
+        size: number;
+        atime: Date;
+        mtime: Date;
+        ctime: Date;
+    }
+    class $mol_file extends $mol_file_base {
+    }
+}
+
+declare namespace $ {
+    function $mol_file_node_buffer_normalize(buf: Buffer<ArrayBuffer>): Uint8Array<ArrayBuffer>;
+    class $mol_file_node extends $mol_file {
+        static relative<This extends typeof $mol_file>(this: This, path: string): InstanceType<This>;
+        watcher(reset?: null): {
+            destructor(): void;
+        };
+        protected info(path: string): $mol_file_stat | null;
+        protected ensure(): null | undefined;
+        protected copy(to: string): void;
+        protected drop(): void;
+        protected read(): Uint8Array<ArrayBuffer>;
+        protected write(buffer: Uint8Array<ArrayBuffer>): undefined;
+        protected kids(): this[];
+        resolve(path: string): this;
+        relate(base?: $mol_file): string;
+        readable(opts: {
+            start?: number;
+            end?: number;
+        }): ReadableStream<Uint8Array<ArrayBuffer>>;
+        writable(opts?: {
+            start?: number;
+        }): WritableStream<Uint8Array<ArrayBuffer>>;
+    }
+}
+
+declare namespace $ {
+    class $mol_state_local_node<Value> extends $mol_state_local<Value> {
+        static dir(): $mol_file;
+        static value<Value>(key: string, next?: Value | null): Value | null;
+    }
+}
+
+declare namespace $ {
+    function $mol_lights(this: $, next?: boolean): boolean;
+}
+
+declare namespace $ {
     const $mol_theme: Record<"image" | "line" | "text" | "field" | "focus" | "back" | "hover" | "card" | "current" | "special" | "control" | "shade" | "spirit", $mol_style_func<"var", unknown>>;
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -956,15 +1119,144 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_dom_render_children(el: Element | DocumentFragment, childNodes: NodeList | Array<Node | string | null>): void;
+}
+
+declare namespace $ {
+    type $mol_type_partial_deep<Val> = Val extends object ? Val extends Function ? Val : {
+        [field in keyof Val]?: $mol_type_partial_deep<Val[field]> | undefined;
+    } : Val;
+}
+
+declare namespace $ {
+    let $mol_jsx_prefix: string;
+    let $mol_jsx_crumbs: string;
+    let $mol_jsx_booked: null | Set<string>;
+    let $mol_jsx_document: $mol_jsx.JSX.ElementClass['ownerDocument'];
+    const $mol_jsx_frag = "";
+    function $mol_jsx<Props extends $mol_jsx.JSX.IntrinsicAttributes, Children extends Array<Node | string>>(Elem: string | ((props: Props, ...children: Children) => Element), props: Props, ...childNodes: Children): Element | DocumentFragment;
+    namespace $mol_jsx.JSX {
+        interface Element extends HTMLElement {
+            class?: string;
+        }
+        interface ElementClass {
+            attributes: {};
+            ownerDocument: Pick<Document, 'getElementById' | 'createElementNS' | 'createDocumentFragment'>;
+            childNodes: Array<Node | string>;
+            valueOf(): Element;
+        }
+        type OrString<Dict> = {
+            [key in keyof Dict]: Dict[key] | string;
+        };
+        type IntrinsicElements = {
+            [key in keyof ElementTagNameMap]?: $.$mol_type_partial_deep<OrString<Element & IntrinsicAttributes & ElementTagNameMap[key]>>;
+        };
+        interface IntrinsicAttributes {
+            id?: string;
+            xmlns?: string;
+        }
+        interface ElementAttributesProperty {
+            attributes: {};
+        }
+        interface ElementChildrenAttribute {
+        }
+    }
+}
+
+declare namespace $ {
+    class $mol_window extends $mol_object {
+        static size(): {
+            width: number;
+            height: number;
+        };
+    }
+}
+
+declare namespace $ {
+    function $mol_guard_defined<T>(value: T): value is NonNullable<T>;
+}
+
+declare namespace $ {
+    class $mol_view_selection extends $mol_object {
+        static focused(next?: Element[], notify?: 'notify'): Element[];
+    }
+}
+
+declare namespace $ {
+    class $mol_wrapper extends $mol_object2 {
+        static wrap: (task: (...ags: any[]) => any) => (...ags: any[]) => any;
+        static run<Result>(task: () => Result): Result;
+        static func<Args extends any[], Result, Host = void>(func: (this: Host, ...args: Args) => Result): (this: Host, ...args: Args) => Result;
+        static get class(): <Class extends new (...args: any[]) => any>(Class: Class) => Class;
+        static get method(): (obj: object, name: PropertyKey, descr: PropertyDescriptor) => PropertyDescriptor;
+        static get field(): <Host, Field extends keyof Host, Args extends any[], Result>(obj: Host, name: Field, descr: TypedPropertyDescriptor<Result>) => TypedPropertyDescriptor<Result>;
+    }
+}
+
+declare namespace $ {
+    class $mol_memo extends $mol_wrapper {
+        static wrap<This extends object, Value>(task: (this: This, next?: Value) => Value): (this: This, next?: Value) => Value | undefined;
+    }
+}
+
+declare namespace $ {
+    function $mol_dom_qname(name: string): string;
+}
+
+declare namespace $ {
+    function $mol_wire_watch(): void;
+}
+
+declare namespace $ {
+    function $mol_dom_render_attributes(el: Element, attrs: {
+        [key: string]: string | number | boolean | null;
+    }): void;
+}
+
+declare namespace $ {
+    function $mol_dom_render_events(el: Element, events: {
+        [key: string]: (event: Event) => any;
+    }, passive?: boolean): void;
+}
+
+declare namespace $ {
+    function $mol_dom_render_styles(el: Element, styles: {
+        [key: string]: string | number;
+    }): void;
+}
+
+declare namespace $ {
+    function $mol_dom_render_fields(el: Element, fields: {
+        [key: string]: any;
+    }): void;
+}
+
+declare namespace $ {
+    type $mol_type_keys_extract<Input, Upper, Lower = never> = {
+        [Field in keyof Input]: unknown extends Input[Field] ? never : Input[Field] extends never ? never : Input[Field] extends Upper ? [
+            Lower
+        ] extends [Input[Field]] ? Field : never : never;
+    }[keyof Input];
+}
+
+declare namespace $ {
+    type $mol_type_pick<Input, Upper> = Pick<Input, $mol_type_keys_extract<Input, Upper>>;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     type $mol_view_content = $mol_view | Node | string | number | boolean | null;
     function $mol_view_visible_width(): number;
     function $mol_view_visible_height(): number;
     function $mol_view_state_key(suffix: string): string;
     class $mol_view extends $mol_object {
         static Root<This extends typeof $mol_view>(this: This, id: number): InstanceType<This>;
-        autorun(): void;
-        static autobind(): void;
+        static roots(): $mol_view[];
+        static auto(): void;
         title(): string;
+        hint(): string;
         focused(next?: boolean): boolean;
         state_key(suffix?: string): string;
         dom_name(): string;
@@ -1025,9 +1317,6 @@ declare namespace $ {
         destructor(): void;
     }
     type $mol_view_all = $mol_type_pick<$, typeof $mol_view>;
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -1133,10 +1422,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
-}
-
-declare namespace $ {
-    let $mol_mem_cached: typeof $mol_wire_probe;
 }
 
 declare namespace $ {
@@ -1431,206 +1716,6 @@ declare namespace $.$$ {
         event_right(event?: KeyboardEvent): undefined;
         index_y(): number | null;
         index_x(): number | null;
-    }
-}
-
-declare namespace $ {
-    let $mol_mem_persist: typeof $mol_wire_solid;
-}
-
-declare namespace $ {
-    class $mol_storage extends $mol_object2 {
-        static native(): StorageManager;
-        static persisted(next?: boolean, cache?: 'cache'): boolean;
-        static estimate(): StorageEstimate;
-        static dir(): FileSystemDirectoryHandle;
-    }
-}
-
-declare namespace $ {
-    class $mol_state_local<Value> extends $mol_object {
-        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
-        static native(): Storage | {
-            getItem(key: string): any;
-            setItem(key: string, value: string): void;
-            removeItem(key: string): void;
-        };
-        static changes(next?: StorageEvent): StorageEvent | undefined;
-        static value<Value>(key: string, next?: Value | null): Value | null;
-        prefix(): string;
-        value(key: string, next?: Value): Value | null;
-    }
-}
-
-declare namespace $ {
-    let $mol_action: typeof $mol_wire_method;
-}
-
-declare namespace $ {
-    class $mol_lock extends $mol_object {
-        protected promise: null | Promise<void>;
-        wait(): Promise<() => void>;
-        grab(): () => void;
-    }
-}
-
-declare namespace $ {
-    function $mol_compare_array<Value extends ArrayLike<unknown>>(a: Value, b: Value): boolean;
-}
-
-declare namespace $ {
-    type $mol_charset_encoding = 'utf8' | 'utf-16le' | 'utf-16be' | 'ibm866' | 'iso-8859-2' | 'iso-8859-3' | 'iso-8859-4' | 'iso-8859-5' | 'iso-8859-6' | 'iso-8859-7' | 'iso-8859-8' | 'iso-8859-8i' | 'iso-8859-10' | 'iso-8859-13' | 'iso-8859-14' | 'iso-8859-15' | 'iso-8859-16' | 'koi8-r' | 'koi8-u' | 'koi8-r' | 'macintosh' | 'windows-874' | 'windows-1250' | 'windows-1251' | 'windows-1252' | 'windows-1253' | 'windows-1254' | 'windows-1255' | 'windows-1256' | 'windows-1257' | 'windows-1258' | 'x-mac-cyrillic' | 'gbk' | 'gb18030' | 'hz-gb-2312' | 'big5' | 'euc-jp' | 'iso-2022-jp' | 'shift-jis' | 'euc-kr' | 'iso-2022-kr';
-}
-
-declare namespace $ {
-    function $mol_charset_decode(buffer: BufferSource, encoding?: $mol_charset_encoding): string;
-}
-
-declare namespace $ {
-    function $mol_charset_encode(value: string): Uint8Array<ArrayBuffer>;
-}
-
-declare namespace $ {
-    type $mol_file_transaction_mode = 'create' | 'exists_truncate' | 'exists_fail' | 'read_only' | 'write_only' | 'read_write' | 'append';
-    type $mol_file_transaction_buffer = ArrayBufferView;
-    class $mol_file_transaction extends $mol_object {
-        path(): string;
-        modes(): readonly $mol_file_transaction_mode[];
-        write(options: {
-            buffer: ArrayBufferView | string | readonly ArrayBufferView[];
-            offset?: number | null;
-            length?: number | null;
-            position?: number | null;
-        }): number;
-        read(): Uint8Array<ArrayBuffer>;
-        truncate(size: number): void;
-        close(): void;
-        destructor(): void;
-    }
-}
-
-declare namespace $ {
-    class $mol_file_transaction_node extends $mol_file_transaction {
-        protected descr(): number;
-        write({ buffer, offset, length, position }: {
-            buffer: ArrayBufferView | string | readonly ArrayBufferView[];
-            offset?: number | null;
-            length?: number | null;
-            position?: number | null;
-        }): number;
-        truncate(size: number): void;
-        read(): Uint8Array<ArrayBuffer>;
-        close(): void;
-    }
-}
-
-declare namespace $ {
-    class $mol_file_base extends $mol_object {
-        static absolute<This extends typeof $mol_file_base>(this: This, path: string): InstanceType<This>;
-        static relative<This extends typeof $mol_file_base>(this: This, path: string): InstanceType<This>;
-        static base: string;
-        path(): string;
-        parent(): this;
-        exists_cut(): boolean;
-        protected root(): boolean;
-        protected stat(next?: $mol_file_stat | null, virt?: 'virt'): $mol_file_stat | null;
-        protected static changed: Set<$mol_file_base>;
-        protected static frame: null | $mol_after_timeout;
-        protected static changed_add(type: 'change' | 'rename', path: string): void;
-        static watch_debounce(): number;
-        static flush(): void;
-        protected static watching: boolean;
-        protected static lock: $mol_lock;
-        protected static watch_off(path: string): void;
-        static unwatched<Result>(side_effect: () => Result, affected_dir: string): Result;
-        reset(): void;
-        modified(): Date | null;
-        version(): string;
-        protected info(path: string): null | $mol_file_stat;
-        protected ensure(): void;
-        protected drop(): void;
-        protected copy(to: string): void;
-        protected read(): Uint8Array<ArrayBuffer>;
-        protected write(buffer: Uint8Array<ArrayBuffer>): void;
-        protected kids(): readonly this[];
-        readable(opts: {
-            start?: number;
-            end?: number;
-        }): ReadableStream<Uint8Array<ArrayBuffer>>;
-        writable(opts: {
-            start?: number;
-        }): WritableStream<Uint8Array<ArrayBuffer>>;
-        buffer(next?: Uint8Array<ArrayBuffer>): Uint8Array<ArrayBuffer>;
-        stat_make(size: number): {
-            readonly type: "file";
-            readonly size: number;
-            readonly atime: Date;
-            readonly mtime: Date;
-            readonly ctime: Date;
-        };
-        clone(to: string): this | null;
-        watcher(): {
-            destructor(): void;
-        };
-        exists(next?: boolean): boolean;
-        type(): "" | $mol_file_type;
-        name(): string;
-        ext(): string;
-        text(next?: string, virt?: 'virt'): string;
-        text_int(next?: string, virt?: 'virt'): string;
-        sub(reset?: null): this[];
-        resolve(path: string): this;
-        relate(base?: $mol_file_base): string;
-        find(include?: RegExp, exclude?: RegExp): this[];
-        size(): number;
-        toJSON(): string;
-        open(...modes: readonly $mol_file_transaction_mode[]): $mol_file_transaction;
-    }
-}
-
-declare namespace $ {
-    type $mol_file_type = 'file' | 'dir' | 'link';
-    interface $mol_file_stat {
-        type: $mol_file_type;
-        size: number;
-        atime: Date;
-        mtime: Date;
-        ctime: Date;
-    }
-    class $mol_file extends $mol_file_base {
-    }
-}
-
-declare namespace $ {
-    function $mol_file_node_buffer_normalize(buf: Buffer<ArrayBuffer>): Uint8Array<ArrayBuffer>;
-    class $mol_file_node extends $mol_file {
-        static relative<This extends typeof $mol_file>(this: This, path: string): InstanceType<This>;
-        watcher(reset?: null): {
-            destructor(): void;
-        };
-        protected info(path: string): $mol_file_stat | null;
-        protected ensure(): null | undefined;
-        protected copy(to: string): void;
-        protected drop(): void;
-        protected read(): Uint8Array<ArrayBuffer>;
-        protected write(buffer: Uint8Array<ArrayBuffer>): undefined;
-        protected kids(): this[];
-        resolve(path: string): this;
-        relate(base?: $mol_file): string;
-        readable(opts: {
-            start?: number;
-            end?: number;
-        }): ReadableStream<Uint8Array<ArrayBuffer>>;
-        writable(opts?: {
-            start?: number;
-        }): WritableStream<Uint8Array<ArrayBuffer>>;
-    }
-}
-
-declare namespace $ {
-    class $mol_state_local_node<Value> extends $mol_state_local<Value> {
-        static dir(): $mol_file;
-        static value<Value>(key: string, next?: Value | null): Value | null;
     }
 }
 
@@ -2302,32 +2387,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_state_arg extends $mol_object {
-        prefix: string;
-        static prolog: string;
-        static separator: string;
-        static href(next?: string): string;
-        static href_normal(): string;
-        static dict(next?: {
-            [key: string]: string | null;
-        }): Readonly<{
-            [key: string]: string;
-        }>;
-        static value(key: string, next?: string | null): string | null;
-        static link(next: Record<string, string | null>): string;
-        static make_link(next: Record<string, string | null>): string;
-        static go(next: {
-            [key: string]: string | null;
-        }): void;
-        static commit(): void;
-        constructor(prefix?: string);
-        value(key: string, next?: string): string | null;
-        sub(postfix: string): $mol_state_arg;
-        link(next: Record<string, string | null>): string;
-    }
-}
-
-declare namespace $ {
 
 	export class $mol_link extends $mol_view {
 		uri_toggle( ): string
@@ -2625,16 +2684,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
-}
-
-declare namespace $ {
-    class $mol_media extends $mol_object2 {
-        static match(query: string, next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-    function $mol_lights(this: $, next?: boolean): boolean;
 }
 
 declare namespace $ {
@@ -4617,6 +4666,24 @@ declare namespace $ {
 //# sourceMappingURL=row.view.tree.d.ts.map
 declare namespace $ {
 
+	export class $mol_icon_arrow_up extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=up.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_arrow_down extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=down.view.tree.d.ts.map
+declare namespace $ {
+
 	export class $mol_ghost extends $mol_view {
 		Sub( ): $mol_view
 	}
@@ -5155,27 +5222,57 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_60 = $mol_type_enforce<
+	type $mol_button_major__disabled_tukanable_gymload_builder_day_60 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_up_disabled'] >
+		,
+		ReturnType< $mol_button_major['disabled'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_builder_day_61 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_up_click'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__sub_tukanable_gymload_builder_day_62 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_major['sub'] >
+	>
+	type $mol_button_major__disabled_tukanable_gymload_builder_day_63 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_down_disabled'] >
+		,
+		ReturnType< $mol_button_major['disabled'] >
+	>
+	type $mol_button_major__click_tukanable_gymload_builder_day_64 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day['sort_down_click'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__sub_tukanable_gymload_builder_day_65 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_major['sub'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_66 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_drop__adopt_tukanable_gymload_builder_day_61 = $mol_type_enforce<
+	type $mol_drop__adopt_tukanable_gymload_builder_day_67 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['sort_transfer_adopt'] >
 		,
 		ReturnType< $mol_drop['adopt'] >
 	>
-	type $mol_drop__receive_tukanable_gymload_builder_day_62 = $mol_type_enforce<
+	type $mol_drop__receive_tukanable_gymload_builder_day_68 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['sort_receive_before'] >
 		,
 		ReturnType< $mol_drop['receive'] >
 	>
-	type $mol_drop__Sub_tukanable_gymload_builder_day_63 = $mol_type_enforce<
+	type $mol_drop__Sub_tukanable_gymload_builder_day_69 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['SortRow_content'] >
 		,
 		ReturnType< $mol_drop['Sub'] >
 	>
-	type $mol_drag__transfer_tukanable_gymload_builder_day_64 = $mol_type_enforce<
+	type $mol_drag__transfer_tukanable_gymload_builder_day_70 = $mol_type_enforce<
 		({ 
 			'text/plain': ReturnType< $tukanable_gymload_builder_day['sort_row_title'] >,
 			'text/html': ReturnType< $tukanable_gymload_builder_day['sort_row_html'] >,
@@ -5184,84 +5281,84 @@ declare namespace $ {
 		,
 		ReturnType< $mol_drag['transfer'] >
 	>
-	type $mol_drag__Sub_tukanable_gymload_builder_day_65 = $mol_type_enforce<
+	type $mol_drag__Sub_tukanable_gymload_builder_day_71 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['SortRow_drop'] >
 		,
 		ReturnType< $mol_drag['Sub'] >
 	>
-	type $mol_list__item_width_min_tukanable_gymload_builder_day_66 = $mol_type_enforce<
+	type $mol_list__item_width_min_tukanable_gymload_builder_day_72 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_width_min'] >
 	>
-	type $mol_list__item_height_min_tukanable_gymload_builder_day_67 = $mol_type_enforce<
+	type $mol_list__item_height_min_tukanable_gymload_builder_day_73 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_height_min'] >
 	>
-	type $mol_list__rows_tukanable_gymload_builder_day_68 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_builder_day_74 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['sort_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_day_69 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_day_75 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_70 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_76 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_deck__style_tukanable_gymload_builder_day_71 = $mol_type_enforce<
+	type $mol_deck__style_tukanable_gymload_builder_day_77 = $mol_type_enforce<
 		({ 
 			'marginTop': string,
 		}) 
 		,
 		ReturnType< $mol_deck['style'] >
 	>
-	type $mol_deck__items_tukanable_gymload_builder_day_72 = $mol_type_enforce<
+	type $mol_deck__items_tukanable_gymload_builder_day_78 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['info_tabs'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_73 = $mol_type_enforce<
+	type $mol_labeler__title_tukanable_gymload_builder_day_79 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_74 = $mol_type_enforce<
+	type $mol_labeler__Content_tukanable_gymload_builder_day_80 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['MinStep'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_75 = $mol_type_enforce<
+	type $mol_labeler__title_tukanable_gymload_builder_day_81 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_76 = $mol_type_enforce<
+	type $mol_labeler__Content_tukanable_gymload_builder_day_82 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['BeginWeight'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_builder_day_77 = $mol_type_enforce<
+	type $mol_labeler__title_tukanable_gymload_builder_day_83 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__Content_tukanable_gymload_builder_day_78 = $mol_type_enforce<
+	type $mol_labeler__Content_tukanable_gymload_builder_day_84 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['BarbellWeight'] >
 		,
 		ReturnType< $mol_labeler['Content'] >
 	>
-	type $tukanable_gymload_builder_day_planweights__values_tukanable_gymload_builder_day_79 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_planweights__values_tukanable_gymload_builder_day_85 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day['plan'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_planweights['values'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_80 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_86 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -5334,6 +5431,14 @@ declare namespace $ {
 		sort_row_uri( id: any): string
 		sort_transfer_adopt( next?: any ): any
 		sort_receive_before( id: any, next?: any ): any
+		sort_up_disabled( id: any): boolean
+		sort_up_click( id: any, next?: any ): any
+		UpButtonIcon( id: any): $mol_icon_arrow_up
+		SortUpButton( id: any): $mol_button_major
+		sort_down_disabled( id: any): boolean
+		sort_down_click( id: any, next?: any ): any
+		DownButtonIcon( id: any): $mol_icon_arrow_down
+		SortDownButton( id: any): $mol_button_major
 		SortRow_content( id: any): $mol_view
 		SortRow_drop( id: any): $mol_drop
 		SortRow( id: any): $mol_drag
@@ -5440,6 +5545,10 @@ declare namespace $.$$ {
         sort_row_uri(id: any): string;
         sort_receive_before(anchor: any, item_id: any): void;
         info_tabs(): $mol_view[];
+        sort_down_disabled(id: any): boolean;
+        sort_up_disabled(id: any): boolean;
+        sort_down_click(id: any): void;
+        sort_up_click(id: any): void;
     }
     export {};
 }
@@ -5614,6 +5723,60 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	export class $mol_icon_chat extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=chat.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_chat_question extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=question.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_link__uri_tukanable_gymload_exercise_params_1 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_exercise_params['uri'] >
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_link__sub_tukanable_gymload_exercise_params_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	export class $tukanable_gymload_exercise_params extends $mol_view {
+		uri( ): string
+		Icon( ): $mol_icon_chat_question
+		reps( ): number
+		sets( ): number
+		idx( ): number|null | null
+		QuestionIcon( ): $mol_icon_chat_question
+		Link( ): $mol_link
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=params.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $tukanable_gymload_exercise_params extends $.$tukanable_gymload_exercise_params {
+        uri(): string;
+        sub(): readonly any[];
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
 	type $tukanable_gymload_smallnumber__precision_view_tukanable_gymload_builder_day_results_set_1 = $mol_type_enforce<
 		number
 		,
@@ -5725,6 +5888,7 @@ declare namespace $ {
 		reps( ): number
 		weight_min_step( ): number
 		weight_min( ): number
+		original_week_weight( next?: null|number | null ): null|number | null
 		PastWeekView( ): $mol_view
 		CurrentWeekView( ): $mol_view
 		DoneWeekView( ): $mol_view
@@ -5767,97 +5931,127 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_title['title'] >
 	>
-	type __tukanable_gymload_builder_day_results_2 = $mol_type_enforce<
-		Parameters< $tukanable_gymload_builder_day_results['current_week'] >[0]
+	type $tukanable_gymload_exercise_params__idx_tukanable_gymload_builder_day_results_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_idx'] >
 		,
-		Parameters< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] >[0]
+		ReturnType< $tukanable_gymload_exercise_params['idx'] >
 	>
-	type $mol_deck__items_tukanable_gymload_builder_day_results_3 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day_results['week_items'] >
+	type $tukanable_gymload_exercise_params__sets_tukanable_gymload_builder_day_results_3 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_sets'] >
 		,
-		ReturnType< $mol_deck['items'] >
+		ReturnType< $tukanable_gymload_exercise_params['sets'] >
 	>
-	type $tukanable_gymload_title__title_tukanable_gymload_builder_day_results_4 = $mol_type_enforce<
-		ReturnType< $tukanable_gymload_builder_day_results['row_exercise_extra'] >
+	type $tukanable_gymload_exercise_params__reps_tukanable_gymload_builder_day_results_4 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_reps'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['reps'] >
+	>
+	type $tukanable_gymload_title__title_tukanable_gymload_builder_day_results_5 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['row_exercise'] >
 		,
 		ReturnType< $tukanable_gymload_title['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_5 = $mol_type_enforce<
+	type $tukanable_gymload_title__Extra_tukanable_gymload_builder_day_results_6 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['ExcerciseExtra'] >
+		,
+		ReturnType< $tukanable_gymload_title['Extra'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_results_7 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['set_rows'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_6 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_results_8 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_list__item_width_min_tukanable_gymload_builder_day_results_7 = $mol_type_enforce<
+	type $mol_list__item_width_min_tukanable_gymload_builder_day_results_9 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_width_min'] >
 	>
-	type $mol_list__item_height_min_tukanable_gymload_builder_day_results_8 = $mol_type_enforce<
+	type $mol_list__item_height_min_tukanable_gymload_builder_day_results_10 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_list['item_height_min'] >
 	>
-	type $mol_list__rows_tukanable_gymload_builder_day_results_9 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_builder_day_results_11 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__set_idx_tukanable_gymload_builder_day_results_10 = $mol_type_enforce<
+	type $mol_deck__current_tukanable_gymload_builder_day_results_12 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['current_week'] >
+		,
+		ReturnType< $mol_deck['current'] >
+	>
+	type $mol_deck__items_tukanable_gymload_builder_day_results_13 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder_day_results['week_items'] >
+		,
+		ReturnType< $mol_deck['items'] >
+	>
+	type $tukanable_gymload_builder_day_results_set__set_idx_tukanable_gymload_builder_day_results_14 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['set_idx'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['set_idx'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__week_idx_tukanable_gymload_builder_day_results_11 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__week_idx_tukanable_gymload_builder_day_results_15 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['current_week_number'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['week_idx'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__week_count_tukanable_gymload_builder_day_results_12 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__week_count_tukanable_gymload_builder_day_results_16 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['week_count'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__excercise_idx_tukanable_gymload_builder_day_results_13 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__excercise_idx_tukanable_gymload_builder_day_results_17 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['excercise_idx'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['excercise_idx'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__reps_tukanable_gymload_builder_day_results_14 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__reps_tukanable_gymload_builder_day_results_18 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['set_reps'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['reps'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__plan_tukanable_gymload_builder_day_results_15 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__plan_tukanable_gymload_builder_day_results_19 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['excercise_plan'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['plan'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__storage_key_tukanable_gymload_builder_day_results_16 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__storage_key_tukanable_gymload_builder_day_results_20 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__weight_min_step_tukanable_gymload_builder_day_results_17 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__weight_min_step_tukanable_gymload_builder_day_results_21 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['row_min_step'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min_step'] >
 	>
-	type $tukanable_gymload_builder_day_results_set__weight_min_tukanable_gymload_builder_day_results_18 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results_set__weight_min_tukanable_gymload_builder_day_results_22 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['row_min_weight'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results_set['weight_min'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_day_results_19 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_day_results_23 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder_day_results['week_tab_title_short'] >
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_day_results_20 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_day_results_24 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__title_tukanable_gymload_builder_day_results_25 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_view['title'] >
+	>
+	type $mol_view__sub_tukanable_gymload_builder_day_results_26 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
@@ -5871,18 +6065,22 @@ declare namespace $ {
 		week_tab_title_short( id: any): string
 		week_tab_title( id: any): string
 		WeekTitle( id: any): $tukanable_gymload_title
-		current_week( next?: ReturnType< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] > ): ReturnType< ReturnType< $tukanable_gymload_builder_day_results['Weeks'] >['current'] >
-		week_items( ): readonly($mol_view)[]
-		Weeks( ): $mol_deck
+		row_idx( id: any): number
+		ExcerciseExtra( id: any): $tukanable_gymload_exercise_params
 		ExcerciseTitle( id: any): $tukanable_gymload_title
 		set_rows( id: any): readonly($mol_view)[]
 		SetRows( id: any): $mol_view
 		Row( id: any): $mol_view
 		rows( ): readonly($mol_view)[]
 		Rows( ): $mol_list
+		current_week( next?: string ): string
+		week_items( ): readonly($mol_view)[]
+		Weeks( ): $mol_deck
 		week_count( ): number
+		DaySettings( ): $tukanable_gymload_builder_day | null
 		SetResult( id: any): $tukanable_gymload_builder_day_results_set
 		WeekTab( id: any): $mol_view
+		EditTab( ): $mol_view
 		sub( ): readonly(any)[]
 	}
 	
@@ -5892,6 +6090,7 @@ declare namespace $ {
 declare namespace $.$$ {
     class $tukanable_gymload_builder_day_results extends $.$tukanable_gymload_builder_day_results {
         rows(): $mol_view[];
+        row_idx(id: any): number;
         set_rows(id: any): $.$tukanable_gymload_builder_day_results_set[];
         set_idx(id: any): any;
         excercise_idx(id: any): number;
@@ -5902,6 +6101,8 @@ declare namespace $.$$ {
         current_week_number(): number;
         day_title(): string;
         set_reps(id: any): number;
+        next_unworked_week(): number;
+        current_week(next?: string): string;
     }
 }
 
@@ -6064,142 +6265,147 @@ declare namespace $ {
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_24 = $mol_type_enforce<
+	type $mol_deck__current_tukanable_gymload_builder_24 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_builder['current_week_item'] >
+		,
+		ReturnType< $mol_deck['current'] >
+	>
+	type $tukanable_gymload_builder_day__storage_key_tukanable_gymload_builder_25 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_25 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__title_tukanable_gymload_builder_26 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['title'] >
 	>
-	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_26 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__day_index_tukanable_gymload_builder_27 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['day_index'] >
 	>
-	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_27 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__dumbbell_values_tukanable_gymload_builder_28 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_28 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__week_count_tukanable_gymload_builder_29 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['week_count'] >
 	>
-	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_29 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__weight_plate_values_tukanable_gymload_builder_30 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_30 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__barbell_values_tukanable_gymload_builder_31 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_31 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__show_charts_tukanable_gymload_builder_32 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['show_charts'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['show_charts'] >
 	>
-	type $tukanable_gymload_builder_day__progress_formula_tukanable_gymload_builder_32 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__progress_formula_tukanable_gymload_builder_33 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['progress_formula'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['progress_formula'] >
 	>
-	type $tukanable_gymload_builder_day__start_percent_tukanable_gymload_builder_33 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day__start_percent_tukanable_gymload_builder_34 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['start_percent'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day['start_percent'] >
 	>
-	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_34 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__storage_key_tukanable_gymload_builder_35 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['storage_key'] >
 	>
-	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_35 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__title_tukanable_gymload_builder_36 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_title'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['title'] >
 	>
-	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_36 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__day_index_tukanable_gymload_builder_37 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_index'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['day_index'] >
 	>
-	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_37 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__week_count_tukanable_gymload_builder_38 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['week_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['week_count'] >
 	>
-	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_38 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__dumbbell_values_tukanable_gymload_builder_39 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['dumbbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['dumbbell_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_39 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__weight_plate_values_tukanable_gymload_builder_40 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['weight_plate_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['weight_plate_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_40 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__barbell_values_tukanable_gymload_builder_41 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['barbell_values'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['barbell_values'] >
 	>
-	type $tukanable_gymload_builder_day_results__progress_formula_tukanable_gymload_builder_41 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__progress_formula_tukanable_gymload_builder_42 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['progress_formula'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['progress_formula'] >
 	>
-	type $tukanable_gymload_builder_day_results__start_percent_tukanable_gymload_builder_42 = $mol_type_enforce<
+	type $tukanable_gymload_builder_day_results__start_percent_tukanable_gymload_builder_43 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['start_percent'] >
 		,
 		ReturnType< $tukanable_gymload_builder_day_results['start_percent'] >
 	>
-	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_43 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__title_tukanable_gymload_builder_44 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_stats['title'] >
 	>
-	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_44 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_builder_45 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['day_count'] >
 	>
-	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_45 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__model_tukanable_gymload_builder_46 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['model'] >
 	>
-	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_builder_46 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_builder_47 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['title'] >
 	>
-	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_builder_47 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_builder_48 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['day_count'] >
 	>
-	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_builder_48 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_builder_49 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_builder['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['model'] >
 	>
-	type $mol_view__title_tukanable_gymload_builder_49 = $mol_type_enforce<
+	type $mol_view__title_tukanable_gymload_builder_50 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_view['title'] >
 	>
-	type $mol_view__sub_tukanable_gymload_builder_50 = $mol_type_enforce<
+	type $mol_view__sub_tukanable_gymload_builder_51 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $tukanable_gymload_pagehint__text_tukanable_gymload_builder_51 = $mol_type_enforce<
+	type $tukanable_gymload_pagehint__text_tukanable_gymload_builder_52 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_pagehint['text'] >
@@ -6231,6 +6437,7 @@ declare namespace $ {
 		weight_plate_values( ): ReturnType< ReturnType< $tukanable_gymload_builder['WeightPlates'] >['values'] >
 		WeightPlates( ): $tukanable_gymload_builder_weights
 		week_items( ): readonly($mol_view)[]
+		current_week_item( next?: string ): string
 		Weeks( ): $mol_deck
 		title( ): string
 		storage_key( ): string
@@ -6261,6 +6468,7 @@ declare namespace $.$$ {
         show_charts(next?: boolean): boolean;
         progress_formula(next?: string): string;
         start_percent(next?: number): number;
+        current_week_item(next?: string): string;
     }
 }
 
@@ -6271,6 +6479,7 @@ declare namespace $ {
 
 	export class $tukanable_gymload_page extends $mol_page {
 		menu_title( ): string
+		hide_in_menu( ): boolean
 	}
 	
 }
@@ -7141,32 +7350,47 @@ declare namespace $ {
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
-	type $mol_row__sub_tukanable_gymload_page_templates_details_5 = $mol_type_enforce<
+	type $tukanable_gymload_exercise_params__idx_tukanable_gymload_page_templates_details_5 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['exercise_idx'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['idx'] >
+	>
+	type $tukanable_gymload_exercise_params__sets_tukanable_gymload_page_templates_details_6 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['exercise_sets'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['sets'] >
+	>
+	type $tukanable_gymload_exercise_params__reps_tukanable_gymload_page_templates_details_7 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_templates_details['exercise_reps'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['reps'] >
+	>
+	type $mol_row__sub_tukanable_gymload_page_templates_details_8 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_list__rows_tukanable_gymload_page_templates_details_6 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_page_templates_details_9 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_page_templates_details['exercises'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_labeler__title_tukanable_gymload_page_templates_details_7 = $mol_type_enforce<
+	type $mol_labeler__title_tukanable_gymload_page_templates_details_10 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_page_templates_details['day_name'] >
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__content_tukanable_gymload_page_templates_details_8 = $mol_type_enforce<
+	type $mol_labeler__content_tukanable_gymload_page_templates_details_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
-	type $mol_list__rows_tukanable_gymload_page_templates_details_9 = $mol_type_enforce<
+	type $mol_list__rows_tukanable_gymload_page_templates_details_12 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload_page_templates_details['days'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_row__sub_tukanable_gymload_page_templates_details_10 = $mol_type_enforce<
+	type $mol_row__sub_tukanable_gymload_page_templates_details_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
@@ -7178,7 +7402,11 @@ declare namespace $ {
 		row_description( ): string
 		DescriptionLabeler( ): $mol_labeler
 		day_name( id: any): string
-		exercise_info( id: any): string
+		exercise_name( id: any): string
+		exercise_idx( id: any): any
+		exercise_sets( id: any): number
+		exercise_reps( id: any): number
+		Params( id: any): $tukanable_gymload_exercise_params
 		ExerciseRow( id: any): $mol_row
 		exercises( id: any): readonly($mol_view)[]
 		Excersises( id: any): $mol_list
@@ -7241,12 +7469,53 @@ declare namespace $.$$ {
             sets: number;
             reps: number;
         };
-        exercise_info(id: any): string;
+        exercise_idx(id: any): number;
+        exercise_name(id: any): string;
+        exercise_sets(id: any): number;
+        exercise_reps(id: any): number;
     }
     export {};
 }
 
 declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $tukanable_gymload_exercise_params__sets_tukanable_gymload_page_exerciseparams_1 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_exerciseparams['sets'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['sets'] >
+	>
+	type $tukanable_gymload_exercise_params__reps_tukanable_gymload_page_exerciseparams_2 = $mol_type_enforce<
+		ReturnType< $tukanable_gymload_page_exerciseparams['reps'] >
+		,
+		ReturnType< $tukanable_gymload_exercise_params['reps'] >
+	>
+	type $tukanable_gymload_exercise_params__Link_tukanable_gymload_page_exerciseparams_3 = $mol_type_enforce<
+		any
+		,
+		ReturnType< $tukanable_gymload_exercise_params['Link'] >
+	>
+	export class $tukanable_gymload_page_exerciseparams extends $tukanable_gymload_page {
+		sets( ): number
+		reps( ): number
+		Params( ): $tukanable_gymload_exercise_params
+		help_text( ): string
+		title( ): string
+		hide_in_menu( ): boolean
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=exerciseparams.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $tukanable_gymload_page_exerciseparams extends $.$tukanable_gymload_page_exerciseparams {
+        sets(): number;
+        reps(): number;
+        help_text(): string;
+    }
 }
 
 declare namespace $ {
@@ -7654,7 +7923,7 @@ declare namespace $.$$ {
         sub_visible(): readonly $mol_view_content[];
         message_receive(event?: MessageEvent<[string, string]>): void;
         uri_change(event: MessageEvent<[string, string]>): void;
-        auto(): (Window | $mol_dom_listener)[];
+        auto(): ($mol_dom_listener | Window)[];
     }
 }
 
@@ -8410,55 +8679,55 @@ declare namespace $ {
 		,
 		Parameters< ReturnType< $tukanable_gymload['BuilderPage'] >['DayResults'] >[0]
 	>
-	type $tukanable_gymload_builder__tools_tukanable_gymload_5 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $tukanable_gymload_builder['tools'] >
-	>
-	type $tukanable_gymload_builder__storage_key_tukanable_gymload_6 = $mol_type_enforce<
+	type $tukanable_gymload_builder__storage_key_tukanable_gymload_5 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['builder_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_builder['storage_key'] >
 	>
-	type $tukanable_gymload_builder_stats__title_tukanable_gymload_7 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__title_tukanable_gymload_6 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_stats['title'] >
 	>
-	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_8 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__day_count_tukanable_gymload_7 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['day_count'] >
 	>
-	type $tukanable_gymload_builder_stats__model_tukanable_gymload_9 = $mol_type_enforce<
+	type $tukanable_gymload_builder_stats__model_tukanable_gymload_8 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_stats['model'] >
 	>
-	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_10 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__title_tukanable_gymload_9 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['title'] >
 	>
-	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_11 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__day_count_tukanable_gymload_10 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['day_count'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['day_count'] >
 	>
-	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_12 = $mol_type_enforce<
+	type $tukanable_gymload_builder_export_print__model_tukanable_gymload_11 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['DaySettings'] >
 		,
 		ReturnType< $tukanable_gymload_builder_export_print['model'] >
 	>
-	type $tukanable_gymload_page_export__storage_key_tukanable_gymload_13 = $mol_type_enforce<
+	type $tukanable_gymload_page_export__storage_key_tukanable_gymload_12 = $mol_type_enforce<
 		ReturnType< $tukanable_gymload['builder_storage_key'] >
 		,
 		ReturnType< $tukanable_gymload_page_export['storage_key'] >
 	>
-	type $tukanable_gymload_page_templates__menu_tools_tukanable_gymload_14 = $mol_type_enforce<
+	type $tukanable_gymload_page_templates__menu_tools_tukanable_gymload_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $tukanable_gymload_page_templates['menu_tools'] >
+	>
+	type $tukanable_gymload_page_exerciseparams__tools_tukanable_gymload_14 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $tukanable_gymload_page_exerciseparams['tools'] >
 	>
 	type $tukanable_gymload_pagehint__text_tukanable_gymload_15 = $mol_type_enforce<
 		string
@@ -8707,15 +8976,20 @@ declare namespace $ {
 		,
 		ReturnType< $tukanable_gymload_page['body'] >
 	>
-	type $mol_page__title_tukanable_gymload_64 = $mol_type_enforce<
+	type $tukanable_gymload_page__title_tukanable_gymload_64 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_page['title'] >
+		ReturnType< $tukanable_gymload_page['title'] >
 	>
-	type $mol_page__body_tukanable_gymload_65 = $mol_type_enforce<
+	type $tukanable_gymload_page__hide_in_menu_tukanable_gymload_65 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $tukanable_gymload_page['hide_in_menu'] >
+	>
+	type $tukanable_gymload_page__body_tukanable_gymload_66 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_page['body'] >
+		ReturnType< $tukanable_gymload_page['body'] >
 	>
 	export class $tukanable_gymload extends $mol_book2_catalog {
 		Lighter( ): $mol_lights_toggle
@@ -8731,6 +9005,7 @@ declare namespace $ {
 		HelpPage( ): $tukanable_gymload_help
 		ExportView( ): $tukanable_gymload_page_export
 		Templates( ): $tukanable_gymload_page_templates
+		ExerciseParams( ): $tukanable_gymload_page_exerciseparams
 		day_results_title( id: any): string
 		day_results_body( id: any): $mol_view
 		programs( ): Record<string, any>
@@ -8787,12 +9062,13 @@ declare namespace $ {
 			'deleteprogram': ReturnType< $tukanable_gymload['DeleteView'] >,
 			'export': ReturnType< $tukanable_gymload['ExportView'] >,
 			'templates': ReturnType< $tukanable_gymload['Templates'] >,
+			'exerciseparams': ReturnType< $tukanable_gymload['ExerciseParams'] >,
 		}) 
 		DayResultsPage( id: any): $mol_page
 		ListPrograms( ): $mol_select
 		NewView( ): $tukanable_gymload_page
 		EditView( ): $tukanable_gymload_page
-		DeleteView( ): $mol_page
+		DeleteView( ): $tukanable_gymload_page
 	}
 	
 	type $mol_text__text_tukanable_gymload_help_1 = $mol_type_enforce<
